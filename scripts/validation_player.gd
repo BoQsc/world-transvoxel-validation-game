@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var gravity: float = 24.0
 
 var _test_motion_direction := Vector3.ZERO
+var _test_jump_requested := false
 var _view_yaw := 0.0
 
 
@@ -29,6 +30,10 @@ func clear_test_motion_direction() -> void:
 	_test_motion_direction = Vector3.ZERO
 
 
+func request_test_jump() -> void:
+	_test_jump_requested = true
+
+
 func set_view_yaw(yaw: float) -> void:
 	_view_yaw = yaw
 
@@ -41,6 +46,7 @@ func get_player_summary() -> Dictionary:
 		"human_input_enabled": human_input_enabled,
 		"simulation_enabled": simulation_enabled,
 		"test_motion_enabled": _test_motion_direction.length() > 0.0,
+		"vertical_velocity": velocity.y,
 	}
 
 
@@ -54,6 +60,9 @@ func _physics_process(delta: float) -> void:
 	velocity.z = direction.z * move_speed
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	elif _test_jump_requested:
+		velocity.y = jump_velocity
+		_test_jump_requested = false
 	elif human_input_enabled and Input.is_key_pressed(KEY_SPACE):
 		velocity.y = jump_velocity
 	else:

@@ -1,6 +1,7 @@
 extends Node3D
 
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
+const GenerationProfile := preload("res://addons/world_transvoxel_terrain/generation/wt_terrain_generation_profile.gd")
 const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/wt_terrain_storage_profile.gd")
 const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
 const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd")
@@ -34,6 +35,7 @@ func _ready() -> void:
 	_reference_scene = ReferenceScene.instantiate()
 	add_child(_reference_scene)
 	_reference_scene.ensure_reference_defaults()
+	_reference_scene.get_terrain_world().generation_profile = _fixture_generation_profile()
 	_reference_scene.get_terrain_world().storage_profile = _fixture_storage_profile()
 	_set_status("STARTING: terrain world not settled yet")
 	if auto_start:
@@ -193,6 +195,14 @@ func _update_camera() -> void:
 		return
 	_camera.global_position = _player.global_position + Vector3(0, first_person_eye_height, 0)
 	_camera.rotation = Vector3(_camera_pitch, _camera_yaw, 0)
+
+
+func _fixture_generation_profile() -> Resource:
+	var generation = GenerationProfile.new()
+	generation.profile_id = &"flat_baseline"
+	generation.source_mode = GenerationProfile.SourceMode.FLAT
+	generation.seed = 1
+	return generation
 
 
 func _fixture_storage_profile() -> Resource:

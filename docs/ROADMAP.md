@@ -43,7 +43,9 @@ Exit:
 
 ## G2 - First-person playable baseline
 
-Status: active next.
+Status: complete by `WT_VALIDATION_G2_CONTRACT_PASS` and
+`WT_VALIDATION_G2_SMOKE_PASS`. G1 human-visible rerun confirmation remains
+pending, but the automated G2 gate is not blocked by that human confirmation.
 
 Exit:
 
@@ -55,7 +57,7 @@ Exit:
 
 ## G3 - Terrain generation modes
 
-Status: pending.
+Status: active next.
 
 Exit:
 

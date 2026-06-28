@@ -48,7 +48,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g2_first_person_baseline")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g3_terrain_generation_modes")
 
 
 if __name__ == "__main__":
