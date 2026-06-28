@@ -16,6 +16,7 @@ func _run_capture() -> void:
 		return
 	var scene = packed.instantiate()
 	scene.set_human_input_enabled(false)
+	scene.set_camera_mode(&"overview")
 	root.add_child(scene)
 	if not await _wait_for_ready(scene):
 		_fail("validation playtest scene did not become ready")

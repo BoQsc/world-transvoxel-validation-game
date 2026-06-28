@@ -26,7 +26,7 @@ G1 makes the scene human-usable:
   need to delete a human-open `artifacts/validation_project`;
 - adds unshaded orientation markers for X, Y, Z, and the viewer position;
 - adds a small playable `CharacterBody3D` with visible body, collision shape,
-  WASD movement, jump, and follow camera;
+  WASD movement, jump, first-person camera, and crosshair;
 - adds a dedicated validation status overlay below the addon debug overlay;
 - records a failed state if no terrain MeshInstance3D exists under the backend
   terrain node;

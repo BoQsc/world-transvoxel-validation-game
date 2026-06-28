@@ -32,6 +32,12 @@ func _run_test() -> void:
 	if not bool(summary.get("player_camera_current", false)):
 		_fail("validation playtest camera is not attached to player view")
 		return
+	if str(summary.get("camera_mode", "")) != "first_person":
+		_fail("validation playtest default camera is not first-person")
+		return
+	if not bool(summary.get("crosshair_present", false)):
+		_fail("validation playtest has no crosshair")
+		return
 	if not bool(summary.get("player_simulation_enabled", false)):
 		_fail("validation player simulation is not enabled after terrain readiness")
 		return

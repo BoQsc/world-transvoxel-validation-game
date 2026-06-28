@@ -24,7 +24,7 @@ Not in scope:
 
 Status: active. Automated guard passes by `WT_VALIDATION_G1_SMOKE_PASS`; visual
 capture passes by `WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS`; human rerun
-confirmation remains pending.
+confirmation remains pending. G1 is not the final playable-world gate.
 
 Exit:
 
@@ -40,3 +40,48 @@ Exit:
 - confirm whether there are obvious orientation, artifact, popping,
   missing-backside, or performance issues;
 - record failures as addon work, not as hidden validation-game workarounds.
+
+## G2 - First-person playable baseline
+
+Status: active next.
+
+Exit:
+
+- first-person camera and crosshair are present for human play;
+- flat terrain remains the default reproducible baseline;
+- generated project supports player walk/jump against terrain collision;
+- automated tests disable human input and prove scripted movement;
+- visual capture shows terrain and player/play HUD evidence.
+
+## G3 - Terrain generation modes
+
+Status: pending.
+
+Exit:
+
+- flat baseline remains selectable;
+- mountain/large-terrain profile exists with deterministic seed;
+- chunking/streaming counters prove bounded work and cold idle;
+- captures cover flat and mountain modes.
+
+## G4 - Terrain edit interaction
+
+Status: pending.
+
+Exit:
+
+- first-person dig/place affordance exists;
+- edit shape policy is explicit, with standard sphere/box and optional alternate
+  shapes only when justified;
+- edit latency and restore/recovery behavior are measured;
+- automated tests prove terrain and collision update after edits.
+
+## G5 - Material and performance baseline
+
+Status: pending.
+
+Exit:
+
+- small texture/material path exists without hiding performance cost;
+- baseline watt/performance behavior is measured;
+- optional GPU burst/full-GPU paths remain decisions, not assumptions.

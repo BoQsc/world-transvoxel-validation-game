@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var gravity: float = 24.0
 
 var _test_motion_direction := Vector3.ZERO
+var _view_yaw := 0.0
 
 
 func set_human_input_enabled(enabled: bool) -> void:
@@ -26,6 +27,10 @@ func set_test_motion_direction(direction: Vector3) -> void:
 
 func clear_test_motion_direction() -> void:
 	_test_motion_direction = Vector3.ZERO
+
+
+func set_view_yaw(yaw: float) -> void:
+	_view_yaw = yaw
 
 
 func get_player_summary() -> Dictionary:
@@ -57,13 +62,13 @@ func _physics_process(delta: float) -> void:
 
 
 func _human_direction() -> Vector3:
-	var direction := Vector3.ZERO
+	var local := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W):
-		direction.z -= 1.0
+		local.z -= 1.0
 	if Input.is_key_pressed(KEY_S):
-		direction.z += 1.0
+		local.z += 1.0
 	if Input.is_key_pressed(KEY_A):
-		direction.x -= 1.0
+		local.x -= 1.0
 	if Input.is_key_pressed(KEY_D):
-		direction.x += 1.0
-	return direction.normalized()
+		local.x += 1.0
+	return (Basis(Vector3.UP, _view_yaw) * local).normalized()

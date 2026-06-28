@@ -2,8 +2,8 @@
 
 Status: canonical project direction for the validation game repository.
 
-Current phase: G0 install/run validation complete. Next phase is G1
-human-visible playtest confirmation.
+Current phase: G1 playable terrain/player validation is active. The larger
+playable-world target is defined in `docs/PLAYABLE_WORLD_TARGET.md`.
 
 This repository exists only because `world-transvoxel-terrain` A6 approved a
 separate validation game repository when explicitly requested.
@@ -18,7 +18,8 @@ separate validation game repository when explicitly requested.
 - Do not vendor addon source in committed history during G0; compose an ignored
   local validation project from sibling repos.
 - Use GDScript only for scene scaffolding, smoke harnesses, and input/debug glue.
-- Keep production game systems out of scope until the install/run path is proven.
+- Keep production game systems out of scope until the terrain/player/edit/world
+  contracts make them measurable.
 
 ## G0 - Install/run validation scaffold
 
@@ -51,3 +52,8 @@ G1 is complete when:
 - any visual, interaction, terrain-orientation, popping, artifact, or performance
   issue found by human review is recorded as follow-up addon work rather than
   hidden inside this validation repo.
+
+G1 is not the final game-world target. The next gates must expand toward
+first-person interaction, flat and mountain terrain generation modes, edit
+latency, texture/material validation, and measured runtime behavior without
+moving heavy systems into GDScript.

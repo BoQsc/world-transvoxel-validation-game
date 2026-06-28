@@ -1,0 +1,51 @@
+# Playable World Target
+
+Status: active target contract.
+
+This repository must eventually validate a real game-facing world built from
+`world-transvoxel`, `world-transvoxel-terrain`, and a future game-world addon.
+Tiny one-chunk rendering is only an early gate, not the finish line.
+
+## Required before final human visual handoff
+
+- first-person player with crosshair and terrain interaction affordances;
+- flat terrain baseline as the default reproducible mode;
+- mountain/large-terrain generation mode for scale and visual validation;
+- digging and placing with measured latency and deterministic recovery policy;
+- textured terrain material path with small, performance-conscious test assets;
+- terrain collision, chunking, cold-idle behavior, and visible-runtime telemetry;
+- automated captures and runtime checks before asking for human playtest.
+
+## Addon boundary
+
+- `world-transvoxel`: low-level MIT-backed Transvoxel backend.
+- `world-transvoxel-terrain`: terrain addon with generation, meshing,
+  streaming, edit/storage/recovery, and terrain-facing public APIs.
+- future game-world addon name is undecided; it should provide the standard
+  world node, terrain node setup, player interaction integration, and game-world
+  defaults without forcing a specific game.
+- future optional addons can cover vegetation, block/voxel buildings, fluids,
+  and entities after terrain is technically reliable.
+
+## Standard-first terrain policy
+
+Default mode should be boring and reliable:
+
+- finite flat terrain baseline;
+- deterministic generation seed/profile;
+- cold when idle;
+- no hidden background work after settling;
+- native/backend hot paths for terrain, meshing, edits, and storage;
+- GDScript limited to scene scaffolding, input glue, HUD, and tests.
+
+Optional modes can add quantized generation, octahedral/alternate edit shapes,
+mountain biomes, fluids, vegetation, GPU bursting, or compute paths only after
+the default path remains measurable and stable.
+
+## Not accepted as final
+
+- a gray patch without terrain interaction;
+- a player that cannot walk on terrain collision;
+- a screenshot without automated runtime evidence;
+- hidden workarounds inside the validation game instead of addon fixes;
+- broad GPU/fluids/biomes work before terrain play/edit performance is measured.

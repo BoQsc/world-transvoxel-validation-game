@@ -36,7 +36,7 @@ REQUIRED_PHRASES = {
         "does not vendor addon source",
     ),
     "IMPLEMENTATION_CHARTER.md": (
-        "Current phase: G0 install/run validation complete",
+        "Current phase: G1 playable terrain/player validation is active",
         "Do not copy or fork `world-transvoxel-sandbox`",
         "G0 is complete when",
         "G1 - Human-visible playtest confirmation",

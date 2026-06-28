@@ -3,27 +3,34 @@ extends Node3D
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
 const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/wt_terrain_storage_profile.gd")
 const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
+const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd")
 
 @export var auto_start: bool = true
 @export var human_input_enabled: bool = true
+@export var camera_mode: StringName = &"first_person"
+@export var mouse_look_enabled: bool = true
+@export var mouse_sensitivity: float = 0.0025
 @export var viewer_position: Vector3 = Vector3(8, 8, 8)
 @export var player_start_position: Vector3 = Vector3(8, 12, 8)
+@export var first_person_eye_height: float = 1.55
 @export var camera_follow_offset: Vector3 = Vector3(22, 14, 24)
 
 var _reference_scene: Node
 var _player: CharacterBody3D
 var _camera: Camera3D
-var _markers: Node3D
 var _status_label: Label
 var _validation_state := "initializing"
 var _status_text := "initializing validation playtest"
+var _camera_yaw := -0.78
+var _camera_pitch := -0.18
 
 
 func _ready() -> void:
 	_add_validation_player()
 	_configure_camera()
-	_add_status_overlay()
-	_add_orientation_markers()
+	_status_label = ValidationViewHelpers.add_status_overlay(self, _status_text)
+	ValidationViewHelpers.add_crosshair(self)
+	ValidationViewHelpers.add_orientation_markers(self, viewer_position)
 	_reference_scene = ReferenceScene.instantiate()
 	add_child(_reference_scene)
 	_reference_scene.ensure_reference_defaults()
@@ -37,10 +44,29 @@ func _process(_delta: float) -> void:
 	_update_camera()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not human_input_enabled:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event is InputEventMouseMotion and mouse_look_enabled and camera_mode == &"first_person":
+		_camera_yaw -= event.relative.x * mouse_sensitivity
+		_camera_pitch = clamp(_camera_pitch - event.relative.y * mouse_sensitivity, -1.35, 1.35)
+
+
 func set_human_input_enabled(enabled: bool) -> void:
 	human_input_enabled = enabled
+	if not enabled:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _player != null and _player.has_method("set_human_input_enabled"):
 		_player.call("set_human_input_enabled", enabled)
+
+
+func set_camera_mode(mode: StringName) -> void:
+	camera_mode = mode
+	_update_camera()
 
 
 func set_player_test_motion(direction: Vector3) -> void:
@@ -115,6 +141,8 @@ func get_validation_summary() -> Dictionary:
 		"player_human_input_enabled": bool(player_stats.get("human_input_enabled", false)),
 		"player_simulation_enabled": bool(player_stats.get("simulation_enabled", false)),
 		"player_camera_current": _camera != null and _camera.current,
+		"camera_mode": camera_mode,
+		"crosshair_present": get_node_or_null("ValidationCrosshair") != null,
 	}
 
 
@@ -157,51 +185,14 @@ func _configure_camera() -> void:
 func _update_camera() -> void:
 	if _camera == null or _player == null:
 		return
-	_camera.global_position = _player.global_position + camera_follow_offset
-	_camera.look_at(_player.global_position + Vector3(0, 1, 0), Vector3.UP)
-
-
-func _add_status_overlay() -> void:
-	var layer := CanvasLayer.new()
-	layer.name = "ValidationStatusOverlay"
-	add_child(layer)
-	var panel := PanelContainer.new()
-	panel.name = "Panel"
-	panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	panel.offset_left = 12.0
-	panel.offset_top = 160.0
-	panel.offset_right = -12.0
-	panel.offset_bottom = 238.0
-	layer.add_child(panel)
-	_status_label = Label.new()
-	_status_label.name = "StatusLabel"
-	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status_label.text = _status_text
-	panel.add_child(_status_label)
-
-
-func _add_orientation_markers() -> void:
-	_markers = Node3D.new()
-	_markers.name = "ValidationMarkers"
-	add_child(_markers)
-	_add_box_marker(_markers, "AxisXRed", Vector3(8, 0.05, 0), Vector3(16, 0.1, 0.1), Color.RED)
-	_add_box_marker(_markers, "AxisYGreen", Vector3(0.05, 8, 0), Vector3(0.1, 16, 0.1), Color.GREEN)
-	_add_box_marker(_markers, "AxisZBlue", Vector3(0, 0.05, 8), Vector3(0.1, 0.1, 16), Color.BLUE)
-	_add_box_marker(_markers, "ViewerYellow", viewer_position, Vector3(0.8, 0.8, 0.8), Color.YELLOW)
-
-
-func _add_box_marker(parent: Node, marker_name: String, position: Vector3, size: Vector3, color: Color) -> void:
-	var mesh := BoxMesh.new()
-	mesh.size = size
-	var material := StandardMaterial3D.new()
-	material.albedo_color = color
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	var instance := MeshInstance3D.new()
-	instance.name = marker_name
-	instance.mesh = mesh
-	instance.material_override = material
-	instance.position = position
-	parent.add_child(instance)
+	if _player.has_method("set_view_yaw"):
+		_player.call("set_view_yaw", _camera_yaw)
+	if camera_mode == &"overview":
+		_camera.global_position = _player.global_position + camera_follow_offset
+		_camera.look_at(_player.global_position + Vector3(0, 1, 0), Vector3.UP)
+		return
+	_camera.global_position = _player.global_position + Vector3(0, first_person_eye_height, 0)
+	_camera.rotation = Vector3(_camera_pitch, _camera_yaw, 0)
 
 
 func _fixture_storage_profile() -> Resource:
