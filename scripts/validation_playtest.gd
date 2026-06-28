@@ -47,7 +47,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_update_camera()
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if not human_input_enabled:
 		return
@@ -65,7 +64,6 @@ func set_human_input_enabled(enabled: bool) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _player != null and _player.has_method("set_human_input_enabled"):
 		_player.call("set_human_input_enabled", enabled)
-
 
 func set_camera_mode(mode: StringName) -> void:
 	camera_mode = mode
@@ -129,11 +127,13 @@ func _start_validation_viewer() -> void:
 	_enable_player_simulation()
 	_validation_state = "ready"
 	_set_status(
-		"READY: terrain_meshes=%d triangles=%d player_start=%s viewer=%s" % [
+		"READY: profile=%s fixture=small_multi_chunk resources=%d viewers=%d meshes=%d triangles=%d player_start=%s" % [
+			str(playtest_profile_id),
+			resource_count,
+			viewer_count,
 			int(terrain_stats.get("instances", 0)),
 			int(terrain_stats.get("triangles", 0)),
 			str(_player.global_position if _player != null else Vector3.ZERO),
-			str(viewer_position),
 		]
 	)
 	print("WT_VALIDATION_PLAYTEST_READY scene=validation_playtest viewer=settled")

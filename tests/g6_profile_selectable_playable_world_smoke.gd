@@ -45,8 +45,8 @@ func _run_profile(profile_id: StringName) -> Dictionary:
 		_fail("%s player did not settle on floor: %s" % [str(profile_id), str(scene.get_validation_summary())])
 		return {}
 	var summary: Dictionary = scene.get_validation_summary()
-	if not _summary_is_large_playable(summary):
-		_fail("%s summary is not large playable: %s" % [str(profile_id), str(summary)])
+	if not _summary_is_multi_chunk_playable(summary):
+		_fail("%s summary is not multi-chunk playable: %s" % [str(profile_id), str(summary)])
 		return {}
 	var materializer: Node = scene.get_node_or_null("ValidationTerrainMaterials")
 	var material_summary := await _wait_for_materials(materializer)
@@ -86,7 +86,7 @@ func _run_profile(profile_id: StringName) -> Dictionary:
 	}
 
 
-func _summary_is_large_playable(summary: Dictionary) -> bool:
+func _summary_is_multi_chunk_playable(summary: Dictionary) -> bool:
 	return int(summary.get("viewer_count", 0)) >= 16 and \
 			int(summary.get("terrain_triangles", 0)) >= 3000 and \
 			int(summary.get("render_resources", 0)) >= 8 and \

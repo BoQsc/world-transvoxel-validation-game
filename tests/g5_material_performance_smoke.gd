@@ -29,6 +29,8 @@ func _run_test() -> void:
 	if int(material_summary.get("materialized_instances", 0)) <= 0:
 		_fail("no terrain meshes were materialized: %s" % str(material_summary))
 		return
+	if not await _verify_material_reapply(scene, materializer):
+		return
 	var frame_metrics := await _measure_frames(scene, 180)
 	if float(frame_metrics.get("avg_ms", 999.0)) > 40.0 or \
 			float(frame_metrics.get("max_ms", 999.0)) > 250.0:
@@ -67,6 +69,39 @@ func _wait_for_materials(materializer: Node) -> Dictionary:
 			return summary
 		await process_frame
 	return materializer.call("apply_materials_now")
+
+
+func _verify_material_reapply(scene: Node, materializer: Node) -> bool:
+	var mesh_instance := _first_terrain_mesh(scene)
+	if mesh_instance == null:
+		_fail("no terrain mesh found for material reapply check")
+		return false
+	mesh_instance.material_override = null
+	for _frame in range(5):
+		await process_frame
+		if mesh_instance.material_override != null:
+			var summary: Dictionary = materializer.call("get_material_summary")
+			if int(summary.get("reapplied_instances", 0)) >= 0:
+				return true
+	_fail("terrain material was not restored after replacement-style clear")
+	return false
+
+
+func _first_terrain_mesh(scene: Node) -> MeshInstance3D:
+	var terrain_world = scene.get_node("WtTerrainReferenceScene").call("get_terrain_world")
+	var backend = terrain_world.call("get_backend_terrain")
+	return _find_mesh(backend)
+
+
+func _find_mesh(node: Node) -> MeshInstance3D:
+	if node is MeshInstance3D and node.mesh != null:
+		return node as MeshInstance3D
+	for child in node.get_children():
+		if child is Node:
+			var found := _find_mesh(child)
+			if found != null:
+				return found
+	return null
 
 
 func _measure_frames(scene: Node, frame_count: int) -> Dictionary:

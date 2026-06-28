@@ -6,8 +6,8 @@ Status: G0 install/run validation complete. G1 playable terrain/player guard
 passes programmatically; G2 first-person flat baseline passes programmatically;
 G3 flat/mountain generation modes pass programmatically; G4 terrain edit
 interaction passes programmatically; G5 material/performance baseline passes
-programmatically; G6 profile-selectable playable world passes programmatically.
-Human visual verification is the next boundary. This repository is not the
+programmatically; G6 small multi-chunk profile-selectable playable world passes
+programmatically. Human visual verification is the next boundary. This repository is not the
 sandbox and not a
 production game. Its job is to import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
