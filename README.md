@@ -2,11 +2,12 @@
 
 Small Godot validation project for `world-transvoxel-terrain`.
 
-Status: G0 install/run validation complete. G1 human-visible playtest
-confirmation is next. This repository is not the sandbox and not a production
-game. Its job is to import `world-transvoxel` and `world-transvoxel-terrain` as
-addons, run the smallest real integration path, and report every failure back to
-the addon repositories instead of hiding workarounds here.
+Status: G0 install/run validation complete. G1 human-visible playtest guard
+passes programmatically; human rerun confirmation is next. This repository is
+not the sandbox and not a production game. Its job is to import
+`world-transvoxel` and `world-transvoxel-terrain` as addons, run the smallest
+real integration path, and report every failure back to the addon repositories
+instead of hiding workarounds here.
 
 ## Boundary
 
@@ -26,6 +27,8 @@ local repos.
 ```console
 python tools/validate_g0_contract.py
 python tools/g0_install_run_smoke.py
+python tools/validate_g1_contract.py
+python tools/g1_visible_playtest_smoke.py
 ```
 
 Expected marker:
@@ -33,16 +36,20 @@ Expected marker:
 ```text
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
+WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
+WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 ```
 
 ## Human-visible playtest
 
-After running the smoke command, open:
+After running the G1 smoke command, open:
 
 ```text
-artifacts/validation_project/project.godot
+artifacts/g1_visible_playtest/project/project.godot
 ```
 
 Run `res://scenes/validation_playtest.tscn`. The scene auto-starts the addon
-reference terrain world, submits one viewer update, and shows the addon debug
-overlay.
+reference terrain world, submits one viewer update, targets the camera at the
+generated chunk, shows orientation markers, and shows a validation status overlay
+below the addon debug overlay. A gray rectangle alone is not an acceptable G1
+result.

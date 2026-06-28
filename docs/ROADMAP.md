@@ -22,13 +22,15 @@ Not in scope:
 
 ## G1 - Human-visible playtest confirmation
 
-Status: active.
+Status: active. Automated guard passes by `WT_VALIDATION_G1_SMOKE_PASS`; human
+rerun confirmation remains pending.
 
 Exit:
 
 - open the generated validation project;
 - run `res://scenes/validation_playtest.tscn`;
-- confirm whether the terrain/debug overlay is visible and whether there are
-  obvious orientation, artifact, popping, missing-backside, or performance
-  issues;
+- confirm that the scene shows more than a gray rectangle: terrain or an
+  explicit failure status, orientation markers, and validation status text;
+- confirm whether there are obvious orientation, artifact, popping,
+  missing-backside, or performance issues;
 - record failures as addon work, not as hidden validation-game workarounds.
