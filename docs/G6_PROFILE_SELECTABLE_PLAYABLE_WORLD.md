@@ -18,12 +18,15 @@ G6 moves the playable validation scene beyond a single default fixture:
   `ValidationTerrainInteractor`;
 - both profiles apply the checker terrain material and save windowed
   first-person plus overview captures before human visual handoff.
+- human playtest input captures mouse on start, overlay controls ignore mouse
+  events, and a recapture click is suppressed so it does not also carve/place.
 
 Expected markers:
 
 ```text
 WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
+WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
 ```
 
 ## Not claimed

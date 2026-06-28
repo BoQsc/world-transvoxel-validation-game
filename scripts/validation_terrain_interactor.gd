@@ -50,9 +50,11 @@ func submit_sphere_edit(
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not enabled or not _human_input_enabled():
+	if not enabled or not _human_input_enabled() or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 	if event is InputEventMouseButton and event.pressed:
+		if _should_ignore_mouse_button_event():
+			return
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			submit_sphere_edit(&"carve", _target_point(), dig_radius, 1, 1.0)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -111,3 +113,9 @@ func _human_input_enabled() -> bool:
 	if parent == null:
 		return false
 	return bool(parent.get("human_input_enabled"))
+
+
+func _should_ignore_mouse_button_event() -> bool:
+	var parent := get_parent()
+	return parent != null and parent.has_method("should_ignore_mouse_button_event") and \
+			bool(parent.call("should_ignore_mouse_button_event"))

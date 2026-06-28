@@ -49,6 +49,7 @@ python tools/validate_g5_contract.py
 python tools/g5_material_performance_smoke.py --windowed
 python tools/validate_g6_contract.py
 python tools/g6_profile_selectable_playable_world_smoke.py --windowed
+python tools/human_input_capture_smoke.py
 ```
 
 Expected marker:
@@ -71,6 +72,7 @@ WT_VALIDATION_G5_CONTRACT_PASS implementation=materialized_performance_baseline 
 WT_VALIDATION_G5_SMOKE_PASS engines=2 report=artifacts/g5_material_performance/g5_material_performance_report.json
 WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
+WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
 ```
 
 ## Human-visible playtest

@@ -7,6 +7,7 @@ static func add_status_overlay(parent: Node, initial_text: String) -> Label:
 	parent.add_child(layer)
 	var panel := PanelContainer.new()
 	panel.name = "Panel"
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	panel.offset_left = 12.0
 	panel.offset_top = 160.0
@@ -15,6 +16,7 @@ static func add_status_overlay(parent: Node, initial_text: String) -> Label:
 	layer.add_child(panel)
 	var label := Label.new()
 	label.name = "StatusLabel"
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.text = initial_text
 	panel.add_child(label)
@@ -46,6 +48,7 @@ static func add_orientation_markers(parent: Node, viewer_position: Vector3) -> N
 static func _crosshair_rect(name: String, left: float, top: float, right: float, bottom: float) -> ColorRect:
 	var rect := ColorRect.new()
 	rect.name = name
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rect.color = Color(1.0, 1.0, 1.0, 0.85)
 	rect.set_anchors_preset(Control.PRESET_CENTER)
 	rect.offset_left = left

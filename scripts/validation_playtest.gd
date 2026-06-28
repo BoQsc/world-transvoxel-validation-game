@@ -3,6 +3,7 @@ extends Node3D
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
 const MeshStats := preload("res://scripts/validation_mesh_stats.gd")
 const ProfileCatalog := preload("res://scripts/validation_profile_catalog.gd")
+const InputCapture := preload("res://scripts/validation_input_capture.gd")
 const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
 const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd")
 
@@ -25,7 +26,7 @@ var _validation_state := "initializing"
 var _status_text := "initializing validation playtest"
 var _camera_yaw := -0.78
 var _camera_pitch := -0.18
-
+var _input_capture := InputCapture.new()
 
 func _ready() -> void:
 	_apply_profile_settings()
@@ -39,9 +40,9 @@ func _ready() -> void:
 	_reference_scene.ensure_reference_defaults()
 	_apply_profile_resources()
 	_set_status("STARTING: terrain world not settled yet")
+	_input_capture.capture_if_enabled(human_input_enabled)
 	if auto_start:
 		call_deferred("_start_validation_viewer")
-
 
 func _process(_delta: float) -> void:
 	_update_camera()
@@ -50,14 +51,13 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not human_input_enabled:
 		return
-	if event is InputEventMouseButton and event.pressed:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if event is InputEventMouseMotion and mouse_look_enabled and camera_mode == &"first_person":
+	if _input_capture.handle_capture_event(event):
+		get_viewport().set_input_as_handled()
+		return
+	if event is InputEventMouseMotion and mouse_look_enabled and camera_mode == &"first_person" and \
+			Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		_camera_yaw -= event.relative.x * mouse_sensitivity
 		_camera_pitch = clamp(_camera_pitch - event.relative.y * mouse_sensitivity, -1.35, 1.35)
-
 
 func set_human_input_enabled(enabled: bool) -> void:
 	human_input_enabled = enabled
@@ -71,6 +71,8 @@ func set_camera_mode(mode: StringName) -> void:
 	camera_mode = mode
 	_update_camera()
 
+func should_ignore_mouse_button_event() -> bool:
+	return _input_capture.should_ignore_mouse_button_event()
 
 func set_manual_camera_view(position: Vector3, target: Vector3) -> void:
 	camera_mode = &"manual"
@@ -85,7 +87,6 @@ func set_player_visual_visible(visible: bool) -> void:
 		if body != null:
 			body.visible = visible
 
-
 func set_player_test_motion(direction: Vector3) -> void:
 	if _player != null and _player.has_method("set_test_motion_direction"):
 		_player.call("set_test_motion_direction", direction)
@@ -98,7 +99,6 @@ func configure_playtest_profile(profile_id: StringName) -> void:
 		_apply_profile_resources()
 	if _player != null:
 		_player.global_position = player_start_position
-
 
 func clear_player_test_motion() -> void:
 	if _player != null and _player.has_method("clear_test_motion_direction"):
