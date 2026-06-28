@@ -1,0 +1,82 @@
+extends SceneTree
+
+const MARKER := "WT_VALIDATION_G1_VISUAL_CAPTURE_PASS"
+const SCENE_PATH := "res://scenes/validation_playtest.tscn"
+const CAPTURE_PATH := "res://artifacts/g1_visual_capture/capture.png"
+
+
+func _initialize() -> void:
+	call_deferred("_run_capture")
+
+
+func _run_capture() -> void:
+	var packed := load(SCENE_PATH)
+	if packed == null:
+		_fail("validation playtest scene did not load")
+		return
+	var scene = packed.instantiate()
+	root.add_child(scene)
+	if not await _wait_for_ready(scene):
+		_fail("validation playtest scene did not become ready")
+		return
+	for _frame in range(8):
+		await process_frame
+	var viewport := root
+	var image := viewport.get_texture().get_image()
+	if image == null or image.is_empty():
+		_fail("viewport image is empty")
+		return
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://artifacts/g1_visual_capture"))
+	var error := image.save_png(CAPTURE_PATH)
+	if error != OK:
+		_fail("failed to save capture: %s" % error_string(error))
+		return
+	var metrics := _image_metrics(image)
+	if int(metrics.get("non_gray_samples", 0)) < 50:
+		_fail("capture lacks enough non-gray samples: %s" % str(metrics))
+		return
+	print("%s path=%s size=%dx%d non_gray_samples=%d" % [
+		MARKER,
+		CAPTURE_PATH,
+		image.get_width(),
+		image.get_height(),
+		int(metrics.get("non_gray_samples", 0)),
+	])
+	scene.queue_free()
+	await process_frame
+	quit(0)
+
+
+func _wait_for_ready(scene: Node) -> bool:
+	for _frame in range(900):
+		if scene.has_method("get_validation_state") and \
+				scene.get_validation_state() == "ready":
+			await process_frame
+			return true
+		await process_frame
+	return false
+
+
+func _image_metrics(image: Image) -> Dictionary:
+	var non_gray_samples := 0
+	var sample_count := 0
+	var width := image.get_width()
+	var height := image.get_height()
+	var step_x = 1
+	var step_y = 1
+	for y in range(0, height, step_y):
+		for x in range(0, width, step_x):
+			var color := image.get_pixel(x, y)
+			var spread = max(color.r, max(color.g, color.b)) - min(color.r, min(color.g, color.b))
+			if spread > 0.08:
+				non_gray_samples += 1
+			sample_count += 1
+	return {
+		"sample_count": sample_count,
+		"non_gray_samples": non_gray_samples,
+	}
+
+
+func _fail(message: String) -> void:
+	push_error("WT_VALIDATION_G1_VISUAL_CAPTURE_FAIL: " + message)
+	quit(1)

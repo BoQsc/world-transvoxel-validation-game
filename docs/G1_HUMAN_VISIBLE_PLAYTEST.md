@@ -8,6 +8,7 @@ Markers:
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_GODOT_PASS state=ready terrain_meshes=1 implementation=human_visible_playtest_guard
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
+WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
 ```
 
 ## Problem observed
@@ -28,7 +29,9 @@ G1 makes the scene human-usable:
 - records a failed state if no terrain MeshInstance3D exists under the backend
   terrain node;
 - adds an automated guard that instantiates the visible playtest scene and
-  checks the ready status plus terrain mesh count.
+  checks the ready status plus terrain mesh count;
+- adds a windowed visual capture check that saves the rendered viewport and
+  rejects a blank or gray-only capture.
 
 ## Automated evidence
 
@@ -36,11 +39,15 @@ The G1 automated guard passes on Godot 4.6.3 and Godot 4.7:
 
 ```text
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
+WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
 ```
 
 The guard confirms the scene reaches ready state and reports
-`terrain_meshes=1`. Human rerun confirmation is still required because G1 is
-about the actual visible experience, not only the programmatic mesh count.
+`terrain_meshes=1`. The capture confirms that the rendered viewport contains
+non-gray marker/status pixels and writes
+`artifacts/g1_visual_capture/godot-4.7-capture.png` for inspection. Human rerun
+confirmation is still useful because G1 is about the actual visible experience,
+not only the programmatic mesh count.
 
 ## Boundary
 

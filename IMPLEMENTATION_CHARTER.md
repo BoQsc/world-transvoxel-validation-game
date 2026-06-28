@@ -25,8 +25,8 @@ separate validation game repository when explicitly requested.
 G0 is complete when:
 
 - this repository has a minimal Godot project;
-- `tools/compose_validation_project.py` creates an ignored project under
-  `artifacts/validation_project`;
+- `tools/compose_validation_project.py` creates ignored generated projects under
+  `artifacts/.../project`;
 - the composed project contains `world-transvoxel`, `world-transvoxel-terrain`,
   validation scenes, validation tests, and the official production lifecycle
   fixture;
@@ -41,7 +41,7 @@ large-map exploration, or final game readiness.
 
 G1 is complete when:
 
-- the generated project opens from `artifacts/validation_project/project.godot`;
+- generated projects open from the relevant `artifacts/.../project/project.godot`;
 - `res://scenes/validation_playtest.tscn` starts the terrain world;
 - the debug overlay is visible;
 - any visual, interaction, terrain-orientation, popping, artifact, or performance

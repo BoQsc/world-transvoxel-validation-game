@@ -11,7 +11,9 @@ REQUIRED_FILES = (
     "docs/G1_HUMAN_VISIBLE_PLAYTEST.md",
     "scripts/validation_playtest.gd",
     "tests/g1_visible_playtest_smoke.gd",
+    "tests/g1_visual_capture.gd",
     "tools/g1_visible_playtest_smoke.py",
+    "tools/g1_visual_capture.py",
     "tools/validate_g1_contract.py",
 )
 
@@ -20,17 +22,23 @@ REQUIRED_PHRASES = {
         "Status: active",
         "WT_VALIDATION_G1_CONTRACT_PASS",
         "WT_VALIDATION_G1_GODOT_PASS",
+        "WT_VALIDATION_G1_SMOKE_PASS",
+        "WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS",
         "gray rectangle",
         "terrain MeshInstance3D",
     ),
     "README.md": (
+        "Do not open the repository-root `project.godot`",
         "python tools/validate_g1_contract.py",
         "python tools/g1_visible_playtest_smoke.py",
+        "python tools/g1_visual_capture.py --windowed",
         "WT_VALIDATION_G1_SMOKE_PASS",
+        "WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS",
     ),
     "docs/ROADMAP.md": (
         "## G1 - Human-visible playtest confirmation",
         "Status: active",
+        "WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS",
         "gray rectangle",
     ),
     "scripts/validation_playtest.gd": (
@@ -49,6 +57,16 @@ REQUIRED_PHRASES = {
     "tools/g1_visible_playtest_smoke.py": (
         "WT_VALIDATION_G1_SMOKE_PASS",
         "g1_visible_playtest_report.json",
+        "compose(project)",
+    ),
+    "tests/g1_visual_capture.gd": (
+        "WT_VALIDATION_G1_VISUAL_CAPTURE_PASS",
+        "viewport.get_texture().get_image()",
+        "non_gray_samples",
+    ),
+    "tools/g1_visual_capture.py": (
+        "WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS",
+        "g1_visual_capture_report.json",
         "compose(project)",
     ),
 }

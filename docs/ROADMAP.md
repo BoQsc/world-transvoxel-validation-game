@@ -22,8 +22,9 @@ Not in scope:
 
 ## G1 - Human-visible playtest confirmation
 
-Status: active. Automated guard passes by `WT_VALIDATION_G1_SMOKE_PASS`; human
-rerun confirmation remains pending.
+Status: active. Automated guard passes by `WT_VALIDATION_G1_SMOKE_PASS`; visual
+capture passes by `WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS`; human rerun
+confirmation remains pending.
 
 Exit:
 
@@ -31,6 +32,8 @@ Exit:
 - run `res://scenes/validation_playtest.tscn`;
 - confirm that the scene shows more than a gray rectangle: terrain or an
   explicit failure status, orientation markers, and validation status text;
+- keep a captured viewport image as automated evidence before asking for human
+  confirmation;
 - confirm whether there are obvious orientation, artifact, popping,
   missing-backside, or performance issues;
 - record failures as addon work, not as hidden validation-game workarounds.

@@ -13,11 +13,15 @@ REQUIRED_FILES = (
     "docs/ROADMAP.md",
     "docs/G0_INSTALL_RUN_VALIDATION.md",
     "project.godot",
+    "artifacts/.gdignore",
+    "scripts/root_project_notice.gd",
+    "scenes/root_project_notice.tscn",
     "tests/g0_install_run_smoke.gd",
     "scripts/validation_playtest.gd",
     "scenes/validation_playtest.tscn",
     "tools/compose_validation_project.py",
     "tools/g0_install_run_smoke.py",
+    "tools/root_project_safe_import.py",
     "tools/validate_g0_contract.py",
 )
 
@@ -25,7 +29,9 @@ REQUIRED_PHRASES = {
     "README.md": (
         "Status: G0 install/run validation complete",
         "python tools/validate_g0_contract.py",
+        "python tools/root_project_safe_import.py",
         "python tools/g0_install_run_smoke.py",
+        "WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS",
         "WT_VALIDATION_G0_SMOKE_PASS",
         "does not vendor addon source",
     ),
@@ -50,18 +56,33 @@ REQUIRED_PHRASES = {
     ),
     "project.godot": (
         "World Transvoxel Validation Game",
-        "res://scenes/validation_playtest.tscn",
+        "res://scenes/root_project_notice.tscn",
+    ),
+    "scripts/root_project_notice.gd": (
+        "This root project does not vendor the addons.",
+        "Opening this root project for terrain playtest is invalid.",
+    ),
+    "scenes/root_project_notice.tscn": (
+        "RootProjectNotice",
+        "res://scripts/root_project_notice.gd",
     ),
     "tools/compose_validation_project.py": (
         "world-transvoxel",
         "world-transvoxel-terrain",
         "production-lifecycle-fixture",
         "VALIDATION_LOCK.json",
+        "World Transvoxel Validation Game - Generated",
+        "res://scenes/validation_playtest.tscn",
     ),
     "tools/g0_install_run_smoke.py": (
         "WT_VALIDATION_G0_GODOT_PASS",
         "WT_VALIDATION_G0_SMOKE_PASS",
         "compose(project)",
+    ),
+    "tools/root_project_safe_import.py": (
+        "WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS",
+        "GDExtension dynamic library not found",
+        "clear_root_import_cache",
     ),
     "tests/g0_install_run_smoke.gd": (
         "WT_VALIDATION_G0_GODOT_PASS",

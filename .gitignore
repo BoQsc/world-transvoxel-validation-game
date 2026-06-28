@@ -1,5 +1,6 @@
 /.godot/
-/artifacts/
+/artifacts/*
+!/artifacts/.gdignore
 __pycache__/
 *.pyc
 *.translation

@@ -16,7 +16,6 @@ TERRAIN_REPO = REPOSITORY_ROOT / "world-transvoxel-terrain"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "validation_project"
 
 PROJECT_ITEMS = (
-    "project.godot",
     "scenes",
     "scripts",
     "tests",
@@ -65,6 +64,7 @@ def compose(output: Path) -> dict[str, object]:
 
     for relative in PROJECT_ITEMS:
         copy_project_item(relative, output)
+    write_generated_project_file(output)
 
     clean_copytree(
         WORLD_TRANSVOXEL_REPO / "addons" / "world_transvoxel",
@@ -99,6 +99,28 @@ def compose(output: Path) -> dict[str, object]:
         json.dumps(lock, indent=2) + "\n", encoding="utf-8"
     )
     return lock
+
+
+def write_generated_project_file(output: Path) -> None:
+    (output / "project.godot").write_text(
+        "\n".join(
+            [
+                "config_version=5",
+                "",
+                "[application]",
+                "",
+                'config/name="World Transvoxel Validation Game - Generated"',
+                'run/main_scene="res://scenes/validation_playtest.tscn"',
+                'config/features=PackedStringArray("4.6", "Forward Plus")',
+                "",
+                "[editor_plugins]",
+                "",
+                'enabled=PackedStringArray("res://addons/world_transvoxel/plugin.cfg", "res://addons/world_transvoxel_terrain/plugin.cfg")',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def main() -> None:

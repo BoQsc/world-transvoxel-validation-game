@@ -9,10 +9,11 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from compose_validation_project import DEFAULT_OUTPUT, ROOT, compose
+from compose_validation_project import ROOT, compose
 
 
 ARTIFACT_ROOT = ROOT / "artifacts" / "g0_install_run_smoke"
+G0_PROJECT = ARTIFACT_ROOT / "project"
 SCRIPT = "res://tests/g0_install_run_smoke.gd"
 MARKER = "WT_VALIDATION_G0_GODOT_PASS"
 ENGINE_VERSIONS = ("4.6.3", "4.7")
@@ -125,7 +126,7 @@ def main() -> None:
         description="Run the G0 install/run validation smoke in a composed Godot project."
     )
     parser.add_argument("--godot", type=Path, action="append", default=[])
-    parser.add_argument("--project", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--project", type=Path, default=G0_PROJECT)
     arguments = parser.parse_args()
 
     project = arguments.project.resolve()
