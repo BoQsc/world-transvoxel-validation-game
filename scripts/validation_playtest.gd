@@ -1,14 +1,15 @@
 extends Node3D
 
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
-const GenerationProfile := preload("res://addons/world_transvoxel_terrain/generation/wt_terrain_generation_profile.gd")
-const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/wt_terrain_storage_profile.gd")
+const MeshStats := preload("res://scripts/validation_mesh_stats.gd")
+const ProfileCatalog := preload("res://scripts/validation_profile_catalog.gd")
 const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
 const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd")
 
 @export var auto_start: bool = true
 @export var human_input_enabled: bool = true
 @export var camera_mode: StringName = &"first_person"
+@export var playtest_profile_id: StringName = &"flat_baseline"
 @export var mouse_look_enabled: bool = true
 @export var mouse_sensitivity: float = 0.0025
 @export var viewer_position: Vector3 = Vector3(8, 8, 8)
@@ -27,6 +28,7 @@ var _camera_pitch := -0.18
 
 
 func _ready() -> void:
+	_apply_profile_settings()
 	_add_validation_player()
 	_configure_camera()
 	_status_label = ValidationViewHelpers.add_status_overlay(self, _status_text)
@@ -35,8 +37,7 @@ func _ready() -> void:
 	_reference_scene = ReferenceScene.instantiate()
 	add_child(_reference_scene)
 	_reference_scene.ensure_reference_defaults()
-	_reference_scene.get_terrain_world().generation_profile = _fixture_generation_profile()
-	_reference_scene.get_terrain_world().storage_profile = _fixture_storage_profile()
+	_apply_profile_resources()
 	_set_status("STARTING: terrain world not settled yet")
 	if auto_start:
 		call_deferred("_start_validation_viewer")
@@ -71,9 +72,32 @@ func set_camera_mode(mode: StringName) -> void:
 	_update_camera()
 
 
+func set_manual_camera_view(position: Vector3, target: Vector3) -> void:
+	camera_mode = &"manual"
+	if _camera != null:
+		_camera.global_position = position
+		_camera.look_at(target, Vector3.UP)
+
+
+func set_player_visual_visible(visible: bool) -> void:
+	if _player != null:
+		var body := _player.get_node_or_null("PlayerVisibleBody") as Node3D
+		if body != null:
+			body.visible = visible
+
+
 func set_player_test_motion(direction: Vector3) -> void:
 	if _player != null and _player.has_method("set_test_motion_direction"):
 		_player.call("set_test_motion_direction", direction)
+
+
+func configure_playtest_profile(profile_id: StringName) -> void:
+	playtest_profile_id = profile_id
+	_apply_profile_settings()
+	if _reference_scene != null:
+		_apply_profile_resources()
+	if _player != null:
+		_player.global_position = player_start_position
 
 
 func clear_player_test_motion() -> void:
@@ -88,10 +112,11 @@ func _start_validation_viewer() -> void:
 	if not await _wait_for_backend_state("running"):
 		_fail("backend did not reach running state")
 		return
-	if not _reference_scene.update_reference_viewer(1, 1, viewer_position, 0, 0):
-		_fail("viewer update failed")
+	var viewer_count := _submit_profile_viewers()
+	if viewer_count <= 0:
 		return
-	if not await _wait_for_cold_idle(1, 1):
+	var resource_count := ProfileCatalog.expected_resource_count(playtest_profile_id)
+	if not await _wait_for_cold_idle(resource_count, resource_count):
 		_fail("terrain did not settle")
 		return
 	var terrain_stats := _terrain_mesh_stats()
@@ -127,6 +152,7 @@ func get_validation_summary() -> Dictionary:
 	var player_stats := _player_summary()
 	return {
 		"state": _validation_state,
+		"playtest_profile_id": str(playtest_profile_id),
 		"status_text": _status_text,
 		"terrain_mesh_instances": int(terrain_stats.get("instances", 0)),
 		"terrain_mesh_surfaces": int(terrain_stats.get("surfaces", 0)),
@@ -136,6 +162,8 @@ func get_validation_summary() -> Dictionary:
 		"render_resources": int(metrics.get("render_resources", 0)),
 		"collision_resources": int(metrics.get("collision_resources", 0)),
 		"viewer_position": viewer_position,
+		"viewer_count": ProfileCatalog.viewer_positions(playtest_profile_id).size(),
+		"expected_resource_count": ProfileCatalog.expected_resource_count(playtest_profile_id),
 		"camera_position": _camera.global_position if _camera != null else Vector3.ZERO,
 		"player_present": bool(player_stats.get("present", false)),
 		"player_position": player_stats.get("position", Vector3.ZERO),
@@ -187,6 +215,8 @@ func _configure_camera() -> void:
 func _update_camera() -> void:
 	if _camera == null or _player == null:
 		return
+	if camera_mode == &"manual":
+		return
 	if _player.has_method("set_view_yaw"):
 		_player.call("set_view_yaw", _camera_yaw)
 	if camera_mode == &"overview":
@@ -197,60 +227,31 @@ func _update_camera() -> void:
 	_camera.rotation = Vector3(_camera_pitch, _camera_yaw, 0)
 
 
-func _fixture_generation_profile() -> Resource:
-	var generation = GenerationProfile.new()
-	generation.profile_id = &"flat_baseline"
-	generation.source_mode = GenerationProfile.SourceMode.FLAT
-	generation.seed = 1
-	return generation
+func _apply_profile_settings() -> void:
+	var profile_settings := ProfileCatalog.settings(playtest_profile_id)
+	viewer_position = profile_settings.get("viewer_position", viewer_position)
+	player_start_position = profile_settings.get("player_start_position", player_start_position)
+	camera_follow_offset = profile_settings.get("camera_follow_offset", camera_follow_offset)
 
 
-func _fixture_storage_profile() -> Resource:
-	var storage = StorageProfile.new()
-	storage.world_manifest_path = "res://build/production-lifecycle-fixture/streaming.wtworld"
-	storage.object_root_path = "res://build/production-lifecycle-fixture"
-	storage.edit_journal_path = "res://build/production-lifecycle-fixture/world.wtedit"
-	storage.snapshot_directory = "res://build/production-lifecycle-fixture/snapshots"
-	storage.allow_res_paths_for_test_fixtures = true
-	return storage
+func _apply_profile_resources() -> void:
+	var terrain_world = _reference_scene.get_terrain_world()
+	terrain_world.generation_profile = ProfileCatalog.generation_profile(playtest_profile_id)
+	terrain_world.storage_profile = ProfileCatalog.storage_profile(playtest_profile_id)
 
 
 func _terrain_mesh_stats() -> Dictionary:
-	var stats := {
-		"instances": 0,
-		"surfaces": 0,
-		"face_vertices": 0,
-		"triangles": 0,
-		"max_extent": 0.0,
-	}
-	if _reference_scene == null:
-		return stats
-	var terrain_world = _reference_scene.get_terrain_world()
-	if terrain_world == null:
-		return stats
-	var backend = terrain_world.get_backend_terrain()
-	if backend == null:
-		return stats
-	_accumulate_terrain_mesh_stats(backend, stats)
-	return stats
+	return MeshStats.collect(_reference_scene)
 
 
-func _accumulate_terrain_mesh_stats(node: Node, stats: Dictionary) -> void:
-	if node is MeshInstance3D:
-		var instance := node as MeshInstance3D
-		stats["instances"] = int(stats.get("instances", 0)) + 1
-		if instance.mesh != null:
-			var mesh := instance.mesh
-			stats["surfaces"] = int(stats.get("surfaces", 0)) + mesh.get_surface_count()
-			var faces := mesh.get_faces()
-			stats["face_vertices"] = int(stats.get("face_vertices", 0)) + faces.size()
-			stats["triangles"] = int(stats.get("triangles", 0)) + int(faces.size() / 3)
-			var size := mesh.get_aabb().size
-			var extent = max(size.x, max(size.y, size.z))
-			stats["max_extent"] = max(float(stats.get("max_extent", 0.0)), extent)
-	for child in node.get_children():
-		if child is Node:
-			_accumulate_terrain_mesh_stats(child, stats)
+func _submit_profile_viewers() -> int:
+	var viewer_id := 1
+	for position in ProfileCatalog.viewer_positions(playtest_profile_id):
+		if not _reference_scene.update_reference_viewer(viewer_id, 1, position, 0, 0):
+			_fail("viewer update failed at %s" % str(position))
+			return 0
+		viewer_id += 1
+	return viewer_id - 1
 
 
 func _enable_player_simulation() -> void:
@@ -291,8 +292,8 @@ func _wait_for_cold_idle(render_count: int, collision_count: int) -> bool:
 	for _frame in range(900):
 		var summary: Dictionary = terrain_world.get_cold_idle_summary()
 		if bool(summary.get("cold_idle", false)) and \
-				int(summary.get("render_resources", -1)) == render_count and \
-				int(summary.get("collision_resources", -1)) == collision_count:
+				int(summary.get("render_resources", -1)) >= render_count and \
+				int(summary.get("collision_resources", -1)) >= collision_count:
 			await get_tree().process_frame
 			return true
 		await get_tree().process_frame

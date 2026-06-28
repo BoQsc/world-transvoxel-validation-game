@@ -6,8 +6,9 @@ Status: G0 install/run validation complete. G1 playable terrain/player guard
 passes programmatically; G2 first-person flat baseline passes programmatically;
 G3 flat/mountain generation modes pass programmatically; G4 terrain edit
 interaction passes programmatically; G5 material/performance baseline passes
-programmatically; larger playable-world validation remains active. This
-repository is not the sandbox and not a
+programmatically; G6 profile-selectable playable world passes programmatically.
+Human visual verification is the next boundary. This repository is not the
+sandbox and not a
 production game. Its job is to import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
 and report every failure back to the addon repositories instead of hiding
@@ -46,6 +47,8 @@ python tools/validate_g4_contract.py
 python tools/g4_edit_interaction_smoke.py
 python tools/validate_g5_contract.py
 python tools/g5_material_performance_smoke.py --windowed
+python tools/validate_g6_contract.py
+python tools/g6_profile_selectable_playable_world_smoke.py --windowed
 ```
 
 Expected marker:
@@ -54,7 +57,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g6_profile_selectable_playable_world
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=human_visual_verification
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -66,6 +69,8 @@ WT_VALIDATION_G4_CONTRACT_PASS implementation=first_person_edit_interaction next
 WT_VALIDATION_G4_SMOKE_PASS engines=2 report=artifacts/g4_edit_interaction/g4_edit_interaction_report.json
 WT_VALIDATION_G5_CONTRACT_PASS implementation=materialized_performance_baseline next=g6_profile_selectable_playable_world
 WT_VALIDATION_G5_SMOKE_PASS engines=2 report=artifacts/g5_material_performance/g5_material_performance_report.json
+WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
+WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
 ```
 
 ## Human-visible playtest

@@ -22,10 +22,11 @@ REQUIRED_PHRASES = {
         "## G3 - Terrain generation modes",
         "## G4 - Terrain edit interaction",
         "## G5 - Material and performance baseline",
+        "## G6 - Profile-selectable playable world",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
-        "larger playable-world validation remains active",
+        "Human visual verification is the next boundary",
         "python tools/validate_playable_world_target.py",
         "WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS",
     ),
@@ -48,7 +49,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g6_profile_selectable_playable_world")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=human_visual_verification")
 
 
 if __name__ == "__main__":

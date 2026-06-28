@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = (
     "docs/G2_FIRST_PERSON_PLAYABLE_BASELINE.md",
     "scripts/validation_playtest.gd",
+    "scripts/validation_profile_catalog.gd",
     "scripts/validation_player.gd",
     "tests/g2_first_person_baseline_smoke.gd",
     "tools/g2_first_person_baseline_smoke.py",
@@ -39,10 +40,14 @@ REQUIRED_PHRASES = {
     ),
     "scripts/validation_playtest.gd": (
         "flat_baseline",
-        "GenerationProfile.SourceMode.FLAT",
-        "_fixture_generation_profile",
+        "ProfileCatalog.generation_profile",
         "first_person",
         "ValidationCrosshair",
+    ),
+    "scripts/validation_profile_catalog.gd": (
+        "GenerationProfile.SourceMode.FLAT",
+        "flat_baseline",
+        "storage_profile",
     ),
     "scripts/validation_player.gd": (
         "request_test_jump",

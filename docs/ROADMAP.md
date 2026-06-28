@@ -93,7 +93,8 @@ Exit:
 
 ## G6 - Profile-selectable playable world
 
-Status: active next.
+Status: complete by `WT_VALIDATION_G6_CONTRACT_PASS` and
+`WT_VALIDATION_G6_SMOKE_PASS`.
 
 Exit:
 
@@ -103,3 +104,15 @@ Exit:
 - automated captures cover both profiles before human handoff;
 - handoff document gives the exact generated project path and accepted
   limitations.
+
+## G7 - Human visual verification
+
+Status: active next.
+
+Exit:
+
+- human opens the generated validation project and confirms whether flat and
+  mountain playable profiles look and feel acceptable;
+- any terrain orientation, artifact, popping, performance, collision, or edit
+  issue is recorded as addon follow-up work instead of hidden in the validation
+  game.
