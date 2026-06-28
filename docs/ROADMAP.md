@@ -1,0 +1,34 @@
+# Roadmap
+
+## G0 - Install/run validation scaffold
+
+Status: complete by `WT_VALIDATION_G0_SMOKE_PASS`.
+
+Exit:
+
+- compose a fresh ignored Godot project from sibling `world-transvoxel` and
+  `world-transvoxel-terrain` repos;
+- run one headless install/run smoke;
+- provide one human-visible playtest scene;
+- keep all discovered addon failures visible and attributable.
+
+Not in scope:
+
+- production gameplay systems;
+- broad open-world exploration;
+- GPU compute;
+- water/lava, planets, vegetation, building blocks, or structural stability;
+- 0BSD backend replacement.
+
+## G1 - Human-visible playtest confirmation
+
+Status: active.
+
+Exit:
+
+- open the generated validation project;
+- run `res://scenes/validation_playtest.tscn`;
+- confirm whether the terrain/debug overlay is visible and whether there are
+  obvious orientation, artifact, popping, missing-backside, or performance
+  issues;
+- record failures as addon work, not as hidden validation-game workarounds.
