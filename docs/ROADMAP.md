@@ -69,7 +69,8 @@ Exit:
 
 ## G4 - Terrain edit interaction
 
-Status: active next.
+Status: complete by `WT_VALIDATION_G4_CONTRACT_PASS` and
+`WT_VALIDATION_G4_SMOKE_PASS`.
 
 Exit:
 
@@ -81,7 +82,7 @@ Exit:
 
 ## G5 - Material and performance baseline
 
-Status: pending.
+Status: active next.
 
 Exit:
 

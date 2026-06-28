@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/validation_playtest.gd" id="1_playtest"]
+[ext_resource type="Script" path="res://scripts/validation_terrain_interactor.gd" id="2_interactor"]
 
 [node name="ValidationPlaytest" type="Node3D"]
 script = ExtResource("1_playtest")
@@ -12,3 +13,6 @@ current = true
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 16, 0)
 light_energy = 2.0
+
+[node name="ValidationTerrainInteractor" type="Node" parent="."]
+script = ExtResource("2_interactor")
