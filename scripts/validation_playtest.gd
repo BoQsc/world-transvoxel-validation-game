@@ -2,12 +2,17 @@ extends Node3D
 
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
 const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/wt_terrain_storage_profile.gd")
+const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
 
 @export var auto_start: bool = true
+@export var human_input_enabled: bool = true
 @export var viewer_position: Vector3 = Vector3(8, 8, 8)
-@export var camera_position: Vector3 = Vector3(30, 24, 34)
+@export var player_start_position: Vector3 = Vector3(8, 12, 8)
+@export var camera_follow_offset: Vector3 = Vector3(22, 14, 24)
 
 var _reference_scene: Node
+var _player: CharacterBody3D
+var _camera: Camera3D
 var _markers: Node3D
 var _status_label: Label
 var _validation_state := "initializing"
@@ -15,6 +20,7 @@ var _status_text := "initializing validation playtest"
 
 
 func _ready() -> void:
+	_add_validation_player()
 	_configure_camera()
 	_add_status_overlay()
 	_add_orientation_markers()
@@ -25,6 +31,26 @@ func _ready() -> void:
 	_set_status("STARTING: terrain world not settled yet")
 	if auto_start:
 		call_deferred("_start_validation_viewer")
+
+
+func _process(_delta: float) -> void:
+	_update_camera()
+
+
+func set_human_input_enabled(enabled: bool) -> void:
+	human_input_enabled = enabled
+	if _player != null and _player.has_method("set_human_input_enabled"):
+		_player.call("set_human_input_enabled", enabled)
+
+
+func set_player_test_motion(direction: Vector3) -> void:
+	if _player != null and _player.has_method("set_test_motion_direction"):
+		_player.call("set_test_motion_direction", direction)
+
+
+func clear_player_test_motion() -> void:
+	if _player != null and _player.has_method("clear_test_motion_direction"):
+		_player.call("clear_test_motion_direction")
 
 
 func _start_validation_viewer() -> void:
@@ -47,12 +73,13 @@ func _start_validation_viewer() -> void:
 	if int(terrain_stats.get("triangles", 0)) <= 0:
 		_fail("terrain MeshInstance3D has no drawable triangles: %s" % str(terrain_stats))
 		return
+	_enable_player_simulation()
 	_validation_state = "ready"
 	_set_status(
-		"READY: terrain_meshes=%d triangles=%d viewer=%s camera_target=%s" % [
+		"READY: terrain_meshes=%d triangles=%d player_start=%s viewer=%s" % [
 			int(terrain_stats.get("instances", 0)),
 			int(terrain_stats.get("triangles", 0)),
-			str(viewer_position),
+			str(_player.global_position if _player != null else Vector3.ZERO),
 			str(viewer_position),
 		]
 	)
@@ -69,6 +96,7 @@ func get_validation_summary() -> Dictionary:
 	if terrain_world != null:
 		metrics = terrain_world.get_runtime_metrics()
 	var terrain_stats := _terrain_mesh_stats()
+	var player_stats := _player_summary()
 	return {
 		"state": _validation_state,
 		"status_text": _status_text,
@@ -80,18 +108,57 @@ func get_validation_summary() -> Dictionary:
 		"render_resources": int(metrics.get("render_resources", 0)),
 		"collision_resources": int(metrics.get("collision_resources", 0)),
 		"viewer_position": viewer_position,
-		"camera_position": camera_position,
+		"camera_position": _camera.global_position if _camera != null else Vector3.ZERO,
+		"player_present": bool(player_stats.get("present", false)),
+		"player_position": player_stats.get("position", Vector3.ZERO),
+		"player_on_floor": bool(player_stats.get("on_floor", false)),
+		"player_human_input_enabled": bool(player_stats.get("human_input_enabled", false)),
+		"player_simulation_enabled": bool(player_stats.get("simulation_enabled", false)),
+		"player_camera_current": _camera != null and _camera.current,
 	}
 
 
+func _add_validation_player() -> void:
+	_player = CharacterBody3D.new()
+	_player.name = "ValidationPlayer"
+	_player.set_script(ValidationPlayerScript)
+	_player.position = player_start_position
+	_player.call("set_human_input_enabled", human_input_enabled)
+	var shape := CapsuleShape3D.new()
+	shape.radius = 0.45
+	shape.height = 1.8
+	var collision := CollisionShape3D.new()
+	collision.name = "PlayerCollision"
+	collision.shape = shape
+	_player.add_child(collision)
+	var mesh := CapsuleMesh.new()
+	mesh.radius = 0.45
+	mesh.height = 1.8
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(0.05, 0.85, 1.0)
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var body := MeshInstance3D.new()
+	body.name = "PlayerVisibleBody"
+	body.mesh = mesh
+	body.material_override = material
+	_player.add_child(body)
+	add_child(_player)
+
+
 func _configure_camera() -> void:
-	var camera := get_node_or_null("Camera3D") as Camera3D
-	if camera == null:
+	_camera = get_node_or_null("Camera3D") as Camera3D
+	if _camera == null:
 		return
-	camera.position = camera_position
-	camera.current = true
-	camera.fov = 55.0
-	camera.look_at(viewer_position, Vector3.UP)
+	_camera.current = true
+	_camera.fov = 55.0
+	_update_camera()
+
+
+func _update_camera() -> void:
+	if _camera == null or _player == null:
+		return
+	_camera.global_position = _player.global_position + camera_follow_offset
+	_camera.look_at(_player.global_position + Vector3(0, 1, 0), Vector3.UP)
 
 
 func _add_status_overlay() -> void:
@@ -147,10 +214,6 @@ func _fixture_storage_profile() -> Resource:
 	return storage
 
 
-func _count_terrain_mesh_instances() -> int:
-	return int(_terrain_mesh_stats().get("instances", 0))
-
-
 func _terrain_mesh_stats() -> Dictionary:
 	var stats := {
 		"instances": 0,
@@ -187,6 +250,17 @@ func _accumulate_terrain_mesh_stats(node: Node, stats: Dictionary) -> void:
 	for child in node.get_children():
 		if child is Node:
 			_accumulate_terrain_mesh_stats(child, stats)
+
+
+func _enable_player_simulation() -> void:
+	if _player != null and _player.has_method("set_simulation_enabled"):
+		_player.call("set_simulation_enabled", true)
+
+
+func _player_summary() -> Dictionary:
+	if _player == null or not _player.has_method("get_player_summary"):
+		return {"present": false}
+	return Dictionary(_player.call("get_player_summary"))
 
 
 func _wait_for_backend_state(expected: String) -> bool:

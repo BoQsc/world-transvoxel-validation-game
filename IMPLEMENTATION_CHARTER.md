@@ -43,9 +43,11 @@ G1 is complete when:
 
 - generated projects open from the relevant `artifacts/.../project/project.godot`;
 - `res://scenes/validation_playtest.tscn` starts the terrain world;
+- the scene contains a playable character and follow camera for final human
+  visual/playfeel confirmation;
 - the debug overlay is visible;
 - the automated guard proves nonzero terrain mesh triangle count, not just a
-  node name;
+  node name, and proves the player can move under scripted autonomous control;
 - any visual, interaction, terrain-orientation, popping, artifact, or performance
   issue found by human review is recorded as follow-up addon work rather than
   hidden inside this validation repo.

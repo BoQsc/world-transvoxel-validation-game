@@ -25,13 +25,16 @@ G1 makes the scene human-usable:
 - composes into `artifacts/g1_visible_playtest/project` so the smoke does not
   need to delete a human-open `artifacts/validation_project`;
 - adds unshaded orientation markers for X, Y, Z, and the viewer position;
+- adds a small playable `CharacterBody3D` with visible body, collision shape,
+  WASD movement, jump, and follow camera;
 - adds a dedicated validation status overlay below the addon debug overlay;
 - records a failed state if no terrain MeshInstance3D exists under the backend
   terrain node;
 - adds an automated guard that instantiates the visible playtest scene and
-  checks the ready status plus terrain mesh and triangle counts;
+  checks the ready status plus terrain mesh, triangle, collision, player, and
+  scripted-motion counts;
 - adds a windowed visual capture check that saves the rendered viewport and
-  rejects a blank, gray-only, or terrain-off-center capture.
+  rejects a blank, gray-only, terrain-off-center, or player-not-visible capture.
 
 ## Automated evidence
 
@@ -44,8 +47,8 @@ WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_ca
 
 The guard confirms the scene reaches ready state and reports nonzero terrain
 mesh and triangle counts. The capture confirms that the rendered viewport
-contains non-gray marker/status pixels plus centered terrain-bright pixels and
-writes
+contains non-gray marker/status pixels, centered terrain-bright pixels, and
+visible player pixels, then writes
 `artifacts/g1_visual_capture/godot-4.7-capture.png` for inspection. Human rerun
 confirmation is still useful because G1 is about the actual visible experience,
 not only the programmatic mesh count.

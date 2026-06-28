@@ -15,12 +15,13 @@ func _run_capture() -> void:
 		_fail("validation playtest scene did not load")
 		return
 	var scene = packed.instantiate()
+	scene.set_human_input_enabled(false)
 	root.add_child(scene)
 	if not await _wait_for_ready(scene):
 		_fail("validation playtest scene did not become ready")
 		return
-	for _frame in range(8):
-		await process_frame
+	for _frame in range(30):
+		await physics_frame
 	var viewport := root
 	var image := viewport.get_texture().get_image()
 	if image == null or image.is_empty():
@@ -38,17 +39,24 @@ func _run_capture() -> void:
 	if int(metrics.get("center_bright_samples", 0)) < 1000:
 		_fail("capture lacks enough centered terrain-bright samples: %s" % str(metrics))
 		return
+	if int(metrics.get("player_cyan_samples", 0)) < 20:
+		_fail("capture lacks enough visible player cyan samples: %s" % str(metrics))
+		return
 	var summary: Dictionary = scene.get_validation_summary()
 	if int(summary.get("terrain_triangles", 0)) <= 0:
 		_fail("captured scene terrain mesh has no triangles")
 		return
-	print("%s path=%s size=%dx%d non_gray_samples=%d center_bright_samples=%d terrain_triangles=%d" % [
+	if not bool(summary.get("player_present", false)):
+		_fail("captured scene has no validation player")
+		return
+	print("%s path=%s size=%dx%d non_gray_samples=%d center_bright_samples=%d player_cyan_samples=%d terrain_triangles=%d" % [
 		MARKER,
 		CAPTURE_PATH,
 		image.get_width(),
 		image.get_height(),
 		int(metrics.get("non_gray_samples", 0)),
 		int(metrics.get("center_bright_samples", 0)),
+		int(metrics.get("player_cyan_samples", 0)),
 		int(summary.get("terrain_triangles", 0)),
 	])
 	scene.queue_free()
@@ -69,6 +77,7 @@ func _wait_for_ready(scene: Node) -> bool:
 func _image_metrics(image: Image) -> Dictionary:
 	var non_gray_samples := 0
 	var center_bright_samples := 0
+	var player_cyan_samples := 0
 	var sample_count := 0
 	var width := image.get_width()
 	var height := image.get_height()
@@ -84,6 +93,9 @@ func _image_metrics(image: Image) -> Dictionary:
 			var spread = max(color.r, max(color.g, color.b)) - min(color.r, min(color.g, color.b))
 			if spread > 0.08:
 				non_gray_samples += 1
+			if color.r < 0.32 and color.g > 0.25 and color.b > 0.30 and \
+					max(color.g, color.b) - color.r > 0.14:
+				player_cyan_samples += 1
 			var luminance = (color.r + color.g + color.b) / 3.0
 			if x >= center_min_x and x < center_max_x and \
 					y >= center_min_y and y < center_max_y and \
@@ -94,6 +106,7 @@ func _image_metrics(image: Image) -> Dictionary:
 		"sample_count": sample_count,
 		"non_gray_samples": non_gray_samples,
 		"center_bright_samples": center_bright_samples,
+		"player_cyan_samples": player_cyan_samples,
 	}
 
 

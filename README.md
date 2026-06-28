@@ -63,7 +63,9 @@ artifacts/g1_visual_capture/project/project.godot
 ```
 
 Run `res://scenes/validation_playtest.tscn`. The scene auto-starts the addon
-reference terrain world, submits one viewer update, targets the camera at the
-generated chunk, shows orientation markers, and shows a validation status overlay
-below the addon debug overlay. The automated G1 guard also checks nonzero
-terrain triangle geometry. A gray rectangle alone is not an acceptable G1 result.
+reference terrain world, submits one viewer update, adds a small WASD/jump
+playable character with a follow camera, shows orientation markers, and shows a
+validation status overlay below the addon debug overlay. The automated G1 guard
+also checks nonzero terrain triangle geometry, terrain collision resources,
+player presence, and scripted player movement. A gray rectangle alone is not an
+acceptable G1 result.
