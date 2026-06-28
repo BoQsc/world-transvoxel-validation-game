@@ -16,6 +16,7 @@ TERRAIN_REPO = REPOSITORY_ROOT / "world-transvoxel-terrain"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "validation_project"
 
 PROJECT_ITEMS = (
+    "materials",
     "scenes",
     "scripts",
     "tests",

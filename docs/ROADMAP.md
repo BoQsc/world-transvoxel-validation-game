@@ -82,10 +82,24 @@ Exit:
 
 ## G5 - Material and performance baseline
 
-Status: active next.
+Status: complete by `WT_VALIDATION_G5_CONTRACT_PASS` and
+`WT_VALIDATION_G5_SMOKE_PASS`.
 
 Exit:
 
 - small texture/material path exists without hiding performance cost;
 - baseline watt/performance behavior is measured;
 - optional GPU burst/full-GPU paths remain decisions, not assumptions.
+
+## G6 - Profile-selectable playable world
+
+Status: active next.
+
+Exit:
+
+- generated playtest exposes flat and mountain playable profiles;
+- both profiles keep first-person player, crosshair, materialized terrain,
+  dig/place interaction, collision, and telemetry;
+- automated captures cover both profiles before human handoff;
+- handoff document gives the exact generated project path and accepted
+  limitations.
