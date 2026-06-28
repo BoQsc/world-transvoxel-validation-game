@@ -57,7 +57,8 @@ Exit:
 
 ## G3 - Terrain generation modes
 
-Status: active next.
+Status: complete by `WT_VALIDATION_G3_CONTRACT_PASS` and
+`WT_VALIDATION_G3_SMOKE_PASS`.
 
 Exit:
 
@@ -68,7 +69,7 @@ Exit:
 
 ## G4 - Terrain edit interaction
 
-Status: pending.
+Status: active next.
 
 Exit:
 

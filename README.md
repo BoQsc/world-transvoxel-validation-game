@@ -4,8 +4,9 @@ Small Godot validation project for `world-transvoxel-terrain`.
 
 Status: G0 install/run validation complete. G1 playable terrain/player guard
 passes programmatically; G2 first-person flat baseline passes programmatically;
-larger playable-world validation remains active. This repository is not the
-sandbox and not a production game. Its job is to import `world-transvoxel` and
+G3 flat/mountain generation modes pass programmatically; larger playable-world
+validation remains active. This repository is not the sandbox and not a
+production game. Its job is to import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
 and report every failure back to the addon repositories instead of hiding
 workarounds here.
@@ -37,6 +38,8 @@ python tools/g1_visible_playtest_smoke.py
 python tools/g1_visual_capture.py --windowed
 python tools/validate_g2_contract.py
 python tools/g2_first_person_baseline_smoke.py
+python tools/validate_g3_contract.py
+python tools/g3_generation_modes_smoke.py --windowed
 ```
 
 Expected marker:
@@ -45,12 +48,14 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g3_terrain_generation_modes
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=g4_terrain_edit_interaction
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
 WT_VALIDATION_G2_CONTRACT_PASS implementation=first_person_flat_baseline next=g3_terrain_generation_modes
 WT_VALIDATION_G2_SMOKE_PASS engines=2 report=artifacts/g2_first_person_baseline/g2_first_person_baseline_report.json
+WT_VALIDATION_G3_CONTRACT_PASS implementation=flat_and_mountain_baked_generation_modes next=g4_terrain_edit_interaction
+WT_VALIDATION_G3_SMOKE_PASS profiles=2 engines=2 report=artifacts/g3_generation_modes/g3_generation_modes_report.json
 ```
 
 ## Human-visible playtest
