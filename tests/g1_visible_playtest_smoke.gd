@@ -22,11 +22,18 @@ func _run_test() -> void:
 	if int(summary.get("terrain_mesh_instances", 0)) <= 0:
 		_fail("validation playtest has no terrain mesh instances")
 		return
+	if int(summary.get("terrain_triangles", 0)) <= 0:
+		_fail("validation playtest terrain mesh has no triangles")
+		return
 	if not str(summary.get("status_text", "")).contains("READY"):
 		_fail("validation playtest status text is not ready")
 		return
-	print("%s state=ready terrain_meshes=%d implementation=human_visible_playtest_guard" %
-		[MARKER, int(summary.get("terrain_mesh_instances", 0))])
+	print("%s state=ready terrain_meshes=%d terrain_triangles=%d implementation=human_visible_playtest_guard" %
+		[
+			MARKER,
+			int(summary.get("terrain_mesh_instances", 0)),
+			int(summary.get("terrain_triangles", 0)),
+		])
 	scene.queue_free()
 	await process_frame
 	quit(0)

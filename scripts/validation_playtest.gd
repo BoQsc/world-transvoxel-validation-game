@@ -8,6 +8,7 @@ const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/w
 @export var camera_position: Vector3 = Vector3(30, 24, 34)
 
 var _reference_scene: Node
+var _markers: Node3D
 var _status_label: Label
 var _validation_state := "initializing"
 var _status_text := "initializing validation playtest"
@@ -39,14 +40,22 @@ func _start_validation_viewer() -> void:
 	if not await _wait_for_cold_idle(1, 1):
 		_fail("terrain did not settle")
 		return
-	var terrain_meshes := _count_terrain_mesh_instances()
-	if terrain_meshes <= 0:
+	var terrain_stats := _terrain_mesh_stats()
+	if int(terrain_stats.get("instances", 0)) <= 0:
 		_fail("no visible terrain MeshInstance3D was found")
 		return
+	if int(terrain_stats.get("triangles", 0)) <= 0:
+		_fail("terrain MeshInstance3D has no drawable triangles: %s" % str(terrain_stats))
+		return
 	_validation_state = "ready"
-	_set_status("READY: terrain_meshes=%d viewer=%s camera_target=%s" % [
-		terrain_meshes, str(viewer_position), str(viewer_position)
-	])
+	_set_status(
+		"READY: terrain_meshes=%d triangles=%d viewer=%s camera_target=%s" % [
+			int(terrain_stats.get("instances", 0)),
+			int(terrain_stats.get("triangles", 0)),
+			str(viewer_position),
+			str(viewer_position),
+		]
+	)
 	print("WT_VALIDATION_PLAYTEST_READY scene=validation_playtest viewer=settled")
 
 
@@ -59,10 +68,15 @@ func get_validation_summary() -> Dictionary:
 	var metrics: Dictionary = {}
 	if terrain_world != null:
 		metrics = terrain_world.get_runtime_metrics()
+	var terrain_stats := _terrain_mesh_stats()
 	return {
 		"state": _validation_state,
 		"status_text": _status_text,
-		"terrain_mesh_instances": _count_terrain_mesh_instances(),
+		"terrain_mesh_instances": int(terrain_stats.get("instances", 0)),
+		"terrain_mesh_surfaces": int(terrain_stats.get("surfaces", 0)),
+		"terrain_face_vertices": int(terrain_stats.get("face_vertices", 0)),
+		"terrain_triangles": int(terrain_stats.get("triangles", 0)),
+		"terrain_max_extent": float(terrain_stats.get("max_extent", 0.0)),
 		"render_resources": int(metrics.get("render_resources", 0)),
 		"collision_resources": int(metrics.get("collision_resources", 0)),
 		"viewer_position": viewer_position,
@@ -100,13 +114,13 @@ func _add_status_overlay() -> void:
 
 
 func _add_orientation_markers() -> void:
-	var markers := Node3D.new()
-	markers.name = "ValidationMarkers"
-	add_child(markers)
-	_add_box_marker(markers, "AxisXRed", Vector3(8, 0.05, 0), Vector3(16, 0.1, 0.1), Color.RED)
-	_add_box_marker(markers, "AxisYGreen", Vector3(0.05, 8, 0), Vector3(0.1, 16, 0.1), Color.GREEN)
-	_add_box_marker(markers, "AxisZBlue", Vector3(0, 0.05, 8), Vector3(0.1, 0.1, 16), Color.BLUE)
-	_add_box_marker(markers, "ViewerYellow", viewer_position, Vector3(0.8, 0.8, 0.8), Color.YELLOW)
+	_markers = Node3D.new()
+	_markers.name = "ValidationMarkers"
+	add_child(_markers)
+	_add_box_marker(_markers, "AxisXRed", Vector3(8, 0.05, 0), Vector3(16, 0.1, 0.1), Color.RED)
+	_add_box_marker(_markers, "AxisYGreen", Vector3(0.05, 8, 0), Vector3(0.1, 16, 0.1), Color.GREEN)
+	_add_box_marker(_markers, "AxisZBlue", Vector3(0, 0.05, 8), Vector3(0.1, 0.1, 16), Color.BLUE)
+	_add_box_marker(_markers, "ViewerYellow", viewer_position, Vector3(0.8, 0.8, 0.8), Color.YELLOW)
 
 
 func _add_box_marker(parent: Node, marker_name: String, position: Vector3, size: Vector3, color: Color) -> void:
@@ -134,23 +148,45 @@ func _fixture_storage_profile() -> Resource:
 
 
 func _count_terrain_mesh_instances() -> int:
+	return int(_terrain_mesh_stats().get("instances", 0))
+
+
+func _terrain_mesh_stats() -> Dictionary:
+	var stats := {
+		"instances": 0,
+		"surfaces": 0,
+		"face_vertices": 0,
+		"triangles": 0,
+		"max_extent": 0.0,
+	}
 	if _reference_scene == null:
-		return 0
+		return stats
 	var terrain_world = _reference_scene.get_terrain_world()
 	if terrain_world == null:
-		return 0
+		return stats
 	var backend = terrain_world.get_backend_terrain()
 	if backend == null:
-		return 0
-	return _count_mesh_instances(backend)
+		return stats
+	_accumulate_terrain_mesh_stats(backend, stats)
+	return stats
 
 
-func _count_mesh_instances(node: Node) -> int:
-	var count := 1 if node is MeshInstance3D else 0
+func _accumulate_terrain_mesh_stats(node: Node, stats: Dictionary) -> void:
+	if node is MeshInstance3D:
+		var instance := node as MeshInstance3D
+		stats["instances"] = int(stats.get("instances", 0)) + 1
+		if instance.mesh != null:
+			var mesh := instance.mesh
+			stats["surfaces"] = int(stats.get("surfaces", 0)) + mesh.get_surface_count()
+			var faces := mesh.get_faces()
+			stats["face_vertices"] = int(stats.get("face_vertices", 0)) + faces.size()
+			stats["triangles"] = int(stats.get("triangles", 0)) + int(faces.size() / 3)
+			var size := mesh.get_aabb().size
+			var extent = max(size.x, max(size.y, size.z))
+			stats["max_extent"] = max(float(stats.get("max_extent", 0.0)), extent)
 	for child in node.get_children():
 		if child is Node:
-			count += _count_mesh_instances(child)
-	return count
+			_accumulate_terrain_mesh_stats(child, stats)
 
 
 func _wait_for_backend_state(expected: String) -> bool:

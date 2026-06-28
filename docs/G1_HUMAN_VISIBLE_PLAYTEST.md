@@ -29,9 +29,9 @@ G1 makes the scene human-usable:
 - records a failed state if no terrain MeshInstance3D exists under the backend
   terrain node;
 - adds an automated guard that instantiates the visible playtest scene and
-  checks the ready status plus terrain mesh count;
+  checks the ready status plus terrain mesh and triangle counts;
 - adds a windowed visual capture check that saves the rendered viewport and
-  rejects a blank or gray-only capture.
+  rejects a blank, gray-only, or terrain-off-center capture.
 
 ## Automated evidence
 
@@ -42,9 +42,10 @@ WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_vi
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
 ```
 
-The guard confirms the scene reaches ready state and reports
-`terrain_meshes=1`. The capture confirms that the rendered viewport contains
-non-gray marker/status pixels and writes
+The guard confirms the scene reaches ready state and reports nonzero terrain
+mesh and triangle counts. The capture confirms that the rendered viewport
+contains non-gray marker/status pixels plus centered terrain-bright pixels and
+writes
 `artifacts/g1_visual_capture/godot-4.7-capture.png` for inspection. Human rerun
 confirmation is still useful because G1 is about the actual visible experience,
 not only the programmatic mesh count.

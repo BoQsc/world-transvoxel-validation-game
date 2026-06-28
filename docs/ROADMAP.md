@@ -32,6 +32,8 @@ Exit:
 - run `res://scenes/validation_playtest.tscn`;
 - confirm that the scene shows more than a gray rectangle: terrain or an
   explicit failure status, orientation markers, and validation status text;
+- confirm programmatically that the visible terrain mesh has nonzero triangle
+  geometry;
 - keep a captured viewport image as automated evidence before asking for human
   confirmation;
 - confirm whether there are obvious orientation, artifact, popping,

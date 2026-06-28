@@ -44,6 +44,8 @@ G1 is complete when:
 - generated projects open from the relevant `artifacts/.../project/project.godot`;
 - `res://scenes/validation_playtest.tscn` starts the terrain world;
 - the debug overlay is visible;
+- the automated guard proves nonzero terrain mesh triangle count, not just a
+  node name;
 - any visual, interaction, terrain-orientation, popping, artifact, or performance
   issue found by human review is recorded as follow-up addon work rather than
   hidden inside this validation repo.

@@ -47,11 +47,14 @@ REQUIRED_PHRASES = {
         "ValidationMarkers",
         "look_at(viewer_position",
         "no visible terrain MeshInstance3D",
+        "terrain_triangles",
+        "_terrain_mesh_stats",
         "get_validation_summary",
     ),
     "tests/g1_visible_playtest_smoke.gd": (
         "WT_VALIDATION_G1_GODOT_PASS",
         "terrain_mesh_instances",
+        "terrain_triangles",
         "status_text",
     ),
     "tools/g1_visible_playtest_smoke.py": (
@@ -63,6 +66,8 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G1_VISUAL_CAPTURE_PASS",
         "viewport.get_texture().get_image()",
         "non_gray_samples",
+        "center_bright_samples",
+        "terrain_triangles",
     ),
     "tools/g1_visual_capture.py": (
         "WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS",

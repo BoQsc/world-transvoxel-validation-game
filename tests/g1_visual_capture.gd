@@ -35,12 +35,21 @@ func _run_capture() -> void:
 	if int(metrics.get("non_gray_samples", 0)) < 50:
 		_fail("capture lacks enough non-gray samples: %s" % str(metrics))
 		return
-	print("%s path=%s size=%dx%d non_gray_samples=%d" % [
+	if int(metrics.get("center_bright_samples", 0)) < 1000:
+		_fail("capture lacks enough centered terrain-bright samples: %s" % str(metrics))
+		return
+	var summary: Dictionary = scene.get_validation_summary()
+	if int(summary.get("terrain_triangles", 0)) <= 0:
+		_fail("captured scene terrain mesh has no triangles")
+		return
+	print("%s path=%s size=%dx%d non_gray_samples=%d center_bright_samples=%d terrain_triangles=%d" % [
 		MARKER,
 		CAPTURE_PATH,
 		image.get_width(),
 		image.get_height(),
 		int(metrics.get("non_gray_samples", 0)),
+		int(metrics.get("center_bright_samples", 0)),
+		int(summary.get("terrain_triangles", 0)),
 	])
 	scene.queue_free()
 	await process_frame
@@ -59,21 +68,32 @@ func _wait_for_ready(scene: Node) -> bool:
 
 func _image_metrics(image: Image) -> Dictionary:
 	var non_gray_samples := 0
+	var center_bright_samples := 0
 	var sample_count := 0
 	var width := image.get_width()
 	var height := image.get_height()
 	var step_x = 1
 	var step_y = 1
+	var center_min_x := int(width * 0.25)
+	var center_max_x := int(width * 0.85)
+	var center_min_y := int(height * 0.2)
+	var center_max_y := int(height * 0.8)
 	for y in range(0, height, step_y):
 		for x in range(0, width, step_x):
 			var color := image.get_pixel(x, y)
 			var spread = max(color.r, max(color.g, color.b)) - min(color.r, min(color.g, color.b))
 			if spread > 0.08:
 				non_gray_samples += 1
+			var luminance = (color.r + color.g + color.b) / 3.0
+			if x >= center_min_x and x < center_max_x and \
+					y >= center_min_y and y < center_max_y and \
+					luminance > 0.45:
+				center_bright_samples += 1
 			sample_count += 1
 	return {
 		"sample_count": sample_count,
 		"non_gray_samples": non_gray_samples,
+		"center_bright_samples": center_bright_samples,
 	}
 
 
