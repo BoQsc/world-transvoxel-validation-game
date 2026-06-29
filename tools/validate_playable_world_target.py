@@ -27,6 +27,7 @@ REQUIRED_PHRASES = {
         "dense generated 16 by 16 fixture with 256 generated pages",
         "32 by 32 fixture with 1024 generated pages",
         "generated fixture vertical coverage guard",
+        "64 by 64 fixture with 4096 generated pages",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -41,6 +42,7 @@ REQUIRED_PHRASES = {
         "## G11 - Generated 16x16 playable streaming",
         "## G12 - Generated 32x32 playable streaming",
         "## G13 - Generated fixture vertical coverage guard",
+        "## G14 - Generated 64x64 playable streaming",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

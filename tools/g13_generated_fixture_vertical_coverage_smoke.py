@@ -15,6 +15,11 @@ from g12_generated_32x32_playable_streaming_smoke import (
     SOURCE_REVISION as G12_SOURCE_REVISION,
     vertical_coverage as g12_vertical_coverage,
 )
+from g14_generated_64x64_playable_streaming_smoke import (
+    PROFILE_ID as G14_PROFILE_ID,
+    SOURCE_REVISION as G14_SOURCE_REVISION,
+    vertical_coverage as g14_vertical_coverage,
+)
 from generated_fixture_vertical_coverage import (
     ACTIVE_VERTICAL_MAX,
     ACTIVE_VERTICAL_MIN,
@@ -39,6 +44,11 @@ def main() -> None:
             "profile": G12_PROFILE_ID,
             "source_revision": G12_SOURCE_REVISION,
             "coverage": g12_vertical_coverage(),
+        },
+        {
+            "profile": G14_PROFILE_ID,
+            "source_revision": G14_SOURCE_REVISION,
+            "coverage": g14_vertical_coverage(),
         },
     ]
     report_path = ARTIFACT_ROOT / "g13_generated_fixture_vertical_coverage_report.json"

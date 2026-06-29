@@ -36,6 +36,7 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS",
         "g11_vertical_coverage",
         "g12_vertical_coverage",
+        "g14_vertical_coverage",
         "g13_generated_fixture_vertical_coverage_report.json",
     ),
     "tools/g11_generated_16x16_playable_streaming_smoke.py": (

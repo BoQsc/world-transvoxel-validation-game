@@ -228,11 +228,34 @@ Status: complete by `WT_VALIDATION_G13_CONTRACT_PASS` and
 
 Exit:
 
-- G11 and G12 generated fixture runners compute surface min/max height before
-  bake;
+- G11, G12, and G14 generated fixture runners compute surface min/max height
+  before bake;
 - generated surfaces must remain inside the active vertical chunk with explicit
   lower and upper margins;
-- G11 and G12 fixture reports include `vertical_coverage` metadata;
+- G11, G12, and G14 fixture reports include `vertical_coverage` metadata;
 - reused generated fixtures must match the runner's expected `source_revision`;
 - stale or vertically unsafe generated fixtures fail before Godot runtime smoke;
 - this is a safety gate before larger generated terrain scale-up milestones.
+
+## G14 - Generated 64x64 playable streaming
+
+Status: complete by `WT_VALIDATION_G14_CONTRACT_PASS` and
+`WT_VALIDATION_G14_GENERATED_64X64_PLAYABLE_STREAMING_SMOKE_PASS`.
+
+Exit:
+
+- `g14_generated_64x64` is a selectable playable profile backed by a dense
+  deterministic generated terrain fixture;
+- the fixture is baked through `world-transvoxel/tools/wt_bake.py` and contains
+  4096 generated pages;
+- generated source writing uses the streamed source writer instead of building
+  one large in-memory bytearray;
+- the normal first-person playtest path starts with one active viewer, player,
+  camera, crosshair, collision, materialized terrain, and human input disabled
+  for autonomous validation;
+- the smoke moves the same viewer ID through the 64 by 64 terrain and requires
+  9/25/25/25/9 active render/collision resources;
+- the playable-scene active budget remains 25 resources and does not load all
+  4096 generated pages as active resources;
+- scripted player motion and an active-center edit remain valid after streaming,
+  with `render_fading_resources == 0`.
