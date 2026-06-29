@@ -23,6 +23,8 @@ G18 production budget pivot reclassifies G16/G17 as stress-only evidence and
 requires compact deterministic/on-demand terrain before larger game claims.
 G19 implements that compact near-2K on-demand path through the addons without
 dense source/world files.
+G20 closes the compact terrain storage/load-shape issue: within the near-2K
+validation boundary, dense source/world files are no longer the normal path.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -93,6 +95,8 @@ python tools/validate_g18_contract.py
 python tools/g18_world_budget_guard.py
 python tools/validate_g19_contract.py
 python tools/g19_compact_2k_on_demand_smoke.py
+python tools/validate_g20_contract.py
+python tools/g20_compact_terrain_resolution.py
 ```
 
 Expected marker:
@@ -152,6 +156,8 @@ WT_VALIDATION_G18_WORLD_BUDGET_GUARD_PASS production_ready=false max_file_mb=100
 WT_VALIDATION_G19_CONTRACT_PASS implementation=compact_2k_on_demand
 WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS profile=g19_compact_2k_on_demand samples=5 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=... dense_world_files=0
 WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS engines=2 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
+WT_VALIDATION_G20_CONTRACT_PASS implementation=compact_terrain_resolution
+WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 engines=2 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 ```
 
 ## Human-visible playtest

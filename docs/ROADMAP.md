@@ -362,3 +362,24 @@ Exit:
 - active-center carving commits and replaces render resources;
 - generated runtime files stay inside the 50 MiB target per-file and 100 MiB
   total generated-object-root budget.
+
+## G20 - Compact terrain resolution gate
+
+Status: complete when `WT_VALIDATION_G20_CONTRACT_PASS` and
+`WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS` both pass.
+
+Exit:
+
+- the G19 two-engine report exists and proves `g19_compact_2k_on_demand`;
+- the compact near-2K terrain storage/load-shape problem is resolved within
+  this validation boundary;
+- the G18 budget guard still sees no oversized stress artifacts;
+- G16/G17 remain stress-only historical evidence;
+- the next terrain work must not reintroduce dense near-2K source/world files
+  as the normal path.
+
+Boundary:
+
+- this does not claim final terrain art, dynamic LOD seam quality,
+  GPU/compute generation, water, biomes, vegetation, buildings, multiplayer, or
+  game repository readiness.

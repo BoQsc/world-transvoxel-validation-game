@@ -72,6 +72,11 @@ no `world.wtworld`, no `streaming.wtworld`, no `procedural.wtseed`, bounded
 25-resource active streaming, edit replacement, and generated object-root files
 under the 50 MiB target per-file and 100 MiB total budget.
 
+G20 closes the compact terrain storage/load-shape issue. The dense near-2K
+source/world-file problem is resolved for the current validation boundary by
+G19's addon-level on-demand path. This is not final terrain art, not dynamic
+LOD seam approval, not GPU generation, and not game-repository readiness.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

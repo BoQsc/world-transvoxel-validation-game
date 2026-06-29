@@ -45,6 +45,9 @@ REQUIRED_PHRASES = {
         "deterministic procedural descriptor",
         "no `world.wtworld`",
         "100 MiB total budget",
+        "G20 closes the compact terrain storage/load-shape issue",
+        "dense near-2K source/world-file problem is resolved",
+        "not final terrain art",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -65,6 +68,7 @@ REQUIRED_PHRASES = {
         "## G17 - Generated 128x128 human visual handoff",
         "## G18 - Production terrain budget pivot",
         "## G19 - Compact 2K on-demand procedural streaming",
+        "## G20 - Compact terrain resolution gate",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
