@@ -126,7 +126,7 @@ Exit:
 
 ## G8 - 2000×2000 bounded streaming
 
-Status: active. G8 now requires `WT_VALIDATION_G8_CONTRACT_PASS`,
+Status: complete by `WT_VALIDATION_G8_CONTRACT_PASS`,
 `WT_VALIDATION_G8_WINDOW_PLAN_PASS`, and
 `WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS`.
 
@@ -143,3 +143,19 @@ Exit:
 - Godot viewer movement across the logical 2000×2000 path must settle to
   9/25/25/25/9 active render/collision resources, no render fade blink
   resources, and no active-resource budget overflow.
+
+## G9 - Sparse 2K playable profile
+
+Status: complete by `WT_VALIDATION_G9_CONTRACT_PASS` and
+`WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_SMOKE_PASS`.
+
+Exit:
+
+- `g8_sparse_2k` is a selectable playable profile in the validation scene;
+- the profile uses the native G8 `g8_2000x2000_sparse.wtworld` fixture;
+- the normal first-person playtest path keeps player, camera, crosshair,
+  collision, materialized terrain, scripted motion, and edit submission working;
+- the profile submits five bounded G8 path viewers and settles to 93 active
+  sparse path resources, not a full 125 by 125 map load;
+- edit replacement keeps `render_fading_resources == 0`, preserving the no-blink
+  policy from G8.

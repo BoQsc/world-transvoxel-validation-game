@@ -10,10 +10,12 @@ programmatically; G6 8 by 8 multi-chunk profile-selectable playable world passes
 programmatically. G7 human visual verification handoff is reproducible;
 final human profile review remains pending. G8 bounded 2000×2000 streaming has
 an active-window planner and now requires a real Godot/native runtime active
-window smoke. This repository is not the sandbox and not a production game. Its
-job is to import `world-transvoxel` and `world-transvoxel-terrain` as addons,
-run real game-facing integration paths, and report every failure back to the
-addon repositories instead of hiding workarounds here.
+window smoke. G9 sparse 2K playable profile passes programmatically through the
+normal validation playtest scene. This repository is not the sandbox and not a
+production game. Its job is to import `world-transvoxel` and
+`world-transvoxel-terrain` as addons, run real game-facing integration paths,
+and report every failure back to the addon repositories instead of hiding
+workarounds here.
 
 ## Boundary
 
@@ -57,6 +59,8 @@ python tools/g7_human_visual_handoff.py --reuse-bake --import-projects
 python tools/validate_g8_contract.py
 python tools/g8_2000x2000_window_plan.py
 python tools/g8_runtime_active_window_smoke.py
+python tools/validate_g9_contract.py
+python tools/g9_sparse_2k_playable_profile_smoke.py
 ```
 
 Expected marker:
@@ -87,6 +91,9 @@ WT_VALIDATION_G8_CONTRACT_PASS implementation=bounded_2000x2000_streaming runtim
 WT_VALIDATION_G8_WINDOW_PLAN_PASS map_blocks=2000 chunk_grid=125x125 max_window_columns=25 active_budget=256
 WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS pages=93 samples=5 max_render_resources=25 max_collision_resources=25 active_budget=256
 WT_VALIDATION_G8_RUNTIME_SMOKE_PASS engines=2 report=artifacts/g8_runtime_active_window/g8_runtime_active_window_report.json
+WT_VALIDATION_G9_CONTRACT_PASS implementation=sparse_2k_playable_profile
+WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_PASS profile=g8_sparse_2k resources=93 viewers=5 triangles=... materialized=93 edit_replacements=1
+WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_SMOKE_PASS engines=2 report=artifacts/g9_sparse_2k_playable_profile/g9_sparse_2k_playable_profile_report.json
 ```
 
 ## Human-visible playtest

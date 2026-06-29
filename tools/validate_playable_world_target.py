@@ -22,6 +22,7 @@ REQUIRED_PHRASES = {
         "1 block = 1 meter",
         "4,000,000 m²",
         "4 km²",
+        "93 active sparse path resources",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -31,6 +32,7 @@ REQUIRED_PHRASES = {
         "## G6 - Profile-selectable playable world",
         "## G7 - Human visual verification",
         "## G8 - 2000×2000 bounded streaming",
+        "## G9 - Sparse 2K playable profile",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

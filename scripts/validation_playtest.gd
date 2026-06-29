@@ -78,7 +78,6 @@ func set_manual_camera_view(position: Vector3, target: Vector3) -> void:
 		_camera.global_position = position
 		_camera.look_at(target, Vector3.UP)
 
-
 func set_player_visual_visible(visible: bool) -> void:
 	if _player != null:
 		var body := _player.get_node_or_null("PlayerVisibleBody") as Node3D
@@ -88,7 +87,6 @@ func set_player_visual_visible(visible: bool) -> void:
 func set_player_test_motion(direction: Vector3) -> void:
 	if _player != null and _player.has_method("set_test_motion_direction"):
 		_player.call("set_test_motion_direction", direction)
-
 
 func configure_playtest_profile(profile_id: StringName) -> void:
 	playtest_profile_id = profile_id
@@ -127,8 +125,9 @@ func _start_validation_viewer() -> void:
 	_enable_player_simulation()
 	_validation_state = "ready"
 	_set_status(
-		"READY: profile=%s fixture=8x8_multi_chunk resources=%d viewers=%d meshes=%d triangles=%d player_start=%s" % [
+		"READY: profile=%s fixture=%s resources=%d viewers=%d meshes=%d triangles=%d player_start=%s" % [
 			str(playtest_profile_id),
+			ProfileCatalog.fixture_label(playtest_profile_id),
 			resource_count,
 			viewer_count,
 			int(terrain_stats.get("instances", 0)),
@@ -162,6 +161,7 @@ func get_validation_summary() -> Dictionary:
 		"render_resources": int(metrics.get("render_resources", 0)),
 		"collision_resources": int(metrics.get("collision_resources", 0)),
 		"viewer_position": viewer_position,
+		"fixture_label": ProfileCatalog.fixture_label(playtest_profile_id),
 		"viewer_count": ProfileCatalog.viewer_positions(playtest_profile_id).size(),
 		"expected_resource_count": ProfileCatalog.expected_resource_count(playtest_profile_id),
 		"camera_position": _camera.global_position if _camera != null else Vector3.ZERO,
