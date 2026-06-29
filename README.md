@@ -10,9 +10,11 @@ programmatically; G6 8 by 8 multi-chunk profile-selectable playable world passes
 programmatically. G7 human visual verification handoff is reproducible;
 final human profile review remains pending. G8 bounded 2000×2000 streaming has
 an active-window planner and now requires a real Godot/native runtime active
-window smoke. G9 sparse 2K playable profile passes programmatically through the
-normal validation playtest scene. This repository is not the sandbox and not a
-production game. Its job is to import `world-transvoxel` and
+window smoke. G9 sparse 2K playable profile and G10 single-viewer 2K playable
+streaming pass programmatically through the normal validation playtest scene.
+G11 generated 16 by 16 playable streaming is tracked as the dense generated
+terrain scale-up gate. This repository is not the sandbox and not a production
+game. Its job is to import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
 and report every failure back to the addon repositories instead of hiding
 workarounds here.
@@ -63,6 +65,8 @@ python tools/validate_g9_contract.py
 python tools/g9_sparse_2k_playable_profile_smoke.py
 python tools/validate_g10_contract.py
 python tools/g10_single_viewer_2k_playable_streaming_smoke.py
+python tools/validate_g11_contract.py
+python tools/g11_generated_16x16_playable_streaming_smoke.py
 ```
 
 Expected marker:
@@ -99,6 +103,9 @@ WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_SMOKE_PASS engines=2 report=artifacts/g9_spa
 WT_VALIDATION_G10_CONTRACT_PASS implementation=single_viewer_2k_playable_streaming
 WT_VALIDATION_G10_SINGLE_VIEWER_2K_PLAYABLE_STREAMING_PASS profile=g10_single_viewer_2k samples=5 pages=93 max_render_resources=25 max_collision_resources=25 edit_replacements=...
 WT_VALIDATION_G10_SINGLE_VIEWER_2K_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g10_single_viewer_2k_playable_streaming/g10_single_viewer_2k_playable_streaming_report.json
+WT_VALIDATION_G11_CONTRACT_PASS implementation=generated_16x16_playable_streaming
+WT_VALIDATION_G11_GENERATED_16X16_PLAYABLE_STREAMING_PASS profile=g11_generated_16x16 samples=5 pages=256 max_render_resources=25 max_collision_resources=25 edit_replacements=...
+WT_VALIDATION_G11_GENERATED_16X16_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g11_generated_16x16_playable_streaming/g11_generated_16x16_playable_streaming_report.json
 ```
 
 ## Human-visible playtest

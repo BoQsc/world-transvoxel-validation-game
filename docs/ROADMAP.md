@@ -178,3 +178,24 @@ Exit:
   does not keep all 93 sparse path resources active;
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
+
+## G11 - Generated 16x16 playable streaming
+
+Status: complete by `WT_VALIDATION_G11_CONTRACT_PASS` and
+`WT_VALIDATION_G11_GENERATED_16X16_PLAYABLE_STREAMING_SMOKE_PASS`.
+
+Exit:
+
+- `g11_generated_16x16` is a selectable playable profile backed by a dense
+  deterministic generated terrain fixture;
+- the fixture is baked through `world-transvoxel/tools/wt_bake.py` and contains
+  256 generated pages;
+- the normal first-person playtest path starts with one active viewer, player,
+  camera, crosshair, collision, materialized terrain, and human input disabled
+  for autonomous validation;
+- the smoke moves the same viewer ID through the 16 by 16 terrain and requires
+  9/25/25/25/9 active render/collision resources;
+- the playable-scene active budget remains 25 resources and does not load all
+  256 generated pages as active resources;
+- scripted player motion and an active-center edit remain valid after streaming,
+  with `render_fading_resources == 0`.

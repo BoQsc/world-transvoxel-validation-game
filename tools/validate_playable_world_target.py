@@ -24,6 +24,7 @@ REQUIRED_PHRASES = {
         "4 km²",
         "93 active sparse path resources",
         "single-viewer playable streaming with a 25-resource active window",
+        "dense generated 16 by 16 fixture with 256 generated pages",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -35,6 +36,7 @@ REQUIRED_PHRASES = {
         "## G8 - 2000×2000 bounded streaming",
         "## G9 - Sparse 2K playable profile",
         "## G10 - Single-viewer 2K playable streaming",
+        "## G11 - Generated 16x16 playable streaming",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

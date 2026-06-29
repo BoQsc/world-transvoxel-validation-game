@@ -24,6 +24,11 @@ resources, and single-viewer playable streaming with a 25-resource active
 window. It is still not the same as rendering or generating the full 2000 by
 2000 surface.
 
+G11 adds a dense generated 16 by 16 fixture with 256 generated pages. It proves
+that generated terrain can use the same playable single-viewer 25-resource
+active window without loading every generated page at once. It is a scale-up
+step from 8 by 8 fixtures, not the final 2000 by 2000 world.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
