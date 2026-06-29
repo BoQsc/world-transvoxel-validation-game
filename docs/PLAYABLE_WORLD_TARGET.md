@@ -80,6 +80,12 @@ G19's addon-level on-demand path, including explicit 30 second timing evidence.
 This is not final terrain art, not dynamic LOD seam approval, not GPU
 generation, and not game-repository readiness.
 
+G21 prepares the compact G19 project for human visual playtesting. It composes
+the validation project from current local addon sources, pins the playable scene
+to `g19_compact_2k_on_demand`, imports the project before handoff, and records
+human_confirmation as pending. It is a handoff gate only; it must not reintroduce
+dense near-2K source/world files as the normal path.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

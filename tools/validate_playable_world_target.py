@@ -48,6 +48,8 @@ REQUIRED_PHRASES = {
         "G20 closes the compact terrain storage/load-shape issue",
         "dense near-2K source/world-file problem is resolved",
         "explicit 30 second timing evidence",
+        "G21 prepares the compact G19 project for human visual playtesting",
+        "human_confirmation as pending",
         "not final terrain art",
     ),
     "docs/ROADMAP.md": (
@@ -70,6 +72,7 @@ REQUIRED_PHRASES = {
         "## G18 - Production terrain budget pivot",
         "## G19 - Compact 2K on-demand procedural streaming",
         "## G20 - Compact terrain resolution gate",
+        "## G21 - Compact 2K human visual handoff",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

@@ -383,3 +383,23 @@ Boundary:
 - this does not claim final terrain art, dynamic LOD seam quality,
   GPU/compute generation, water, biomes, vegetation, buildings, multiplayer, or
   game repository readiness.
+
+## G21 - Compact 2K human visual handoff
+
+Status: complete when `WT_VALIDATION_G21_CONTRACT_PASS` and
+`WT_VALIDATION_G21_COMPACT_2K_HUMAN_HANDOFF_READY` both pass.
+
+Exit:
+
+- the compact G19 near-2K project is composed from current local addon sources;
+- `validation_playtest.tscn` is pinned to `g19_compact_2k_on_demand`;
+- the project imports before human visual playtesting;
+- the handoff report records `human_confirmation = pending`;
+- G21 does not return to dense G16/G17 stress artifacts and does not claim a
+  new terrain algorithm milestone.
+
+Boundary:
+
+- this is a human visual handoff gate only; it does not claim final terrain art,
+  dynamic LOD seam quality, GPU/compute generation, water, biomes, vegetation,
+  buildings, multiplayer, or game repository readiness.
