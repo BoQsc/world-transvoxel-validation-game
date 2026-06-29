@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = (
     "docs/G8_2000X2000_BOUNDED_STREAMING.md",
     "tools/g8_2000x2000_window_plan.py",
+    "tools/g8_runtime_active_window_smoke.py",
+    "tests/g8_runtime_active_window_smoke.gd",
     "tools/validate_g8_contract.py",
 )
 
@@ -17,12 +19,15 @@ REQUIRED_PHRASES = {
     "docs/G8_2000X2000_BOUNDED_STREAMING.md": (
         "WT_VALIDATION_G8_CONTRACT_PASS",
         "WT_VALIDATION_G8_WINDOW_PLAN_PASS",
+        "WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS",
         "2000 blocks by 2000 blocks",
         "4,000,000 m²",
         "chunk size is 16 blocks",
         "125 chunks along X and 125 chunks along Z",
         "radius-2 single-viewer surface window",
         "default active chunk budget is 256 records",
+        "93 sparse chunk pages",
+        "9/25/25/25/9",
         "does not claim rendered 2000×2000 terrain",
     ),
     "tools/g8_2000x2000_window_plan.py": (
@@ -33,15 +38,31 @@ REQUIRED_PHRASES = {
         "ACTIVE_CHUNK_BUDGET = 256",
         "PATH_BLOCKS",
     ),
+    "tools/g8_runtime_active_window_smoke.py": (
+        "WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS",
+        "g8_2000x2000_sparse.wtworld",
+        "PRODUCTION_G8_2000X2000_FIXTURE_PASS",
+        "--configuration",
+        "all",
+    ),
+    "tests/g8_runtime_active_window_smoke.gd": (
+        "WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS",
+        "EXPECTED_PAGE_COUNT := 93",
+        "ACTIVE_CHUNK_BUDGET := 256",
+        "render_fading_resources",
+    ),
     "README.md": (
         "python tools/validate_g8_contract.py",
         "python tools/g8_2000x2000_window_plan.py",
+        "python tools/g8_runtime_active_window_smoke.py",
         "WT_VALIDATION_G8_CONTRACT_PASS",
         "WT_VALIDATION_G8_WINDOW_PLAN_PASS",
+        "WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS",
     ),
     "docs/ROADMAP.md": (
         "## G8 - 2000×2000 bounded streaming",
         "WT_VALIDATION_G8_WINDOW_PLAN_PASS",
+        "WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS",
         "2000×2000",
         "bounded active window",
     ),
@@ -73,7 +94,7 @@ def main() -> None:
     print(
         "WT_VALIDATION_G8_CONTRACT_PASS "
         "implementation=bounded_2000x2000_streaming "
-        "next=g8_runtime_active_window"
+        "runtime=required"
     )
 
 

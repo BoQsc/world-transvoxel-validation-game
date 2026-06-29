@@ -126,8 +126,9 @@ Exit:
 
 ## G8 - 2000×2000 bounded streaming
 
-Status: active. First subgate passes by `WT_VALIDATION_G8_CONTRACT_PASS` and
-`WT_VALIDATION_G8_WINDOW_PLAN_PASS`.
+Status: active. G8 now requires `WT_VALIDATION_G8_CONTRACT_PASS`,
+`WT_VALIDATION_G8_WINDOW_PLAN_PASS`, and
+`WT_VALIDATION_G8_RUNTIME_ACTIVE_WINDOW_PASS`.
 
 Exit:
 
@@ -137,5 +138,8 @@ Exit:
 - viewer movement uses a bounded active window instead of loading the full map;
 - the first active-window planner proves near-origin, center, edge, and
   far-corner logical coordinates;
-- the next G8 runtime subgate attaches this bounded active window to real
-  terrain viewer movement and active resource telemetry.
+- the runtime subgate uses the native `g8_2000x2000_sparse.wtworld` fixture with
+  93 sparse chunk pages;
+- Godot viewer movement across the logical 2000×2000 path must settle to
+  9/25/25/25/9 active render/collision resources, no render fade blink
+  resources, and no active-resource budget overflow.
