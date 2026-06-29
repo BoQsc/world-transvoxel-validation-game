@@ -90,6 +90,7 @@ func set_manual_camera_view(position: Vector3, target: Vector3) -> void:
 
 func set_player_visual_visible(visible: bool) -> void:
 	if _player != null:
+		_player.visible = visible
 		var body := _player.get_node_or_null("PlayerVisibleBody") as Node3D
 		if body != null:
 			body.visible = visible
@@ -110,7 +111,6 @@ func configure_playtest_profile(profile_id: StringName) -> void:
 func clear_player_test_motion() -> void:
 	if _player != null and _player.has_method("clear_test_motion_direction"):
 		_player.call("clear_test_motion_direction")
-
 
 func _start_validation_viewer() -> void:
 	if not _reference_scene.start_reference_backend_world():

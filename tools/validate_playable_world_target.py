@@ -56,6 +56,9 @@ REQUIRED_PHRASES = {
         "G23 fixes the failed human handoff",
         "player-driven streaming",
         "real input path",
+        "G24 blocks further human validation",
+        "autonomous large-terrain acceptance",
+        "2048 by 2048",
         "not final terrain art",
     ),
     "docs/ROADMAP.md": (
@@ -81,6 +84,7 @@ REQUIRED_PHRASES = {
         "## G21 - Compact 2K human visual handoff",
         "## G22 - Exact compact handoff runtime proof",
         "## G23 - Real compact human-playable streaming",
+        "## G24 - Autonomous large-terrain acceptance",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

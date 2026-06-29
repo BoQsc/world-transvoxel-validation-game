@@ -32,6 +32,8 @@ G22 runs the exact compact G21 handoff project before human review, captures
 automated PNG evidence, and proves movement plus carve/place runtime behavior.
 G23 fixes the failed human handoff by requiring player-driven streaming and
 real input-path camera/dig/place checks in the compact project.
+G24 blocks further human validation until autonomous large-terrain acceptance
+proves the compact 2048 by 2048 terrain across map-scale positions.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -110,6 +112,8 @@ python tools/validate_g22_contract.py
 python tools/g22_exact_compact_handoff_runtime_proof.py --skip-build
 python tools/validate_g23_contract.py
 python tools/g23_real_compact_human_playable_streaming.py --skip-build
+python tools/validate_g24_contract.py
+python tools/g24_autonomous_large_terrain_acceptance.py --skip-build
 ```
 
 Expected marker:
@@ -179,6 +183,9 @@ WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_SMOKE_PASS engines=2 captures=..
 WT_VALIDATION_G23_CONTRACT_PASS implementation=real_compact_human_playable_streaming
 WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_PASS profile=g19_compact_2k_on_demand initial_resources=25 viewer_updates_delta=... player_motion=... camera_delta=... click_edits=2 pending_retirements=0 render_fading_resources=0 dense_world_files=0
 WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g23_real_compact_human_playable_streaming/g23_real_compact_human_playable_streaming_report.json
+WT_VALIDATION_G24_CONTRACT_PASS implementation=autonomous_large_terrain_acceptance
+WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_PASS profile=g19_compact_2k_on_demand samples=... pages=16384 map_blocks=2048 max_render_resources=25 max_collision_resources=25 player_stream_updates=... camera_delta=... click_edits=2 captures=... dense_world_files=0
+WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g24_autonomous_large_terrain_acceptance/g24_autonomous_large_terrain_acceptance_report.json
 ```
 
 ## Human-visible playtest
@@ -236,10 +243,11 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-For current compact near-2K human review, first run:
+Do not request current compact near-2K human review until the autonomous
+large-terrain gate passes. First run:
 
 ```console
-python tools/g23_real_compact_human_playable_streaming.py --skip-build
+python tools/g24_autonomous_large_terrain_acceptance.py --skip-build
 ```
 
 Then open:
@@ -248,6 +256,7 @@ Then open:
 artifacts/g19_compact_2k_on_demand/project/project.godot
 ```
 
-The G23 proof is the automated evidence that this exact compact handoff project
-has player-driven streaming and real input-path camera/dig/place behavior before
-human review.
+The G24 proof is the automated prerequisite before human review. It checks the
+compact 2048 by 2048 terrain across map-scale positions, active streaming,
+camera input, local movement, dig/place edits, bounded resources, materialized
+captures, compact storage, and settled runtime metrics.

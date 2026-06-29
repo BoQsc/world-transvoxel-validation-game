@@ -99,6 +99,12 @@ streaming. The compact profile starts inside the 2K map, player movement drives
 the active terrain viewer, and mouse look plus left/right click terrain edits
 are checked through the real input path before human review can resume.
 
+G24 blocks further human validation until autonomous large-terrain acceptance
+passes. It checks the compact 2048 by 2048 terrain across map-scale positions,
+requires player-driven streaming and local movement at every sampled region,
+checks camera input and left/right click edits, writes colored terrain captures,
+and keeps active resources and compact storage inside budget.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
