@@ -12,6 +12,10 @@ import subprocess
 import sys
 
 from compose_validation_project import ROOT, REPOSITORY_ROOT, compose
+from generated_fixture_vertical_coverage import (
+    assert_surface_within_active_vertical_chunk,
+    surface_coverage,
+)
 from g0_install_run_smoke import discover_engines, has_godot_error, run_import
 from g8_runtime_active_window_smoke import build_world_transvoxel
 
@@ -57,6 +61,17 @@ def material_id(x: int, z: int, surface_height: float) -> int:
     return 3
 
 
+def vertical_coverage() -> dict[str, float | str]:
+    return assert_surface_within_active_vertical_chunk(
+        surface_coverage(
+            label=PROFILE_ID,
+            height_function=height,
+            origin=ORIGIN,
+            dimensions=DIMENSIONS,
+        )
+    )
+
+
 def write_source() -> tuple[Path, Path, Path]:
     SOURCE_ROOT.mkdir(parents=True, exist_ok=True)
     density_path = SOURCE_ROOT / "density.f32"
@@ -87,6 +102,7 @@ def bake_fixture(reuse_fixture: bool) -> dict[str, object]:
         return validate_fixture(reused=True)
     remove_tree(SOURCE_ROOT)
     remove_tree(WORLD_OUTPUT)
+    vertical_coverage()
     density, materials, keys = write_source()
     command = [
         sys.executable,
@@ -144,11 +160,14 @@ def validate_fixture(reused: bool) -> dict[str, object]:
     metadata = json.loads(result.stdout)
     if metadata.get("pages") != len(CHUNK_KEYS):
         raise RuntimeError(f"G11 generated 16x16 page count mismatch: {metadata}")
+    if metadata.get("source_revision") != SOURCE_REVISION:
+        raise RuntimeError(f"G11 generated 16x16 source revision mismatch: {metadata}")
     return {
         "reused": reused,
         "profile": PROFILE_ID,
         "world": str(WORLD_MANIFEST),
         "metadata": metadata,
+        "vertical_coverage": vertical_coverage(),
         "chunk_pages": len(CHUNK_KEYS),
     }
 

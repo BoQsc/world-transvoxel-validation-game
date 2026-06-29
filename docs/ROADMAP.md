@@ -220,3 +220,19 @@ Exit:
   1024 generated pages as active resources;
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
+
+## G13 - Generated fixture vertical coverage guard
+
+Status: complete by `WT_VALIDATION_G13_CONTRACT_PASS` and
+`WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS`.
+
+Exit:
+
+- G11 and G12 generated fixture runners compute surface min/max height before
+  bake;
+- generated surfaces must remain inside the active vertical chunk with explicit
+  lower and upper margins;
+- G11 and G12 fixture reports include `vertical_coverage` metadata;
+- reused generated fixtures must match the runner's expected `source_revision`;
+- stale or vertically unsafe generated fixtures fail before Godot runtime smoke;
+- this is a safety gate before larger generated terrain scale-up milestones.

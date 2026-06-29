@@ -26,6 +26,7 @@ REQUIRED_PHRASES = {
         "single-viewer playable streaming with a 25-resource active window",
         "dense generated 16 by 16 fixture with 256 generated pages",
         "32 by 32 fixture with 1024 generated pages",
+        "generated fixture vertical coverage guard",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -39,6 +40,7 @@ REQUIRED_PHRASES = {
         "## G10 - Single-viewer 2K playable streaming",
         "## G11 - Generated 16x16 playable streaming",
         "## G12 - Generated 32x32 playable streaming",
+        "## G13 - Generated fixture vertical coverage guard",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

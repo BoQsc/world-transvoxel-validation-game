@@ -34,6 +34,11 @@ roughly a 512 by 512 block generated terrain step. It preserves the same
 single-viewer 25-resource active window and still avoids claiming final 2000 by
 2000 generated terrain.
 
+G13 locks a generated fixture vertical coverage guard. Future generated fixtures
+must prove their surface min/max height stays inside the active vertical chunk
+with explicit margins, and reused generated fixtures must match the expected
+source revision before Godot runtime tests run.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

@@ -12,6 +12,10 @@ import subprocess
 import sys
 
 from compose_validation_project import ROOT, REPOSITORY_ROOT, compose
+from generated_fixture_vertical_coverage import (
+    assert_surface_within_active_vertical_chunk,
+    surface_coverage,
+)
 from g0_install_run_smoke import discover_engines, has_godot_error, run_import
 from g8_runtime_active_window_smoke import build_world_transvoxel
 
@@ -29,7 +33,7 @@ MARKER = "WT_VALIDATION_G12_GENERATED_32X32_PLAYABLE_STREAMING_PASS"
 WORLD_TRANSVOXEL = REPOSITORY_ROOT / "world-transvoxel"
 ORIGIN = (-2, -4, -2)
 DIMENSIONS = (517, 65, 517)
-SOURCE_REVISION = 123200
+SOURCE_REVISION = 123201
 CHUNK_KEYS = tuple((x, 0, z, 0) for z in range(32) for x in range(32))
 
 
@@ -57,6 +61,17 @@ def material_id(x: int, z: int, surface_height: float) -> int:
     if (x // 48 + z // 48) % 3 == 0:
         return 4
     return 3
+
+
+def vertical_coverage() -> dict[str, float | str]:
+    return assert_surface_within_active_vertical_chunk(
+        surface_coverage(
+            label=PROFILE_ID,
+            height_function=height,
+            origin=ORIGIN,
+            dimensions=DIMENSIONS,
+        )
+    )
 
 
 def write_source() -> tuple[Path, Path, Path]:
@@ -89,6 +104,7 @@ def bake_fixture(reuse_fixture: bool) -> dict[str, object]:
         return validate_fixture(reused=True)
     remove_tree(SOURCE_ROOT)
     remove_tree(WORLD_OUTPUT)
+    vertical_coverage()
     density, materials, keys = write_source()
     command = [
         sys.executable,
@@ -146,11 +162,14 @@ def validate_fixture(reused: bool) -> dict[str, object]:
     metadata = json.loads(result.stdout)
     if metadata.get("pages") != len(CHUNK_KEYS):
         raise RuntimeError(f"G12 generated 32x32 page count mismatch: {metadata}")
+    if metadata.get("source_revision") != SOURCE_REVISION:
+        raise RuntimeError(f"G12 generated 32x32 source revision mismatch: {metadata}")
     return {
         "reused": reused,
         "profile": PROFILE_ID,
         "world": str(WORLD_MANIFEST),
         "metadata": metadata,
+        "vertical_coverage": vertical_coverage(),
         "chunk_pages": len(CHUNK_KEYS),
     }
 
