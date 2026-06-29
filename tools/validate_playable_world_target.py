@@ -50,6 +50,9 @@ REQUIRED_PHRASES = {
         "explicit 30 second timing evidence",
         "G21 prepares the compact G19 project for human visual playtesting",
         "human_confirmation as pending",
+        "G22 runs the exact compact G21 handoff project",
+        "automated PNG evidence",
+        "carve and construct/place",
         "not final terrain art",
     ),
     "docs/ROADMAP.md": (
@@ -73,6 +76,7 @@ REQUIRED_PHRASES = {
         "## G19 - Compact 2K on-demand procedural streaming",
         "## G20 - Compact terrain resolution gate",
         "## G21 - Compact 2K human visual handoff",
+        "## G22 - Exact compact handoff runtime proof",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

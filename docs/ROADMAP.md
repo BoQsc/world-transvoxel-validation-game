@@ -403,3 +403,28 @@ Boundary:
 - this is a human visual handoff gate only; it does not claim final terrain art,
   dynamic LOD seam quality, GPU/compute generation, water, biomes, vegetation,
   buildings, multiplayer, or game repository readiness.
+
+## G22 - Exact compact handoff runtime proof
+
+Status: complete when `WT_VALIDATION_G22_CONTRACT_PASS` and
+`WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_SMOKE_PASS` both pass.
+
+Exit:
+
+- the exact compact G21 handoff project is prepared from current local addon
+  sources and imported before runtime proof;
+- automated runtime disables human input from startup;
+- runtime covers origin, center, and far-corner compact 2K positions;
+- scripted movement, carve, and construct/place all commit;
+- automated PNG captures are produced before human visual review;
+- settled runtime reports `render_fading_resources = 0`;
+- settled runtime reports `pending_chunk_retirements = 0`;
+- active render and collision resources stay within the 25-resource budget;
+- no dense source/world files are reintroduced.
+
+Boundary:
+
+- this proves the current compact handoff artifact runs and produces automated
+  runtime/visual evidence; it does not claim final terrain art, dynamic LOD seam
+  quality, GPU/compute generation, water, biomes, vegetation, buildings,
+  multiplayer, or game repository readiness.

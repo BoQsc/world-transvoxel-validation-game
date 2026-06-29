@@ -28,6 +28,8 @@ validation boundary, dense source/world files are no longer the normal path and
 the compact path is timed against the 30 second load-to-play ceiling.
 G21 prepares the compact G19 project for human visual playtesting without
 returning to the dense G16 stress handoff.
+G22 runs the exact compact G21 handoff project before human review, captures
+automated PNG evidence, and proves movement plus carve/place runtime behavior.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -102,6 +104,8 @@ python tools/validate_g20_contract.py
 python tools/g20_compact_terrain_resolution.py
 python tools/validate_g21_contract.py
 python tools/g21_compact_2k_human_handoff.py --import-project
+python tools/validate_g22_contract.py
+python tools/g22_exact_compact_handoff_runtime_proof.py --skip-build
 ```
 
 Expected marker:
@@ -165,6 +169,9 @@ WT_VALIDATION_G20_CONTRACT_PASS implementation=compact_terrain_resolution
 WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 engines=2 max_file_bytes=... total_bytes=... max_engine_ms=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 WT_VALIDATION_G21_CONTRACT_PASS implementation=compact_2k_human_handoff
 WT_VALIDATION_G21_COMPACT_2K_HUMAN_HANDOFF_READY profile=g19_compact_2k_on_demand imported=true project=... scene=res://scenes/validation_playtest.tscn fullscreen=false report=artifacts/g21_compact_2k_human_handoff/g21_compact_2k_human_handoff_report.json
+WT_VALIDATION_G22_CONTRACT_PASS implementation=exact_compact_handoff_runtime_proof
+WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_PASS profile=g19_compact_2k_on_demand captures=3 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=... construct_verified=1 pending_retirements=0 render_fading_resources=0 dense_world_files=0
+WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_SMOKE_PASS engines=2 captures=... max_file_bytes=... total_bytes=... max_engine_seconds=... report=artifacts/g22_exact_compact_handoff_runtime_proof/g22_exact_compact_handoff_runtime_proof_report.json
 ```
 
 ## Human-visible playtest
@@ -221,3 +228,18 @@ check nonzero terrain triangle geometry, terrain collision resources, player
 presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
+
+For current compact near-2K human review, first run:
+
+```console
+python tools/g22_exact_compact_handoff_runtime_proof.py --skip-build
+```
+
+Then open:
+
+```text
+artifacts/g19_compact_2k_on_demand/project/project.godot
+```
+
+The G22 proof is the automated evidence that this exact compact handoff project
+ran before human review.

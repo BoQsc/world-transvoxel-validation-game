@@ -86,6 +86,14 @@ to `g19_compact_2k_on_demand`, imports the project before handoff, and records
 human_confirmation as pending. It is a handoff gate only; it must not reintroduce
 dense near-2K source/world files as the normal path.
 
+G22 runs the exact compact G21 handoff project before human review. It disables
+human input during automation, captures automated PNG evidence, exercises
+origin, center, and far-corner compact 2K positions, verifies scripted movement,
+carve and construct/place, and requires settled runtime metrics with no render
+fading resources and no pending chunk retirements. It does not claim final
+terrain art, GPU generation, water, biomes, vegetation, buildings, multiplayer,
+or game-repository readiness.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
