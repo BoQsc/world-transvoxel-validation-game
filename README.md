@@ -7,9 +7,9 @@ passes programmatically; G2 first-person flat baseline passes programmatically;
 G3 flat/mountain generation modes pass programmatically; G4 terrain edit
 interaction passes programmatically; G5 material/performance baseline passes
 programmatically; G6 8 by 8 multi-chunk profile-selectable playable world passes
-programmatically. Human visual verification is the next boundary. This repository is not the
-sandbox and not a
-production game. Its job is to import `world-transvoxel` and
+programmatically. G7 human visual verification handoff is reproducible;
+final human profile review remains pending. This repository is not the sandbox
+and not a production game. Its job is to import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
 and report every failure back to the addon repositories instead of hiding
 workarounds here.
@@ -51,6 +51,8 @@ python tools/validate_g6_contract.py
 python tools/g6_profile_selectable_playable_world_smoke.py --windowed
 python tools/human_input_capture_smoke.py
 python tools/prepare_human_playtest.py --profile flat_large --reuse-bake
+python tools/validate_g7_contract.py
+python tools/g7_human_visual_handoff.py --reuse-bake --import-projects
 ```
 
 Expected marker:
@@ -75,6 +77,8 @@ WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world 
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
 WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
 WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_large project=... scene=res://scenes/validation_playtest.tscn launch=false fullscreen=false report=artifacts/human_playtest/human_playtest_report.json
+WT_VALIDATION_G7_CONTRACT_PASS implementation=human_visual_handoff next=human_profile_review
+WT_VALIDATION_G7_HANDOFF_READY profiles=2 imported=true report=artifacts/g7_human_visual_handoff/g7_human_visual_handoff_report.json
 ```
 
 ## Human-visible playtest
@@ -106,6 +110,19 @@ Then open:
 
 ```text
 artifacts/human_playtest/project/project.godot
+```
+
+For G7 review of both generated profiles, run:
+
+```console
+python tools/g7_human_visual_handoff.py --reuse-bake --import-projects
+```
+
+Then open:
+
+```text
+artifacts/g7_human_visual_handoff/flat_large/project/project.godot
+artifacts/g7_human_visual_handoff/mountain_large/project/project.godot
 ```
 
 Run `res://scenes/validation_playtest.tscn`. The scene auto-starts the addon

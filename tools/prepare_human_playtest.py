@@ -77,31 +77,44 @@ def select_engine(explicit: list[Path]) -> tuple[str, Path]:
     return engines[-1]
 
 
-def run_project_import(project: Path, version: str, engine: Path) -> None:
-    ARTIFACT_ROOT.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(
-        [str(engine), "--headless", "--path", str(project), "--import"],
-        cwd=project,
-        check=False,
-        text=True,
-        capture_output=True,
-        errors="replace",
-        timeout=180,
-    )
-    (ARTIFACT_ROOT / f"godot-{version}-import.stdout.txt").write_text(
-        result.stdout, encoding="utf-8"
-    )
-    (ARTIFACT_ROOT / f"godot-{version}-import.stderr.txt").write_text(
-        result.stderr, encoding="utf-8"
-    )
-    combined = result.stdout + result.stderr
+def run_project_import(
+    project: Path,
+    version: str,
+    engine: Path,
+    artifact_root: Path = ARTIFACT_ROOT,
+) -> None:
+    artifact_root.mkdir(parents=True, exist_ok=True)
+    attempts: list[str] = []
+    result: subprocess.CompletedProcess[str] | None = None
     extension_cache = project / ".godot" / "extension_list.cfg"
-    cache_valid = (
-        extension_cache.is_file()
-        and "res://addons/world_transvoxel/world_transvoxel.gdextension"
-        in extension_cache.read_text(encoding="utf-8", errors="replace")
+    cache_valid = False
+    for _attempt in range(2):
+        result = subprocess.run(
+            [str(engine), "--headless", "--path", str(project), "--import"],
+            cwd=project,
+            check=False,
+            text=True,
+            capture_output=True,
+            errors="replace",
+            timeout=180,
+        )
+        combined_attempt = result.stdout + result.stderr
+        attempts.append(combined_attempt)
+        cache_valid = (
+            extension_cache.is_file()
+            and "res://addons/world_transvoxel/world_transvoxel.gdextension"
+            in extension_cache.read_text(encoding="utf-8", errors="replace")
+        )
+        if cache_valid and not has_godot_error(combined_attempt):
+            break
+    (artifact_root / f"godot-{version}-import.stdout.txt").write_text(
+        "\n".join(attempts), encoding="utf-8"
     )
-    if result.returncode != 0 or has_godot_error(combined) or not cache_valid:
+    (artifact_root / f"godot-{version}-import.stderr.txt").write_text(
+        "", encoding="utf-8"
+    )
+    combined = "\n".join(attempts)
+    if result is None or result.returncode != 0 or has_godot_error(combined) or not cache_valid:
         raise RuntimeError(f"Human playtest import failed on {version}")
 
 

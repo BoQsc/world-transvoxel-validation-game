@@ -109,11 +109,16 @@ Exit:
 
 ## G7 - Human visual verification
 
-Status: active next.
+Status: active. Automated handoff prep passes by
+`WT_VALIDATION_G7_CONTRACT_PASS` and `WT_VALIDATION_G7_HANDOFF_READY`; final
+human profile review remains pending.
 
 Exit:
 
-- human opens the generated validation project and confirms whether flat and
+- reproducible handoff projects exist for `flat_large` and `mountain_large`;
+- each generated scene is pinned to the intended profile before review;
+- Godot import passes for both generated handoff projects;
+- human opens the generated validation projects and confirms whether flat and
   mountain playable profiles look and feel acceptable;
 - any terrain orientation, artifact, popping, performance, collision, or edit
   issue is recorded as addon follow-up work instead of hidden in the validation

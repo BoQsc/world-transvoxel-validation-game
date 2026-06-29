@@ -29,10 +29,12 @@ REQUIRED_PHRASES = {
         "## G4 - Terrain edit interaction",
         "## G5 - Material and performance baseline",
         "## G6 - Profile-selectable playable world",
+        "## G7 - Human visual verification",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
-        "Human visual verification is the next boundary",
+        "G7 human visual verification handoff is reproducible",
+        "final human profile review remains pending",
         "python tools/validate_playable_world_target.py",
         "WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS",
     ),
