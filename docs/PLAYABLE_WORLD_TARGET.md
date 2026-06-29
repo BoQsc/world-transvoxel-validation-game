@@ -99,11 +99,15 @@ streaming. The compact profile starts inside the 2K map, player movement drives
 the active terrain viewer, and mouse look plus left/right click terrain edits
 are checked through the real input path before human review can resume.
 
-G24 blocks further human validation until autonomous large-terrain acceptance
-passes. It checks the compact 2048 by 2048 terrain across map-scale positions,
-requires player-driven streaming and local movement at every sampled region,
-checks camera input and left/right click edits, writes colored terrain captures,
-and keeps active resources and compact storage inside budget.
+G24 is reclassified as capped active-window regression evidence. It still checks
+map-scale positions, player-driven streaming, movement, edits, captures, and
+compact storage, but it does not prove the player can see a full 2048 by 2048
+terrain. The active window is only the local native Transvoxel detail layer.
+
+G25 replaces G24 as the active large-terrain visibility gate. It requires full
+2048 by 2048 terrain visual coverage, confirms sampled visual heights against
+native authoritative backend samples, and confirms the active window is only the
+local Transvoxel detail layer for editing and collision.
 
 ## Required before final human visual handoff
 
@@ -113,6 +117,7 @@ and keeps active resources and compact storage inside budget.
 - digging and placing with measured latency and deterministic recovery policy;
 - textured terrain material path with small, performance-conscious test assets;
 - terrain collision, chunking, cold-idle behavior, and visible-runtime telemetry;
+- full 2048 by 2048 terrain visual coverage before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

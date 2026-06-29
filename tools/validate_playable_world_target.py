@@ -56,8 +56,10 @@ REQUIRED_PHRASES = {
         "G23 fixes the failed human handoff",
         "player-driven streaming",
         "real input path",
-        "G24 blocks further human validation",
-        "autonomous large-terrain acceptance",
+        "G24 is reclassified as capped active-window regression evidence",
+        "G25 replaces G24 as the active large-terrain visibility gate",
+        "full 2048 by 2048 terrain visual coverage",
+        "active window is only the local native Transvoxel detail layer",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -85,6 +87,7 @@ REQUIRED_PHRASES = {
         "## G22 - Exact compact handoff runtime proof",
         "## G23 - Real compact human-playable streaming",
         "## G24 - Autonomous large-terrain acceptance",
+        "## G25 - Full terrain visual baseline",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -92,6 +95,7 @@ REQUIRED_PHRASES = {
         "final human profile review remains pending",
         "python tools/validate_playable_world_target.py",
         "WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS",
+        "G25 replaces G24 as the active large-terrain visibility gate",
     ),
 }
 

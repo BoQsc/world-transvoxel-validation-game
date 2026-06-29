@@ -158,16 +158,19 @@ func _verify_click_edits(scene: Node, terrain_world: Node, interactor: Node) -> 
 
 
 func _send_click(scene: Node, interactor: Node, button: MouseButton, revision: int) -> bool:
+	var terrain_world: Node = _helpers.terrain_world(scene)
+	var metrics_before: Dictionary = terrain_world.call("get_runtime_metrics")
+	var minimum_viewer_updates := int(metrics_before.get("viewer_updates", 0))
 	var click := InputEventMouseButton.new()
 	click.button_index = button
 	click.pressed = true
 	root.push_input(click)
 	await process_frame
-	if not await _helpers.wait_for_revision(_helpers.terrain_world(scene), revision):
+	if not await _helpers.wait_for_revision(terrain_world, revision):
 		_helpers.fail("G23 click did not commit revision %d" % revision)
 		return false
 	if not await _helpers.wait_for_window(
-		_helpers.terrain_world(scene), 25, "g23_click_settle", revision,
+		terrain_world, 25, "g23_click_settle", minimum_viewer_updates,
 		null, 25
 	):
 		return false

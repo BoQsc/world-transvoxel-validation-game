@@ -19,9 +19,9 @@ REQUIRED_PHRASES = {
     "docs/G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE.md": (
         "WT_VALIDATION_G24_CONTRACT_PASS",
         "WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_PASS",
-        "autonomous large-terrain gate",
-        "2048 by 2048 block terrain",
-        "No human validation is requested",
+        "capped active-window regression evidence",
+        "2048 by 2048 terrain descriptor",
+        "superseded by G25",
     ),
     "tests/g24_autonomous_large_terrain_acceptance.gd": (
         "WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_PASS",
@@ -43,18 +43,18 @@ REQUIRED_PHRASES = {
         "assert_compact_project_budget",
     ),
     "README.md": (
-        "G24 blocks further human validation",
+        "G24 is now reclassified as a capped active-window regression",
         "python tools/validate_g24_contract.py",
         "python tools/g24_autonomous_large_terrain_acceptance.py --skip-build",
     ),
     "docs/ROADMAP.md": (
         "## G24 - Autonomous large-terrain acceptance",
-        "No further human validation is requested",
+        "G24 is superseded by G25",
         "2048 by 2048",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G24 blocks further human validation",
-        "autonomous large-terrain acceptance",
+        "G24 is reclassified as capped active-window regression evidence",
+        "does not prove the player can see a full 2048 by 2048 terrain",
         "2048 by 2048",
     ),
 }

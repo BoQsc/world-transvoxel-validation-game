@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/validation_playtest.gd" id="1_playtest"]
 [ext_resource type="Script" path="res://scripts/validation_terrain_interactor.gd" id="2_interactor"]
 [ext_resource type="Script" path="res://scripts/validation_terrain_materials.gd" id="3_materials"]
+[ext_resource type="Script" path="res://addons/world_transvoxel_terrain/visual/wt_terrain_full_map_visual.gd" id="4_full_visual"]
 
 [node name="ValidationPlaytest" type="Node3D"]
 script = ExtResource("1_playtest")
@@ -20,3 +21,6 @@ script = ExtResource("2_interactor")
 
 [node name="ValidationTerrainMaterials" type="Node" parent="."]
 script = ExtResource("3_materials")
+
+[node name="ValidationFullTerrainVisual" type="MeshInstance3D" parent="."]
+script = ExtResource("4_full_visual")

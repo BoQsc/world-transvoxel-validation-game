@@ -460,14 +460,16 @@ Boundary:
 
 ## G24 - Autonomous large-terrain acceptance
 
-Status: complete when `WT_VALIDATION_G24_CONTRACT_PASS` and
+Status: complete as capped active-window regression evidence when
+`WT_VALIDATION_G24_CONTRACT_PASS` and
 `WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_SMOKE_PASS` both pass.
+G24 is superseded by G25 for large-terrain visibility.
 
 Exit:
 
-- No further human validation is requested until this gate passes;
+- No further human validation is requested from G24 alone;
 - the compact `g19_compact_2k_on_demand` profile proves a 2048 by 2048 block
-  terrain with 16,384 indexed pages;
+  terrain descriptor with 16,384 indexed pages;
 - autonomous checks cover origin edge, interior quadrants, center, and far
   corner map-scale positions;
 - every sampled position settles to the expected bounded active terrain window;
@@ -475,15 +477,40 @@ Exit:
 - first-person camera input changes camera rotation;
 - left click carves and right click constructs/places through normal input;
 - materialized colored captures are written for every sampled region;
-- active render and collision resources never exceed 25;
+- active render and collision resources never exceed 25 because this is a capped
+  local active-window regression;
 - settled runtime reports `render_fading_resources = 0`;
 - settled runtime reports `pending_chunk_retirements = 0`;
 - no dense near-2K source/world files are reintroduced.
 
 Boundary:
 
-- this is the autonomous prerequisite before human review, not a human handoff;
-- this proves large compact terrain integration inside the validation game, but
-  does not claim final terrain art, seamless dynamic LOD, GPU/compute
+- this is not the autonomous prerequisite before human review anymore;
+- this does not prove full-map terrain visibility; G25 is required for that;
+- this still does not claim final terrain art, seamless dynamic LOD, GPU/compute
   generation, fluids, biomes, vegetation, buildings, multiplayer, or a separate
   game repository.
+
+## G25 - Full terrain visual baseline
+
+Status: complete when `WT_VALIDATION_G25_CONTRACT_PASS` and
+`WT_VALIDATION_G25_FULL_TERRAIN_VISUAL_BASELINE_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- `g19_compact_2k_on_demand` has full 2048 by 2048 terrain visual coverage in
+  the generated playtest scene;
+- the full-map visual layer is provided by `world-transvoxel-terrain`;
+- the active window is only the local Transvoxel detail layer for editable
+  terrain and collision;
+- native authoritative sample queries confirm sampled full-map visual heights
+  match the backend procedural source;
+- an automated full-map overview capture is written;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this restores the large-terrain visibility requirement, but it does not claim
+  final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
+  biomes, vegetation, buildings, multiplayer, or a separate game repository.

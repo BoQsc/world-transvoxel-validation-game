@@ -32,8 +32,10 @@ G22 runs the exact compact G21 handoff project before human review, captures
 automated PNG evidence, and proves movement plus carve/place runtime behavior.
 G23 fixes the failed human handoff by requiring player-driven streaming and
 real input-path camera/dig/place checks in the compact project.
-G24 blocks further human validation until autonomous large-terrain acceptance
-proves the compact 2048 by 2048 terrain across map-scale positions.
+G24 is now reclassified as a capped active-window regression, not the full
+large-terrain proof. G25 replaces G24 as the active large-terrain visibility gate
+and requires full 2048 by 2048 terrain visual coverage while the active native
+Transvoxel window remains only the local editable/collision detail layer.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -114,6 +116,8 @@ python tools/validate_g23_contract.py
 python tools/g23_real_compact_human_playable_streaming.py --skip-build
 python tools/validate_g24_contract.py
 python tools/g24_autonomous_large_terrain_acceptance.py --skip-build
+python tools/validate_g25_contract.py
+python tools/g25_full_terrain_visual_baseline.py --skip-build
 ```
 
 Expected marker:
@@ -186,6 +190,9 @@ WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_SMOKE_PASS engines=2 max
 WT_VALIDATION_G24_CONTRACT_PASS implementation=autonomous_large_terrain_acceptance
 WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_PASS profile=g19_compact_2k_on_demand samples=... pages=16384 map_blocks=2048 max_render_resources=25 max_collision_resources=25 player_stream_updates=... camera_delta=... click_edits=2 captures=... dense_world_files=0
 WT_VALIDATION_G24_AUTONOMOUS_LARGE_TERRAIN_ACCEPTANCE_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g24_autonomous_large_terrain_acceptance/g24_autonomous_large_terrain_acceptance_report.json
+WT_VALIDATION_G25_CONTRACT_PASS implementation=full_terrain_visual_baseline
+WT_VALIDATION_G25_FULL_TERRAIN_VISUAL_BASELINE_PASS profile=g19_compact_2k_on_demand pages=16384 map_blocks=2048 full_visual_blocks=2048x2048 full_visual_vertices=... full_visual_triangles=... native_render_resources=... native_collision_resources=... capture_colored_samples=... dense_world_files=0
+WT_VALIDATION_G25_FULL_TERRAIN_VISUAL_BASELINE_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g25_full_terrain_visual_baseline/g25_full_terrain_visual_baseline_report.json
 ```
 
 ## Human-visible playtest
@@ -243,11 +250,11 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-Do not request current compact near-2K human review until the autonomous
-large-terrain gate passes. First run:
+Do not request current compact near-2K human review until the full-terrain visual
+gate passes. G24 is capped-window regression evidence only. First run:
 
 ```console
-python tools/g24_autonomous_large_terrain_acceptance.py --skip-build
+python tools/g25_full_terrain_visual_baseline.py --skip-build
 ```
 
 Then open:
@@ -256,7 +263,8 @@ Then open:
 artifacts/g19_compact_2k_on_demand/project/project.godot
 ```
 
-The G24 proof is the automated prerequisite before human review. It checks the
-compact 2048 by 2048 terrain across map-scale positions, active streaming,
-camera input, local movement, dig/place edits, bounded resources, materialized
-captures, compact storage, and settled runtime metrics.
+The G25 proof is the automated prerequisite before human review. It checks the
+compact 2048 by 2048 terrain has full-map visual coverage, confirms sampled
+visual heights against native authoritative backend samples, keeps local native
+Transvoxel chunks for editable/collision detail, writes a full-map overview
+capture, and still rejects dense near-2K source/world files.
