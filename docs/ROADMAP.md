@@ -428,3 +428,32 @@ Boundary:
   runtime/visual evidence; it does not claim final terrain art, dynamic LOD seam
   quality, GPU/compute generation, water, biomes, vegetation, buildings,
   multiplayer, or game repository readiness.
+
+## G23 - Real compact human-playable streaming
+
+Status: complete when `WT_VALIDATION_G23_CONTRACT_PASS` and
+`WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_SMOKE_PASS` both pass.
+
+Exit:
+
+- `g19_compact_2k_on_demand` starts inside the map instead of on the clipped
+  origin edge;
+- startup settles to 25 active render and collision resources around the
+  player;
+- human input remains enabled in the compact playtest scene;
+- mouse motion changes the first-person camera through the real scene input
+  path;
+- player movement drives terrain viewer updates and the active terrain window
+  follows the moved player;
+- left click carves and right click constructs/places through the terrain
+  interactor input path;
+- settled runtime reports `render_fading_resources = 0`;
+- settled runtime reports `pending_chunk_retirements = 0`;
+- no dense source/world files are reintroduced.
+
+Boundary:
+
+- this fixes the failed human handoff boundary and proves real compact
+  player-driven streaming, but it does not claim final terrain art, dynamic LOD
+  seam quality, GPU/compute generation, water, biomes, vegetation, buildings,
+  multiplayer, or game repository readiness.

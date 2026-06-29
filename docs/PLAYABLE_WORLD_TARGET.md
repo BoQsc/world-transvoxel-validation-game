@@ -94,6 +94,11 @@ fading resources and no pending chunk retirements. It does not claim final
 terrain art, GPU generation, water, biomes, vegetation, buildings, multiplayer,
 or game-repository readiness.
 
+G23 fixes the failed human handoff by requiring real compact player-driven
+streaming. The compact profile starts inside the 2K map, player movement drives
+the active terrain viewer, and mouse look plus left/right click terrain edits
+are checked through the real input path before human review can resume.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

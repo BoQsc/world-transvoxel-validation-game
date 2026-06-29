@@ -75,8 +75,8 @@ static func settings(profile_id: StringName) -> Dictionary:
 			}
 		"g19_compact_2k_on_demand":
 			return {
-				"viewer_position": Vector3(8, 8, 8),
-				"player_start_position": Vector3(8, 24, 8),
+				"viewer_position": Vector3(1032, 8, 1032),
+				"player_start_position": Vector3(1032, 24, 1032),
 				"camera_follow_offset": Vector3(150, 80, 150),
 				"edit_point": Vector3(1032, 8, 1032),
 				"fixture_label": "g19_compact_2k_on_demand",
@@ -138,7 +138,9 @@ static func storage_profile(profile_id: StringName) -> Resource:
 
 
 static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
-	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id):
+	if _is_compact_on_demand(profile_id):
+		return [Vector3(1032.0, 8.0, 1032.0)]
+	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
 		return [Vector3(8.0, 8.0, 8.0)]
 	if _is_sparse_2k_multi_viewer(profile_id):
 		return [
@@ -163,7 +165,9 @@ static func viewer_radius_chunks(profile_id: StringName) -> int:
 
 
 static func expected_resource_count(profile_id: StringName) -> int:
-	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id):
+	if _is_compact_on_demand(profile_id):
+		return 25
+	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
 		return 9
 	if _is_sparse_2k_multi_viewer(profile_id):
 		return 93

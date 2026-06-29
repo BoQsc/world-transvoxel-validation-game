@@ -16,6 +16,10 @@ func get_last_submission() -> Dictionary:
 	return _last_submission
 
 
+func _input(event: InputEvent) -> void:
+	_unhandled_input(event)
+
+
 func submit_sphere_edit(
 	mode_name: StringName,
 	center: Vector3,
@@ -57,8 +61,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			submit_sphere_edit(&"carve", _target_point(), dig_radius, 1, 1.0)
+			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			submit_sphere_edit(&"construct", _target_point(), place_radius, place_material_id, 1.0)
+			get_viewport().set_input_as_handled()
 
 
 func _operation_mode(mode_name: StringName) -> int:

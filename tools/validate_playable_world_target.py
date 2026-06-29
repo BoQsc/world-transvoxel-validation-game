@@ -53,6 +53,9 @@ REQUIRED_PHRASES = {
         "G22 runs the exact compact G21 handoff project",
         "automated PNG evidence",
         "carve and construct/place",
+        "G23 fixes the failed human handoff",
+        "player-driven streaming",
+        "real input path",
         "not final terrain art",
     ),
     "docs/ROADMAP.md": (
@@ -77,6 +80,7 @@ REQUIRED_PHRASES = {
         "## G20 - Compact terrain resolution gate",
         "## G21 - Compact 2K human visual handoff",
         "## G22 - Exact compact handoff runtime proof",
+        "## G23 - Real compact human-playable streaming",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

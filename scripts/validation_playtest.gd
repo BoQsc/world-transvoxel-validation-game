@@ -4,7 +4,8 @@ const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_
 const MeshStats := preload("res://scripts/validation_mesh_stats.gd")
 const ProfileCatalog := preload("res://scripts/validation_profile_catalog.gd")
 const InputCapture := preload("res://scripts/validation_input_capture.gd")
-const ValidationPlayerScript := preload("res://scripts/validation_player.gd")
+const ValidationPlayerFactory := preload("res://scripts/validation_player_factory.gd")
+const PlayerViewerDriver := preload("res://scripts/validation_player_viewer_driver.gd")
 const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd")
 
 @export var auto_start: bool = true
@@ -13,6 +14,8 @@ const ValidationViewHelpers := preload("res://scripts/validation_view_helpers.gd
 @export var playtest_profile_id: StringName = &"flat_baseline"
 @export var mouse_look_enabled: bool = true
 @export var mouse_sensitivity: float = 0.0025
+@export var player_driven_viewer_enabled: bool = true
+@export var player_viewer_update_distance: float = 8.0
 @export var viewer_position: Vector3 = Vector3(8, 8, 8)
 @export var player_start_position: Vector3 = Vector3(8, 12, 8)
 @export var first_person_eye_height: float = 1.55
@@ -27,6 +30,7 @@ var _status_text := "initializing validation playtest"
 var _camera_yaw := -0.78
 var _camera_pitch := -0.18
 var _input_capture := InputCapture.new()
+var _player_viewer_driver := PlayerViewerDriver.new()
 
 func _ready() -> void:
 	_apply_profile_settings()
@@ -38,6 +42,7 @@ func _ready() -> void:
 	_reference_scene = ReferenceScene.instantiate()
 	add_child(_reference_scene)
 	_reference_scene.ensure_reference_defaults()
+	_configure_player_viewer_driver()
 	_apply_profile_resources()
 	_set_status("STARTING: terrain world not settled yet")
 	_input_capture.capture_if_enabled(human_input_enabled)
@@ -46,7 +51,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_update_camera()
+	if _validation_state == "ready" and human_input_enabled and player_driven_viewer_enabled:
+		_player_viewer_driver.update_from_player(_player)
 
+func _input(event: InputEvent) -> void:
+	_unhandled_input(event)
 func _unhandled_input(event: InputEvent) -> void:
 	if not human_input_enabled:
 		return
@@ -57,6 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		_camera_yaw -= event.relative.x * mouse_sensitivity
 		_camera_pitch = clamp(_camera_pitch - event.relative.y * mouse_sensitivity, -1.35, 1.35)
+		get_viewport().set_input_as_handled()
 
 func set_human_input_enabled(enabled: bool) -> void:
 	human_input_enabled = enabled
@@ -93,6 +103,7 @@ func configure_playtest_profile(profile_id: StringName) -> void:
 	_apply_profile_settings()
 	if _reference_scene != null:
 		_apply_profile_resources()
+		_configure_player_viewer_driver()
 	if _player != null:
 		_player.global_position = player_start_position
 
@@ -170,6 +181,7 @@ func get_validation_summary() -> Dictionary:
 		"player_on_floor": bool(player_stats.get("on_floor", false)),
 		"player_human_input_enabled": bool(player_stats.get("human_input_enabled", false)),
 		"player_simulation_enabled": bool(player_stats.get("simulation_enabled", false)),
+		"player_viewer_updates": _player_viewer_driver.accepted_updates(),
 		"player_camera_current": _camera != null and _camera.current,
 		"camera_mode": camera_mode,
 		"crosshair_present": get_node_or_null("ValidationCrosshair") != null,
@@ -177,29 +189,7 @@ func get_validation_summary() -> Dictionary:
 
 
 func _add_validation_player() -> void:
-	_player = CharacterBody3D.new()
-	_player.name = "ValidationPlayer"
-	_player.set_script(ValidationPlayerScript)
-	_player.position = player_start_position
-	_player.call("set_human_input_enabled", human_input_enabled)
-	var shape := CapsuleShape3D.new()
-	shape.radius = 0.45
-	shape.height = 1.8
-	var collision := CollisionShape3D.new()
-	collision.name = "PlayerCollision"
-	collision.shape = shape
-	_player.add_child(collision)
-	var mesh := CapsuleMesh.new()
-	mesh.radius = 0.45
-	mesh.height = 1.8
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color(0.05, 0.85, 1.0)
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	var body := MeshInstance3D.new()
-	body.name = "PlayerVisibleBody"
-	body.mesh = mesh
-	body.material_override = material
-	_player.add_child(body)
+	_player = ValidationPlayerFactory.create(player_start_position, human_input_enabled)
 	add_child(_player)
 
 
@@ -238,6 +228,16 @@ func _apply_profile_resources() -> void:
 	var terrain_world = _reference_scene.get_terrain_world()
 	terrain_world.generation_profile = ProfileCatalog.generation_profile(playtest_profile_id)
 	terrain_world.storage_profile = ProfileCatalog.storage_profile(playtest_profile_id)
+
+
+func _configure_player_viewer_driver() -> void:
+	if _reference_scene == null:
+		return
+	_player_viewer_driver.configure(
+		_reference_scene,
+		ProfileCatalog.viewer_radius_chunks(playtest_profile_id),
+		player_viewer_update_distance
+	)
 
 
 func _terrain_mesh_stats() -> Dictionary:

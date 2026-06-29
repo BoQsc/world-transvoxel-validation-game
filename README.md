@@ -30,6 +30,8 @@ G21 prepares the compact G19 project for human visual playtesting without
 returning to the dense G16 stress handoff.
 G22 runs the exact compact G21 handoff project before human review, captures
 automated PNG evidence, and proves movement plus carve/place runtime behavior.
+G23 fixes the failed human handoff by requiring player-driven streaming and
+real input-path camera/dig/place checks in the compact project.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -106,6 +108,8 @@ python tools/validate_g21_contract.py
 python tools/g21_compact_2k_human_handoff.py --import-project
 python tools/validate_g22_contract.py
 python tools/g22_exact_compact_handoff_runtime_proof.py --skip-build
+python tools/validate_g23_contract.py
+python tools/g23_real_compact_human_playable_streaming.py --skip-build
 ```
 
 Expected marker:
@@ -172,6 +176,9 @@ WT_VALIDATION_G21_COMPACT_2K_HUMAN_HANDOFF_READY profile=g19_compact_2k_on_deman
 WT_VALIDATION_G22_CONTRACT_PASS implementation=exact_compact_handoff_runtime_proof
 WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_PASS profile=g19_compact_2k_on_demand captures=3 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=... construct_verified=1 pending_retirements=0 render_fading_resources=0 dense_world_files=0
 WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_SMOKE_PASS engines=2 captures=... max_file_bytes=... total_bytes=... max_engine_seconds=... report=artifacts/g22_exact_compact_handoff_runtime_proof/g22_exact_compact_handoff_runtime_proof_report.json
+WT_VALIDATION_G23_CONTRACT_PASS implementation=real_compact_human_playable_streaming
+WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_PASS profile=g19_compact_2k_on_demand initial_resources=25 viewer_updates_delta=... player_motion=... camera_delta=... click_edits=2 pending_retirements=0 render_fading_resources=0 dense_world_files=0
+WT_VALIDATION_G23_REAL_COMPACT_HUMAN_PLAYABLE_STREAMING_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g23_real_compact_human_playable_streaming/g23_real_compact_human_playable_streaming_report.json
 ```
 
 ## Human-visible playtest
@@ -232,7 +239,7 @@ acceptable G1 result.
 For current compact near-2K human review, first run:
 
 ```console
-python tools/g22_exact_compact_handoff_runtime_proof.py --skip-build
+python tools/g23_real_compact_human_playable_streaming.py --skip-build
 ```
 
 Then open:
@@ -241,5 +248,6 @@ Then open:
 artifacts/g19_compact_2k_on_demand/project/project.godot
 ```
 
-The G22 proof is the automated evidence that this exact compact handoff project
-ran before human review.
+The G23 proof is the automated evidence that this exact compact handoff project
+has player-driven streaming and real input-path camera/dig/place behavior before
+human review.

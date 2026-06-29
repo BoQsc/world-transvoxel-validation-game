@@ -1,6 +1,4 @@
 extends SceneTree
-
-
 const MARKER := "WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS"
 const PROFILE_ID := &"g19_compact_2k_on_demand"
 const EXPECTED_PAGE_COUNT := 16384
@@ -45,12 +43,8 @@ const PATH_SAMPLES := [
 		"center_chunk": Vector3i(127, 0, 127),
 	},
 ]
-
-
 func _initialize() -> void:
 	call_deferred("_run_test")
-
-
 func _run_test() -> void:
 	if not _assert_no_dense_files("before_start"):
 		return
@@ -76,8 +70,6 @@ func _run_test() -> void:
 	var summary: Dictionary = scene.get_validation_summary()
 	if not _summary_is_initial_playable(summary):
 		_fail("G19 initial playable summary mismatch: %s" % str(summary))
-		return
-
 	var reference: Node = scene.get_node_or_null("WtTerrainReferenceScene")
 	var terrain_world := _terrain_world(scene)
 	if reference == null or terrain_world == null:
@@ -153,22 +145,18 @@ func _run_test() -> void:
 	scene.queue_free()
 	await process_frame
 	quit(0)
-
-
 func _summary_is_initial_playable(summary: Dictionary) -> bool:
 	return str(summary.get("playtest_profile_id", "")) == str(PROFILE_ID) and \
 			str(summary.get("fixture_label", "")) == "g19_compact_2k_on_demand" and \
 			int(summary.get("viewer_count", 0)) == 1 and \
-			int(summary.get("expected_resource_count", 0)) == 9 and \
-			int(summary.get("render_resources", 0)) == 9 and \
-			int(summary.get("collision_resources", 0)) == 9 and \
+			int(summary.get("expected_resource_count", 0)) == 25 and \
+			int(summary.get("render_resources", 0)) == 25 and \
+			int(summary.get("collision_resources", 0)) == 25 and \
 			int(summary.get("terrain_triangles", 0)) >= MIN_INITIAL_TRIANGLES and \
 			bool(summary.get("player_present", false)) and \
 			bool(summary.get("player_camera_current", false)) and \
 			bool(summary.get("crosshair_present", false)) and \
 			not bool(summary.get("player_human_input_enabled", true))
-
-
 func _move_player_to(scene: Node, viewer_sample_position: Vector3) -> bool:
 	var player := scene.get_node_or_null("ValidationPlayer") as CharacterBody3D
 	if player == null:
@@ -178,8 +166,6 @@ func _move_player_to(scene: Node, viewer_sample_position: Vector3) -> bool:
 	player.global_position = Vector3(viewer_sample_position.x, 26.0, viewer_sample_position.z)
 	player.velocity = Vector3.ZERO
 	return true
-
-
 func _verify_player_motion(scene: Node, summary: Dictionary) -> bool:
 	var before: Vector3 = summary.get("player_position", Vector3.ZERO)
 	scene.set_player_test_motion(Vector3(1, 0, 0))
@@ -191,8 +177,6 @@ func _verify_player_motion(scene: Node, summary: Dictionary) -> bool:
 		_fail("G19 scripted player motion did not move: before=%s after=%s" % [str(before), str(after)])
 		return false
 	return true
-
-
 func _verify_edit(scene: Node, terrain_world: Node, revision: int, center_chunk: Vector3i) -> bool:
 	var interactor: Node = scene.get_node_or_null("ValidationTerrainInteractor")
 	if interactor == null:
@@ -214,8 +198,6 @@ func _verify_edit(scene: Node, terrain_world: Node, revision: int, center_chunk:
 		_fail("G19 active-center carve did not replace any render resource: %s" % str(metrics))
 		return false
 	return true
-
-
 func _verify_materials(materializer: Node, expected_chunks: int, label: String) -> bool:
 	if materializer == null:
 		_fail("G19 materializer missing")
@@ -225,23 +207,17 @@ func _verify_materials(materializer: Node, expected_chunks: int, label: String) 
 		_fail("G19 materials did not cover %s: %s" % [label, str(summary)])
 		return false
 	return true
-
-
 func _assert_no_dense_files(stage: String) -> bool:
 	for path in FORBIDDEN_DENSE_FILES:
 		if FileAccess.file_exists(path):
 			_fail("G19 dense file exists at %s: %s" % [stage, path])
 			return false
 	return true
-
-
 func _terrain_world(scene: Node) -> Node:
 	var reference: Node = scene.get_node_or_null("WtTerrainReferenceScene")
 	if reference == null:
 		return null
 	return reference.call("get_terrain_world")
-
-
 func _wait_for_ready(scene: Node) -> bool:
 	for _frame in range(1800):
 		if scene.has_method("get_validation_state") and scene.get_validation_state() == "ready":
@@ -249,8 +225,6 @@ func _wait_for_ready(scene: Node) -> bool:
 			return true
 		await process_frame
 	return false
-
-
 func _wait_for_player_floor(scene: Node) -> bool:
 	for _frame in range(360):
 		var summary: Dictionary = scene.get_validation_summary()
@@ -258,16 +232,12 @@ func _wait_for_player_floor(scene: Node) -> bool:
 			return true
 		await physics_frame
 	return false
-
-
 func _wait_for_revision(terrain_world: Node, revision: int) -> bool:
 	for _frame in range(1800):
 		if int(terrain_world.call("get_backend_world_revision")) >= revision:
 			return true
 		await process_frame
 	return false
-
-
 func _wait_for_window(
 	terrain_world: Node,
 	expected_chunks: int,
@@ -302,16 +272,12 @@ func _wait_for_window(
 		str(terrain_world.call("get_runtime_metrics")),
 	])
 	return false
-
-
 func _is_ready_snapshot(snapshot: RefCounted) -> bool:
 	return snapshot != null and snapshot.call("is_present") and \
 			snapshot.call("is_visual_ready") and \
 			snapshot.call("is_collision_required") and \
 			snapshot.call("is_collision_ready") and \
 			snapshot.call("is_fully_ready")
-
-
 func _fail(message: String) -> void:
 	push_error("WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_FAIL: " + message)
 	quit(1)

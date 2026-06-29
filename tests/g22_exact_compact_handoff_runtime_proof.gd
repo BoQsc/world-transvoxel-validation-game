@@ -180,9 +180,9 @@ func _summary_is_initial_playable(summary: Dictionary) -> bool:
 	return str(summary.get("playtest_profile_id", "")) == str(PROFILE_ID) and \
 			str(summary.get("fixture_label", "")) == "g19_compact_2k_on_demand" and \
 			int(summary.get("viewer_count", 0)) == 1 and \
-			int(summary.get("expected_resource_count", 0)) == 9 and \
-			int(summary.get("render_resources", 0)) == 9 and \
-			int(summary.get("collision_resources", 0)) == 9 and \
+			int(summary.get("expected_resource_count", 0)) == 25 and \
+			int(summary.get("render_resources", 0)) == 25 and \
+			int(summary.get("collision_resources", 0)) == 25 and \
 			int(summary.get("terrain_triangles", 0)) >= MIN_INITIAL_TRIANGLES and \
 			bool(summary.get("player_present", false)) and \
 			bool(summary.get("player_camera_current", false)) and \

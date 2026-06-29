@@ -12,14 +12,17 @@ const FORBIDDEN_DENSE_FILES := [
 ]
 
 var _tree: SceneTree
+var _failure_prefix := "WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_FAIL"
 
 
-func _init(tree: SceneTree) -> void:
+func _init(tree: SceneTree, failure_prefix: String = "") -> void:
 	_tree = tree
+	if not failure_prefix.is_empty():
+		_failure_prefix = failure_prefix
 
 
 func fail(message: String) -> void:
-	push_error("WT_VALIDATION_G22_EXACT_COMPACT_HANDOFF_RUNTIME_FAIL: " + message)
+	push_error("%s: %s" % [_failure_prefix, message])
 	_tree.quit(1)
 
 
