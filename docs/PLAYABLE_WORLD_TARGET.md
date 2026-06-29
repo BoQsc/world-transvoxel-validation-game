@@ -52,6 +52,10 @@ G16 is the 128 by 128 dense generated near-2K playable streaming gate. It is
 roughly a 2048 by 2048 block generated terrain step, with 16384 generated pages
 and the same 25-resource active streaming budget.
 
+G17 prepares the G16 near-2K generated project for human visual playtesting. It
+pins the generated scene to `g16_generated_128x128`, imports the project, and
+records `human_confirmation` as pending.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

@@ -33,6 +33,8 @@ REQUIRED_PHRASES = {
         "128 by 128 dense generated near-2K playable streaming gate",
         "roughly a 2048 by 2048 block generated terrain step",
         "16384 generated pages",
+        "G17 prepares the G16 near-2K generated project for human visual playtesting",
+        "human_confirmation",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -50,6 +52,7 @@ REQUIRED_PHRASES = {
         "## G14 - Generated 64x64 playable streaming",
         "## G15 - G14 scale telemetry guard",
         "## G16 - Generated 128x128 playable streaming",
+        "## G17 - Generated 128x128 human visual handoff",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

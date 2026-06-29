@@ -179,6 +179,21 @@ Exit:
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
 
+## G17 - Generated 128x128 human visual handoff
+
+Status: complete when `WT_VALIDATION_G17_CONTRACT_PASS` and
+`WT_VALIDATION_G17_GENERATED_128X128_HUMAN_HANDOFF_READY` both pass.
+
+Exit:
+
+- the saved G16 runtime report is present and still proves two engine runs;
+- the handoff project is composed from current local addon sources;
+- the G16 baked world is copied into the generated project;
+- `validation_playtest.tscn` is pinned to `g16_generated_128x128`;
+- Godot import passes before human review;
+- the final confirmation is human visual playtesting, recorded as
+  `human_confirmation = pending`.
+
 ## G11 - Generated 16x16 playable streaming
 
 Status: complete by `WT_VALIDATION_G11_CONTRACT_PASS` and
