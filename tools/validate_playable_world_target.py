@@ -47,6 +47,7 @@ REQUIRED_PHRASES = {
         "100 MiB total budget",
         "G20 closes the compact terrain storage/load-shape issue",
         "dense near-2K source/world-file problem is resolved",
+        "explicit 30 second timing evidence",
         "not final terrain art",
     ),
     "docs/ROADMAP.md": (

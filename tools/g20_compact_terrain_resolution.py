@@ -23,6 +23,7 @@ G19_MARKER = "WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS"
 MARKER = "WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS"
 MAX_GENERATED_FILE_BYTES = 50 * 1024 * 1024
 MAX_GENERATED_TOTAL_BYTES = 100 * 1024 * 1024
+MAX_LOAD_TO_PLAY_SECONDS = 30.0
 
 
 def load_json(path: Path) -> dict[str, object]:
@@ -56,6 +57,10 @@ def validate_g19_report(report: dict[str, object]) -> dict[str, int]:
         and budget.get("dense_world_artifacts") is False,
         f"G19 dense artifact flags are not false: {budget}",
     )
+    require(
+        float(budget.get("max_load_to_play_seconds", -1.0)) <= MAX_LOAD_TO_PLAY_SECONDS,
+        f"G19 report has wrong load-to-play budget: {budget}",
+    )
     post_run_budget = report.get("post_run_budget", {})
     require(
         isinstance(post_run_budget, dict),
@@ -73,8 +78,15 @@ def validate_g19_report(report: dict[str, object]) -> dict[str, int]:
     )
     engines = report.get("engines", [])
     require(isinstance(engines, list) and len(engines) >= 2, "G19 must have two engine runs")
+    max_engine_seconds = 0.0
     for engine in engines:
         require(isinstance(engine, dict), f"invalid engine result: {engine}")
+        duration_seconds = float(engine.get("duration_seconds", -1.0))
+        require(
+            0.0 <= duration_seconds <= MAX_LOAD_TO_PLAY_SECONDS,
+            f"G19 engine duration exceeded budget: {engine}",
+        )
+        max_engine_seconds = max(max_engine_seconds, duration_seconds)
         marker = str(engine.get("marker", ""))
         require(marker.startswith(G19_MARKER), f"G19 marker mismatch: {marker}")
         require(marker_value(marker, "profile") == "g19_compact_2k_on_demand", marker)
@@ -87,6 +99,7 @@ def validate_g19_report(report: dict[str, object]) -> dict[str, int]:
         "max_file_bytes": max_file_bytes,
         "total_bytes": total_bytes,
         "engines": len(engines),
+        "max_engine_milliseconds": int(round(max_engine_seconds * 1000.0)),
     }
 
 
@@ -114,6 +127,7 @@ def main() -> None:
         f"engines={g19_summary['engines']} "
         f"max_file_bytes={g19_summary['max_file_bytes']} "
         f"total_bytes={g19_summary['total_bytes']} "
+        f"max_engine_ms={g19_summary['max_engine_milliseconds']} "
         f"report={G19_REPORT.relative_to(ROOT).as_posix()}"
     )
 

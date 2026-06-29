@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import time
 
 from compose_validation_project import ROOT, compose
 from g0_install_run_smoke import discover_engines, has_godot_error, run_import
@@ -21,6 +22,7 @@ SCRIPT = "res://tests/g19_compact_2k_on_demand_smoke.gd"
 MARKER = "WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS"
 MAX_GENERATED_FILE_BYTES = 50 * 1024 * 1024
 MAX_GENERATED_TOTAL_BYTES = 100 * 1024 * 1024
+MAX_LOAD_TO_PLAY_SECONDS = 30.0
 FORBIDDEN_ARTIFACT_DIRS = (
     ARTIFACT_ROOT / "source",
     ARTIFACT_ROOT / "worlds",
@@ -86,6 +88,7 @@ def run_smoke(project: Path, version: str, engine: Path, headless: bool) -> dict
         command.append("--headless")
     command.extend(["--path", str(project), "--script", SCRIPT])
     ARTIFACT_ROOT.mkdir(parents=True, exist_ok=True)
+    started_at = time.perf_counter()
     result = subprocess.run(
         command,
         cwd=project,
@@ -95,6 +98,7 @@ def run_smoke(project: Path, version: str, engine: Path, headless: bool) -> dict
         errors="replace",
         timeout=900,
     )
+    duration_seconds = time.perf_counter() - started_at
     (ARTIFACT_ROOT / f"godot-{version}-g19.stdout.txt").write_text(
         result.stdout,
         encoding="utf-8",
@@ -107,9 +111,15 @@ def run_smoke(project: Path, version: str, engine: Path, headless: bool) -> dict
     print(combined, end="" if combined.endswith("\n") else "\n")
     if result.returncode != 0 or MARKER not in combined or has_godot_error(combined):
         raise RuntimeError(f"G19 compact 2K on-demand smoke failed on {version}")
+    if duration_seconds > MAX_LOAD_TO_PLAY_SECONDS:
+        raise RuntimeError(
+            "G19 compact 2K on-demand smoke exceeded load-to-play ceiling "
+            f"on {version}: {duration_seconds:.3f}s > {MAX_LOAD_TO_PLAY_SECONDS:.3f}s"
+        )
     return {
         "engine": version,
         "executable": str(engine),
+        "duration_seconds": duration_seconds,
         "marker": next(line for line in combined.splitlines() if line.startswith(MARKER)),
     }
 
@@ -136,6 +146,9 @@ def main() -> None:
     for version, engine in engines:
         run_import(project, version, engine)
         results.append(run_smoke(project, version, engine, not arguments.windowed))
+    max_engine_seconds = max(
+        float(result["duration_seconds"]) for result in results
+    )
     post_run_budget = assert_compact_project_budget(project)
     report_path = ARTIFACT_ROOT / "g19_compact_2k_on_demand_report.json"
     report_path.write_text(
@@ -151,6 +164,7 @@ def main() -> None:
                 "budget": {
                     "max_generated_file_bytes": MAX_GENERATED_FILE_BYTES,
                     "max_generated_total_bytes": MAX_GENERATED_TOTAL_BYTES,
+                    "max_load_to_play_seconds": MAX_LOAD_TO_PLAY_SECONDS,
                     "dense_source_artifacts": False,
                     "dense_world_artifacts": False,
                 },
@@ -165,6 +179,7 @@ def main() -> None:
         f"engines={len(results)} "
         f"max_file_bytes={post_run_budget['max_file_bytes']} "
         f"total_bytes={post_run_budget['total_bytes']} "
+        f"max_engine_seconds={max_engine_seconds:.3f} "
         f"report={report_path.relative_to(ROOT).as_posix()}"
     )
 

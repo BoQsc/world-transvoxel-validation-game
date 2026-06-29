@@ -5,7 +5,7 @@ Status: complete when `WT_VALIDATION_G20_CONTRACT_PASS` and
 
 G20 closes the specific G18/G19 storage and load-shape problem: the normal
 near-2K validation path no longer depends on dense source files, a baked dense
-world manifest, or large generated project artifacts.
+world manifest, large generated project artifacts, or unmeasured startup time.
 
 Resolved scope:
 
@@ -17,6 +17,7 @@ Resolved scope:
 - terrain edit replacement works on the active center chunk;
 - generated G19 runtime files remain below the 50 MiB per-file target and
   100 MiB total object-root ceiling;
+- every G19 engine run remains within the 30 second load-to-play ceiling;
 - G16/G17 dense near-2K artifacts remain stress-only evidence, not the normal
   terrain path.
 
@@ -40,5 +41,5 @@ Expected marker:
 
 ```text
 WT_VALIDATION_G20_CONTRACT_PASS implementation=compact_terrain_resolution
-WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
+WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 max_file_bytes=... total_bytes=... max_engine_ms=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 ```

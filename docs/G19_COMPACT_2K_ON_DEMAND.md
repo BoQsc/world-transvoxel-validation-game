@@ -25,7 +25,8 @@ Required behavior:
   collision resources;
 - an active-center carve edit commits and replaces render resources;
 - generated runtime files remain under the 50 MiB per-file target and 100 MiB
-  total generated-object-root ceiling.
+  total generated-object-root ceiling;
+- every engine smoke run completes within the 30 second load-to-play ceiling.
 
 Validation:
 
@@ -39,7 +40,7 @@ Expected markers:
 ```text
 WT_VALIDATION_G19_CONTRACT_PASS implementation=compact_2k_on_demand
 WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS profile=g19_compact_2k_on_demand samples=5 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=... dense_world_files=0
-WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS engines=2 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
+WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS engines=2 max_file_bytes=... total_bytes=... max_engine_seconds=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 ```
 
 Boundary:

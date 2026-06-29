@@ -24,7 +24,8 @@ requires compact deterministic/on-demand terrain before larger game claims.
 G19 implements that compact near-2K on-demand path through the addons without
 dense source/world files.
 G20 closes the compact terrain storage/load-shape issue: within the near-2K
-validation boundary, dense source/world files are no longer the normal path.
+validation boundary, dense source/world files are no longer the normal path and
+the compact path is timed against the 30 second load-to-play ceiling.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -155,9 +156,9 @@ WT_VALIDATION_G18_CONTRACT_PASS implementation=production_terrain_budget_pivot
 WT_VALIDATION_G18_WORLD_BUDGET_GUARD_PASS production_ready=false max_file_mb=100 target_file_mb=50 load_to_play_seconds=30 oversized_stress_artifacts=... report=artifacts/g18_world_budget_guard/g18_world_budget_guard_report.json
 WT_VALIDATION_G19_CONTRACT_PASS implementation=compact_2k_on_demand
 WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_PASS profile=g19_compact_2k_on_demand samples=5 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=... dense_world_files=0
-WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS engines=2 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
+WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS engines=2 max_file_bytes=... total_bytes=... max_engine_seconds=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 WT_VALIDATION_G20_CONTRACT_PASS implementation=compact_terrain_resolution
-WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 engines=2 max_file_bytes=... total_bytes=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
+WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS compact_path_resolved=true map_blocks=2048 active_budget=25 engines=2 max_file_bytes=... total_bytes=... max_engine_ms=... report=artifacts/g19_compact_2k_on_demand/g19_compact_2k_on_demand_report.json
 ```
 
 ## Human-visible playtest

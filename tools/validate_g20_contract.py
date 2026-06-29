@@ -19,7 +19,9 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS",
         "dense source files",
         "baked dense world manifest",
+        "unmeasured startup time",
         "g19_compact_2k_on_demand",
+        "30 second load-to-play ceiling",
         "Still outside this resolution",
         "final terrain art quality",
         "GPU/compute generation",
@@ -31,9 +33,12 @@ REQUIRED_PHRASES = {
         "compact_path_resolved=true",
         "MAX_GENERATED_FILE_BYTES = 50 * 1024 * 1024",
         "MAX_GENERATED_TOTAL_BYTES = 100 * 1024 * 1024",
+        "MAX_LOAD_TO_PLAY_SECONDS = 30.0",
+        "max_engine_ms",
     ),
     "README.md": (
         "G20 closes the compact terrain storage/load-shape issue",
+        "30 second load-to-play ceiling",
         "python tools/validate_g20_contract.py",
         "python tools/g20_compact_terrain_resolution.py",
         "WT_VALIDATION_G20_COMPACT_TERRAIN_RESOLUTION_PASS",
@@ -46,6 +51,7 @@ REQUIRED_PHRASES = {
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G20 closes the compact terrain storage/load-shape issue",
         "dense near-2K source/world-file problem is resolved",
+        "explicit 30 second timing evidence",
         "not final terrain art",
     ),
 }
