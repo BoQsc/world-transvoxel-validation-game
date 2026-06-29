@@ -14,6 +14,7 @@ static func available_profile_ids() -> Array[StringName]:
 		&"g11_generated_16x16",
 		&"g12_generated_32x32",
 		&"g14_generated_64x64",
+		&"g16_generated_128x128",
 	]
 
 
@@ -63,6 +64,14 @@ static func settings(profile_id: StringName) -> Dictionary:
 				"edit_point": Vector3(520, 8, 520),
 				"fixture_label": "g14_generated_64x64_dense",
 			}
+		"g16_generated_128x128":
+			return {
+				"viewer_position": Vector3(8, 8, 8),
+				"player_start_position": Vector3(8, 24, 8),
+				"camera_follow_offset": Vector3(150, 80, 150),
+				"edit_point": Vector3(1032, 8, 1032),
+				"fixture_label": "g16_generated_128x128_dense",
+			}
 		_:
 			return {
 				"viewer_position": Vector3(8, 8, 8),
@@ -94,6 +103,8 @@ static func storage_profile(profile_id: StringName) -> Resource:
 		root_path = "res://build/g12-generated-fixture/%s" % str(profile_id)
 	elif _is_generated_64x64(profile_id):
 		root_path = "res://build/g14-generated-fixture/%s" % str(profile_id)
+	elif _is_generated_128x128(profile_id):
+		root_path = "res://build/g16-generated-fixture/%s" % str(profile_id)
 	var manifest_name := "streaming.wtworld"
 	if _is_grid_8x8(profile_id) or _is_dense_generated(profile_id):
 		manifest_name = "world.wtworld"
@@ -176,8 +187,12 @@ static func _is_generated_64x64(profile_id: StringName) -> bool:
 	return str(profile_id) == "g14_generated_64x64"
 
 
+static func _is_generated_128x128(profile_id: StringName) -> bool:
+	return str(profile_id) == "g16_generated_128x128"
+
+
 static func _is_dense_generated(profile_id: StringName) -> bool:
-	return _is_generated_16x16(profile_id) or _is_generated_32x32(profile_id) or _is_generated_64x64(profile_id)
+	return _is_generated_16x16(profile_id) or _is_generated_32x32(profile_id) or _is_generated_64x64(profile_id) or _is_generated_128x128(profile_id)
 
 
 static func _grid_8x8_settings(

@@ -14,8 +14,9 @@ Exit:
 - generated dense fixtures compute surface min/max height before bake;
 - the computed surface must stay inside the active vertical chunk with
   `REQUIRED_LOWER_MARGIN` and `REQUIRED_UPPER_MARGIN`;
-- G11, G12, and G14 reports include `vertical_coverage` metadata;
-- G11, G12, and G14 reused fixtures must match the expected `source_revision`;
+- G11, G12, G14, and G16 reports include `vertical_coverage` metadata;
+- G11, G12, G14, and G16 reused fixtures must match the expected
+  `source_revision`;
 - stale generated fixtures fail before Godot instead of silently reusing an
   old height field;
 - this milestone is a safety gate for future larger generated terrain steps, not
@@ -32,5 +33,5 @@ Expected markers:
 
 ```text
 WT_VALIDATION_G13_CONTRACT_PASS implementation=generated_fixture_vertical_coverage_guard
-WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS profiles=3 active_y=0.0..16.0 required_lower_margin=1.00 required_upper_margin=0.75 report=artifacts/g13_generated_fixture_vertical_coverage/g13_generated_fixture_vertical_coverage_report.json
+WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS profiles=4 active_y=0.0..16.0 required_lower_margin=1.00 required_upper_margin=0.75 report=artifacts/g13_generated_fixture_vertical_coverage/g13_generated_fixture_vertical_coverage_report.json
 ```

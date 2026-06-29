@@ -13,6 +13,7 @@ REQUIRED_FILES = (
     "tools/g13_generated_fixture_vertical_coverage_smoke.py",
     "tools/g11_generated_16x16_playable_streaming_smoke.py",
     "tools/g12_generated_32x32_playable_streaming_smoke.py",
+    "tools/g16_generated_128x128_playable_streaming_smoke.py",
     "tools/validate_g13_contract.py",
 )
 
@@ -37,6 +38,7 @@ REQUIRED_PHRASES = {
         "g11_vertical_coverage",
         "g12_vertical_coverage",
         "g14_vertical_coverage",
+        "g16_vertical_coverage",
         "g13_generated_fixture_vertical_coverage_report.json",
     ),
     "tools/g11_generated_16x16_playable_streaming_smoke.py": (
@@ -48,6 +50,13 @@ REQUIRED_PHRASES = {
     "tools/g12_generated_32x32_playable_streaming_smoke.py": (
         "generated_fixture_vertical_coverage",
         "SOURCE_REVISION = 123201",
+        "vertical_coverage",
+        "source revision mismatch",
+        "\"vertical_coverage\"",
+    ),
+    "tools/g16_generated_128x128_playable_streaming_smoke.py": (
+        "generated_fixture_vertical_coverage",
+        "SOURCE_REVISION = 1612800",
         "vertical_coverage",
         "source revision mismatch",
         "\"vertical_coverage\"",

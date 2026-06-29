@@ -48,6 +48,10 @@ G15 locks G14 scale telemetry by checking source sizes, source revision,
 vertical margins, engine markers, and active-resource budget before another
 generated-terrain scale jump.
 
+G16 is the 128 by 128 dense generated near-2K playable streaming gate. It is
+roughly a 2048 by 2048 block generated terrain step, with 16384 generated pages
+and the same 25-resource active streaming budget.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

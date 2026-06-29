@@ -228,11 +228,11 @@ Status: complete by `WT_VALIDATION_G13_CONTRACT_PASS` and
 
 Exit:
 
-- G11, G12, and G14 generated fixture runners compute surface min/max height
+- G11, G12, G14, and G16 generated fixture runners compute surface min/max height
   before bake;
 - generated surfaces must remain inside the active vertical chunk with explicit
   lower and upper margins;
-- G11, G12, and G14 fixture reports include `vertical_coverage` metadata;
+- G11, G12, G14, and G16 fixture reports include `vertical_coverage` metadata;
 - reused generated fixtures must match the runner's expected `source_revision`;
 - stale or vertically unsafe generated fixtures fail before Godot runtime smoke;
 - this is a safety gate before larger generated terrain scale-up milestones.
@@ -277,3 +277,28 @@ Exit:
 - runtime telemetry proves render and collision resources remain at or below the
   25 active-resource playable budget;
 - edit replacement remains proven by the G14 runtime markers.
+
+## G16 - Generated 128x128 playable streaming
+
+Status: complete when `WT_VALIDATION_G16_CONTRACT_PASS` and
+`WT_VALIDATION_G16_GENERATED_128X128_PLAYABLE_STREAMING_SMOKE_PASS` both pass.
+
+Exit:
+
+- `g16_generated_128x128` is a selectable playable profile backed by a dense
+  deterministic near-2K generated terrain fixture;
+- the fixture is baked through `world-transvoxel/tools/wt_bake.py` and contains
+  16384 generated pages;
+- generated source writing uses the streamed source writer;
+- generated source sizes are checked before runtime:
+  `density.f32 = 1095850340` and `materials.u16 = 547925170`;
+- the G13 vertical coverage guard includes the G16 height field;
+- the normal first-person playtest path starts with one active viewer, player,
+  camera, crosshair, collision, materialized terrain, and human input disabled
+  for autonomous validation;
+- the smoke moves the same viewer ID through the 128 by 128 terrain and requires
+  9/25/25/25/9 active render/collision resources;
+- the playable-scene active budget remains 25 resources and does not load all
+  16384 generated pages as active resources;
+- scripted player motion and an active-center edit remain valid after streaming,
+  with `render_fading_resources == 0`.

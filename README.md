@@ -17,6 +17,7 @@ as dense generated terrain scale-up gates. G13 locks generated fixture vertical
 coverage and source-revision guards before larger generated scale-ups. G14 adds
 the 64 by 64 dense generated terrain scale step with streamed source writing.
 G15 locks G14 scale telemetry before another generated-terrain scale jump.
+G16 is the 128 by 128 dense generated near-2K playable streaming gate.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -79,6 +80,8 @@ python tools/validate_g14_contract.py
 python tools/g14_generated_64x64_playable_streaming_smoke.py
 python tools/validate_g15_contract.py
 python tools/g15_g14_scale_telemetry_guard.py
+python tools/validate_g16_contract.py
+python tools/g16_generated_128x128_playable_streaming_smoke.py
 ```
 
 Expected marker:
@@ -122,12 +125,15 @@ WT_VALIDATION_G12_CONTRACT_PASS implementation=generated_32x32_playable_streamin
 WT_VALIDATION_G12_GENERATED_32X32_PLAYABLE_STREAMING_PASS profile=g12_generated_32x32 samples=5 pages=1024 max_render_resources=25 max_collision_resources=25 edit_replacements=...
 WT_VALIDATION_G12_GENERATED_32X32_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g12_generated_32x32_playable_streaming/g12_generated_32x32_playable_streaming_report.json
 WT_VALIDATION_G13_CONTRACT_PASS implementation=generated_fixture_vertical_coverage_guard
-WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS profiles=3 active_y=0.0..16.0 required_lower_margin=1.00 required_upper_margin=0.75 report=artifacts/g13_generated_fixture_vertical_coverage/g13_generated_fixture_vertical_coverage_report.json
+WT_VALIDATION_G13_GENERATED_FIXTURE_VERTICAL_COVERAGE_PASS profiles=4 active_y=0.0..16.0 required_lower_margin=1.00 required_upper_margin=0.75 report=artifacts/g13_generated_fixture_vertical_coverage/g13_generated_fixture_vertical_coverage_report.json
 WT_VALIDATION_G14_CONTRACT_PASS implementation=generated_64x64_playable_streaming
 WT_VALIDATION_G14_GENERATED_64X64_PLAYABLE_STREAMING_PASS profile=g14_generated_64x64 samples=5 pages=4096 max_render_resources=25 max_collision_resources=25 edit_replacements=...
 WT_VALIDATION_G14_GENERATED_64X64_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g14_generated_64x64_playable_streaming/g14_generated_64x64_playable_streaming_report.json
 WT_VALIDATION_G15_CONTRACT_PASS implementation=g14_scale_telemetry_guard
 WT_VALIDATION_G15_G14_SCALE_TELEMETRY_PASS pages=4096 engines=2 density_bytes=275298660 materials_bytes=137649330 max_render_resources=25 max_collision_resources=25 report=artifacts/g15_g14_scale_telemetry/g15_g14_scale_telemetry_report.json
+WT_VALIDATION_G16_CONTRACT_PASS implementation=generated_128x128_playable_streaming
+WT_VALIDATION_G16_GENERATED_128X128_PLAYABLE_STREAMING_PASS profile=g16_generated_128x128 samples=5 pages=16384 max_render_resources=25 max_collision_resources=25 edit_replacements=...
+WT_VALIDATION_G16_GENERATED_128X128_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g16_generated_128x128_playable_streaming/g16_generated_128x128_playable_streaming_report.json
 ```
 
 ## Human-visible playtest
