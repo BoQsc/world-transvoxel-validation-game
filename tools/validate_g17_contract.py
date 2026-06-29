@@ -39,7 +39,7 @@ REQUIRED_PHRASES = {
     "docs/ROADMAP.md": (
         "## G17 - Generated 128x128 human visual handoff",
         "WT_VALIDATION_G17_GENERATED_128X128_HUMAN_HANDOFF_READY",
-        "final confirmation is human visual playtesting",
+        "stress-fixture visual confirmation is human visual playtesting",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G17 prepares the G16 near-2K generated project for human visual playtesting",

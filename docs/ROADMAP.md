@@ -179,21 +179,6 @@ Exit:
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
 
-## G17 - Generated 128x128 human visual handoff
-
-Status: complete when `WT_VALIDATION_G17_CONTRACT_PASS` and
-`WT_VALIDATION_G17_GENERATED_128X128_HUMAN_HANDOFF_READY` both pass.
-
-Exit:
-
-- the saved G16 runtime report is present and still proves two engine runs;
-- the handoff project is composed from current local addon sources;
-- the G16 baked world is copied into the generated project;
-- `validation_playtest.tscn` is pinned to `g16_generated_128x128`;
-- Godot import passes before human review;
-- the final confirmation is human visual playtesting, recorded as
-  `human_confirmation = pending`.
-
 ## G11 - Generated 16x16 playable streaming
 
 Status: complete by `WT_VALIDATION_G11_CONTRACT_PASS` and
@@ -317,3 +302,42 @@ Exit:
   16384 generated pages as active resources;
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
+
+## G17 - Generated 128x128 human visual handoff
+
+Status: complete when `WT_VALIDATION_G17_CONTRACT_PASS` and
+`WT_VALIDATION_G17_GENERATED_128X128_HUMAN_HANDOFF_READY` both pass.
+
+Exit:
+
+- the saved G16 runtime report is present and still proves two engine runs;
+- the handoff project is composed from current local addon sources;
+- the G16 baked world is copied into the generated project;
+- `validation_playtest.tscn` is pinned to `g16_generated_128x128`;
+- Godot import passes before human review;
+- the stress-fixture visual confirmation is human visual playtesting, recorded as
+  `human_confirmation = pending`.
+
+Boundary:
+
+- G17 is a stress-fixture handoff only;
+- G16 and G17 are stress-only evidence, not production terrain architecture;
+- this does not make dense pre-baked near-2K terrain acceptable for normal game
+  startup, storage, or distribution.
+
+## G18 - Production terrain budget pivot
+
+Status: complete when `WT_VALIDATION_G18_CONTRACT_PASS` and
+`WT_VALIDATION_G18_WORLD_BUDGET_GUARD_PASS` both pass.
+
+Exit:
+
+- G16/G17 dense near-2K artifacts are classified as stress-only evidence;
+- normal terrain/world files have a 100 MiB hard per-file ceiling and 50 MiB
+  target per-file ceiling;
+- normal load-to-play has a 30 second ceiling;
+- raw dense source files are transient stress artifacts only;
+- large terrain must move to deterministic-on-demand generation or compact
+  seed/config plus edit journals;
+- ignored oversized stress artifacts can be cleaned while committed reports and
+  contracts remain.

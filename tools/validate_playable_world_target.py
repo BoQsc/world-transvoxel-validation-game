@@ -35,6 +35,12 @@ REQUIRED_PHRASES = {
         "16384 generated pages",
         "G17 prepares the G16 near-2K generated project for human visual playtesting",
         "human_confirmation",
+        "G18 is the production budget pivot",
+        "no normal game path may require raw dense source files",
+        "100 MiB hard per-file ceiling",
+        "50 MiB target per-file ceiling",
+        "30 seconds load-to-play ceiling",
+        "G16 and G17 are stress-only evidence, not production terrain architecture",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -53,6 +59,7 @@ REQUIRED_PHRASES = {
         "## G15 - G14 scale telemetry guard",
         "## G16 - Generated 128x128 playable streaming",
         "## G17 - Generated 128x128 human visual handoff",
+        "## G18 - Production terrain budget pivot",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

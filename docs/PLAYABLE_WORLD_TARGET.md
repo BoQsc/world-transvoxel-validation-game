@@ -56,6 +56,14 @@ G17 prepares the G16 near-2K generated project for human visual playtesting. It
 pins the generated scene to `g16_generated_128x128`, imports the project, and
 records `human_confirmation` as pending.
 
+G18 is the production budget pivot. G16 and G17 are stress-only evidence, not
+production terrain architecture. The normal terrain path must not use the G16
+dense source/world-file shape: no normal game path may require raw dense source
+files, terrain/world files have a 100 MiB hard per-file ceiling and a 50 MiB
+target per-file ceiling, and the 30 seconds load-to-play ceiling is mandatory. The next
+architecture must be deterministic-on-demand generation or compact seed/config
+plus edit journals.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
