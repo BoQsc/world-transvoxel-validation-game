@@ -16,6 +16,12 @@ REQUIRED_PHRASES = {
         "textured terrain material path",
         "future game-world addon name is undecided",
         "GDScript limited to scene scaffolding",
+        "Map scale vocabulary",
+        "2000×2000",
+        "2000 blocks by 2000 blocks",
+        "1 block = 1 meter",
+        "4,000,000 m²",
+        "4 km²",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",

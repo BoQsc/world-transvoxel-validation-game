@@ -21,7 +21,8 @@ performance claims.
 
 ## Not claimed
 
-- 2K map scale;
+- 2K map scale, meaning 2000 by 2000 horizontal blocks at the standard
+  baseline of 1 block = 1 meter;
 - streaming while the player moves across the full map;
 - terrain edit/dig/place;
 - material/textured terrain;

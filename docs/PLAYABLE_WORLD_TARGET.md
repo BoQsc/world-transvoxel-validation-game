@@ -6,6 +6,18 @@ This repository must eventually validate a real game-facing world built from
 `world-transvoxel`, `world-transvoxel-terrain`, and a future game-world addon.
 Tiny one-chunk rendering is only an early gate, not the finish line.
 
+## Map scale vocabulary
+
+When this project says `2000×2000`, `2000x2000`, `2K map`, or
+`2K-world exploration`, it means horizontal block/grid dimensions:
+
+- `2000×2000` means 2000 blocks by 2000 blocks;
+- with the standard baseline of 1 block = 1 meter, this is about 2 km by 2 km;
+- the horizontal area is 2000 * 2000 = 4,000,000 m², or 4 km².
+
+This is not chunk count. Current 8 by 8 fixtures are validation fixtures, not
+the final 2000 by 2000 block exploration target.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

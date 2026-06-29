@@ -43,5 +43,7 @@ WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_large project=... scene=res://sc
 ## Not claimed
 
 G6 is still not final production terrain. It does not claim seamless dynamic
-LOD, 2K-world exploration, water/lava, vegetation, buildings, multiplayer,
-compute-shader acceleration, production art, or final performance budgets.
+LOD, 2K-world exploration, meaning 2000 by 2000 horizontal blocks at the
+standard baseline of 1 block = 1 meter, water/lava, vegetation, buildings,
+multiplayer, compute-shader acceleration, production art, or final performance
+budgets.
