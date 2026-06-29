@@ -44,6 +44,10 @@ roughly a 1024 by 1024 block terrain step. It adds a streamed source writer so
 larger bake inputs are written predictably without a large in-memory source
 buffer, while keeping the same single-viewer 25-resource active window.
 
+G15 locks G14 scale telemetry by checking source sizes, source revision,
+vertical margins, engine markers, and active-resource budget before another
+generated-terrain scale jump.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

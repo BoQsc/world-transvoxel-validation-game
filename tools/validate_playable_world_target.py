@@ -28,6 +28,8 @@ REQUIRED_PHRASES = {
         "32 by 32 fixture with 1024 generated pages",
         "generated fixture vertical coverage guard",
         "64 by 64 fixture with 4096 generated pages",
+        "G15 locks G14 scale telemetry",
+        "source sizes, source revision, vertical margins, engine markers, and active-resource budget",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -43,6 +45,7 @@ REQUIRED_PHRASES = {
         "## G12 - Generated 32x32 playable streaming",
         "## G13 - Generated fixture vertical coverage guard",
         "## G14 - Generated 64x64 playable streaming",
+        "## G15 - G14 scale telemetry guard",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

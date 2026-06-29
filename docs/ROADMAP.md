@@ -259,3 +259,21 @@ Exit:
   4096 generated pages as active resources;
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
+
+## G15 - G14 scale telemetry guard
+
+Status: complete when `WT_VALIDATION_G15_CONTRACT_PASS` and
+`WT_VALIDATION_G15_G14_SCALE_TELEMETRY_PASS` both pass.
+
+Exit:
+
+- the G14 saved report is present and still describes `g14_generated_64x64`;
+- the fixture is still 4096 generated pages at source revision `146400`;
+- streamed source files have the expected byte sizes:
+  `density.f32 = 275298660` and `materials.u16 = 137649330`;
+- `keys.txt` contains exactly the 64 by 64 chunk-key set;
+- vertical coverage margins remain inside the G13 safety policy;
+- two engine runtime markers are present from the G14 smoke;
+- runtime telemetry proves render and collision resources remain at or below the
+  25 active-resource playable budget;
+- edit replacement remains proven by the G14 runtime markers.
