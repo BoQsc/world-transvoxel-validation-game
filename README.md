@@ -50,6 +50,7 @@ python tools/g5_material_performance_smoke.py --windowed
 python tools/validate_g6_contract.py
 python tools/g6_profile_selectable_playable_world_smoke.py --windowed
 python tools/human_input_capture_smoke.py
+python tools/prepare_human_playtest.py --profile flat_large --reuse-bake
 ```
 
 Expected marker:
@@ -73,6 +74,7 @@ WT_VALIDATION_G5_SMOKE_PASS engines=2 report=artifacts/g5_material_performance/g
 WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
 WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
+WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_large project=... scene=res://scenes/validation_playtest.tscn launch=false fullscreen=false report=artifacts/human_playtest/human_playtest_report.json
 ```
 
 ## Human-visible playtest
@@ -93,12 +95,26 @@ After running the G1 visual capture command, the newest generated project is:
 artifacts/g1_visual_capture/project/project.godot
 ```
 
+For current human visual testing of the 8 by 8 multi-chunk flat fixture, prepare
+the dedicated generated project instead of manually patching ignored artifacts:
+
+```console
+python tools/prepare_human_playtest.py --profile flat_large --reuse-bake --import-project
+```
+
+Then open:
+
+```text
+artifacts/human_playtest/project/project.godot
+```
+
 Run `res://scenes/validation_playtest.tscn`. The scene auto-starts the addon
-reference terrain world, submits one viewer update, adds a small WASD/jump
-playable character with a first-person camera and crosshair, shows orientation
-markers, and shows a validation status overlay below the addon debug overlay.
-Left mouse carves terrain and right mouse places/constructs terrain through the
-terrain addon edit bridge. The automated G1/G4 guards check nonzero terrain
-triangle geometry, terrain collision resources, player presence, crosshair
-presence, scripted player movement, edit commits, replacement metrics, and
-sample updates. A gray rectangle alone is not an acceptable G1 result.
+reference terrain world, submits the selected profile's viewer update set, adds
+a small WASD/jump playable character with a first-person camera and crosshair,
+shows orientation markers, and shows a validation status overlay below the addon
+debug overlay. Left mouse carves terrain and right mouse places/constructs
+terrain through the terrain addon edit bridge. The automated G1/G4/G6 guards
+check nonzero terrain triangle geometry, terrain collision resources, player
+presence, crosshair presence, scripted player movement, edit commits,
+replacement metrics, and sample updates. A gray rectangle alone is not an
+acceptable G1 result.

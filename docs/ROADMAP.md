@@ -102,6 +102,8 @@ Exit:
 - both profiles keep first-person player, crosshair, materialized terrain,
   dig/place interaction, collision, and telemetry;
 - automated captures cover both profiles before human handoff;
+- `tools/prepare_human_playtest.py` prepares the reproducible human-test project
+  and pins the generated scene to the 8 by 8 `flat_large` profile;
 - handoff document gives the exact generated project path and accepted
   limitations.
 

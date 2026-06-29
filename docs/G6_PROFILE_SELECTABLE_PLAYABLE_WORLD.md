@@ -27,6 +27,9 @@ G6 moves the playable validation scene beyond a single default fixture:
   small, visible multi-chunk evidence was not obvious to a player, and real
   performance could not be judged from that scale. The current gate therefore
   bakes and loads an 8 by 8 fixture before human handoff.
+- `tools/prepare_human_playtest.py` prepares a reproducible human-playtest
+  project and pins `res://scenes/validation_playtest.tscn` to `flat_large`, so
+  human testing does not depend on manual edits to ignored generated artifacts.
 
 Expected markers:
 
@@ -34,6 +37,7 @@ Expected markers:
 WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
 WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
+WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_large project=... scene=res://scenes/validation_playtest.tscn launch=false fullscreen=false report=artifacts/human_playtest/human_playtest_report.json
 ```
 
 ## Not claimed

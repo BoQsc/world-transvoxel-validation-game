@@ -13,6 +13,7 @@ REQUIRED_FILES = (
     "scripts/validation_mesh_stats.gd",
     "tests/g6_profile_selectable_playable_world_smoke.gd",
     "tools/g6_profile_selectable_playable_world_smoke.py",
+    "tools/prepare_human_playtest.py",
     "tools/validate_g6_contract.py",
 )
 
@@ -24,6 +25,8 @@ REQUIRED_PHRASES = {
         "mountain_large",
         "first-person plus overview captures",
         "human_visual_verification",
+        "WT_VALIDATION_HUMAN_PLAYTEST_READY",
+        "prepare_human_playtest.py",
     ),
     "scripts/validation_playtest.gd": (
         "configure_playtest_profile",
@@ -49,16 +52,27 @@ REQUIRED_PHRASES = {
         "generate_worlds",
         "copy_worlds_into_project",
     ),
+    "tools/prepare_human_playtest.py": (
+        "WT_VALIDATION_HUMAN_PLAYTEST_READY",
+        "pin_scene_profile",
+        'playtest_profile_id = &"{profile}"',
+        "copy_worlds_into_project",
+        "run_project_import",
+        "launch_project",
+    ),
     "README.md": (
         "python tools/validate_g6_contract.py",
         "python tools/g6_profile_selectable_playable_world_smoke.py --windowed",
+        "python tools/prepare_human_playtest.py --profile flat_large --reuse-bake",
         "WT_VALIDATION_G6_CONTRACT_PASS",
         "WT_VALIDATION_G6_SMOKE_PASS",
+        "WT_VALIDATION_HUMAN_PLAYTEST_READY",
     ),
     "docs/ROADMAP.md": (
         "## G6 - Profile-selectable playable world",
         "Status: complete",
         "WT_VALIDATION_G6_SMOKE_PASS",
+        "prepare_human_playtest.py",
         "Human visual verification",
     ),
 }
