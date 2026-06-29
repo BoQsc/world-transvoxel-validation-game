@@ -21,7 +21,7 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G3_SMOKE_PASS",
         "flat_large",
         "mountain_large",
-        "4 by 4 LOD0 page set",
+        "8 by 8 LOD0 page set",
         "Not claimed",
     ),
     "README.md": (

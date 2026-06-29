@@ -127,7 +127,7 @@ func _start_validation_viewer() -> void:
 	_enable_player_simulation()
 	_validation_state = "ready"
 	_set_status(
-		"READY: profile=%s fixture=small_multi_chunk resources=%d viewers=%d meshes=%d triangles=%d player_start=%s" % [
+		"READY: profile=%s fixture=8x8_multi_chunk resources=%d viewers=%d meshes=%d triangles=%d player_start=%s" % [
 			str(playtest_profile_id),
 			resource_count,
 			viewer_count,
@@ -243,11 +243,11 @@ func _apply_profile_resources() -> void:
 func _terrain_mesh_stats() -> Dictionary:
 	return MeshStats.collect(_reference_scene)
 
-
 func _submit_profile_viewers() -> int:
 	var viewer_id := 1
+	var radius_chunks := ProfileCatalog.viewer_radius_chunks(playtest_profile_id)
 	for position in ProfileCatalog.viewer_positions(playtest_profile_id):
-		if not _reference_scene.update_reference_viewer(viewer_id, 1, position, 0, 0):
+		if not _reference_scene.update_reference_viewer(viewer_id, 1, position, radius_chunks, 0):
 			_fail("viewer update failed at %s" % str(position))
 			return 0
 		viewer_id += 1

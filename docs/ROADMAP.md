@@ -63,7 +63,7 @@ Status: complete by `WT_VALIDATION_G3_CONTRACT_PASS` and
 Exit:
 
 - flat baseline remains selectable;
-- mountain/large-terrain profile exists with deterministic seed;
+- mountain/8 by 8 multi-chunk profile exists with deterministic seed;
 - chunking/streaming counters prove bounded work and cold idle;
 - captures cover flat and mountain modes.
 

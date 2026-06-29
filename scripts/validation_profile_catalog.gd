@@ -11,9 +11,9 @@ static func available_profile_ids() -> Array[StringName]:
 static func settings(profile_id: StringName) -> Dictionary:
 	match str(profile_id):
 		"flat_large":
-			return _large_settings(profile_id, Vector3(32, 12, 32), Vector3(32, 8, 32))
+			return _large_settings(profile_id, Vector3(64, 12, 64), Vector3(64, 8, 64))
 		"mountain_large":
-			return _large_settings(profile_id, Vector3(32, 24, 32), Vector3(32, 9, 32))
+			return _large_settings(profile_id, Vector3(64, 24, 64), Vector3(64, 10, 64))
 		_:
 			return {
 				"viewer_position": Vector3(8, 8, 8),
@@ -50,15 +50,20 @@ static func storage_profile(profile_id: StringName) -> Resource:
 static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
 	if not str(profile_id).ends_with("_large"):
 		return [Vector3(8, 8, 8)]
-	var positions: Array[Vector3] = []
-	for z in range(4):
-		for x in range(4):
-			positions.append(Vector3(float(x * 16 + 8), 8.0, float(z * 16 + 8)))
-	return positions
+	return [
+		Vector3(40.0, 8.0, 40.0),
+		Vector3(88.0, 8.0, 40.0),
+		Vector3(40.0, 8.0, 88.0),
+		Vector3(88.0, 8.0, 88.0),
+	]
+
+
+static func viewer_radius_chunks(profile_id: StringName) -> int:
+	return 2 if str(profile_id).ends_with("_large") else 0
 
 
 static func expected_resource_count(profile_id: StringName) -> int:
-	return 8 if str(profile_id).ends_with("_large") else 1
+	return 64 if str(profile_id).ends_with("_large") else 1
 
 
 static func edit_point(profile_id: StringName) -> Vector3:
@@ -71,7 +76,7 @@ static func _large_settings(
 	edit_position: Vector3
 ) -> Dictionary:
 	return {
-		"viewer_position": Vector3(32, 10, 32),
+		"viewer_position": Vector3(64, 10, 64),
 		"player_start_position": player_position,
 		"camera_follow_offset": Vector3(48, 34, 52),
 		"edit_point": edit_position,

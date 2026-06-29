@@ -87,10 +87,10 @@ func _run_profile(profile_id: StringName) -> Dictionary:
 
 
 func _summary_is_multi_chunk_playable(summary: Dictionary) -> bool:
-	return int(summary.get("viewer_count", 0)) >= 16 and \
+	return int(summary.get("viewer_count", 0)) >= 4 and \
 			int(summary.get("terrain_triangles", 0)) >= 3000 and \
-			int(summary.get("render_resources", 0)) >= 8 and \
-			int(summary.get("collision_resources", 0)) >= 8 and \
+			int(summary.get("render_resources", 0)) >= 64 and \
+			int(summary.get("collision_resources", 0)) >= 64 and \
 			bool(summary.get("player_present", false)) and \
 			bool(summary.get("player_camera_current", false)) and \
 			bool(summary.get("crosshair_present", false))
@@ -121,6 +121,9 @@ func _verify_edits(scene: Node, profile_id: StringName) -> bool:
 		_fail("%s construct did not commit" % str(profile_id))
 		return false
 	var metrics: Dictionary = terrain_world.call("get_runtime_metrics")
+	if int(metrics.get("render_fading_resources", 0)) != 0:
+		_fail("%s edit/place created render fade blink resources: %s" % [str(profile_id), str(metrics)])
+		return false
 	return int(metrics.get("edit_replacements", 0)) > 0 and int(metrics.get("collision_resources", 0)) > 0
 
 

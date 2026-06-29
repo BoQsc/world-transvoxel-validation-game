@@ -71,7 +71,7 @@ func _run_mode(mode: Dictionary) -> Dictionary:
 	if int(stats.get("triangles", 0)) <= 0:
 		_fail("profile has no terrain triangles: %s" % str(mode.get("id", "")))
 		return {}
-	if int(metrics.get("render_resources", 0)) < 4 or int(metrics.get("collision_resources", 0)) < 4:
+	if int(metrics.get("render_resources", 0)) < 64 or int(metrics.get("collision_resources", 0)) < 64:
 		_fail("profile missing render/collision resources: %s %s" % [str(mode.get("id", "")), str(metrics)])
 		return {}
 	if not await _capture(str(mode.get("capture_path", ""))):
@@ -89,13 +89,16 @@ func _run_mode(mode: Dictionary) -> Dictionary:
 
 func _submit_profile_viewers(scene: Node, mode_id: String) -> bool:
 	var viewer_id := 1
-	for z in range(4):
-		for x in range(4):
-			var position := Vector3(float(x * 16 + 8), 8.0, float(z * 16 + 8))
-			if not scene.call("update_reference_viewer", viewer_id, 1, position, 0, 0):
-				_fail("viewer update failed for %s at %s" % [mode_id, str(position)])
-				return false
-			viewer_id += 1
+	for position in [
+		Vector3(40.0, 8.0, 40.0),
+		Vector3(88.0, 8.0, 40.0),
+		Vector3(40.0, 8.0, 88.0),
+		Vector3(88.0, 8.0, 88.0),
+	]:
+		if not scene.call("update_reference_viewer", viewer_id, 1, position, 2, 0):
+			_fail("viewer update failed for %s at %s" % [mode_id, str(position)])
+			return false
+		viewer_id += 1
 	return true
 
 

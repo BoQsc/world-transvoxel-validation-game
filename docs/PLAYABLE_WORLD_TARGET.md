@@ -10,7 +10,7 @@ Tiny one-chunk rendering is only an early gate, not the finish line.
 
 - first-person player with crosshair and terrain interaction affordances;
 - flat terrain baseline as the default reproducible mode;
-- mountain/large-terrain generation mode for scale and visual validation;
+- mountain/8 by 8 multi-chunk generation mode for scale and visual validation;
 - digging and placing with measured latency and deterministic recovery policy;
 - textured terrain material path with small, performance-conscious test assets;
 - terrain collision, chunking, cold-idle behavior, and visible-runtime telemetry;

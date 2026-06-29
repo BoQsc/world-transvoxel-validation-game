@@ -11,10 +11,11 @@ G6 moves the playable validation scene beyond a single default fixture:
   profiles;
 - `flat_large` and `mountain_large` load through the same generated playtest
   scene, first-person player, crosshair, terrain materializer, and interactor;
-- despite the profile names, these are small multi-chunk validation fixtures,
+- despite the profile names, these are 8 by 8 multi-chunk validation fixtures,
   not exploration-scale large terrain;
-- each multi-chunk profile submits 16 viewer positions, keeps render and
-  collision telemetry live, and reaches cold idle;
+- each multi-chunk profile submits 4 radius-2 coverage viewer positions, keeps
+  render and collision telemetry live, loads the 8 by 8 page set, and reaches
+  cold idle;
 - the smoke disables human input before the scene enters the tree;
 - both profiles perform automated carve and construct/place submissions through
   `ValidationTerrainInteractor`;
@@ -22,9 +23,10 @@ G6 moves the playable validation scene beyond a single default fixture:
   first-person plus overview captures before human visual handoff.
 - human playtest input captures mouse on start, overlay controls ignore mouse
   events, and a recapture click is suppressed so it does not also carve/place.
-- human playtest feedback reported that the fixture still looks small, visible
-  multi-chunk evidence is not obvious to a player, and real performance cannot
-  be judged from this scale.
+- human playtest feedback reported that the previous 4 by 4 fixture looked too
+  small, visible multi-chunk evidence was not obvious to a player, and real
+  performance could not be judged from that scale. The current gate therefore
+  bakes and loads an 8 by 8 fixture before human handoff.
 
 Expected markers:
 

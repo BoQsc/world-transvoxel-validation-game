@@ -23,9 +23,9 @@ SCRIPT = "res://tests/g3_generation_modes_smoke.gd"
 MARKER = "WT_VALIDATION_G3_GODOT_PASS"
 WORLD_TRANSVOXEL = REPOSITORY_ROOT / "world-transvoxel"
 ORIGIN = (-2, -2, -2)
-DIMENSIONS = (69, 37, 69)
+DIMENSIONS = (133, 37, 133)
 SOURCE_REVISION_BASE = 9300
-CHUNK_KEYS = tuple((x, 0, z, 0) for z in range(4) for x in range(4))
+CHUNK_KEYS = tuple((x, 0, z, 0) for z in range(8) for x in range(8))
 
 
 def remove_tree(path: Path) -> None:
@@ -37,8 +37,8 @@ def remove_tree(path: Path) -> None:
 def height(mode: str, x: int, z: int) -> float:
     if mode == "flat_large":
         return 8.0
-    centered_x = (x - 31.5) / 31.5
-    centered_z = (z - 31.5) / 31.5
+    centered_x = (x - 63.5) / 63.5
+    centered_z = (z - 63.5) / 63.5
     ridge = 4.4 * math.exp(-3.0 * (centered_x * centered_x + centered_z * centered_z))
     waves = 1.3 * math.sin(x * 0.23) + 0.9 * math.cos(z * 0.19)
     return 7.2 + ridge + waves

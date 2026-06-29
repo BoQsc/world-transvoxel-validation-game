@@ -11,7 +11,7 @@ REQUIRED_PHRASES = {
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "first-person player with crosshair",
         "flat terrain baseline",
-        "mountain/large-terrain generation mode",
+        "mountain/8 by 8 multi-chunk generation mode",
         "digging and placing",
         "textured terrain material path",
         "future game-world addon name is undecided",

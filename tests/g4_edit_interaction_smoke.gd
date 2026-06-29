@@ -99,6 +99,9 @@ func _submit_and_verify(
 	if int(metrics.get("edit_replacements", 0)) <= 0 or int(cold_idle.get("collision_resources", 0)) <= 0:
 		_fail("edit did not preserve replacement/collision evidence: %s" % str(metrics))
 		return {}
+	if int(metrics.get("render_fading_resources", 0)) != 0:
+		_fail("edit created render fade/blink resources: %s" % str(metrics))
+		return {}
 	return {
 		"commit_frames": commit_frames,
 		"settle_frames": Engine.get_physics_frames() - settle_start,

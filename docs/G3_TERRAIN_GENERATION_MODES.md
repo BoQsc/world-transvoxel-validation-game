@@ -12,7 +12,7 @@ performance claims.
 - flat baseline remains selectable as `flat_large`;
 - deterministic mountain profile exists as `mountain_large`;
 - both profiles bake through the standard `world-transvoxel` dense bake path;
-- each baked profile contains a 4 by 4 LOD0 page set;
+- each baked profile contains an 8 by 8 LOD0 page set;
 - Godot loads both profiles from generated artifacts;
 - cold-idle, render resources, collision resources, and nonzero triangle counts
   are checked for both profiles;
