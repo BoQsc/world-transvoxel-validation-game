@@ -64,6 +64,14 @@ target per-file ceiling, and the 30 seconds load-to-play ceiling is mandatory. T
 architecture must be deterministic-on-demand generation or compact seed/config
 plus edit journals.
 
+G19 implements the first compact near-2K on-demand path. It keeps the 128 by
+128 chunk footprint and 16384 indexed pages, but starts from a deterministic
+procedural descriptor in the addons instead of dense source files or a baked
+world manifest. Its validation requires no dense G19 source/world directories,
+no `world.wtworld`, no `streaming.wtworld`, no `procedural.wtseed`, bounded
+25-resource active streaming, edit replacement, and generated object-root files
+under the 50 MiB target per-file and 100 MiB total budget.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

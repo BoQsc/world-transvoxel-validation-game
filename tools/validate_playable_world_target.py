@@ -41,6 +41,10 @@ REQUIRED_PHRASES = {
         "50 MiB target per-file ceiling",
         "30 seconds load-to-play ceiling",
         "G16 and G17 are stress-only evidence, not production terrain architecture",
+        "G19 implements the first compact near-2K on-demand path",
+        "deterministic procedural descriptor",
+        "no `world.wtworld`",
+        "100 MiB total budget",
     ),
     "docs/ROADMAP.md": (
         "## G2 - First-person playable baseline",
@@ -60,6 +64,7 @@ REQUIRED_PHRASES = {
         "## G16 - Generated 128x128 playable streaming",
         "## G17 - Generated 128x128 human visual handoff",
         "## G18 - Production terrain budget pivot",
+        "## G19 - Compact 2K on-demand procedural streaming",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",

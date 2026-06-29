@@ -15,6 +15,7 @@ static func available_profile_ids() -> Array[StringName]:
 		&"g12_generated_32x32",
 		&"g14_generated_64x64",
 		&"g16_generated_128x128",
+		&"g19_compact_2k_on_demand",
 	]
 
 
@@ -72,6 +73,14 @@ static func settings(profile_id: StringName) -> Dictionary:
 				"edit_point": Vector3(1032, 8, 1032),
 				"fixture_label": "g16_generated_128x128_dense",
 			}
+		"g19_compact_2k_on_demand":
+			return {
+				"viewer_position": Vector3(8, 8, 8),
+				"player_start_position": Vector3(8, 24, 8),
+				"camera_follow_offset": Vector3(150, 80, 150),
+				"edit_point": Vector3(1032, 8, 1032),
+				"fixture_label": "g19_compact_2k_on_demand",
+			}
 		_:
 			return {
 				"viewer_position": Vector3(8, 8, 8),
@@ -88,6 +97,12 @@ static func generation_profile(profile_id: StringName) -> Resource:
 	generation.source_mode = GenerationProfile.SourceMode.FLAT
 	if str(profile_id) == "mountain_8x8" or _is_sparse_2k(profile_id) or _is_dense_generated(profile_id):
 		generation.source_mode = GenerationProfile.SourceMode.BAKED_WORLD
+	if _is_compact_on_demand(profile_id):
+		generation.source_mode = GenerationProfile.SourceMode.DETERMINISTIC_REFERENCE
+		generation.seed = 19019
+		generation.world_chunk_count_x = 128
+		generation.world_chunk_count_z = 128
+		generation.source_revision = 190019
 	return generation
 
 
@@ -105,11 +120,15 @@ static func storage_profile(profile_id: StringName) -> Resource:
 		root_path = "res://build/g14-generated-fixture/%s" % str(profile_id)
 	elif _is_generated_128x128(profile_id):
 		root_path = "res://build/g16-generated-fixture/%s" % str(profile_id)
+	elif _is_compact_on_demand(profile_id):
+		root_path = "res://build/g19-compact-on-demand/%s" % str(profile_id)
 	var manifest_name := "streaming.wtworld"
 	if _is_grid_8x8(profile_id) or _is_dense_generated(profile_id):
 		manifest_name = "world.wtworld"
 	elif _is_sparse_2k(profile_id):
 		manifest_name = "g8_2000x2000_sparse.wtworld"
+	elif _is_compact_on_demand(profile_id):
+		manifest_name = "procedural.wtseed"
 	storage.world_manifest_path = "%s/%s" % [root_path, manifest_name]
 	storage.object_root_path = root_path
 	storage.edit_journal_path = "%s/world.wtedit" % root_path
@@ -119,7 +138,7 @@ static func storage_profile(profile_id: StringName) -> Resource:
 
 
 static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
-	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
+	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id):
 		return [Vector3(8.0, 8.0, 8.0)]
 	if _is_sparse_2k_multi_viewer(profile_id):
 		return [
@@ -140,11 +159,11 @@ static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
 
 
 static func viewer_radius_chunks(profile_id: StringName) -> int:
-	return 2 if _is_grid_8x8(profile_id) or _is_sparse_2k(profile_id) or _is_dense_generated(profile_id) else 0
+	return 2 if _is_grid_8x8(profile_id) or _is_sparse_2k(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id) else 0
 
 
 static func expected_resource_count(profile_id: StringName) -> int:
-	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
+	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id):
 		return 9
 	if _is_sparse_2k_multi_viewer(profile_id):
 		return 93
@@ -193,6 +212,10 @@ static func _is_generated_128x128(profile_id: StringName) -> bool:
 
 static func _is_dense_generated(profile_id: StringName) -> bool:
 	return _is_generated_16x16(profile_id) or _is_generated_32x32(profile_id) or _is_generated_64x64(profile_id) or _is_generated_128x128(profile_id)
+
+
+static func _is_compact_on_demand(profile_id: StringName) -> bool:
+	return str(profile_id) == "g19_compact_2k_on_demand"
 
 
 static func _grid_8x8_settings(

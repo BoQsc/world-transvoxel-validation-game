@@ -341,3 +341,24 @@ Exit:
   seed/config plus edit journals;
 - ignored oversized stress artifacts can be cleaned while committed reports and
   contracts remain.
+
+## G19 - Compact 2K on-demand procedural streaming
+
+Status: complete when `WT_VALIDATION_G19_CONTRACT_PASS` and
+`WT_VALIDATION_G19_COMPACT_2K_ON_DEMAND_SMOKE_PASS` both pass.
+
+Exit:
+
+- `g19_compact_2k_on_demand` is a selectable playable profile using
+  `DETERMINISTIC_REFERENCE` generation;
+- the addons start a compact procedural world from chunk counts, seed, source
+  revision, and object root, not a dense `.wtworld` manifest;
+- the near-2K footprint remains 128 by 128 chunks, 16,384 indexed pages, or
+  roughly 2048 by 2048 blocks;
+- no dense source directory, baked world directory, `world.wtworld`,
+  `streaming.wtworld`, or `procedural.wtseed` is produced for this path;
+- the five-point playable streaming path remains bounded to 25 active render
+  resources and 25 active collision resources;
+- active-center carving commits and replaces render resources;
+- generated runtime files stay inside the 50 MiB target per-file and 100 MiB
+  total generated-object-root budget.
