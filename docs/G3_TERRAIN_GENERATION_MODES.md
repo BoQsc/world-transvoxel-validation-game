@@ -4,13 +4,13 @@ Status: complete by automated contract and runtime smoke when
 `WT_VALIDATION_G3_CONTRACT_PASS` and `WT_VALIDATION_G3_SMOKE_PASS` both pass.
 
 G3 proves that the validation game can generate and load more than the tiny
-single-reference terrain slice without moving into final large-world
+single-reference terrain slice without moving into final 2000×2000-block
 performance claims.
 
 ## Exit evidence
 
-- flat baseline remains selectable as `flat_large`;
-- deterministic mountain profile exists as `mountain_large`;
+- flat 8 by 8 fixture remains selectable as `flat_8x8`;
+- deterministic mountain 8 by 8 fixture exists as `mountain_8x8`;
 - both profiles bake through the standard `world-transvoxel` dense bake path;
 - each baked profile contains an 8 by 8 LOD0 page set;
 - Godot loads both profiles from generated artifacts;

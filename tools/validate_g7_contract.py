@@ -17,8 +17,8 @@ REQUIRED_PHRASES = {
     "docs/G7_HUMAN_VISUAL_VERIFICATION.md": (
         "WT_VALIDATION_G7_CONTRACT_PASS",
         "WT_VALIDATION_G7_HANDOFF_READY",
-        "flat_large",
-        "mountain_large",
+        "flat_8x8",
+        "mountain_8x8",
         "terrain is not upside down",
         "terrain does not visibly blink",
         "chunk pieces do not rapidly disappear",
@@ -41,8 +41,8 @@ REQUIRED_PHRASES = {
     "docs/ROADMAP.md": (
         "## G7 - Human visual verification",
         "WT_VALIDATION_G7_HANDOFF_READY",
-        "flat_large",
-        "mountain_large",
+        "flat_8x8",
+        "mountain_8x8",
     ),
 }
 

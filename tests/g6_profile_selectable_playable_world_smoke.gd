@@ -4,7 +4,7 @@ const MARKER := "WT_VALIDATION_G6_GODOT_PASS"
 const SCENE_PATH := "res://scenes/validation_playtest.tscn"
 const ProfileCatalog := preload("res://scripts/validation_profile_catalog.gd")
 
-const PROFILES := [&"flat_large", &"mountain_large"]
+const PROFILES := [&"flat_8x8", &"mountain_8x8"]
 
 
 func _initialize() -> void:

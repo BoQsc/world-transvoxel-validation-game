@@ -56,5 +56,5 @@ not only the programmatic mesh count.
 ## Boundary
 
 G1 still does not claim terrain quality, final camera controls, production
-performance, or correct large-world visuals. It only makes the human-visible
+performance, or correct 2000×2000-block world visuals. It only makes the human-visible
 validation scene informative enough to continue review.

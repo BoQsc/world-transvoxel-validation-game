@@ -10,7 +10,7 @@ G7 is the first explicit human-review gate after the automated playable-world
 checks. It does not replace technical validation; it makes the human review
 reproducible:
 
-- `flat_large` and `mountain_large` each get a separate generated Godot project;
+- `flat_8x8` and `mountain_8x8` each get a separate generated Godot project;
 - each generated `res://scenes/validation_playtest.tscn` is pinned to the
   intended profile, so review does not depend on manual ignored-artifact edits;
 - Godot import is run before handoff when `--import-projects` is used;
@@ -34,8 +34,8 @@ python tools/g7_human_visual_handoff.py --reuse-bake --import-projects
 Then open the generated projects:
 
 ```text
-artifacts/g7_human_visual_handoff/flat_large/project/project.godot
-artifacts/g7_human_visual_handoff/mountain_large/project/project.godot
+artifacts/g7_human_visual_handoff/flat_8x8/project/project.godot
+artifacts/g7_human_visual_handoff/mountain_8x8/project/project.godot
 ```
 
 Run `res://scenes/validation_playtest.tscn` in each project.

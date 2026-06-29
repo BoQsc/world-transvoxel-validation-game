@@ -40,7 +40,7 @@ def run_smoke(project: Path, version: str, engine: Path, headless: bool) -> dict
     if result.returncode != 0 or MARKER not in combined or has_godot_error(combined):
         raise RuntimeError(f"G6 profile-selectable playable-world smoke failed on {version}")
     captures: dict[str, str] = {}
-    for profile_id in ("flat_large", "mountain_large"):
+    for profile_id in ("flat_8x8", "mountain_8x8"):
         for view_id in ("first_person", "overview"):
             capture = project / "artifacts" / "g6_profile_selectable_playable_world" / f"{profile_id}_{view_id}.png"
             if not capture.is_file():

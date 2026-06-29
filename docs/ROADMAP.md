@@ -103,7 +103,7 @@ Exit:
   dig/place interaction, collision, and telemetry;
 - automated captures cover both profiles before human handoff;
 - `tools/prepare_human_playtest.py` prepares the reproducible human-test project
-  and pins the generated scene to the 8 by 8 `flat_large` profile;
+  and pins the generated scene to the 8 by 8 `flat_8x8` profile;
 - handoff document gives the exact generated project path and accepted
   limitations.
 
@@ -115,7 +115,7 @@ human profile review remains pending.
 
 Exit:
 
-- reproducible handoff projects exist for `flat_large` and `mountain_large`;
+- reproducible handoff projects exist for `flat_8x8` and `mountain_8x8`;
 - each generated scene is pinned to the intended profile before review;
 - Godot import passes for both generated handoff projects;
 - human opens the generated validation projects and confirms whether flat and

@@ -20,7 +20,7 @@ systems are added.
 
 ## Not claimed
 
-- large terrain;
+- 2000×2000-block terrain;
 - mountain generation;
 - terrain dig/place;
 - material/textured terrain;

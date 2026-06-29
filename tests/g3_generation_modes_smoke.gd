@@ -7,18 +7,18 @@ const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/w
 
 const MODES := [
 	{
-		"id": "flat_large",
+		"id": "flat_8x8",
 		"source_mode": "FLAT",
-		"world_path": "res://build/g3-generation-fixtures/flat_large/world.wtworld",
-		"root_path": "res://build/g3-generation-fixtures/flat_large",
-		"capture_path": "res://artifacts/g3_generation_modes/flat_large.png",
+		"world_path": "res://build/g3-generation-fixtures/flat_8x8/world.wtworld",
+		"root_path": "res://build/g3-generation-fixtures/flat_8x8",
+		"capture_path": "res://artifacts/g3_generation_modes/flat_8x8.png",
 	},
 	{
-		"id": "mountain_large",
+		"id": "mountain_8x8",
 		"source_mode": "BAKED_WORLD",
-		"world_path": "res://build/g3-generation-fixtures/mountain_large/world.wtworld",
-		"root_path": "res://build/g3-generation-fixtures/mountain_large",
-		"capture_path": "res://artifacts/g3_generation_modes/mountain_large.png",
+		"world_path": "res://build/g3-generation-fixtures/mountain_8x8/world.wtworld",
+		"root_path": "res://build/g3-generation-fixtures/mountain_8x8",
+		"capture_path": "res://artifacts/g3_generation_modes/mountain_8x8.png",
 	},
 ]
 

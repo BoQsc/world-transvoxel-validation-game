@@ -17,7 +17,7 @@ ARTIFACT_ROOT = ROOT / "artifacts" / "human_playtest"
 PROJECT = ARTIFACT_ROOT / "project"
 SCENE = "scenes/validation_playtest.tscn"
 MARKER = "WT_VALIDATION_HUMAN_PLAYTEST_READY"
-PROFILES = ("flat_large", "mountain_large")
+PROFILES = ("flat_8x8", "mountain_8x8")
 
 
 def profile_worlds_exist() -> bool:
@@ -130,7 +130,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Prepare the generated project used for final human visual playtesting."
     )
-    parser.add_argument("--profile", choices=PROFILES, default="flat_large")
+    parser.add_argument("--profile", choices=PROFILES, default="flat_8x8")
     parser.add_argument("--project", type=Path, default=PROJECT)
     parser.add_argument("--reuse-bake", action="store_true")
     parser.add_argument("--import-project", action="store_true")

@@ -35,7 +35,7 @@ def remove_tree(path: Path) -> None:
 
 
 def height(mode: str, x: int, z: int) -> float:
-    if mode == "flat_large":
+    if mode == "flat_8x8":
         return 8.0
     centered_x = (x - 63.5) / 63.5
     centered_z = (z - 63.5) / 63.5
@@ -113,8 +113,8 @@ def generate_worlds() -> list[dict[str, object]]:
     SOURCE_ROOT.mkdir(parents=True, exist_ok=True)
     WORLDS_ROOT.mkdir(parents=True, exist_ok=True)
     results = [
-        bake_profile("flat_large", 2, SOURCE_REVISION_BASE + 1),
-        bake_profile("mountain_large", 3, SOURCE_REVISION_BASE + 2),
+        bake_profile("flat_8x8", 2, SOURCE_REVISION_BASE + 1),
+        bake_profile("mountain_8x8", 3, SOURCE_REVISION_BASE + 2),
     ]
     (ARTIFACT_ROOT / "g3_generation_modes_bake_report.json").write_text(
         json.dumps({"profiles": results, "chunk_pages_per_profile": len(CHUNK_KEYS)}, indent=2) + "\n",
@@ -151,7 +151,7 @@ def run_smoke(project: Path, version: str, engine: Path, headless: bool) -> dict
     if result.returncode != 0 or MARKER not in combined or has_godot_error(combined):
         raise RuntimeError(f"G3 generation modes smoke failed on {version}")
     copied: dict[str, str] = {}
-    for mode in ("flat_large", "mountain_large"):
+    for mode in ("flat_8x8", "mountain_8x8"):
         capture = project / "artifacts" / "g3_generation_modes" / f"{mode}.png"
         if not capture.is_file():
             raise RuntimeError(f"G3 capture missing: {capture}")

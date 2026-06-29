@@ -21,8 +21,8 @@ REQUIRED_PHRASES = {
     "docs/G6_PROFILE_SELECTABLE_PLAYABLE_WORLD.md": (
         "WT_VALIDATION_G6_CONTRACT_PASS",
         "WT_VALIDATION_G6_SMOKE_PASS",
-        "flat_large",
-        "mountain_large",
+        "flat_8x8",
+        "mountain_8x8",
         "first-person plus overview captures",
         "human_visual_verification",
         "WT_VALIDATION_HUMAN_PLAYTEST_READY",
@@ -37,8 +37,8 @@ REQUIRED_PHRASES = {
     ),
     "scripts/validation_profile_catalog.gd": (
         "available_profile_ids",
-        "flat_large",
-        "mountain_large",
+        "flat_8x8",
+        "mountain_8x8",
         "viewer_positions",
     ),
     "tests/g6_profile_selectable_playable_world_smoke.gd": (
@@ -63,7 +63,7 @@ REQUIRED_PHRASES = {
     "README.md": (
         "python tools/validate_g6_contract.py",
         "python tools/g6_profile_selectable_playable_world_smoke.py --windowed",
-        "python tools/prepare_human_playtest.py --profile flat_large --reuse-bake",
+        "python tools/prepare_human_playtest.py --profile flat_8x8 --reuse-bake",
         "WT_VALIDATION_G6_CONTRACT_PASS",
         "WT_VALIDATION_G6_SMOKE_PASS",
         "WT_VALIDATION_HUMAN_PLAYTEST_READY",

@@ -9,10 +9,10 @@ G6 moves the playable validation scene beyond a single default fixture:
 
 - `ValidationPlaytest.configure_playtest_profile()` exposes selectable playable
   profiles;
-- `flat_large` and `mountain_large` load through the same generated playtest
+- `flat_8x8` and `mountain_8x8` load through the same generated playtest
   scene, first-person player, crosshair, terrain materializer, and interactor;
-- despite the profile names, these are 8 by 8 multi-chunk validation fixtures,
-  not exploration-scale large terrain;
+- these are 8 by 8 multi-chunk validation fixtures, not the final 2000×2000
+  block exploration target;
 - each multi-chunk profile submits 4 radius-2 coverage viewer positions, keeps
   render and collision telemetry live, loads the 8 by 8 page set, and reaches
   cold idle;
@@ -28,7 +28,7 @@ G6 moves the playable validation scene beyond a single default fixture:
   performance could not be judged from that scale. The current gate therefore
   bakes and loads an 8 by 8 fixture before human handoff.
 - `tools/prepare_human_playtest.py` prepares a reproducible human-playtest
-  project and pins `res://scenes/validation_playtest.tscn` to `flat_large`, so
+  project and pins `res://scenes/validation_playtest.tscn` to `flat_8x8`, so
   human testing does not depend on manual edits to ignored generated artifacts.
 
 Expected markers:
@@ -37,7 +37,7 @@ Expected markers:
 WT_VALIDATION_G6_CONTRACT_PASS implementation=profile_selectable_playable_world next=human_visual_verification
 WT_VALIDATION_G6_SMOKE_PASS profiles=2 engines=2 report=artifacts/g6_profile_selectable_playable_world/g6_profile_selectable_playable_world_report.json
 WT_VALIDATION_HUMAN_INPUT_CAPTURE_SMOKE_PASS engines=2 report=artifacts/human_input_capture/human_input_capture_report.json
-WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_large project=... scene=res://scenes/validation_playtest.tscn launch=false fullscreen=false report=artifacts/human_playtest/human_playtest_report.json
+WT_VALIDATION_HUMAN_PLAYTEST_READY profile=flat_8x8 project=... scene=res://scenes/validation_playtest.tscn launch=false fullscreen=false report=artifacts/human_playtest/human_playtest_report.json
 ```
 
 ## Not claimed

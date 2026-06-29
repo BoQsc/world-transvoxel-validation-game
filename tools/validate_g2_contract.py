@@ -36,7 +36,7 @@ REQUIRED_PHRASES = {
         "Status: complete",
         "WT_VALIDATION_G2_SMOKE_PASS",
         "## G3 - Terrain generation modes",
-        "Status: active next",
+        "WT_VALIDATION_G3_SMOKE_PASS",
     ),
     "scripts/validation_playtest.gd": (
         "flat_baseline",
