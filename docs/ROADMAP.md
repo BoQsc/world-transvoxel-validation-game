@@ -123,3 +123,19 @@ Exit:
 - any terrain orientation, artifact, popping, performance, collision, or edit
   issue is recorded as addon follow-up work instead of hidden in the validation
   game.
+
+## G8 - 2000×2000 bounded streaming
+
+Status: active. First subgate passes by `WT_VALIDATION_G8_CONTRACT_PASS` and
+`WT_VALIDATION_G8_WINDOW_PLAN_PASS`.
+
+Exit:
+
+- `2000×2000` means 2000 horizontal blocks by 2000 horizontal blocks, not chunk
+  count;
+- the map is represented as a 125 by 125 chunk grid with 16-block chunks;
+- viewer movement uses a bounded active window instead of loading the full map;
+- the first active-window planner proves near-origin, center, edge, and
+  far-corner logical coordinates;
+- the next G8 runtime subgate attaches this bounded active window to real
+  terrain viewer movement and active resource telemetry.

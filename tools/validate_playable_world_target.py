@@ -30,6 +30,7 @@ REQUIRED_PHRASES = {
         "## G5 - Material and performance baseline",
         "## G6 - Profile-selectable playable world",
         "## G7 - Human visual verification",
+        "## G8 - 2000×2000 bounded streaming",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
