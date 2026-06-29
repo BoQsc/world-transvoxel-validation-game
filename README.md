@@ -61,6 +61,8 @@ python tools/g8_2000x2000_window_plan.py
 python tools/g8_runtime_active_window_smoke.py
 python tools/validate_g9_contract.py
 python tools/g9_sparse_2k_playable_profile_smoke.py
+python tools/validate_g10_contract.py
+python tools/g10_single_viewer_2k_playable_streaming_smoke.py
 ```
 
 Expected marker:
@@ -94,6 +96,9 @@ WT_VALIDATION_G8_RUNTIME_SMOKE_PASS engines=2 report=artifacts/g8_runtime_active
 WT_VALIDATION_G9_CONTRACT_PASS implementation=sparse_2k_playable_profile
 WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_PASS profile=g8_sparse_2k resources=93 viewers=5 triangles=... materialized=93 edit_replacements=1
 WT_VALIDATION_G9_SPARSE_2K_PLAYABLE_SMOKE_PASS engines=2 report=artifacts/g9_sparse_2k_playable_profile/g9_sparse_2k_playable_profile_report.json
+WT_VALIDATION_G10_CONTRACT_PASS implementation=single_viewer_2k_playable_streaming
+WT_VALIDATION_G10_SINGLE_VIEWER_2K_PLAYABLE_STREAMING_PASS profile=g10_single_viewer_2k samples=5 pages=93 max_render_resources=25 max_collision_resources=25 edit_replacements=...
+WT_VALIDATION_G10_SINGLE_VIEWER_2K_PLAYABLE_STREAMING_SMOKE_PASS engines=2 report=artifacts/g10_single_viewer_2k_playable_streaming/g10_single_viewer_2k_playable_streaming_report.json
 ```
 
 ## Human-visible playtest

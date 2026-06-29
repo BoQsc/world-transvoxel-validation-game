@@ -5,7 +5,7 @@ const StorageProfile := preload("res://addons/world_transvoxel_terrain/storage/w
 
 
 static func available_profile_ids() -> Array[StringName]:
-	return [&"flat_baseline", &"flat_8x8", &"mountain_8x8", &"g8_sparse_2k"]
+	return [&"flat_baseline", &"flat_8x8", &"mountain_8x8", &"g8_sparse_2k", &"g10_single_viewer_2k"]
 
 
 static func settings(profile_id: StringName) -> Dictionary:
@@ -21,6 +21,14 @@ static func settings(profile_id: StringName) -> Dictionary:
 				"camera_follow_offset": Vector3(70, 48, 70),
 				"edit_point": Vector3(1000, 8, 1000),
 				"fixture_label": "g8_sparse_2k_path",
+			}
+		"g10_single_viewer_2k":
+			return {
+				"viewer_position": Vector3(8, 8, 8),
+				"player_start_position": Vector3(8, 12, 8),
+				"camera_follow_offset": Vector3(70, 48, 70),
+				"edit_point": Vector3(1000, 8, 1000),
+				"fixture_label": "g10_single_viewer_2k_path",
 			}
 		_:
 			return {
@@ -61,7 +69,9 @@ static func storage_profile(profile_id: StringName) -> Resource:
 
 
 static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
-	if _is_sparse_2k(profile_id):
+	if _is_sparse_2k_single_viewer(profile_id):
+		return [Vector3(8.0, 8.0, 8.0)]
+	if _is_sparse_2k_multi_viewer(profile_id):
 		return [
 			Vector3(8.0, 8.0, 8.0),
 			Vector3(496.0, 8.0, 496.0),
@@ -84,7 +94,9 @@ static func viewer_radius_chunks(profile_id: StringName) -> int:
 
 
 static func expected_resource_count(profile_id: StringName) -> int:
-	if _is_sparse_2k(profile_id):
+	if _is_sparse_2k_single_viewer(profile_id):
+		return 9
+	if _is_sparse_2k_multi_viewer(profile_id):
 		return 93
 	return 64 if _is_grid_8x8(profile_id) else 1
 
@@ -102,7 +114,15 @@ static func _is_grid_8x8(profile_id: StringName) -> bool:
 
 
 static func _is_sparse_2k(profile_id: StringName) -> bool:
+	return _is_sparse_2k_multi_viewer(profile_id) or _is_sparse_2k_single_viewer(profile_id)
+
+
+static func _is_sparse_2k_multi_viewer(profile_id: StringName) -> bool:
 	return str(profile_id) == "g8_sparse_2k"
+
+
+static func _is_sparse_2k_single_viewer(profile_id: StringName) -> bool:
+	return str(profile_id) == "g10_single_viewer_2k"
 
 
 static func _grid_8x8_settings(

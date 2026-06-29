@@ -159,3 +159,22 @@ Exit:
   sparse path resources, not a full 125 by 125 map load;
 - edit replacement keeps `render_fading_resources == 0`, preserving the no-blink
   policy from G8.
+
+## G10 - Single-viewer 2K playable streaming
+
+Status: complete by `WT_VALIDATION_G10_CONTRACT_PASS` and
+`WT_VALIDATION_G10_SINGLE_VIEWER_2K_PLAYABLE_STREAMING_SMOKE_PASS`.
+
+Exit:
+
+- `g10_single_viewer_2k` is a selectable playable profile that uses the native
+  G8 `g8_2000x2000_sparse.wtworld` fixture;
+- the normal first-person playtest path starts with one active viewer, player,
+  camera, crosshair, collision, materialized terrain, and human input disabled
+  for autonomous validation;
+- the smoke moves the same viewer ID through the G8 path and requires
+  9/25/25/25/9 active render/collision resources;
+- the playable-scene active budget is 25 resources for this sparse path and it
+  does not keep all 93 sparse path resources active;
+- scripted player motion and an active-center edit remain valid after streaming,
+  with `render_fading_resources == 0`.

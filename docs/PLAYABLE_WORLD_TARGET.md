@@ -18,10 +18,11 @@ When this project says `2000×2000`, `2000x2000`, `2K map`, or
 This is not chunk count. Current 8 by 8 fixtures are validation fixtures, not
 the final 2000 by 2000 block exploration target.
 
-G8/G9 add a bounded sparse 2K path fixture. That fixture proves 2000×2000
-coordinate handling and playable-scene integration over 93 active sparse path
-resources, but it is still not the same as rendering or generating the full
-2000 by 2000 surface.
+G8/G9/G10 add a bounded sparse 2K path fixture. That fixture proves 2000×2000
+coordinate handling, playable-scene integration over 93 active sparse path
+resources, and single-viewer playable streaming with a 25-resource active
+window. It is still not the same as rendering or generating the full 2000 by
+2000 surface.
 
 ## Required before final human visual handoff
 
