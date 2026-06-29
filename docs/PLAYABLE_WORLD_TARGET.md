@@ -29,6 +29,11 @@ that generated terrain can use the same playable single-viewer 25-resource
 active window without loading every generated page at once. It is a scale-up
 step from 8 by 8 fixtures, not the final 2000 by 2000 world.
 
+G12 scales that generated path to a 32 by 32 fixture with 1024 generated pages,
+roughly a 512 by 512 block generated terrain step. It preserves the same
+single-viewer 25-resource active window and still avoids claiming final 2000 by
+2000 generated terrain.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;

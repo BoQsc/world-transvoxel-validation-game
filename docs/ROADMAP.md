@@ -199,3 +199,24 @@ Exit:
   256 generated pages as active resources;
 - scripted player motion and an active-center edit remain valid after streaming,
   with `render_fading_resources == 0`.
+
+## G12 - Generated 32x32 playable streaming
+
+Status: complete by `WT_VALIDATION_G12_CONTRACT_PASS` and
+`WT_VALIDATION_G12_GENERATED_32X32_PLAYABLE_STREAMING_SMOKE_PASS`.
+
+Exit:
+
+- `g12_generated_32x32` is a selectable playable profile backed by a dense
+  deterministic generated terrain fixture;
+- the fixture is baked through `world-transvoxel/tools/wt_bake.py` and contains
+  1024 generated pages;
+- the normal first-person playtest path starts with one active viewer, player,
+  camera, crosshair, collision, materialized terrain, and human input disabled
+  for autonomous validation;
+- the smoke moves the same viewer ID through the 32 by 32 terrain and requires
+  9/25/25/25/9 active render/collision resources;
+- the playable-scene active budget remains 25 resources and does not load all
+  1024 generated pages as active resources;
+- scripted player motion and an active-center edit remain valid after streaming,
+  with `render_fading_resources == 0`.
