@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G50, what the expected final world/terrain target is, and
+game actually is after G51, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G50
+## Current claim boundary after G51
 
-The current validated claim after G50 is:
+The current validated claim after G51 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, and terrain profile standard evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, and material texture pipeline evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -30,7 +30,9 @@ streaming, edit application, storage, and normal validation runtime paths,
 provide a normal-scene debug telemetry overlay/export for active chunks, queues,
 frame/update cost, edit state, material state, and storage state, and lock the
 standard flat baseline, mountain, compact 2K, and seeded procedural 2K terrain
-profiles with deterministic seeds/source revisions and storage/load budgets.
+profiles with deterministic seeds/source revisions and storage/load budgets, and
+lock the current small deterministic material/texture pipeline through edit and
+streaming stability evidence.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -90,25 +92,25 @@ These items are currently backed by milestone evidence in this repository:
 - debug telemetry UI/export evidence for active chunks, queues, frame/update
   cost, edit state, material state, and storage state;
 - terrain profile standard evidence for `flat_baseline`, `mountain_8x8`,
-  `g19_compact_2k_on_demand`, and `g50_seeded_procedural_2k`.
+  `g19_compact_2k_on_demand`, and `g50_seeded_procedural_2k`;
+- material texture pipeline evidence for deterministic UV2 material assignment,
+  small generated texture budget, construct-edit material sampling, and streaming
+  material stability.
 
 ## Not production-ready yet
 
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. The material/texture pipeline is not yet production quality. We need stable
-   texture selection, small test assets, biome/material assignment rules, and no
-   visible edit flicker.
-2. Underground terrain variation is not yet a production contract. Mining and
+1. Underground terrain variation is not yet a production contract. Mining and
    deep terrain need voxel-based density/material behavior below the surface.
-3. Large-world streaming radius and dynamic LOD seam quality are not yet final
+2. Large-world streaming radius and dynamic LOD seam quality are not yet final
    production contracts. The current path validates bounded local detail, not a
    finished multi-LOD terrain product.
-4. World generation is not yet the final game-world generator. Flat baseline and
+3. World generation is not yet the final game-world generator. Flat baseline and
    compact procedural terrain are required, but biomes, underground variation,
    veins, caves, and optional quantized generation need separate standards.
-5. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
+4. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
    and compute/GPU acceleration are future systems. They must not be treated as
    complete just because the terrain validation path exists.
 
@@ -151,7 +153,9 @@ The first production-gap milestones are:
 9. `G49 - Debug telemetry UI quality`: make active runtime state inspectable
    through a lightweight overlay or exported telemetry path.
 10. `G50 - Terrain profile standard quality`: lock deterministic default terrain
-   profiles before profile/material/underground work continues.
+    profiles before profile/material/underground work continues.
+11. `G51 - Material texture pipeline quality`: lock deterministic small
+    material/texture assignment before underground and streaming-radius work.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -161,7 +165,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G50.
+runtime after G51.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -177,6 +181,8 @@ audit evidence. G48 locked the native hot-path boundary for the current compact
 against GDScript terrain hot loops. G49 added a normal-scene debug telemetry
 overlay/export path for active chunks, queues, frame/update cost, edit state,
 material state, and storage state. G50 locked the terrain profile standard for
-flat baseline, mountain, compact 2K, and seeded procedural 2K profiles. The
-immediate direction after G50 is G51 material texture pipeline quality, then the
+flat baseline, mountain, compact 2K, and seeded procedural 2K profiles. G51
+locked the material texture pipeline for deterministic small UV2 material
+assignment through edits and streaming. The immediate direction after G51 is G52
+underground terrain variation quality, then the
 remaining finite G41-G60 Terrain 1.0 roadmap.

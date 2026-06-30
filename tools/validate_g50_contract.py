@@ -63,16 +63,16 @@ REQUIRED_PHRASES = {
         "g50_seeded_procedural_2k",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G50",
-        "The next milestone after G50 is G51",
+        "G50 - Terrain profile standard quality",
+        "G51 - Material texture pipeline quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
         "G50 locked the terrain profile standard",
-        "The immediate direction after G50 is G51",
+        "G51 locked the material texture pipeline",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G50 is the latest completed terrain profile standard quality gate",
-        "Current state after G50",
+        "G51 is the latest completed material texture pipeline quality gate",
     ),
 }
 

@@ -22,7 +22,8 @@ REQUIRED_PHRASES = {
         "G49 added a normal-scene debug telemetry",
         "terrain profile standard evidence",
         "G50 locked the terrain profile standard",
-        "The material/texture pipeline is not yet production quality",
+        "material texture pipeline evidence",
+        "G51 locked the material texture pipeline",
         "Underground terrain variation is not yet a production contract",
         "Gap closure ladder",
         "finite production roadmap",
@@ -72,7 +73,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=material_texture_pipeline_quality")
+    print(f"{MARKER} next=underground_terrain_variation_quality")
 
 
 if __name__ == "__main__":

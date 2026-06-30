@@ -1190,3 +1190,31 @@ Boundary:
   underground variation, large-world streaming radius, LOD seam quality,
   generator budgets, water, vegetation, buildings, multiplayer, compute
   acceleration, or separate game integration.
+
+## G51 - Material texture pipeline quality
+
+Status: complete when `WT_VALIDATION_G51_CONTRACT_PASS` and
+`WT_VALIDATION_G51_MATERIAL_TEXTURE_PIPELINE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- `WtTerrainMaterialProfile` exposes `terrain_material_profile_contract_v1`;
+- `WtTerrainMaterialApplicator` exposes `terrain_material_texture_pipeline_v1`;
+- the normal compact 2K validation path uses the UV2 material-id shader path;
+- the standard generated checker texture is deterministic, 16 by 16 `RGBA8`,
+  and 1024 bytes under the 4 KiB G51 budget;
+- the standard palette IDs are `1,2,3,4,7`;
+- all active compact 2K terrain meshes receive the same shared material instance;
+- the material instance remains stable after a real construct edit and after two
+  explicit viewer-streaming windows;
+- an authoritative sample after construct observes material ID `4`;
+- automated capture evidence shows colored terrain material output.
+
+Boundary:
+
+- this locks the current deterministic small material/texture pipeline. It does
+  not finish final terrain art, external texture packs, biome materials,
+  underground material variation, large-world streaming radius, LOD seam quality,
+  generator budgets, water, vegetation, buildings, multiplayer, compute
+  acceleration, or separate game integration.

@@ -102,6 +102,7 @@ REQUIRED_PHRASES = {
         "G48 is the latest completed native hot-path boundary quality gate",
         "G49 is the latest completed debug telemetry UI quality gate",
         "G50 is the latest completed terrain profile standard quality gate",
+        "G51 is the latest completed material texture pipeline quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -161,6 +162,7 @@ REQUIRED_PHRASES = {
         "## G48 - Native hot-path boundary quality",
         "## G49 - Debug telemetry UI quality",
         "## G50 - Terrain profile standard quality",
+        "## G51 - Material texture pipeline quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -194,6 +196,7 @@ REQUIRED_PHRASES = {
         "G48 is the latest completed native hot-path boundary quality gate",
         "G49 is the latest completed debug telemetry UI quality gate",
         "G50 is the latest completed terrain profile standard quality gate",
+        "G51 is the latest completed material texture pipeline quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -234,7 +237,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=material_texture_pipeline_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=underground_terrain_variation_quality")
 
 
 if __name__ == "__main__":
