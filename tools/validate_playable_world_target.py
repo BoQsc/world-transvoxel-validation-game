@@ -91,6 +91,7 @@ REQUIRED_PHRASES = {
         "G37 is the active streaming movement performance quality gate",
         "G38 is the active streaming endurance stability quality gate",
         "G39 is the active distributed edit streaming quality gate",
+        "G40 is the active edit visual material feedback quality gate",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -133,6 +134,7 @@ REQUIRED_PHRASES = {
         "## G37 - Streaming movement performance quality",
         "## G38 - Streaming endurance stability quality",
         "## G39 - Distributed edit streaming quality",
+        "## G40 - Edit visual material feedback quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -155,6 +157,7 @@ REQUIRED_PHRASES = {
         "G37 is the active streaming movement performance quality gate",
         "G38 is the active streaming endurance stability quality gate",
         "G39 is the active distributed edit streaming quality gate",
+        "G40 is the active edit visual material feedback quality gate",
         "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
 }
@@ -176,7 +179,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=distributed_edit_streaming_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=edit_visual_material_feedback_quality")
 
 
 if __name__ == "__main__":

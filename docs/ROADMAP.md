@@ -880,3 +880,28 @@ Boundary:
   CPU/native terrain path. It does not claim final terrain art, seamless dynamic
   LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
   multiplayer, or a separate game repository.
+
+## G40 - Edit visual material feedback quality
+
+Status: complete when `WT_VALIDATION_G40_CONTRACT_PASS` and
+`WT_VALIDATION_G40_EDIT_VISUAL_MATERIAL_FEEDBACK_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- edit visual material feedback quality is measured in the normal compact 2K
+  runtime scene;
+- a focused terrain patch is captured before and after real edits;
+- carve and construct edits commit through the terrain interactor;
+- authoritative backend samples match the edited density/material values;
+- the after-edit capture differs from the before-edit capture above threshold;
+- material auto-application stabilizes after edit replacement;
+- active render and collision resources remain bounded to 25;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves player-facing edit visual and material feedback for the current
+  compact CPU/native terrain path. It does not claim final terrain art, seamless
+  dynamic LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
+  multiplayer, or a separate game repository.

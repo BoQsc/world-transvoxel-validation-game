@@ -87,6 +87,9 @@ G39 is the active distributed edit streaming quality gate: it streams to four
 distant compact 2K regions, applies real carve/construct edits, verifies
 authoritative samples, reloads the scene, and verifies all four edits replay
 from the journal.
+G40 is the active edit visual material feedback quality gate: it captures a
+focused terrain patch before and after real edits, requires visible image delta,
+verifies material stability, and checks authoritative edited samples.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -197,6 +200,8 @@ python tools/validate_g38_contract.py
 python tools/g38_streaming_endurance_stability_quality.py
 python tools/validate_g39_contract.py
 python tools/g39_distributed_edit_streaming_quality.py
+python tools/validate_g40_contract.py
+python tools/g40_edit_visual_material_feedback_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -206,7 +211,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=distributed_edit_streaming_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=edit_visual_material_feedback_quality
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -312,6 +317,9 @@ WT_VALIDATION_G38_STREAMING_ENDURANCE_STABILITY_SMOKE_PASS profile=g19_compact_2
 WT_VALIDATION_G39_CONTRACT_PASS implementation=distributed_edit_streaming_quality
 WT_VALIDATION_G39_DISTRIBUTED_EDIT_STREAMING_PASS profile=g19_compact_2k_on_demand edit_sites=4 replayed=4 max_commit_frames=... max_settle_frames=... journal_bytes=... max_render_resources=25 max_collision_resources=25 final_render_resources=25 final_collision_resources=25 final_cold_idle=true dense_world_files=0
 WT_VALIDATION_G39_DISTRIBUTED_EDIT_STREAMING_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 edit_sites=4 replayed=4 max_commit_frames=... max_settle_frames=... final_cold_idle=true quality_track=runtime_terrain dense_world_files=0 report=artifacts/g39_distributed_edit_streaming_quality/g39_distributed_edit_streaming_quality_report.json
+WT_VALIDATION_G40_CONTRACT_PASS implementation=edit_visual_material_feedback_quality
+WT_VALIDATION_G40_EDIT_VISUAL_MATERIAL_FEEDBACK_PASS profile=g19_compact_2k_on_demand edits=2 changed_samples=... before_colored_samples=... after_colored_samples=... material_auto_apply_delta=... max_commit_frames=... max_settle_frames=... max_render_resources=25 max_collision_resources=25 edit_replacement_delta=... dense_world_files=0
+WT_VALIDATION_G40_EDIT_VISUAL_MATERIAL_FEEDBACK_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 edits=2 min_changed_samples=... max_commit_frames=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g40_edit_visual_material_feedback_quality/g40_edit_visual_material_feedback_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -329,9 +337,10 @@ python tools/g36_cold_idle_performance_quality.py
 python tools/g37_streaming_movement_performance_quality.py
 python tools/g38_streaming_endurance_stability_quality.py
 python tools/g39_distributed_edit_streaming_quality.py
+python tools/g40_edit_visual_material_feedback_quality.py
 ```
 
-G39 is the gate to beat before adding the next terrain feature. Next terrain
+G40 is the gate to beat before adding the next terrain feature. Next terrain
 work should improve measured runtime behavior, broader terrain correctness,
 material quality, edit policy, or addon API stability. Human-visible review
 remains useful as a final sanity check, but it is not the active project

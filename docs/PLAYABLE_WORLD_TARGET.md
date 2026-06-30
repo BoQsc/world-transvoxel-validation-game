@@ -191,6 +191,10 @@ distant compact 2K regions, applies carve/construct edits, verifies
 authoritative samples, reloads the scene, and verifies all four edits replay
 from the edit journal.
 
+G40 is the active edit visual material feedback quality gate. It captures a
+focused terrain patch before and after real edits, requires visible image delta,
+verifies material stability, and checks authoritative edited samples.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -217,6 +221,7 @@ from the edit journal.
   review;
 - streaming endurance stability quality gate before renewed human visual review;
 - distributed edit streaming quality gate before renewed human visual review;
+- edit visual material feedback quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary
