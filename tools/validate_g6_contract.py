@@ -10,7 +10,6 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = (
     "docs/G6_PROFILE_SELECTABLE_PLAYABLE_WORLD.md",
     "scripts/validation_profile_catalog.gd",
-    "scripts/validation_mesh_stats.gd",
     "tests/g6_profile_selectable_playable_world_smoke.gd",
     "tools/g6_profile_selectable_playable_world_smoke.py",
     "tools/prepare_human_playtest.py",
@@ -34,6 +33,12 @@ REQUIRED_PHRASES = {
         "set_manual_camera_view",
         "set_player_visual_visible",
         "_submit_profile_viewers",
+        "wt_terrain_mesh_stats.gd",
+    ),
+    "../world-transvoxel-terrain/addons/world_transvoxel_terrain/debug/wt_terrain_mesh_stats.gd": (
+        "class_name WtTerrainMeshStats",
+        "terrain_addon_mesh_stats",
+        "MeshInstance3D",
     ),
     "scripts/validation_profile_catalog.gd": (
         "available_profile_ids",
@@ -88,7 +93,7 @@ def main() -> None:
         if not (ROOT / relative).is_file():
             errors.append(f"missing G6 file: {relative}")
     for relative, phrases in REQUIRED_PHRASES.items():
-        path = ROOT / relative
+        path = (ROOT / relative).resolve()
         if not path.is_file():
             errors.append(f"missing phrase input: {relative}")
             continue

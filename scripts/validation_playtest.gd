@@ -1,7 +1,7 @@
 extends Node3D
 
 const ReferenceScene := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_reference_scene.tscn")
-const MeshStats := preload("res://scripts/validation_mesh_stats.gd")
+const MeshStats := preload("res://addons/world_transvoxel_terrain/debug/wt_terrain_mesh_stats.gd")
 const ProfileCatalog := preload("res://scripts/validation_profile_catalog.gd")
 const InputCapture := preload("res://scripts/validation_input_capture.gd")
 const ValidationPlayerFactory := preload("res://scripts/validation_player_factory.gd")
@@ -116,8 +116,8 @@ func _start_validation_viewer() -> void:
 	if not _reference_scene.start_reference_backend_world():
 		_fail("backend start failed")
 		return
-	if not await _wait_for_backend_state("running"):
-		_fail("backend did not reach running state")
+	if not await _wait_for_world_state("running"):
+		_fail("terrain world did not reach running state")
 		return
 	var viewer_count := _submit_profile_viewers()
 	if viewer_count <= 0:
@@ -152,7 +152,6 @@ func _start_validation_viewer() -> void:
 func get_validation_state() -> String:
 	return _validation_state
 
-
 func get_validation_summary() -> Dictionary:
 	var terrain_world = _reference_scene.get_terrain_world() if _reference_scene != null else null
 	var metrics: Dictionary = {}
@@ -169,6 +168,7 @@ func get_validation_summary() -> Dictionary:
 		"terrain_face_vertices": int(terrain_stats.get("face_vertices", 0)),
 		"terrain_triangles": int(terrain_stats.get("triangles", 0)),
 		"terrain_max_extent": float(terrain_stats.get("max_extent", 0.0)),
+		"terrain_mesh_stats_implementation": str(terrain_stats.get("implementation", "")),
 		"render_resources": int(metrics.get("render_resources", 0)),
 		"collision_resources": int(metrics.get("collision_resources", 0)),
 		"viewer_position": viewer_position,
@@ -265,10 +265,10 @@ func _player_summary() -> Dictionary:
 	return Dictionary(_player.call("get_player_summary"))
 
 
-func _wait_for_backend_state(expected: String) -> bool:
+func _wait_for_world_state(expected: String) -> bool:
 	var terrain_world = _reference_scene.get_terrain_world()
 	for _frame in range(900):
-		if terrain_world.get_backend_world_state_name() == expected:
+		if terrain_world.get_world_state_name() == expected:
 			await get_tree().process_frame
 			return true
 		await get_tree().process_frame

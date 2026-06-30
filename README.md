@@ -109,11 +109,15 @@ compaction/reopen behavior.
 G46 is the latest completed terrain addon API contract quality gate: it locks
 the minimal public `WtTerrainWorld` API for lifecycle, profiles, streaming,
 editing, storage, telemetry, debug snapshots, and authoritative sample queries.
-Current claim boundary after G46: automated validation-grade compact 2K terrain
+G47 is the latest completed validation workaround removal quality gate: it moves
+required material and mesh-inspection helpers into `world-transvoxel-terrain`
+and audits historical backend-facing tests as quarantined evidence.
+Current claim boundary after G47: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
-game-facing terrain addon API contract, not production-ready large-world terrain.
+game-facing terrain addon API contract plus validation-workaround removal
+evidence, not production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -250,6 +254,8 @@ python tools/validate_g45_contract.py
 python tools/g45_storage_recovery_schema_quality.py
 python tools/validate_g46_contract.py
 python tools/g46_terrain_addon_api_contract_quality.py
+python tools/validate_g47_contract.py
+python tools/g47_validation_workaround_removal_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -259,8 +265,8 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=validation_workaround_removal_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=validation_workaround_removal_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=native_hot_path_boundary_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=native_hot_path_boundary_quality
 WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
@@ -388,6 +394,9 @@ WT_VALIDATION_G45_STORAGE_RECOVERY_SCHEMA_SMOKE_PASS profile=g19_compact_2k_on_d
 WT_VALIDATION_G46_CONTRACT_PASS implementation=terrain_addon_api_contract_quality
 WT_VALIDATION_G46_TERRAIN_ADDON_API_CONTRACT_PASS profile=g19_compact_2k_on_demand api_version=1 public_methods=22 stable_groups=7 lifecycle=1 streaming=1 edits=1 storage=1 telemetry=1 debug=1 samples=... edit_committed=1 world_revision_delta=... max_render_resources=25 max_collision_resources=25 max_active_records=25 direct_backend_calls=0 dense_world_files=0
 WT_VALIDATION_G46_TERRAIN_ADDON_API_CONTRACT_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 api_version=1 public_methods=22 stable_groups=7 direct_backend_calls=0 quality_track=runtime_terrain dense_world_files=0 report=artifacts/g46_terrain_addon_api_contract_quality/g46_terrain_addon_api_contract_quality_report.json
+WT_VALIDATION_G47_CONTRACT_PASS implementation=validation_workaround_removal_quality
+WT_VALIDATION_G47_VALIDATION_WORKAROUND_REMOVAL_PASS profile=g19_compact_2k_on_demand moved_helpers=2 local_workaround_files=0 material_impl=terrain_addon_material_applicator mesh_stats_impl=terrain_addon_mesh_stats materialized=... max_render_resources=25 max_collision_resources=25 max_active_records=25 dense_world_files=0
+WT_VALIDATION_G47_VALIDATION_WORKAROUND_REMOVAL_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 moved_helpers=2 local_workaround_files=0 direct_runtime_backend_refs=0 quarantined_historical_backend_tests=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g47_validation_workaround_removal_quality/g47_validation_workaround_removal_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -412,22 +421,24 @@ python tools/g43_view_distance_presentation_quality.py
 python tools/g44_edit_policy_shape_quality.py
 python tools/g45_storage_recovery_schema_quality.py
 python tools/g46_terrain_addon_api_contract_quality.py
+python tools/g47_validation_workaround_removal_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G46 is the latest completed terrain quality gate. Current state after G46 is
+G47 is the latest completed terrain quality gate. Current state after G47 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
 compact storage recovery schema evidence plus a minimal game-facing terrain
-addon API contract, not production-ready large-world terrain. The gap to the
-expected final world/terrain is tracked in
+addon API contract plus validation-workaround removal evidence, not
+production-ready large-world terrain. The gap to the expected final world/terrain
+is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
 through G60, with G60 as the release-candidate finish line. Next terrain work is
-G47 validation workaround removal quality and must advance through that finite list
+G48 native hot-path boundary quality and must advance through that finite list
 instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.

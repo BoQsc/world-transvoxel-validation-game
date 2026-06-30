@@ -9,8 +9,6 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = (
     "docs/G5_MATERIAL_PERFORMANCE_BASELINE.md",
-    "materials/validation_terrain_palette.gdshader",
-    "scripts/validation_terrain_materials.gd",
     "tests/g5_material_performance_smoke.gd",
     "tools/g5_material_performance_smoke.py",
     "tools/validate_g5_contract.py",
@@ -24,13 +22,13 @@ REQUIRED_PHRASES = {
         "GPU watts",
         "Not claimed",
     ),
-    "materials/validation_terrain_palette.gdshader": (
+    "../world-transvoxel-terrain/addons/world_transvoxel_terrain/material/wt_terrain_palette.gdshader": (
         "shader_type spatial",
         "checker_texture",
         "UV2.x",
     ),
-    "scripts/validation_terrain_materials.gd": (
-        "validation_uv2_checker",
+    "../world-transvoxel-terrain/addons/world_transvoxel_terrain/material/wt_terrain_material_applicator.gd": (
+        "addon_uv2_checker",
         "ImageTexture.create_from_image",
         "material_override",
     ),
@@ -72,7 +70,7 @@ def main() -> None:
         if not (ROOT / relative).is_file():
             errors.append(f"missing G5 file: {relative}")
     for relative, phrases in REQUIRED_PHRASES.items():
-        path = ROOT / relative
+        path = (ROOT / relative).resolve()
         if not path.is_file():
             errors.append(f"missing phrase input: {relative}")
             continue

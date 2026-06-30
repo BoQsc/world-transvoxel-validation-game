@@ -1078,3 +1078,29 @@ Boundary:
   integration. It does not remove every old validation helper, finish material
   art, complete underground terrain, solve LOD seams, add fluids, vegetation,
   buildings, multiplayer, or prove a separate game repository.
+
+## G47 - Validation workaround removal quality
+
+Status: complete when `WT_VALIDATION_G47_CONTRACT_PASS` and
+`WT_VALIDATION_G47_VALIDATION_WORKAROUND_REMOVAL_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- validation-game material application and mesh-stat helpers that inspect
+  terrain internals are moved into `world-transvoxel-terrain`;
+- the validation scene uses addon-owned `WtTerrainMaterialApplicator`;
+- the validation playtest uses addon-owned `WtTerrainMeshStats`;
+- local validation-game copies of those terrain helpers are absent;
+- normal validation runtime scripts do not call backend internals directly;
+- remaining direct backend calls in historical tests are reported as
+  quarantined audit evidence;
+- the compact 2K validation scene still reaches ready state, applies terrain
+  materials, reports mesh stats, and stays inside the 25-resource detail window.
+
+Boundary:
+
+- this removes required reusable material and mesh-inspection workarounds from
+  the validation game. It does not rewrite every historical test, lock native
+  hot-path boundaries, finish material art, solve underground terrain, LOD seams,
+  fluids, vegetation, buildings, multiplayer, or a separate game repository.

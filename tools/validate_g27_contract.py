@@ -24,7 +24,7 @@ REQUIRED_PHRASES = {
         "event-driven material application",
         "bounded material-repair audit",
     ),
-    "scripts/validation_terrain_materials.gd": (
+    "../world-transvoxel-terrain/addons/world_transvoxel_terrain/material/wt_terrain_material_applicator.gd": (
         "_apply_if_signature_changed",
         "_repair_missing_materials_if_needed",
         "_runtime_signature",
@@ -74,7 +74,7 @@ def main() -> None:
         if not (ROOT / relative).is_file():
             errors.append(f"missing G27 file: {relative}")
     for relative, phrases in REQUIRED_PHRASES.items():
-        path = ROOT / relative
+        path = (ROOT / relative).resolve()
         if not path.is_file():
             errors.append(f"missing phrase input: {relative}")
             continue

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/validation_playtest.gd" id="1_playtest"]
 [ext_resource type="Script" path="res://scripts/validation_terrain_interactor.gd" id="2_interactor"]
-[ext_resource type="Script" path="res://scripts/validation_terrain_materials.gd" id="3_materials"]
+[ext_resource type="Script" path="res://addons/world_transvoxel_terrain/material/wt_terrain_material_applicator.gd" id="3_materials"]
 [ext_resource type="Script" path="res://addons/world_transvoxel_terrain/visual/wt_terrain_full_map_visual.gd" id="4_full_visual"]
 
 [node name="ValidationPlaytest" type="Node3D"]

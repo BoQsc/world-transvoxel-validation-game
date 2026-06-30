@@ -98,6 +98,7 @@ REQUIRED_PHRASES = {
         "G44 is the latest completed edit policy and shape quality gate",
         "G45 is the latest completed storage recovery schema quality gate",
         "G46 is the latest completed terrain addon API contract quality gate",
+        "G47 is the latest completed validation workaround removal quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -153,6 +154,7 @@ REQUIRED_PHRASES = {
         "## G44 - Edit policy and shape quality",
         "## G45 - Storage recovery schema quality",
         "## G46 - Terrain addon API contract quality",
+        "## G47 - Validation workaround removal quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -182,6 +184,7 @@ REQUIRED_PHRASES = {
         "G44 is the latest completed edit policy and shape quality gate",
         "G45 is the latest completed storage recovery schema quality gate",
         "G46 is the latest completed terrain addon API contract quality gate",
+        "G47 is the latest completed validation workaround removal quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -222,7 +225,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=validation_workaround_removal_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=native_hot_path_boundary_quality")
 
 
 if __name__ == "__main__":

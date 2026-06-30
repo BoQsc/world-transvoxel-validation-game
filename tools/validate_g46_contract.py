@@ -46,8 +46,8 @@ REQUIRED_PHRASES = {
         "G46 is the latest completed terrain addon API contract quality gate",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G46",
-        "The next milestone after G46 is G47",
+        "G46 - Terrain addon API contract quality",
+        "G47 - Validation workaround removal quality",
     ),
 }
 
