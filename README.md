@@ -64,6 +64,9 @@ G33 is the active runtime terrain quality gate: it audits the G32 runtime
 evidence for full 2048 by 2048 terrain coverage, first-person route evidence,
 bounded active resources, edit/material behavior, copied PNG evidence, and
 runtime ceilings. Human-visible review is not the active project direction.
+G34 is the active edit latency and persistence quality gate: it times carve and
+construct edits, verifies authoritative samples, writes the edit journal, reloads
+the scene, and proves the edits replay from persistent storage.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -162,6 +165,8 @@ python tools/validate_g32_contract.py
 python tools/g32_review_bundle_runtime_proof.py
 python tools/validate_g33_contract.py
 python tools/g33_runtime_terrain_quality_gate.py
+python tools/validate_g34_contract.py
+python tools/g34_edit_latency_persistence_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -259,6 +264,9 @@ WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_PASS profile=g19_compact_2k_on_demand en
 WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_SMOKE_PASS engines=2 scripts=6 max_script_seconds=... report=artifacts/g32_review_bundle_runtime_proof/g32_review_bundle_runtime_proof_report.json
 WT_VALIDATION_G33_CONTRACT_PASS implementation=runtime_terrain_quality_gate
 WT_VALIDATION_G33_RUNTIME_TERRAIN_QUALITY_PASS profile=g19_compact_2k_on_demand engines=2 g25=2 g26=2 g27=2 map_blocks=2048 max_active_resources=25 max_script_seconds=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g33_runtime_terrain_quality_gate/g33_runtime_terrain_quality_gate_report.json
+WT_VALIDATION_G34_CONTRACT_PASS implementation=edit_latency_persistence_quality
+WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_PASS profile=g19_compact_2k_on_demand edits=2 replayed=2 max_commit_frames=... max_settle_frames=... max_commit_ms=... max_settle_ms=... journal_bytes=... max_render_resources=25 max_collision_resources=25 dense_world_files=0
+WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 edits=2 replayed=2 max_commit_frames=... max_settle_frames=... max_commit_ms=... max_settle_ms=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g34_edit_latency_persistence_quality/g34_edit_latency_persistence_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -270,12 +278,13 @@ packaging. The current baseline is:
 ```console
 python tools/g32_review_bundle_runtime_proof.py
 python tools/g33_runtime_terrain_quality_gate.py
+python tools/g34_edit_latency_persistence_quality.py
 ```
 
-G33 is the gate to beat before adding the next terrain feature. Next terrain
-work should improve measured runtime behavior, terrain correctness, edit
-latency/persistence, material quality, or addon API stability. Human-visible
-review remains useful as a final sanity check, but it is not the active project
+G34 is the gate to beat before adding the next terrain feature. Next terrain
+work should improve measured runtime behavior, terrain correctness, broader edit
+persistence, material quality, or addon API stability. Human-visible review
+remains useful as a final sanity check, but it is not the active project
 direction.
 
 Run the drift guard before adding or accepting any new milestone:

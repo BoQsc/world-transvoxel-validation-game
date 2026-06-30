@@ -160,6 +160,11 @@ Active track guardrails keep this from drifting again. Post-G33 milestones must
 not be review, handoff, package, bundle, launch, or human-review milestones; the
 allowed direction is measured runtime terrain quality and addon usability.
 
+G34 is the active edit latency and persistence quality gate. It starts the
+compact 2K runtime path from a clean state, performs timed carve and construct
+edits, verifies authoritative samples, verifies edit journal creation, reloads
+the scene, and verifies both edits replay from persistent storage.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -178,6 +183,7 @@ allowed direction is measured runtime terrain quality and addon usability.
 - copied-bundle launch readiness before renewed human visual review;
 - copied review-bundle runtime proof before renewed human visual review;
 - runtime terrain quality gate before renewed human visual review;
+- edit latency and persistence quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

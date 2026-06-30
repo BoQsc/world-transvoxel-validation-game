@@ -730,3 +730,27 @@ Boundary:
   It does not claim final terrain art, seamless dynamic LOD, GPU/compute
   generation, fluids, biomes, vegetation, buildings, multiplayer, or a separate
   game repository.
+
+## G34 - Edit latency persistence quality
+
+Status: complete when `WT_VALIDATION_G34_CONTRACT_PASS` and
+`WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- the compact 2K runtime state starts clean for each engine;
+- carve and construct edits commit inside the frame and millisecond budgets;
+- authoritative samples match edited density/material values before reload;
+- the edit journal is created and remains inside compact storage budgets;
+- a fresh scene reload replays both edits from persistent storage;
+- terrain settles without pending retirements or render fade/blink resources;
+- active render and collision resources remain bounded to 25;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves edit latency and persistence for the current compact CPU/native
+  terrain path. It does not claim final terrain art, seamless dynamic LOD,
+  GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
+  or a separate game repository.
