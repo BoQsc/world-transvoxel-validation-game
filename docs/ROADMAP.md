@@ -622,3 +622,27 @@ Boundary:
   approval, final terrain art, seamless dynamic LOD, GPU/compute generation,
   fluids, biomes, vegetation, buildings, multiplayer, or a separate game
   repository.
+
+## G30 - Compact 2K review bundle
+
+Status: complete when `WT_VALIDATION_G30_CONTRACT_PASS` and
+`WT_VALIDATION_G30_COMPACT_2K_REVIEW_BUNDLE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the compact 2K review bundle gate;
+- the human-ready G29 project is copied into `project/`;
+- the bundled project keeps `human_input_enabled = true`;
+- `project/HUMAN_REVIEW.md` remains present;
+- `REVIEW_INDEX.md` explains what to open and what evidence is included;
+- `HANDOFF_MANIFEST.json` records source commits, SHA-256 hashes, project
+  budget, evidence budget, and prerequisite evidence files;
+- G27, G28, and G29 reports/logs are copied into `evidence/`;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this prepares an auditable review bundle; it does not claim human approval,
+  final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
+  biomes, vegetation, buildings, multiplayer, or a separate game repository.

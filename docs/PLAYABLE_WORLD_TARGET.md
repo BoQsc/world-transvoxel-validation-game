@@ -135,6 +135,10 @@ human-ready compact 2K handoff project, verifies current G27/G28 prerequisite
 reports against current addon source commits, imports the project, leaves human
 input enabled, and writes `HUMAN_REVIEW.md` into the generated project.
 
+G30 is the active compact 2K review bundle gate. It packages the human-ready
+project, G27/G28/G29 evidence, `REVIEW_INDEX.md`, and `HANDOFF_MANIFEST.json`
+with SHA-256 hashes so the review artifact is auditable from one directory.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -149,6 +153,7 @@ input enabled, and writes `HUMAN_REVIEW.md` into the generated project.
 - normal generated playtest scene preflight before renewed human visual review;
 - normal generated project launch preflight before renewed human visual review;
 - human-ready compact 2K handoff project before renewed human visual review;
+- Compact 2K review bundle before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

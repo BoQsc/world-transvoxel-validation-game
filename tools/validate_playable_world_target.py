@@ -73,6 +73,9 @@ REQUIRED_PHRASES = {
         "G29 is the active compact 2K human-ready handoff gate",
         "human-ready compact 2K handoff project",
         "HUMAN_REVIEW.md",
+        "G30 is the active compact 2K review bundle gate",
+        "Compact 2K review bundle",
+        "HANDOFF_MANIFEST.json",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -105,6 +108,7 @@ REQUIRED_PHRASES = {
         "## G27 - Full terrain handoff preflight",
         "## G28 - Normal project launch preflight",
         "## G29 - Compact 2K human-ready handoff",
+        "## G30 - Compact 2K review bundle",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -117,6 +121,7 @@ REQUIRED_PHRASES = {
         "G27 is the active full-terrain human handoff preflight gate",
         "G28 is the active normal project launch preflight gate",
         "G29 is the active compact 2K human-ready handoff gate",
+        "G30 is the active compact 2K review bundle gate",
     ),
 }
 
@@ -137,7 +142,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=compact_2k_human_ready_handoff")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=compact_2k_review_bundle")
 
 
 if __name__ == "__main__":
