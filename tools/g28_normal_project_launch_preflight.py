@@ -39,6 +39,12 @@ def prepare_project(project: Path) -> tuple[dict[str, object], Path]:
     return lock, scene
 
 
+def restore_human_handoff_scene(scene: Path) -> None:
+    pin_scene_property(scene, "human_input_enabled", "true")
+    if "human_input_enabled = true" not in scene.read_text(encoding="utf-8"):
+        raise RuntimeError("G28 failed to restore human input in handoff scene")
+
+
 def pin_scene_property(scene: Path, property_name: str, value: str) -> None:
     text = scene.read_text(encoding="utf-8")
     target_line = f"{property_name} = {value}"
@@ -194,9 +200,12 @@ def main() -> None:
     pre_run_budget = assert_compact_project_budget(project)
     engines = discover_engines(arguments.godot)
     results: list[dict[str, object]] = []
-    for version, engine in engines:
-        run_project_import(project, version, engine, ARTIFACT_ROOT)
-        results.append(run_normal_launch(project, version, engine))
+    try:
+        for version, engine in engines:
+            run_project_import(project, version, engine, ARTIFACT_ROOT)
+            results.append(run_normal_launch(project, version, engine))
+    finally:
+        restore_human_handoff_scene(scene)
     post_run_budget = assert_compact_project_budget(project)
     max_ready_seconds = max(float(result["ready_seconds"]) for result in results)
     report_path = ARTIFACT_ROOT / "g28_normal_project_launch_preflight_report.json"
@@ -207,7 +216,8 @@ def main() -> None:
                 "scene": str(scene),
                 "scene_res": MAIN_SCENE,
                 "profile": PROFILE_ID,
-                "human_input_enabled": False,
+                "automation_human_input_enabled": False,
+                "post_preflight_human_input_enabled": True,
                 "lock": lock,
                 "pre_run_budget": pre_run_budget,
                 "post_run_budget": post_run_budget,
@@ -222,7 +232,8 @@ def main() -> None:
     print(
         f"{MARKER} profile={PROFILE_ID} main_scene={MAIN_SCENE} "
         f"human_input=false engines={len(results)} "
-        f"max_ready_seconds={max_ready_seconds:.3f} dense_world_files=0"
+        f"max_ready_seconds={max_ready_seconds:.3f} "
+        "handoff_human_input_restored=true dense_world_files=0"
     )
     print(
         f"{SUMMARY_MARKER} engines={len(results)} "

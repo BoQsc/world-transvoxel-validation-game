@@ -20,6 +20,7 @@ REQUIRED_PHRASES = {
         "normal project launch preflight",
         "Godot is launched with `--path`, not `--script`",
         "automation disables human input from startup",
+        "restored to human input enabled",
     ),
     "tools/g28_normal_project_launch_preflight.py": (
         "WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_SMOKE_PASS",
@@ -28,6 +29,8 @@ REQUIRED_PHRASES = {
         "human_input_enabled = false",
         "--path",
         "run_normal_launch",
+        "restore_human_handoff_scene",
+        "handoff_human_input_restored=true",
         "normal_project_launch_preflight",
         "assert_compact_project_budget",
     ),
@@ -45,6 +48,7 @@ REQUIRED_PHRASES = {
         "G28 is the active normal project launch preflight gate",
         "normal generated project launch",
         "automation disables human input",
+        "restored to human input enabled",
     ),
 }
 

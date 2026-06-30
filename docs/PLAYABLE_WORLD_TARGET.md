@@ -127,7 +127,8 @@ generated project launch that a human would use, keeps automation safe by
 disabling human input in the generated scene file, and proves the project
 reaches the playable `validation_playtest.tscn` scene through `project.godot`
 without using a test script. For this gate, automation disables human input from
-startup; human playtest can run without that generated-scene patch.
+startup; after automation, the generated handoff scene is restored to human
+input enabled for human playtest.
 
 ## Required before final human visual handoff
 

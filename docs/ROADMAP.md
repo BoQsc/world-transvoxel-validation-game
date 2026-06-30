@@ -584,6 +584,8 @@ Exit:
 - Godot is launched with `--path`, not `--script`;
 - the normal launch reaches `WT_VALIDATION_PLAYTEST_READY` within the 30 second
   load-to-ready ceiling;
+- after automation, the generated handoff scene is restored to human input
+  enabled;
 - the normal launch logs no Godot errors;
 - dense near-2K source/world files are not reintroduced.
 

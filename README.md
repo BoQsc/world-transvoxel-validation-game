@@ -45,8 +45,8 @@ application plus bounded material-repair audit, captures first-person evidence,
 and rejects dense near-2K files before human review.
 G28 is the active normal project launch preflight gate: it launches the
 generated handoff project through `project.godot`, disables human input for
-automation, reaches the normal playtest scene without `--script`, and rejects
-dense near-2K files before human review.
+automation, reaches the normal playtest scene without `--script`, restores human
+input for handoff, and rejects dense near-2K files before human review.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -217,7 +217,7 @@ WT_VALIDATION_G27_CONTRACT_PASS implementation=full_terrain_handoff_preflight
 WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_PASS profile=g19_compact_2k_on_demand pages=16384 map_blocks=2048 captures=2 material_auto_applies=... player_stream_updates=... max_render_resources=25 max_collision_resources=25 human_input=false full_visual_visible=true dense_world_files=0
 WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_SMOKE_PASS engines=2 max_engine_seconds=... project=... scene=res://scenes/validation_playtest.tscn report=artifacts/g27_full_terrain_handoff_preflight/g27_full_terrain_handoff_preflight_report.json
 WT_VALIDATION_G28_CONTRACT_PASS implementation=normal_project_launch_preflight
-WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_PASS profile=g19_compact_2k_on_demand main_scene=res://scenes/validation_playtest.tscn human_input=false engines=2 max_ready_seconds=... dense_world_files=0
+WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_PASS profile=g19_compact_2k_on_demand main_scene=res://scenes/validation_playtest.tscn human_input=false engines=2 max_ready_seconds=... handoff_human_input_restored=true dense_world_files=0
 WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=... report=artifacts/g28_normal_project_launch_preflight/g28_normal_project_launch_preflight_report.json
 ```
 
@@ -293,9 +293,9 @@ artifacts/g19_compact_2k_on_demand/project/project.godot
 
 The G28 proof is the automated prerequisite before human review. It checks that
 the generated project opens through `project.godot` into the normal
-`validation_playtest.tscn` scene without `--script`. G27 remains the deeper
-scene-level proof for compact 2048 by 2048 terrain visibility, first-person
-captures, event-driven material application, local native Transvoxel chunks
-following scripted player movement for editable/collision detail, bounded
-material-repair audit behavior, a committed terrain edit, and rejection of dense
-near-2K source/world files.
+`validation_playtest.tscn` scene without `--script`, then restores human input
+for the handoff project. G27 remains the deeper scene-level proof for compact
+2048 by 2048 terrain visibility, first-person captures, event-driven material
+application, local native Transvoxel chunks following scripted player movement
+for editable/collision detail, bounded material-repair audit behavior, a
+committed terrain edit, and rejection of dense near-2K source/world files.

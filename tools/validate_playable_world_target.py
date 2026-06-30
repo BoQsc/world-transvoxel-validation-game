@@ -69,6 +69,7 @@ REQUIRED_PHRASES = {
         "G28 is the active normal project launch preflight gate",
         "normal generated project launch",
         "automation safe by disabling human input",
+        "restored to human input enabled",
         "2048 by 2048",
         "not final terrain art",
     ),

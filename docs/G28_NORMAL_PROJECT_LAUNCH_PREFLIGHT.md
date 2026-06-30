@@ -18,6 +18,8 @@ Exit:
 - Godot is launched with `--path`, not `--script`;
 - the normal launch reaches `WT_VALIDATION_PLAYTEST_READY` within the 30 second
   load-to-ready ceiling;
+- after automation, the generated handoff scene is restored to human input
+  enabled;
 - the normal launch logs no Godot errors;
 - dense near-2K source/world files are not reintroduced.
 
@@ -32,7 +34,7 @@ Expected markers:
 
 ```text
 WT_VALIDATION_G28_CONTRACT_PASS implementation=normal_project_launch_preflight
-WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_PASS profile=g19_compact_2k_on_demand main_scene=res://scenes/validation_playtest.tscn human_input=false engines=2 max_ready_seconds=... dense_world_files=0
+WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_PASS profile=g19_compact_2k_on_demand main_scene=res://scenes/validation_playtest.tscn human_input=false engines=2 max_ready_seconds=... handoff_human_input_restored=true dense_world_files=0
 WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=... report=artifacts/g28_normal_project_launch_preflight/g28_normal_project_launch_preflight_report.json
 ```
 
