@@ -21,6 +21,9 @@ REQUIRED_PHRASES = {
         "The material/texture pipeline is not yet production quality",
         "Storage/recovery is not yet a long-term schema contract",
         "Gap closure ladder",
+        "finite production roadmap",
+        "Terrain 1.0",
+        "G60",
         "G41 - Runtime frame budget telemetry quality",
         "G42 - Collision traversal stability quality",
         "G43 - Terrain addon API contract quality",
@@ -37,6 +40,7 @@ REQUIRED_PHRASES = {
     ),
     "README.md": (
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
+        "docs/FINITE_PRODUCTION_ROADMAP.md",
         "automated validation-grade compact 2K terrain runtime",
         "python tools/validate_production_gap_audit.py",
         "WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS",

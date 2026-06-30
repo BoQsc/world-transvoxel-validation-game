@@ -93,6 +93,9 @@ REQUIRED_PHRASES = {
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
         "production world/terrain gap audit",
+        "finite production roadmap",
+        "Terrain 1.0",
+        "G41 through G60",
         "automated validation-grade compact 2K terrain runtime",
         "runtime frame budget telemetry quality",
         "2048 by 2048",
@@ -162,6 +165,9 @@ REQUIRED_PHRASES = {
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
+        "docs/FINITE_PRODUCTION_ROADMAP.md",
+        "Terrain 1.0",
+        "G41 through G60",
         "automated validation-grade compact 2K terrain runtime",
         "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
@@ -171,6 +177,13 @@ REQUIRED_PHRASES = {
         "Not production-ready yet",
         "Gap closure ladder",
         "runtime frame budget telemetry quality",
+    ),
+    "docs/FINITE_PRODUCTION_ROADMAP.md": (
+        "Status: active roadmap contract",
+        "Terrain 1.0 finish line",
+        "Remaining Terrain 1.0 gates",
+        "G41 - Runtime frame budget telemetry quality",
+        "G60 - Terrain 1.0 release candidate quality",
     ),
 }
 

@@ -94,6 +94,9 @@ Current claim boundary after G40: automated validation-grade compact 2K terrain
 runtime, not production-ready large-world terrain. The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
+The finite Terrain 1.0 roadmap is tracked in
+[`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md) as
+G41 through G60.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -112,6 +115,8 @@ workarounds here.
   [`docs/PLAYABLE_WORLD_TARGET.md`](docs/PLAYABLE_WORLD_TARGET.md).
 - The current production-readiness gap is tracked in
   [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
+- The finite Terrain 1.0 roadmap is tracked in
+  [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md).
 
 ## Validate
 
@@ -125,6 +130,7 @@ python tools/root_project_safe_import.py
 python tools/g0_install_run_smoke.py
 python tools/validate_playable_world_target.py
 python tools/validate_production_gap_audit.py
+python tools/validate_finite_production_roadmap.py
 python tools/validate_g1_contract.py
 python tools/g1_visible_playtest_smoke.py
 python tools/g1_visual_capture.py --windowed
@@ -220,6 +226,7 @@ WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_proj
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
 WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=runtime_frame_budget_telemetry_quality
 WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=runtime_frame_budget_telemetry_quality
+WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -347,17 +354,20 @@ python tools/g38_streaming_endurance_stability_quality.py
 python tools/g39_distributed_edit_streaming_quality.py
 python tools/g40_edit_visual_material_feedback_quality.py
 python tools/validate_production_gap_audit.py
+python tools/validate_finite_production_roadmap.py
 ```
 
 G40 is the last completed terrain quality gate. Current state is automated
 validation-grade compact 2K terrain runtime, not production-ready large-world
 terrain. The gap to the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Next terrain work should close that gap with measured runtime behavior first:
-runtime frame budget telemetry quality, then collision traversal stability,
-terrain addon API stability, material/texture quality, and storage/recovery
-schema quality. Human-visible review remains useful as a final sanity check, but
-it is not the active project direction.
+The finite Terrain 1.0 roadmap is
+[`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
+through G60, with G60 as the release-candidate finish line. Next terrain work
+starts at G41 runtime frame budget telemetry quality and must advance through
+that finite list instead of appending unbounded "next useful" tasks.
+Human-visible review remains useful as a final sanity check, but it is not the
+active project direction.
 
 Run the drift guard before adding or accepting any new milestone:
 

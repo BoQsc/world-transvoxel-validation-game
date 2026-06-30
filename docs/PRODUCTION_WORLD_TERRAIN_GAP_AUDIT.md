@@ -107,7 +107,11 @@ Each milestone must name:
 - whether the fix belongs in `world-transvoxel`, `world-transvoxel-terrain`, this
   validation game, or a future addon.
 
-The next useful production-gap milestones should be:
+The finite production roadmap is
+[`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
+is bounded to G41 through G60; G60 is the release-candidate finish line.
+
+The first production-gap milestones are:
 
 1. `G41 - Runtime frame budget telemetry quality`: measure real idle, movement,
    streaming, edit, and reload costs under the compact 2K profile.

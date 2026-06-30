@@ -203,6 +203,10 @@ runtime frame budget telemetry quality, followed by collision traversal
 stability, terrain addon API stability, material/texture quality, and
 storage/recovery schema quality.
 
+The finite production roadmap is
+[`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
+is bounded to G41 through G60, with G60 as the release-candidate finish line.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -231,6 +235,7 @@ storage/recovery schema quality.
 - distributed edit streaming quality gate before renewed human visual review;
 - edit visual material feedback quality gate before renewed human visual review;
 - production world/terrain gap audit before claiming production-ready terrain;
+- finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary
