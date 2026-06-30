@@ -595,3 +595,30 @@ Boundary:
   use; it does not replace G27's capture/edit checks and does not claim final
   terrain art, seamless dynamic LOD, GPU/compute generation, fluids, biomes,
   vegetation, buildings, multiplayer, or a separate game repository.
+
+## G29 - Compact 2K human-ready handoff
+
+Status: complete when `WT_VALIDATION_G29_CONTRACT_PASS` and
+`WT_VALIDATION_G29_COMPACT_2K_HUMAN_READY_HANDOFF_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the human-ready compact 2K handoff project gate;
+- the generated handoff project is separate from automation-preflight projects;
+- the scene is pinned to `g19_compact_2k_on_demand`;
+- human input is enabled in the generated handoff scene;
+- `project.godot` launches `res://scenes/validation_playtest.tscn`;
+- current G27 and G28 prerequisite reports are present and match the current
+  addon source commits;
+- Godot import passes for the generated handoff project;
+- `HUMAN_REVIEW.md` is written inside the generated project with controls,
+  expected baseline, source commits, and known boundaries;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this prepares the current human review artifact; it does not claim human
+  approval, final terrain art, seamless dynamic LOD, GPU/compute generation,
+  fluids, biomes, vegetation, buildings, multiplayer, or a separate game
+  repository.

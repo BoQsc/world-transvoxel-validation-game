@@ -130,6 +130,11 @@ without using a test script. For this gate, automation disables human input from
 startup; after automation, the generated handoff scene is restored to human
 input enabled for human playtest.
 
+G29 is the active compact 2K human-ready handoff gate. It creates a separate
+human-ready compact 2K handoff project, verifies current G27/G28 prerequisite
+reports against current addon source commits, imports the project, leaves human
+input enabled, and writes `HUMAN_REVIEW.md` into the generated project.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -143,6 +148,7 @@ input enabled for human playtest.
   visual review;
 - normal generated playtest scene preflight before renewed human visual review;
 - normal generated project launch preflight before renewed human visual review;
+- human-ready compact 2K handoff project before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

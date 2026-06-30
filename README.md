@@ -47,6 +47,10 @@ G28 is the active normal project launch preflight gate: it launches the
 generated handoff project through `project.godot`, disables human input for
 automation, reaches the normal playtest scene without `--script`, restores human
 input for handoff, and rejects dense near-2K files before human review.
+G29 is the active compact 2K human-ready handoff gate: it creates a separate
+human-ready generated project, verifies current G27/G28 prerequisite reports,
+imports the project, writes `HUMAN_REVIEW.md`, and leaves human input enabled
+for review.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -135,6 +139,8 @@ python tools/validate_g27_contract.py
 python tools/g27_full_terrain_handoff_preflight.py --skip-build
 python tools/validate_g28_contract.py
 python tools/g28_normal_project_launch_preflight.py --skip-build
+python tools/validate_g29_contract.py
+python tools/g29_compact_2k_human_ready_handoff.py --skip-build
 ```
 
 Expected marker:
@@ -143,7 +149,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=normal_project_launch_preflight
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=compact_2k_human_ready_handoff
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -219,6 +225,8 @@ WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_SMOKE_PASS engines=2 max_engine
 WT_VALIDATION_G28_CONTRACT_PASS implementation=normal_project_launch_preflight
 WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_PASS profile=g19_compact_2k_on_demand main_scene=res://scenes/validation_playtest.tscn human_input=false engines=2 max_ready_seconds=... handoff_human_input_restored=true dense_world_files=0
 WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=... report=artifacts/g28_normal_project_launch_preflight/g28_normal_project_launch_preflight_report.json
+WT_VALIDATION_G29_CONTRACT_PASS implementation=compact_2k_human_ready_handoff
+WT_VALIDATION_G29_COMPACT_2K_HUMAN_READY_HANDOFF_PASS profile=g19_compact_2k_on_demand project=... scene=res://scenes/validation_playtest.tscn human_input=true imported_engines=2 review=HUMAN_REVIEW.md dense_world_files=0 report=artifacts/g29_compact_2k_human_ready_handoff/g29_compact_2k_human_ready_handoff_report.json
 ```
 
 ## Human-visible playtest
@@ -276,26 +284,28 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-Do not request current compact near-2K human review until the normal project
-launch preflight gate passes. G24 is capped-window regression evidence only,
+Do not request current compact near-2K human review until the compact 2K
+human-ready handoff gate passes. G24 is capped-window regression evidence only,
 G25 is an overhead visual baseline, G26 is first-person full-terrain runtime
-evidence, and G27 is scene-level handoff preflight. First run:
+evidence, G27 is scene-level handoff preflight, and G28 is normal launch
+preflight. First run:
 
 ```console
-python tools/g28_normal_project_launch_preflight.py --skip-build
+python tools/g29_compact_2k_human_ready_handoff.py --skip-build
 ```
 
 Then open:
 
 ```text
-artifacts/g19_compact_2k_on_demand/project/project.godot
+artifacts/g29_compact_2k_human_ready_handoff/project/project.godot
 ```
 
-The G28 proof is the automated prerequisite before human review. It checks that
-the generated project opens through `project.godot` into the normal
-`validation_playtest.tscn` scene without `--script`, then restores human input
-for the handoff project. G27 remains the deeper scene-level proof for compact
-2048 by 2048 terrain visibility, first-person captures, event-driven material
-application, local native Transvoxel chunks following scripted player movement
-for editable/collision detail, bounded material-repair audit behavior, a
-committed terrain edit, and rejection of dense near-2K source/world files.
+The G29 proof is the automated prerequisite before human review. It creates a
+separate human-ready generated project, verifies current G27/G28 proof reports,
+imports the project, writes `HUMAN_REVIEW.md`, and leaves human input enabled.
+G27 remains the deeper scene-level proof for compact 2048 by 2048 terrain
+visibility, first-person captures, event-driven material application, local
+native Transvoxel chunks following scripted player movement for
+editable/collision detail, bounded material-repair audit behavior, a committed
+terrain edit, and rejection of dense near-2K source/world files. G28 remains the
+normal `project.godot` launch proof.
