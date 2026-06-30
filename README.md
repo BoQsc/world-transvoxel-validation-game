@@ -158,6 +158,11 @@ python tools/validate_g30_contract.py
 python tools/g30_compact_2k_review_bundle.py
 python tools/validate_g31_contract.py
 python tools/g31_review_bundle_launch_preflight.py
+python tools/validate_g32_contract.py
+python tools/g32_review_bundle_runtime_proof.py
+python tools/validate_g33_contract.py
+python tools/g33_runtime_terrain_quality_gate.py
+python tools/validate_active_track_guardrails.py
 ```
 
 Expected marker:
@@ -166,7 +171,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=review_bundle_launch_preflight
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=runtime_terrain_quality_gate
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -254,6 +259,7 @@ WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_PASS profile=g19_compact_2k_on_demand en
 WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_SMOKE_PASS engines=2 scripts=6 max_script_seconds=... report=artifacts/g32_review_bundle_runtime_proof/g32_review_bundle_runtime_proof_report.json
 WT_VALIDATION_G33_CONTRACT_PASS implementation=runtime_terrain_quality_gate
 WT_VALIDATION_G33_RUNTIME_TERRAIN_QUALITY_PASS profile=g19_compact_2k_on_demand engines=2 g25=2 g26=2 g27=2 map_blocks=2048 max_active_resources=25 max_script_seconds=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g33_runtime_terrain_quality_gate/g33_runtime_terrain_quality_gate_report.json
+WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
 ## Active terrain quality track
@@ -271,6 +277,15 @@ work should improve measured runtime behavior, terrain correctness, edit
 latency/persistence, material quality, or addon API stability. Human-visible
 review remains useful as a final sanity check, but it is not the active project
 direction.
+
+Run the drift guard before adding or accepting any new milestone:
+
+```console
+python tools/validate_active_track_guardrails.py
+```
+
+The guard rejects post-G33 roadmap milestones that drift back into review,
+handoff, bundle, packaging, or launch work instead of runtime terrain quality.
 
 ## Human-visible sanity check
 

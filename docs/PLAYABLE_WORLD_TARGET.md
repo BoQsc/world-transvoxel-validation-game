@@ -156,6 +156,10 @@ bounded active resources, edit/material behavior, copied PNG evidence, and a
 gates are the active direction; human-visible review remains a final sanity
 check, not the active project direction.
 
+Active track guardrails keep this from drifting again. Post-G33 milestones must
+not be review, handoff, package, bundle, launch, or human-review milestones; the
+allowed direction is measured runtime terrain quality and addon usability.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;

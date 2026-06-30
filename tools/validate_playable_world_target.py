@@ -83,6 +83,8 @@ REQUIRED_PHRASES = {
         "copied review-bundle runtime proof",
         "G33 is the active runtime terrain quality gate",
         "quality gates are the active direction",
+        "Active track guardrails",
+        "Post-G33 milestones must not be review, handoff, package, bundle, launch, or human-review milestones",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -135,6 +137,7 @@ REQUIRED_PHRASES = {
         "G31 is the active review bundle launch preflight gate",
         "G32 is the active exact review-bundle autonomous runtime proof gate",
         "G33 is the active runtime terrain quality gate",
+        "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
 }
 
