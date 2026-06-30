@@ -112,12 +112,17 @@ editing, storage, telemetry, debug snapshots, and authoritative sample queries.
 G47 is the latest completed validation workaround removal quality gate: it moves
 required material and mesh-inspection helpers into `world-transvoxel-terrain`
 and audits historical backend-facing tests as quarantined evidence.
-Current claim boundary after G47: automated validation-grade compact 2K terrain
+G48 is the latest completed native hot-path boundary quality gate: it exposes
+the addon hot-path boundary through `WtTerrainWorld`, verifies native/backend
+ownership for generation, meshing, streaming, edit application, and storage, and
+rejects GDScript terrain hot loops in normal runtime paths.
+Current claim boundary after G48: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
-evidence, not production-ready large-world terrain.
+evidence plus native hot-path boundary evidence, not production-ready large-world
+terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -397,6 +402,9 @@ WT_VALIDATION_G46_TERRAIN_ADDON_API_CONTRACT_SMOKE_PASS profile=g19_compact_2k_o
 WT_VALIDATION_G47_CONTRACT_PASS implementation=validation_workaround_removal_quality
 WT_VALIDATION_G47_VALIDATION_WORKAROUND_REMOVAL_PASS profile=g19_compact_2k_on_demand moved_helpers=2 local_workaround_files=0 material_impl=terrain_addon_material_applicator mesh_stats_impl=terrain_addon_mesh_stats materialized=... max_render_resources=25 max_collision_resources=25 max_active_records=25 dense_world_files=0
 WT_VALIDATION_G47_VALIDATION_WORKAROUND_REMOVAL_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 moved_helpers=2 local_workaround_files=0 direct_runtime_backend_refs=0 quarantined_historical_backend_tests=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g47_validation_workaround_removal_quality/g47_validation_workaround_removal_quality_report.json
+WT_VALIDATION_G48_CONTRACT_PASS implementation=native_hot_path_boundary_quality
+WT_VALIDATION_G48_NATIVE_HOT_PATH_BOUNDARY_PASS profile=g19_compact_2k_on_demand hot_paths=5 native_owned=5 gdscript_hot_loops=0 edit_committed=1 max_render_resources=25 max_collision_resources=25 max_active_records=25 dense_world_files=0
+WT_VALIDATION_G48_NATIVE_HOT_PATH_BOUNDARY_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 hot_paths=5 native_owned=5 gdscript_hot_loops=0 quality_track=runtime_terrain dense_world_files=0 report=artifacts/g48_native_hot_path_boundary_quality/g48_native_hot_path_boundary_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -422,23 +430,24 @@ python tools/g44_edit_policy_shape_quality.py
 python tools/g45_storage_recovery_schema_quality.py
 python tools/g46_terrain_addon_api_contract_quality.py
 python tools/g47_validation_workaround_removal_quality.py
+python tools/g48_native_hot_path_boundary_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G47 is the latest completed terrain quality gate. Current state after G47 is
+G48 is the latest completed terrain quality gate. Current state after G48 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
 compact storage recovery schema evidence plus a minimal game-facing terrain
-addon API contract plus validation-workaround removal evidence, not
-production-ready large-world terrain. The gap to the expected final world/terrain
-is tracked in
+addon API contract plus validation-workaround removal evidence plus native
+hot-path boundary evidence, not production-ready large-world terrain. The gap to
+the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
 through G60, with G60 as the release-candidate finish line. Next terrain work is
-G48 native hot-path boundary quality and must advance through that finite list
+G49 debug telemetry UI quality and must advance through that finite list
 instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.

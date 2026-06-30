@@ -53,8 +53,8 @@ REQUIRED_PHRASES = {
         "G47 is the latest completed validation workaround removal quality gate",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G47",
-        "The next milestone after G47 is G48",
+        "G47 - Validation workaround removal quality",
+        "G48 - Native hot-path boundary quality",
     ),
 }
 

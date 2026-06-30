@@ -2,17 +2,17 @@
 
 Status: active roadmap contract.
 
-This document defines the concrete remaining path from the current G47 state to
+This document defines the concrete remaining path from the current G48 state to
 Terrain 1.0. It exists so the project does not degrade into an infinite list of
 "next useful" tasks.
 
 ## Current state
 
-Completed validation track: G0 through G47.
+Completed validation track: G0 through G48.
 
 Current claim:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, and validation-workaround removal evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, and native hot-path boundary evidence, not production-ready large-world terrain.
 
 The remaining roadmap is finite for Terrain 1.0. If new work is discovered, it
 must either replace an existing gate, be folded into an existing gate, or be
@@ -39,7 +39,10 @@ Terrain 1.0 does not require water, lava, vegetation, voxel buildings, planets,
 multiplayer, or compute-shader acceleration. Those are post-1.0 systems unless a
 specific gate below says otherwise.
 
-## Remaining Terrain 1.0 gates
+## Terrain 1.0 gates
+
+The remaining Terrain 1.0 gates after the current G48 state are G49 through
+G60. G41 through G48 remain listed here as the completed evidence ladder.
 
 ### Phase A - Runtime reliability and performance
 
@@ -97,6 +100,8 @@ Goal: ensure games use stable addon APIs instead of validation-game internals.
    - Verify terrain generation, meshing, streaming, edit application, storage,
      and heavy validation paths avoid GDScript hot loops.
    - Failure means the implementation boundary is not performance-safe.
+   - Current status: complete when `WT_VALIDATION_G48_CONTRACT_PASS` and
+     `WT_VALIDATION_G48_NATIVE_HOT_PATH_BOUNDARY_SMOKE_PASS` both pass.
 
 9. `G49 - Debug telemetry UI quality`
    - Provide a lightweight in-game/debug overlay or exported telemetry path for
@@ -193,6 +198,6 @@ Each post-1.0 system must get its own bounded roadmap before implementation.
 
 ## Drift rule
 
-The next milestone after G47 is G48. The finish line for this roadmap is G60.
+The next milestone after G48 is G49. The finish line for this roadmap is G60.
 No new Terrain 1.0 milestone may be appended after G60 unless it replaces or
 merges with an existing G41-G60 gate and keeps the roadmap finite.

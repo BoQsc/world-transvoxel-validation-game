@@ -1104,3 +1104,32 @@ Boundary:
   the validation game. It does not rewrite every historical test, lock native
   hot-path boundaries, finish material art, solve underground terrain, LOD seams,
   fluids, vegetation, buildings, multiplayer, or a separate game repository.
+
+## G48 - Native hot-path boundary quality
+
+Status: complete when `WT_VALIDATION_G48_CONTRACT_PASS` and
+`WT_VALIDATION_G48_NATIVE_HOT_PATH_BOUNDARY_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- `WtTerrainWorld` exposes `get_hot_path_boundary_summary`;
+- the boundary summary marks generation, meshing, streaming, edit application,
+  and storage as native/backend-owned runtime hot paths;
+- normal validation-game runtime scripts avoid direct backend calls and avoid
+  GDScript density-volume, mesh-building, page-generation, source-file
+  streaming, and image/pixel terrain loops;
+- bounded GDScript helpers remain limited to public API wrappers, profile
+  descriptors, edit-command validation, material/debug helpers, and telemetry
+  summaries;
+- the compact 2K validation scene starts, streams, commits one public edit,
+  remains inside the 25-resource detail window, and reports
+  `gdscript_hot_loops=0`.
+
+Boundary:
+
+- this locks the native hot-path ownership boundary for the current compact 2K
+  CPU/native validation path. It does not finish debug telemetry UI, final
+  terrain profiles, material textures, underground variation, large-world
+  streaming radius, LOD seam quality, generator budgets, water, vegetation,
+  buildings, multiplayer, compute acceleration, or separate game integration.

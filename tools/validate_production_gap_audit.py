@@ -16,7 +16,8 @@ REQUIRED_PHRASES = {
         "Not production-ready yet",
         "minimal public terrain addon API contract",
         "addon-owned material applicator and mesh-stats helpers",
-        "Native hot-path boundaries are not yet locked",
+        "native hot-path boundary evidence",
+        "G48 locked the native hot-path boundary",
         "Debug telemetry UI is not yet production quality",
         "Terrain profile standards are not yet final",
         "The material/texture pipeline is not yet production quality",
@@ -69,7 +70,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=native_hot_path_boundary_quality")
+    print(f"{MARKER} next=debug_telemetry_ui_quality")
 
 
 if __name__ == "__main__":

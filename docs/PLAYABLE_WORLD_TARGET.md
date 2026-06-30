@@ -228,15 +228,21 @@ required material and mesh-inspection helpers into `world-transvoxel-terrain`,
 removes their validation-game copies, and quarantines historical backend-facing
 tests as audit evidence.
 
+G48 is the latest completed native hot-path boundary quality gate. It exposes
+the addon hot-path boundary through `WtTerrainWorld`, proves generation,
+meshing, streaming, edit application, storage, and normal validation runtime
+paths stay out of GDScript terrain hot loops, and keeps bounded debug/material
+helpers separate from production hot paths.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G47 is automated validation-grade compact 2K terrain runtime
+Current state after G48 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
-evidence, not production-ready large-world terrain. The next production-gap
-direction is native hot-path boundary quality.
+evidence plus native hot-path boundary evidence, not production-ready large-world
+terrain. The next production-gap direction is debug telemetry UI quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
