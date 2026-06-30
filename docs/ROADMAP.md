@@ -1053,3 +1053,28 @@ Boundary:
   claim final save UI, cloud sync, massive world compaction, procedural-world
   compaction, public terrain API stability, materials/textures, LOD seam quality,
   water, vegetation, buildings, multiplayer, or a separate game repository.
+
+## G46 - Terrain addon API contract quality
+
+Status: complete when `WT_VALIDATION_G46_CONTRACT_PASS` and
+`WT_VALIDATION_G46_TERRAIN_ADDON_API_CONTRACT_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- `WtTerrainWorld` exposes minimal stable public lifecycle, profile, streaming,
+  editing, storage, telemetry, and debug API groups;
+- authoritative sample queries are exposed through public terrain addon methods
+  and signals;
+- the compact 2K validation runtime starts, streams, edits, samples, and reads
+  debug/telemetry state through the public API path;
+- the validation gate reports `direct_backend_calls=0`;
+- active resources return to the 25-resource compact detail window;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this locks the minimal public terrain addon API required by normal Godot game
+  integration. It does not remove every old validation helper, finish material
+  art, complete underground terrain, solve LOD seams, add fluids, vegetation,
+  buildings, multiplayer, or prove a separate game repository.

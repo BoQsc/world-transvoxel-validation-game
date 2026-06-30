@@ -14,7 +14,7 @@ REQUIRED_PHRASES = {
         "Expected final world/terrain target",
         "Proven by the current validation track",
         "Not production-ready yet",
-        "The public terrain addon API is not yet locked as a game-facing contract",
+        "minimal public terrain addon API contract",
         "Validation-game workarounds are not yet removed or moved into the correct addon boundary",
         "Native hot-path boundaries are not yet locked",
         "Debug telemetry UI is not yet production quality",
@@ -69,7 +69,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=terrain_addon_api_contract_quality")
+    print(f"{MARKER} next=validation_workaround_removal_quality")
 
 
 if __name__ == "__main__":

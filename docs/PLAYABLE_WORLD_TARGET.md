@@ -218,15 +218,20 @@ G45 is the latest completed storage recovery schema quality gate. It verifies co
 storage policy, journal versioning, reload, truncated-tail recovery, and
 compaction/reopen behavior.
 
+G46 is the latest completed terrain addon API contract quality gate. It locks
+the minimal public `WtTerrainWorld` API for profile summaries, lifecycle,
+streaming, edits, authoritative samples, storage snapshot requests, telemetry,
+and debug snapshots.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G45 is automated validation-grade compact 2K terrain runtime
+Current state after G46 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
-shape validation plus compact storage recovery schema evidence, not
-production-ready large-world terrain. The next production-gap direction is terrain
-addon API stability, followed by validation-workaround removal and native hot-path
-boundary quality.
+shape validation plus compact storage recovery schema evidence and a minimal
+game-facing terrain addon API contract, not production-ready large-world terrain.
+The next production-gap direction is validation-workaround removal, followed by
+native hot-path boundary quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0

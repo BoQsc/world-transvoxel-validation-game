@@ -12,7 +12,7 @@ MARKER = "WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS"
 REQUIRED_PHRASES = {
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
         "Status: active roadmap contract",
-        "Completed validation track: G0 through G45",
+        "Completed validation track: G0 through G46",
         "automated validation-grade compact 2K terrain runtime with measured frame/update telemetry",
         "Terrain 1.0 finish line",
         "Remaining Terrain 1.0 gates",
@@ -41,7 +41,7 @@ REQUIRED_PHRASES = {
         "G59 - Versioning release contract quality",
         "G60 - Terrain 1.0 release candidate quality",
         "Post-1.0 backlog",
-        "The next milestone after G45 is G46",
+        "The next milestone after G46 is G47",
         "The finish line for this roadmap is G60",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
@@ -58,7 +58,7 @@ REQUIRED_PHRASES = {
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
         "G41 through G60",
-        "G45 is the latest completed storage recovery schema quality gate",
+        "G46 is the latest completed terrain addon API contract quality gate",
         "python tools/validate_finite_production_roadmap.py",
         "WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS",
     ),

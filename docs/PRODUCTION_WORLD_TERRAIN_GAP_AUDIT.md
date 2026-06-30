@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G45, what the expected final world/terrain target is, and
+game actually is after G46, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G45
+## Current claim boundary after G46
 
-The current validated claim after G45 is:
+The current validated claim after G46 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, and compact storage recovery schema evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, and a minimal game-facing terrain addon API contract, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -21,8 +21,10 @@ traversal stability across flat, mountain/sloped, and edited terrain cases, prov
 multi-position first-person view-distance presentation coverage, verify the
 default sphere carve/place policy with repeated edit shape samples, verify
 compact storage journal/reload/truncated-tail recovery plus sparse 2K
-compaction/reopen, and produce automated evidence for specific runtime quality
-gates.
+compaction/reopen, prove a minimal public `WtTerrainWorld` API path for profile
+summaries, lifecycle, streaming, edits, authoritative samples, storage,
+telemetry, and debug snapshots, and produce automated evidence for specific
+runtime quality gates.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -70,38 +72,38 @@ These items are currently backed by milestone evidence in this repository:
 - first-person compact 2K view-distance presentation coverage;
 - repeated default sphere edit policy and shape behavior;
 - compact 2K journal/reload/truncated-tail recovery plus sparse 2K
-  compaction/reopen.
+  compaction/reopen;
+- minimal public terrain addon API contract for profile summaries, lifecycle,
+  streaming, edits, authoritative samples, storage, telemetry, and debug
+  snapshots.
 
 ## Not production-ready yet
 
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. The public terrain addon API is not yet locked as a game-facing contract.
-   Games need stable generation, streaming, edit, material, storage, telemetry,
-   and debug hooks without depending on validation-game internals.
-2. Validation-game workarounds are not yet removed or moved into the correct
+1. Validation-game workarounds are not yet removed or moved into the correct
    addon boundary. The validation game must not mask addon incompleteness.
-3. Native hot-path boundaries are not yet locked. Heavy generation, meshing,
+2. Native hot-path boundaries are not yet locked. Heavy generation, meshing,
    streaming, edit application, storage, and validation paths must avoid
    GDScript hot loops.
-4. Debug telemetry UI is not yet production quality. Games need inspectable
+3. Debug telemetry UI is not yet production quality. Games need inspectable
    active chunks, queues, frame/update cost, edit state, material state, and
    storage state.
-5. Terrain profile standards are not yet final. Flat, mountain, compact 2K, and
+4. Terrain profile standards are not yet final. Flat, mountain, compact 2K, and
    seeded procedural profiles still need deterministic production defaults.
-6. The material/texture pipeline is not yet production quality. We need stable
+5. The material/texture pipeline is not yet production quality. We need stable
    texture selection, small test assets, biome/material assignment rules, and no
    visible edit flicker.
-7. Underground terrain variation is not yet a production contract. Mining and
+6. Underground terrain variation is not yet a production contract. Mining and
    deep terrain need voxel-based density/material behavior below the surface.
-8. Large-world streaming radius and dynamic LOD seam quality are not yet final
+7. Large-world streaming radius and dynamic LOD seam quality are not yet final
    production contracts. The current path validates bounded local detail, not a
    finished multi-LOD terrain product.
-9. World generation is not yet the final game-world generator. Flat baseline and
+8. World generation is not yet the final game-world generator. Flat baseline and
    compact procedural terrain are required, but biomes, underground variation,
    veins, caves, and optional quantized generation need separate standards.
-10. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
+9. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
    and compute/GPU acceleration are future systems. They must not be treated as
    complete just because the terrain validation path exists.
 
@@ -146,7 +148,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G45.
+runtime after G46.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -154,6 +156,7 @@ gap for current validation profiles. G43 closed the view distance presentation
 quality gap for current compact 2K first-person views. G44 closed the edit policy
 and repeated shape quality gap for the default validation sphere brush. G45
 closed the storage/recovery schema quality gap for compact 2K journal recovery
-and sparse 2K compaction/reopen. The immediate direction after G45 is to close
-the game-facing terrain addon API contract gap through G46, then continue through
-the finite G41-G60 Terrain 1.0 roadmap.
+and sparse 2K compaction/reopen. G46 closed the minimal game-facing terrain
+addon API contract gap. The immediate direction after G46 is to remove or move
+validation-game workarounds through G47, then continue through the finite G41-G60
+Terrain 1.0 roadmap.
