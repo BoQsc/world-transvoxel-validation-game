@@ -93,6 +93,7 @@ REQUIRED_PHRASES = {
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
         "G41 is the latest completed runtime frame budget telemetry quality gate",
+        "G42 is the latest completed collision traversal stability quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -143,6 +144,7 @@ REQUIRED_PHRASES = {
         "## G39 - Distributed edit streaming quality",
         "## G40 - Edit visual material feedback quality",
         "## G41 - Runtime frame budget telemetry quality",
+        "## G42 - Collision traversal stability quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -167,6 +169,7 @@ REQUIRED_PHRASES = {
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
         "G41 is the latest completed runtime frame budget telemetry quality gate",
+        "G42 is the latest completed collision traversal stability quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -175,7 +178,7 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "automated validation-grade compact 2K terrain runtime, not production-ready large-world terrain",
+        "automated validation-grade compact 2K terrain runtime",
         "Expected final world/terrain target",
         "Not production-ready yet",
         "Gap closure ladder",
@@ -207,7 +210,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=collision_traversal_stability_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=view_distance_presentation_quality")
 
 
 if __name__ == "__main__":

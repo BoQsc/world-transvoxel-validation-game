@@ -10,7 +10,7 @@ MARKER = "WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS"
 
 REQUIRED_PHRASES = {
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "automated validation-grade compact 2K terrain runtime, not production-ready large-world terrain",
+        "automated validation-grade compact 2K terrain runtime",
         "Expected final world/terrain target",
         "Proven by the current validation track",
         "Not production-ready yet",
@@ -67,7 +67,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=collision_traversal_stability_quality")
+    print(f"{MARKER} next=view_distance_presentation_quality")
 
 
 if __name__ == "__main__":

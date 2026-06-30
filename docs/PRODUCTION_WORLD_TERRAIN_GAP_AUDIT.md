@@ -9,15 +9,16 @@ terrain.
 
 ## Current claim boundary after G40
 
-The current validated claim is:
+The current validated claim after G42 is:
 
-> automated validation-grade compact 2K terrain runtime, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry and collision traversal stability, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
 stream a bounded local Transvoxel detail window, edit terrain, replay distributed
-edits, remain cold when idle, and produce automated evidence for specific
-runtime quality gates.
+edits, remain cold when idle, measure frame/update telemetry, prove collision
+traversal stability across flat, mountain/sloped, and edited terrain cases, and
+produce automated evidence for specific runtime quality gates.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -137,6 +138,7 @@ claim the narrower current state: automated validation-grade compact 2K terrain
 runtime after G40.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
-compact 2K validation path. The immediate direction after G41 is to close the
-production-readiness gap through G42 collision traversal stability quality, then
-continue through the finite G41-G60 Terrain 1.0 roadmap.
+compact 2K validation path. G42 closed the collision traversal stability quality
+gap for current validation profiles. The immediate direction after G42 is to
+close the production-readiness gap through G43 view distance presentation
+quality, then continue through the finite G41-G60 Terrain 1.0 roadmap.

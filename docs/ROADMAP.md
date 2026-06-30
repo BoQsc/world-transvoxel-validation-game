@@ -933,3 +933,31 @@ Boundary:
   compact CPU/native terrain path. It does not claim final optimization,
   seamless dynamic LOD, GPU/compute generation, fluids, biomes, vegetation,
   buildings, multiplayer, or a separate game repository.
+
+## G42 - Collision traversal stability quality
+
+Status: complete when `WT_VALIDATION_G42_CONTRACT_PASS` and
+`WT_VALIDATION_G42_COLLISION_TRAVERSAL_STABILITY_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- collision traversal stability quality is measured through the real validation
+  player controller;
+- flat baseline, mountain/sloped, and edited compact 2K terrain cases are
+  exercised;
+- every case reaches the normal playable scene with human input disabled;
+- scripted traversal keeps valid control state and camera state;
+- total motion, floor contact ratio, off-floor streak, minimum player height,
+  and vertical velocity remain within stability thresholds;
+- the edited compact 2K case performs a real terrain edit before traversal;
+- transient active resources stay bounded;
+- render fade/blink resources remain zero;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves collision traversal stability for current validation profiles. It
+  does not claim final character controller design, final terrain art, seamless
+  dynamic LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
+  multiplayer, or a separate game repository.
