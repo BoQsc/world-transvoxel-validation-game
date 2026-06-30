@@ -122,6 +122,13 @@ requires event-driven material application so material work happens on runtime
 state changes instead of every frame, plus a bounded material-repair audit for
 missing overrides.
 
+G28 is the active normal project launch preflight gate. It checks the normal
+generated project launch that a human would use, keeps automation safe by
+disabling human input in the generated scene file, and proves the project
+reaches the playable `validation_playtest.tscn` scene through `project.godot`
+without using a test script. For this gate, automation disables human input from
+startup; human playtest can run without that generated-scene patch.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -134,6 +141,7 @@ missing overrides.
 - first-person full-terrain playable-experience captures before renewed human
   visual review;
 - normal generated playtest scene preflight before renewed human visual review;
+- normal generated project launch preflight before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

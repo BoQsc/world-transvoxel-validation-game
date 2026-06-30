@@ -568,3 +568,28 @@ Boundary:
   project, but it does not claim final terrain art, seamless dynamic LOD,
   GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer, or
   a separate game repository.
+
+## G28 - Normal project launch preflight
+
+Status: complete when `WT_VALIDATION_G28_CONTRACT_PASS` and
+`WT_VALIDATION_G28_NORMAL_PROJECT_LAUNCH_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the normal project launch preflight gate;
+- the generated project's `run/main_scene` is `validation_playtest.tscn`;
+- the scene is pinned to `g19_compact_2k_on_demand`;
+- automation disables human input from startup in the generated scene file;
+- Godot is launched with `--path`, not `--script`;
+- the normal launch reaches `WT_VALIDATION_PLAYTEST_READY` within the 30 second
+  load-to-ready ceiling;
+- the normal launch logs no Godot errors;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves the generated handoff project starts through the path a human will
+  use; it does not replace G27's capture/edit checks and does not claim final
+  terrain art, seamless dynamic LOD, GPU/compute generation, fluids, biomes,
+  vegetation, buildings, multiplayer, or a separate game repository.

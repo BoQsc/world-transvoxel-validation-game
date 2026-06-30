@@ -66,6 +66,9 @@ REQUIRED_PHRASES = {
         "normal generated playtest scene",
         "event-driven material application",
         "bounded material-repair audit",
+        "G28 is the active normal project launch preflight gate",
+        "normal generated project launch",
+        "automation safe by disabling human input",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -96,6 +99,7 @@ REQUIRED_PHRASES = {
         "## G25 - Full terrain visual baseline",
         "## G26 - Full terrain playable experience",
         "## G27 - Full terrain handoff preflight",
+        "## G28 - Normal project launch preflight",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -106,6 +110,7 @@ REQUIRED_PHRASES = {
         "G25 replaces G24 as the active large-terrain visibility gate",
         "G26 is the active first-person full-terrain playable-experience gate",
         "G27 is the active full-terrain human handoff preflight gate",
+        "G28 is the active normal project launch preflight gate",
     ),
 }
 
@@ -126,7 +131,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=full_terrain_handoff_preflight")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=normal_project_launch_preflight")
 
 
 if __name__ == "__main__":
