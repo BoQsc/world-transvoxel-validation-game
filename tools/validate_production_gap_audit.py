@@ -24,7 +24,9 @@ REQUIRED_PHRASES = {
         "G50 locked the terrain profile standard",
         "material texture pipeline evidence",
         "G51 locked the material texture pipeline",
-        "Underground terrain variation is not yet a production contract",
+        "underground density/material variation evidence",
+        "G52 locked baseline underground",
+        "Large-world streaming radius and dynamic LOD seam quality are not yet final",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -73,7 +75,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=underground_terrain_variation_quality")
+    print(f"{MARKER} next=large_world_streaming_radius_quality")
 
 
 if __name__ == "__main__":

@@ -249,17 +249,23 @@ current small deterministic UV2 material-id pipeline, including a 16 by 16
 generated `RGBA8` texture, standard material IDs, shared material-instance
 stability through edits and streaming, and authoritative material sampling.
 
+G52 is the latest completed underground terrain variation quality gate. It locks
+the native procedural vertical-strata model, public generation-profile
+underground contract, flat-baseline volumetric density proof, and localized
+underground carve behavior.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G51 is automated validation-grade compact 2K terrain runtime
+Current state after G52 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
 evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
-terrain profile standard evidence plus material texture pipeline evidence, not
-production-ready large-world terrain. The next production-gap direction is
-underground terrain variation quality.
+terrain profile standard evidence plus material texture pipeline evidence and
+underground density/material variation evidence, not production-ready large-world
+terrain. The next production-gap direction is large-world streaming radius
+quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -303,6 +309,8 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
 - terrain profile standard quality gate before material, underground, streaming
   radius, seam/artifact, or generator-budget work;
 - material texture pipeline quality gate before underground, streaming radius,
+  seam/artifact, or generator-budget work;
+- underground terrain variation quality gate before streaming radius,
   seam/artifact, or generator-budget work;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;

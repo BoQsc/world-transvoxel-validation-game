@@ -46,16 +46,16 @@ REQUIRED_PHRASES = {
         "terrain_material_texture_pipeline_v1",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G51",
-        "The next milestone after G51 is G52",
+        "G51 - Material texture pipeline quality",
+        "G52 - Underground terrain variation quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
         "G51 locked the material texture pipeline",
-        "The immediate direction after G51 is G52",
+        "G52 locked baseline underground",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G51 is the latest completed material texture pipeline quality gate",
-        "Current state after G51",
+        "Current state after G52",
     ),
 }
 ADDON_PHRASES = {

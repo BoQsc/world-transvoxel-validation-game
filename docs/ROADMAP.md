@@ -1218,3 +1218,31 @@ Boundary:
   underground material variation, large-world streaming radius, LOD seam quality,
   generator budgets, water, vegetation, buildings, multiplayer, compute
   acceleration, or separate game integration.
+
+## G52 - Underground terrain variation quality
+
+Status: complete when `WT_VALIDATION_G52_CONTRACT_PASS` and
+`WT_VALIDATION_G52_UNDERGROUND_TERRAIN_VARIATION_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the native procedural compact terrain source exposes
+  `density_volume_vertical_strata_v1`;
+- underground material strata are deterministic: deep `1`, mid stone `7`, and
+  shallow subsoil `4`;
+- authoritative sample batches prove same-column density ordering from
+  underground solid to above-surface air;
+- a local underground carve changes the target voxel density without rewriting
+  unaffected deeper strata;
+- the flat baseline also exposes volumetric density samples through the public
+  terrain-world authoritative sample API;
+- no dense near-2K source/world files are required in the normal compact path.
+
+Boundary:
+
+- this locks the baseline underground density/material variation proof. It does
+  not finish deep vertical worlds, caves, ore veins, mining progression, biome
+  ecosystems, large-world streaming radius, LOD seam quality, generator budgets,
+  water, vegetation, buildings, multiplayer, compute acceleration, or separate
+  game integration.
