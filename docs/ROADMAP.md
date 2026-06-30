@@ -855,3 +855,28 @@ Boundary:
   CPU/native terrain path. It does not claim final terrain art, seamless dynamic
   LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
   multiplayer, or a separate game repository.
+
+## G39 - Distributed edit streaming quality
+
+Status: complete when `WT_VALIDATION_G39_CONTRACT_PASS` and
+`WT_VALIDATION_G39_DISTRIBUTED_EDIT_STREAMING_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- distributed edit streaming quality is measured in the normal compact 2K
+  runtime scene;
+- four distant compact 2K edit sites are streamed to before editing;
+- carve and construct edits both commit in distant regions;
+- authoritative backend samples match the edited density/material at each site;
+- a fresh scene reload replays all four distributed edits from the edit journal;
+- the replay scene returns to cold idle with 25 render/collision resources;
+- render fade/blink resources remain zero;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves distributed edit and replay behavior for the current compact
+  CPU/native terrain path. It does not claim final terrain art, seamless dynamic
+  LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
+  multiplayer, or a separate game repository.

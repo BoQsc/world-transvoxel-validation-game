@@ -186,6 +186,11 @@ compact 2K streaming route for two cycles, verifies ten route samples with real
 local player movement, and requires final cold idle with the standard
 25-resource active window.
 
+G39 is the active distributed edit streaming quality gate. It streams to four
+distant compact 2K regions, applies carve/construct edits, verifies
+authoritative samples, reloads the scene, and verifies all four edits replay
+from the edit journal.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -211,6 +216,7 @@ local player movement, and requires final cold idle with the standard
 - streaming movement performance quality gate before renewed human visual
   review;
 - streaming endurance stability quality gate before renewed human visual review;
+- distributed edit streaming quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary
