@@ -1246,3 +1246,26 @@ Boundary:
   ecosystems, large-world streaming radius, LOD seam quality, generator budgets,
   water, vegetation, buildings, multiplayer, compute acceleration, or separate
   game integration.
+
+## G53 - Large-world streaming radius quality
+
+Status: complete when `WT_VALIDATION_G53_CONTRACT_PASS` and
+`WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the compact 2K public viewer path accepts configurable radii 1, 2, 4, and 6;
+- active/render resources settle exactly to 9, 25, 81, and 169;
+- active resources remain inside capacity 256;
+- radius-edge chunks are fully ready and chunks just outside the selected radius
+  are absent;
+- visible terrain mesh spread grows as radius grows;
+- no dense near-2K source/world files are required in the normal compact path.
+
+Boundary:
+
+- this locks configurable streaming-radius behavior for the current compact 2K
+  CPU/native path. It does not finish LOD seam quality, generator budgets,
+  water, vegetation, buildings, multiplayer, compute acceleration, or separate
+  game integration.

@@ -132,15 +132,20 @@ G52 is the latest completed underground terrain variation quality gate: it locks
 the native procedural vertical-strata model, public generation-profile
 underground contract, localized underground carve proof, and flat-baseline
 volumetric density proof.
-Current claim boundary after G52: automated validation-grade compact 2K terrain
+G53 is the latest completed large-world streaming radius quality gate: it proves
+the compact 2K runtime accepts configurable streaming radii 1, 2, 4, and 6,
+settles active/render resources to 9, 25, 81, and 169, keeps resources inside a
+256 active-resource capacity, and verifies radius-edge readiness plus
+outside-radius absence.
+Current claim boundary after G53: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
 evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
 terrain profile standard evidence plus material texture pipeline evidence and
-underground density/material variation evidence, not production-ready large-world
-terrain.
+underground density/material variation evidence plus configurable streaming
+radius evidence, not production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -289,6 +294,8 @@ python tools/validate_g51_contract.py
 python tools/g51_material_texture_pipeline_quality.py
 python tools/validate_g52_contract.py
 python tools/g52_underground_terrain_variation_quality.py
+python tools/validate_g53_contract.py
+python tools/g53_large_world_streaming_radius_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -298,9 +305,9 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=native_hot_path_boundary_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=native_hot_path_boundary_quality
-WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 final=G60 terrain_1_0=true
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=lod_seam_artifact_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=lod_seam_artifact_quality
+WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G53 next=G54 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -445,6 +452,9 @@ WT_VALIDATION_G51_MATERIAL_TEXTURE_PIPELINE_SMOKE_PASS profile=g19_compact_2k_on
 WT_VALIDATION_G52_CONTRACT_PASS implementation=underground_terrain_variation_quality
 WT_VALIDATION_G52_UNDERGROUND_TERRAIN_VARIATION_PASS profile=g19_compact_2k_on_demand flat_profile=flat_baseline strata_samples=3 flat_volume_samples=3 density_ordered=1 strata_materials=1,7,4 flat_material=7 edit_localized=1 carved_density=1.000 max_render_resources=25 max_collision_resources=25 dense_world_files=0
 WT_VALIDATION_G52_UNDERGROUND_TERRAIN_VARIATION_SMOKE_PASS profile=g19_compact_2k_on_demand flat_profile=flat_baseline engines=2 native_configs=2 strata_materials=1,7,4 edit_localized=1 max_engine_seconds=... dense_world_files=0 report=artifacts/g52_underground_terrain_variation_quality/g52_underground_terrain_variation_quality_report.json
+WT_VALIDATION_G53_CONTRACT_PASS implementation=large_world_streaming_radius_quality
+WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_PASS profile=g19_compact_2k_on_demand radii=1,2,4,6 expected_resources=9,25,81,169 max_active_resources=169 active_capacity=256 inside_edge_ready=16 outside_radius_absent=16 min_span_x=... max_span_x=... min_span_z=... max_span_z=... dense_world_files=0
+WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 radii=1,2,4,6 expected_resources=9,25,81,169 active_capacity=256 max_engine_seconds=... dense_world_files=0 report=artifacts/g53_large_world_streaming_radius_quality/g53_large_world_streaming_radius_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -475,11 +485,12 @@ python tools/g49_debug_telemetry_ui_quality.py
 python tools/g50_terrain_profile_standard_quality.py
 python tools/g51_material_texture_pipeline_quality.py
 python tools/g52_underground_terrain_variation_quality.py
+python tools/g53_large_world_streaming_radius_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G52 is the latest completed terrain quality gate. Current state after G52 is
+G53 is the latest completed terrain quality gate. Current state after G53 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
@@ -487,14 +498,13 @@ compact storage recovery schema evidence plus a minimal game-facing terrain
 addon API contract plus validation-workaround removal evidence plus native
 hot-path boundary evidence plus debug telemetry UI evidence and terrain profile
 standard evidence plus material texture pipeline evidence plus underground
-density/material variation evidence, not production-ready large-world terrain.
+density/material variation evidence plus configurable streaming radius evidence,
+not production-ready large-world terrain.
 The gap to the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
-through G60, with G60 as the release-candidate finish line. Next terrain work is
-G53 large-world streaming radius quality and must advance through that finite list
-instead of appending unbounded "next useful" tasks.
+through G60, with G60 as the release-candidate finish line. Next terrain work is G54 LOD seam and artifact quality and must advance through that finite list instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
 

@@ -47,16 +47,16 @@ REQUIRED_PHRASES = {
         "density_volume_vertical_strata_v1",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G52",
-        "The next milestone after G52 is G53",
+        "G52 - Underground terrain variation quality",
+        "WT_VALIDATION_G52_UNDERGROUND_TERRAIN_VARIATION_SMOKE_PASS",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
         "underground density/material variation evidence",
-        "immediate direction after G52 is G53",
+        "G52 locked baseline underground",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G52 is the latest completed underground terrain variation quality gate",
-        "Current state after G52",
+        "underground density/material variation evidence",
     ),
 }
 WORLD_PHRASES = {

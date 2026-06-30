@@ -55,7 +55,7 @@ REQUIRED_PHRASES = {
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G51 is the latest completed material texture pipeline quality gate",
-        "Current state after G52",
+        "material texture pipeline evidence",
     ),
 }
 ADDON_PHRASES = {

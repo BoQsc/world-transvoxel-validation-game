@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G52, what the expected final world/terrain target is, and
+game actually is after G53, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G52
+## Current claim boundary after G53
 
-The current validated claim after G52 is:
+The current validated claim after G53 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, and underground density/material variation evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, and configurable streaming radius evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -33,7 +33,10 @@ standard flat baseline, mountain, compact 2K, and seeded procedural 2K terrain
 profiles with deterministic seeds/source revisions and storage/load budgets, and
 lock the current small deterministic material/texture pipeline through edit and
 streaming stability evidence, and prove baseline underground density/material
-variation with localized carve behavior.
+variation with localized carve behavior, and prove configurable compact 2K
+streaming radii 1, 2, 4, and 6 with exact active/render resource counts,
+radius-edge readiness, outside-radius absence, growing visible mesh spread, and a
+256 active-resource capacity.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -103,8 +106,8 @@ These items are currently backed by milestone evidence in this repository:
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. Large-world streaming radius and dynamic LOD seam quality are not yet final
-   production contracts. The current path validates bounded local detail, not a
+1. Dynamic LOD seam quality is not yet final. The current path validates
+   configurable compact 2K streaming radii and bounded local detail, not a
    finished multi-LOD terrain product.
 2. World generation is not yet the final game-world generator. Flat baseline and
    compact procedural terrain are required, but biomes, veins, caves, deep
@@ -158,6 +161,10 @@ The first production-gap milestones are:
 12. `G52 - Underground terrain variation quality`: lock baseline underground
     density/material strata, flat-world volumetric density, and localized
     underground carve behavior before streaming-radius work.
+13. `G53 - Large-world streaming radius quality`: lock configurable compact 2K
+    streaming radii, exact active/render resource counts, radius-edge readiness,
+    outside-radius absence, growing visible mesh spread, and the 256 active
+    resource capacity before LOD seam/artifact work.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -167,7 +174,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G52.
+runtime after G53.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -186,6 +193,6 @@ material state, and storage state. G50 locked the terrain profile standard for
 flat baseline, mountain, compact 2K, and seeded procedural 2K profiles. G51
 locked the material texture pipeline for deterministic small UV2 material
 assignment through edits and streaming. G52 locked baseline underground
-density/material variation and localized underground carve behavior. The
-immediate direction after G52 is G53 large-world streaming radius quality, then the
-remaining finite G41-G60 Terrain 1.0 roadmap.
+density/material variation and localized underground carve behavior. G53 locked configurable streaming radius behavior for compact 2K active/render resources and
+draw-distance spread. The immediate direction after G53 is G54 LOD seam and
+artifact quality, then the remaining finite G41-G60 Terrain 1.0 roadmap.

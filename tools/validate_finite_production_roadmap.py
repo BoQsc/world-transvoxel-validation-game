@@ -12,7 +12,7 @@ MARKER = "WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS"
 REQUIRED_PHRASES = {
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
         "Status: active roadmap contract",
-        "Completed validation track: G0 through G52",
+        "Completed validation track: G0 through G53",
         "automated validation-grade compact 2K terrain runtime with measured frame/update telemetry",
         "Terrain 1.0 finish line",
         "Terrain 1.0 gates",
@@ -41,7 +41,7 @@ REQUIRED_PHRASES = {
         "G59 - Versioning release contract quality",
         "G60 - Terrain 1.0 release candidate quality",
         "Post-1.0 backlog",
-        "The next milestone after G52 is G53",
+        "The next milestone after G53 is G54",
         "The finish line for this roadmap is G60",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
@@ -58,9 +58,9 @@ REQUIRED_PHRASES = {
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
         "G41 through G60",
-        "G52 is the latest completed underground terrain variation quality gate",
-        "python tools/g52_underground_terrain_variation_quality.py",
-        "WT_VALIDATION_G52_UNDERGROUND_TERRAIN_VARIATION_SMOKE_PASS",
+        "G53 is the latest completed large-world streaming radius quality gate",
+        "python tools/g53_large_world_streaming_radius_quality.py",
+        "WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS",
         "python tools/validate_finite_production_roadmap.py",
         "WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS",
     ),
@@ -106,7 +106,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} first=G41 current=G52 next=G53 final=G60 terrain_1_0=true")
+    print(f"{MARKER} first=G41 current=G53 next=G54 final=G60 terrain_1_0=true")
 
 
 if __name__ == "__main__":
