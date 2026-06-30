@@ -55,7 +55,7 @@ REQUIRED_PHRASES = {
         "Status: complete",
         "WT_VALIDATION_G4_SMOKE_PASS",
         "## G5 - Material and performance baseline",
-        "Status: active next",
+        "Status: complete by `WT_VALIDATION_G5_CONTRACT_PASS`",
     ),
 }
 

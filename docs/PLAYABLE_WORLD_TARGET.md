@@ -115,6 +115,13 @@ active, captures player-eye views at map-scale positions, verifies the local
 detail window follows scripted player movement, and confirms terrain editing
 still commits.
 
+G27 is the active full-terrain human handoff preflight gate. It checks the
+normal generated playtest scene directly before renewed human review, verifies
+player/camera/crosshair/interactor/full-visual/local-detail readiness, and
+requires event-driven material application so material work happens on runtime
+state changes instead of every frame, plus a bounded material-repair audit for
+missing overrides.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -126,6 +133,7 @@ still commits.
 - full 2048 by 2048 terrain visual coverage before renewed human visual review;
 - first-person full-terrain playable-experience captures before renewed human
   visual review;
+- normal generated playtest scene preflight before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

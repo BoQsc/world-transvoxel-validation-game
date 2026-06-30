@@ -39,6 +39,10 @@ Transvoxel window remains only the local editable/collision detail layer.
 G26 is the active first-person full-terrain playable-experience gate: it checks
 full terrain from player-eye captures while local Transvoxel detail follows
 scripted player movement with human input disabled.
+G27 is the active full-terrain human handoff preflight gate: it checks the
+normal generated playtest scene directly, proves event-driven material
+application plus bounded material-repair audit, captures first-person evidence,
+and rejects dense near-2K files before human review.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -123,6 +127,8 @@ python tools/validate_g25_contract.py
 python tools/g25_full_terrain_visual_baseline.py --skip-build
 python tools/validate_g26_contract.py
 python tools/g26_full_terrain_playable_experience.py --skip-build
+python tools/validate_g27_contract.py
+python tools/g27_full_terrain_handoff_preflight.py --skip-build
 ```
 
 Expected marker:
@@ -131,7 +137,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=human_visual_verification
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=full_terrain_handoff_preflight
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -201,6 +207,9 @@ WT_VALIDATION_G25_FULL_TERRAIN_VISUAL_BASELINE_SMOKE_PASS engines=2 max_engine_s
 WT_VALIDATION_G26_CONTRACT_PASS implementation=full_terrain_playable_experience
 WT_VALIDATION_G26_FULL_TERRAIN_PLAYABLE_EXPERIENCE_PASS profile=g19_compact_2k_on_demand pages=16384 map_blocks=2048 captures=3 player_stream_updates=... max_render_resources=25 max_collision_resources=25 full_visual_visible=true dense_world_files=0
 WT_VALIDATION_G26_FULL_TERRAIN_PLAYABLE_EXPERIENCE_SMOKE_PASS engines=2 max_engine_seconds=... report=artifacts/g26_full_terrain_playable_experience/g26_full_terrain_playable_experience_report.json
+WT_VALIDATION_G27_CONTRACT_PASS implementation=full_terrain_handoff_preflight
+WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_PASS profile=g19_compact_2k_on_demand pages=16384 map_blocks=2048 captures=2 material_auto_applies=... player_stream_updates=... max_render_resources=25 max_collision_resources=25 human_input=false full_visual_visible=true dense_world_files=0
+WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_SMOKE_PASS engines=2 max_engine_seconds=... project=... scene=res://scenes/validation_playtest.tscn report=artifacts/g27_full_terrain_handoff_preflight/g27_full_terrain_handoff_preflight_report.json
 ```
 
 ## Human-visible playtest
@@ -258,12 +267,13 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-Do not request current compact near-2K human review until the first-person
-full-terrain playable-experience gate passes. G24 is capped-window regression
-evidence only and G25 is an overhead visual baseline. First run:
+Do not request current compact near-2K human review until the full-terrain
+handoff preflight gate passes. G24 is capped-window regression evidence only,
+G25 is an overhead visual baseline, and G26 is first-person full-terrain runtime
+evidence. First run:
 
 ```console
-python tools/g26_full_terrain_playable_experience.py --skip-build
+python tools/g27_full_terrain_handoff_preflight.py --skip-build
 ```
 
 Then open:
@@ -272,8 +282,9 @@ Then open:
 artifacts/g19_compact_2k_on_demand/project/project.godot
 ```
 
-The G26 proof is the automated prerequisite before human review. It checks the
-compact 2048 by 2048 terrain from first-person player-eye captures, keeps local
-native Transvoxel chunks following scripted player movement for editable/collision
-detail, commits a terrain edit, and still rejects dense near-2K source/world
-files.
+The G27 proof is the automated prerequisite before human review. It checks the
+normal generated playtest scene, compact 2048 by 2048 terrain visibility,
+first-person captures, event-driven material application, local native
+Transvoxel chunks following scripted player movement for editable/collision
+detail, bounded material-repair audit behavior, a committed terrain edit, and
+rejection of dense near-2K source/world files.

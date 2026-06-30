@@ -539,3 +539,32 @@ Boundary:
 - this proves first-person full-terrain validation-game behavior, but it does not
   claim final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
   biomes, vegetation, buildings, multiplayer, or a separate game repository.
+
+## G27 - Full terrain handoff preflight
+
+Status: complete when `WT_VALIDATION_G27_CONTRACT_PASS` and
+`WT_VALIDATION_G27_FULL_TERRAIN_HANDOFF_PREFLIGHT_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the full-terrain human handoff preflight gate;
+- the normal generated playtest scene is checked directly, not a test-only
+  substitute;
+- human input is disabled for automation from startup;
+- player, camera, crosshair, interactor, full-map visual coverage, and local
+  native Transvoxel detail are all present;
+- event-driven material application happens automatically, includes a bounded
+  material-repair audit for missing overrides, and then remains stable instead
+  of reapplying every frame;
+- scripted player movement updates the local native detail window;
+- first-person captures are written before human review;
+- terrain editing still commits through the normal interactor;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves automated handoff readiness for the current generated playtest
+  project, but it does not claim final terrain art, seamless dynamic LOD,
+  GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer, or
+  a separate game repository.

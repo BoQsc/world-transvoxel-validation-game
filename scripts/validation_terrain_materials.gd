@@ -3,6 +3,7 @@ extends Node
 const TERRAIN_SHADER := preload("res://materials/validation_terrain_palette.gdshader")
 
 @export var auto_apply: bool = true
+@export_range(1, 30, 1) var material_audit_interval_frames: int = 2
 @export_range(2, 64, 1) var texture_resolution: int = 16
 
 var _summary := {
@@ -12,8 +13,12 @@ var _summary := {
 	"texture_resolution": 0,
 	"shader_mode": "validation_uv2_checker",
 	"profile_id": "",
+	"auto_apply_count": 0,
 }
 var _material: ShaderMaterial
+var _auto_apply_signature := ""
+var _auto_apply_count := 0
+var _audit_frame_count := 0
 
 
 func _ready() -> void:
@@ -24,7 +29,10 @@ func _process(_delta: float) -> void:
 	var parent := get_parent()
 	if parent != null and parent.has_method("get_validation_state") and \
 			parent.call("get_validation_state") == "ready":
-		apply_materials_now()
+		if not _apply_if_signature_changed():
+			_repair_missing_materials_if_needed()
+		return
+	_auto_apply_signature = ""
 
 
 func get_material_summary() -> Dictionary:
@@ -46,8 +54,32 @@ func apply_materials_now() -> Dictionary:
 		"shader_mode": "validation_uv2_checker",
 		"profile_id": str(profile.get("profile_id", "unknown")),
 		"material_profile_configured": bool(profile.get("configured", false)),
+		"auto_apply_count": _auto_apply_count,
+		"auto_apply_signature": _auto_apply_signature,
 	}
 	return get_material_summary()
+
+
+func _apply_if_signature_changed() -> bool:
+	var signature := _runtime_signature()
+	if signature.is_empty() or signature == _auto_apply_signature:
+		return false
+	_auto_apply_signature = signature
+	_auto_apply_count += 1
+	apply_materials_now()
+	return true
+
+
+func _repair_missing_materials_if_needed() -> void:
+	_audit_frame_count += 1
+	if _audit_frame_count < material_audit_interval_frames:
+		return
+	_audit_frame_count = 0
+	if _runtime_signature().is_empty():
+		return
+	if _material != null and _has_unmaterialized_meshes(_backend_terrain(), _material):
+		_auto_apply_count += 1
+		apply_materials_now()
 
 
 func _material_instance() -> ShaderMaterial:
@@ -92,11 +124,52 @@ func _apply_to_meshes_recursive(node: Node, material: Material, result: Dictiona
 			_apply_to_meshes_recursive(child, material, result)
 
 
+func _has_unmaterialized_meshes(node: Node, material: Material) -> bool:
+	if node == null:
+		return false
+	if node is MeshInstance3D:
+		var instance := node as MeshInstance3D
+		if instance.mesh != null and instance.material_override != material:
+			return true
+	for child in node.get_children():
+		if child is Node and _has_unmaterialized_meshes(child, material):
+			return true
+	return false
+
+
 func _backend_terrain() -> Node:
 	var terrain_world := _terrain_world()
 	if terrain_world == null or not terrain_world.has_method("get_backend_terrain"):
 		return null
 	return terrain_world.call("get_backend_terrain")
+
+
+func _runtime_signature() -> String:
+	var terrain_world := _terrain_world()
+	if terrain_world == null or not terrain_world.has_method("get_runtime_metrics"):
+		return ""
+	var metrics: Dictionary = terrain_world.call("get_runtime_metrics")
+	var active_records := int(metrics.get("active_chunk_records", 0))
+	var render_resources := int(metrics.get("render_resources", 0))
+	var collision_resources := int(metrics.get("collision_resources", 0))
+	if render_resources <= 0 or collision_resources <= 0 or \
+			int(metrics.get("queued_render", 0)) != 0 or \
+			int(metrics.get("queued_collision", 0)) != 0 or \
+			int(metrics.get("pending_chunk_retirements", 0)) != 0 or \
+			int(metrics.get("render_fading_resources", 0)) != 0 or \
+			int(metrics.get("fully_ready_chunk_records", -1)) != active_records:
+		return ""
+	var revision := 0
+	if terrain_world.has_method("get_backend_world_revision"):
+		revision = int(terrain_world.call("get_backend_world_revision"))
+	return "%d:%d:%d:%d:%d:%d" % [
+		active_records,
+		render_resources,
+		collision_resources,
+		int(metrics.get("viewer_updates", 0)),
+		int(metrics.get("edit_replacements", 0)),
+		revision,
+	]
 
 
 func _terrain_world() -> Node:

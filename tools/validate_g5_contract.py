@@ -57,7 +57,7 @@ REQUIRED_PHRASES = {
         "Status: complete",
         "WT_VALIDATION_G5_SMOKE_PASS",
         "## G6 - Profile-selectable playable world",
-        "Status: active next",
+        "Status: complete by `WT_VALIDATION_G6_CONTRACT_PASS`",
     ),
 }
 
