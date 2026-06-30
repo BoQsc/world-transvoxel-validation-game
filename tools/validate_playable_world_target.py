@@ -100,6 +100,7 @@ REQUIRED_PHRASES = {
         "G46 is the latest completed terrain addon API contract quality gate",
         "G47 is the latest completed validation workaround removal quality gate",
         "G48 is the latest completed native hot-path boundary quality gate",
+        "G49 is the latest completed debug telemetry UI quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -157,6 +158,7 @@ REQUIRED_PHRASES = {
         "## G46 - Terrain addon API contract quality",
         "## G47 - Validation workaround removal quality",
         "## G48 - Native hot-path boundary quality",
+        "## G49 - Debug telemetry UI quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -188,6 +190,7 @@ REQUIRED_PHRASES = {
         "G46 is the latest completed terrain addon API contract quality gate",
         "G47 is the latest completed validation workaround removal quality gate",
         "G48 is the latest completed native hot-path boundary quality gate",
+        "G49 is the latest completed debug telemetry UI quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -228,7 +231,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=debug_telemetry_ui_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=terrain_profile_standard_quality")
 
 
 if __name__ == "__main__":

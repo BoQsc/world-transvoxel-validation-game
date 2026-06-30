@@ -2,17 +2,17 @@
 
 Status: active roadmap contract.
 
-This document defines the concrete remaining path from the current G48 state to
+This document defines the concrete remaining path from the current G49 state to
 Terrain 1.0. It exists so the project does not degrade into an infinite list of
 "next useful" tasks.
 
 ## Current state
 
-Completed validation track: G0 through G48.
+Completed validation track: G0 through G49.
 
 Current claim:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, and native hot-path boundary evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, and debug telemetry UI evidence, not production-ready large-world terrain.
 
 The remaining roadmap is finite for Terrain 1.0. If new work is discovered, it
 must either replace an existing gate, be folded into an existing gate, or be
@@ -41,8 +41,8 @@ specific gate below says otherwise.
 
 ## Terrain 1.0 gates
 
-The remaining Terrain 1.0 gates after the current G48 state are G49 through
-G60. G41 through G48 remain listed here as the completed evidence ladder.
+The remaining Terrain 1.0 gates after the current G49 state are G50 through
+G60. G41 through G49 remain listed here as the completed evidence ladder.
 
 ### Phase A - Runtime reliability and performance
 
@@ -108,6 +108,8 @@ Goal: ensure games use stable addon APIs instead of validation-game internals.
      active chunks, queues, frame/update cost, edit state, material state, and
      storage state.
    - Failure means problems are too hard to observe early.
+   - Current status: complete when `WT_VALIDATION_G49_CONTRACT_PASS` and
+     `WT_VALIDATION_G49_DEBUG_TELEMETRY_UI_SMOKE_PASS` both pass.
 
 ### Phase C - Terrain generation, materials, and large-world behavior
 
@@ -198,6 +200,6 @@ Each post-1.0 system must get its own bounded roadmap before implementation.
 
 ## Drift rule
 
-The next milestone after G48 is G49. The finish line for this roadmap is G60.
+The next milestone after G49 is G50. The finish line for this roadmap is G60.
 No new Terrain 1.0 milestone may be appended after G60 unless it replaces or
 merges with an existing G41-G60 gate and keeps the roadmap finite.

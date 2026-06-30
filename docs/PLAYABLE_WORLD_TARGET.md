@@ -234,15 +234,21 @@ meshing, streaming, edit application, storage, and normal validation runtime
 paths stay out of GDScript terrain hot loops, and keeps bounded debug/material
 helpers separate from production hot paths.
 
+G49 is the latest completed debug telemetry UI quality gate. It adds a
+mouse-transparent telemetry overlay and JSON export to the normal validation
+playtest scene for active chunks, queues, frame/update cost, edit state,
+material state, and storage state.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G48 is automated validation-grade compact 2K terrain runtime
+Current state after G49 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
-evidence plus native hot-path boundary evidence, not production-ready large-world
-terrain. The next production-gap direction is debug telemetry UI quality.
+evidence plus native hot-path boundary evidence and debug telemetry UI evidence,
+not production-ready large-world terrain. The next production-gap direction is
+terrain profile standard quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0

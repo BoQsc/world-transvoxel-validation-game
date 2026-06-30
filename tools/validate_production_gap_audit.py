@@ -18,7 +18,8 @@ REQUIRED_PHRASES = {
         "addon-owned material applicator and mesh-stats helpers",
         "native hot-path boundary evidence",
         "G48 locked the native hot-path boundary",
-        "Debug telemetry UI is not yet production quality",
+        "debug telemetry UI evidence",
+        "G49 added a normal-scene debug telemetry",
         "Terrain profile standards are not yet final",
         "The material/texture pipeline is not yet production quality",
         "Underground terrain variation is not yet a production contract",
@@ -70,7 +71,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=debug_telemetry_ui_quality")
+    print(f"{MARKER} next=terrain_profile_standard_quality")
 
 
 if __name__ == "__main__":

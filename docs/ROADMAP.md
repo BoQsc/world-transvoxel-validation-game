@@ -1133,3 +1133,29 @@ Boundary:
   terrain profiles, material textures, underground variation, large-world
   streaming radius, LOD seam quality, generator budgets, water, vegetation,
   buildings, multiplayer, compute acceleration, or separate game integration.
+
+## G49 - Debug telemetry UI quality
+
+Status: complete when `WT_VALIDATION_G49_CONTRACT_PASS` and
+`WT_VALIDATION_G49_DEBUG_TELEMETRY_UI_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the normal validation playtest scene owns a lightweight debug telemetry
+  overlay;
+- the overlay exposes active chunks, queues, frame/update cost, edit state,
+  material state, and storage state;
+- the overlay is mouse-transparent and does not interfere with player input;
+- telemetry can be exported as JSON for automated inspection;
+- the compact 2K validation scene starts, streams, commits one public edit,
+  updates the telemetry overlay, exports telemetry, and remains inside the
+  25-resource detail window.
+
+Boundary:
+
+- this makes runtime problems observable in the current validation scene. It
+  does not finish terrain profile standards, material textures, underground
+  variation, large-world streaming radius, LOD seam quality, generator budgets,
+  water, vegetation, buildings, multiplayer, compute acceleration, or separate
+  game integration.

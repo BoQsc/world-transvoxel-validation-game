@@ -46,16 +46,16 @@ REQUIRED_PHRASES = {
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G48 is the latest completed native hot-path boundary quality gate",
-        "Current state after G48",
+        "native hot-path boundary evidence",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G48",
-        "The next milestone after G48 is G49",
+        "G48 - Native hot-path boundary quality",
+        "G49 - Debug telemetry UI quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G48",
+        "G48 locked the native hot-path boundary",
         "native hot-path boundary evidence",
-        "debug telemetry UI quality",
+        "debug telemetry UI evidence",
     ),
 }
 TERRAIN_REQUIRED = (
