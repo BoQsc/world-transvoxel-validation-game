@@ -103,10 +103,14 @@ presentation.
 G44 is the latest completed edit policy and shape quality gate: it locks the default
 sphere carve/place policy and verifies repeated edit shape behavior with
 authoritative samples.
-Current claim boundary after G44: automated validation-grade compact 2K terrain
+G45 is the latest completed storage recovery schema quality gate: it verifies compact
+storage policy, journal versioning, reload, truncated-tail recovery, and
+compaction/reopen behavior.
+Current claim boundary after G45: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
-shape validation, not production-ready large-world terrain.
+shape validation plus compact storage recovery schema evidence, not
+production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -239,6 +243,8 @@ python tools/validate_g43_contract.py
 python tools/g43_view_distance_presentation_quality.py
 python tools/validate_g44_contract.py
 python tools/g44_edit_policy_shape_quality.py
+python tools/validate_g45_contract.py
+python tools/g45_storage_recovery_schema_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -248,8 +254,8 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=storage_recovery_schema_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=storage_recovery_schema_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=terrain_addon_api_contract_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=terrain_addon_api_contract_quality
 WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
@@ -371,6 +377,9 @@ WT_VALIDATION_G43_VIEW_DISTANCE_PRESENTATION_SMOKE_PASS profile=g19_compact_2k_o
 WT_VALIDATION_G44_CONTRACT_PASS implementation=edit_policy_shape_quality
 WT_VALIDATION_G44_EDIT_POLICY_SHAPE_PASS profile=g19_compact_2k_on_demand default_shape=sphere dig_radius=1.800 place_radius=1.800 place_material=4 alternate_shape_toggles=false edits=6 inside_samples=... outside_unchanged_samples=... max_commit_frames=... max_settle_frames=... edit_replacement_delta=... max_render_resources=25 max_collision_resources=25 max_active_records=25 max_pending_retirements=0 max_render_fading_resources=0 dense_world_files=0
 WT_VALIDATION_G44_EDIT_POLICY_SHAPE_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 edits=6 inside_samples=... outside_unchanged_samples=... max_commit_frames=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g44_edit_policy_shape_quality/g44_edit_policy_shape_quality_report.json
+WT_VALIDATION_G45_CONTRACT_PASS implementation=storage_recovery_schema_quality
+WT_VALIDATION_G45_STORAGE_RECOVERY_SCHEMA_PASS profile=g19_compact_2k_on_demand compact_2k_edits=3 compact_2k_replayed=3 compact_2k_recovered=3 journal_magic=WTEDIT journal_format_version=1 journal_source_revision=190019 journal_bytes=... truncated_tail_bytes=... recovery_truncated_to_bytes=... compaction_profile=g8_sparse_2k compacted_pages=93 compacted_source_revision=8102 compacted_world_revision=... compacted_reopened=1 compacted_journal_exists=false max_render_resources=25 max_collision_resources=25 max_active_records=25 dense_world_files=0
+WT_VALIDATION_G45_STORAGE_RECOVERY_SCHEMA_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 compact_2k_edits=3 compact_2k_replayed=3 compact_2k_recovered=3 compaction_profile=g8_sparse_2k compacted_pages=93 compacted_reopened=1 quality_track=runtime_terrain dense_world_files=0 report=artifacts/g45_storage_recovery_schema_quality/g45_storage_recovery_schema_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -393,21 +402,22 @@ python tools/g41_runtime_frame_budget_telemetry_quality.py
 python tools/g42_collision_traversal_stability_quality.py
 python tools/g43_view_distance_presentation_quality.py
 python tools/g44_edit_policy_shape_quality.py
+python tools/g45_storage_recovery_schema_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G44 is the latest completed terrain quality gate. Current state after G44 is
+G45 is the latest completed terrain quality gate. Current state after G45 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
-coverage plus default sphere edit policy/repeated edit shape validation, not
-production-ready large-world terrain. The gap to the expected final world/terrain
-is tracked in
+coverage plus default sphere edit policy/repeated edit shape validation and
+compact storage recovery schema evidence, not production-ready large-world
+terrain. The gap to the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
 through G60, with G60 as the release-candidate finish line. Next terrain work is
-G45 storage recovery schema quality and must advance through that finite list
+G46 terrain addon API contract quality and must advance through that finite list
 instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.

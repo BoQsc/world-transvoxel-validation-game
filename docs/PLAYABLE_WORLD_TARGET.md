@@ -214,14 +214,19 @@ G44 is the latest completed edit policy and shape quality gate. It locks the def
 sphere carve/place policy for the validation layer and verifies repeated edit
 shape behavior with authoritative samples.
 
+G45 is the latest completed storage recovery schema quality gate. It verifies compact
+storage policy, journal versioning, reload, truncated-tail recovery, and
+compaction/reopen behavior.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G44 is automated validation-grade compact 2K terrain runtime
+Current state after G45 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
-shape validation, not production-ready large-world terrain. The next
-production-gap direction is storage/recovery schema, followed by terrain addon API
-stability and material/texture quality.
+shape validation plus compact storage recovery schema evidence, not
+production-ready large-world terrain. The next production-gap direction is terrain
+addon API stability, followed by validation-workaround removal and native hot-path
+boundary quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0

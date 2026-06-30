@@ -14,12 +14,13 @@ REQUIRED_PHRASES = {
         "Expected final world/terrain target",
         "Proven by the current validation track",
         "Not production-ready yet",
-        "Runtime frame budget telemetry is not yet a production performance contract",
-        "Player collision traversal is not yet a long-route stability contract",
-        "Human-facing playable view distance is not yet a production presentation contract",
         "The public terrain addon API is not yet locked as a game-facing contract",
+        "Validation-game workarounds are not yet removed or moved into the correct addon boundary",
+        "Native hot-path boundaries are not yet locked",
+        "Debug telemetry UI is not yet production quality",
+        "Terrain profile standards are not yet final",
         "The material/texture pipeline is not yet production quality",
-        "Storage/recovery is not yet a long-term schema contract",
+        "Underground terrain variation is not yet a production contract",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -29,6 +30,7 @@ REQUIRED_PHRASES = {
         "G43 - View distance presentation quality",
         "G44 - Edit policy and shape quality",
         "G45 - Storage recovery schema quality",
+        "G46 - Terrain addon API contract quality",
         "world-transvoxel",
         "world-transvoxel-terrain",
         "validation game",
@@ -67,7 +69,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=storage_recovery_schema_quality")
+    print(f"{MARKER} next=terrain_addon_api_contract_quality")
 
 
 if __name__ == "__main__":

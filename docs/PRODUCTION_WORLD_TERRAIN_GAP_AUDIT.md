@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G44, what the expected final world/terrain target is, and
+game actually is after G45, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G44
+## Current claim boundary after G45
 
-The current validated claim after G44 is:
+The current validated claim after G45 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, and default sphere edit policy/repeated edit shape validation, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, and compact storage recovery schema evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -19,8 +19,10 @@ stream a bounded local Transvoxel detail window, edit terrain, replay distribute
 edits, remain cold when idle, measure frame/update telemetry, prove collision
 traversal stability across flat, mountain/sloped, and edited terrain cases, prove
 multi-position first-person view-distance presentation coverage, verify the
-default sphere carve/place policy with repeated edit shape samples, and produce
-automated evidence for specific runtime quality gates.
+default sphere carve/place policy with repeated edit shape samples, verify
+compact storage journal/reload/truncated-tail recovery plus sparse 2K
+compaction/reopen, and produce automated evidence for specific runtime quality
+gates.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -61,40 +63,45 @@ These items are currently backed by milestone evidence in this repository:
 - movement streaming across multiple compact 2K regions;
 - repeated streaming endurance returning to final cold idle;
 - distributed edits across distant compact 2K regions with replay verification;
-- visible edit/material feedback above an image-delta threshold.
+- visible edit/material feedback above an image-delta threshold;
+- runtime frame/update telemetry across idle, movement, editing, and reload;
+- scripted collision traversal stability across flat, sloped, mountainous, and
+  edited validation profiles;
+- first-person compact 2K view-distance presentation coverage;
+- repeated default sphere edit policy and shape behavior;
+- compact 2K journal/reload/truncated-tail recovery plus sparse 2K
+  compaction/reopen.
 
 ## Not production-ready yet
 
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. Runtime frame budget telemetry is not yet a production performance contract.
-   We need measured frame-time, update-churn, memory/resource, and edit/stream
-   cost evidence across idle, movement, streaming, and editing.
-2. Player collision traversal is not yet a long-route stability contract. We
-   need scripted traversal over flat, sloped, mountainous, and edited terrain
-   with floor/contact stability, no falling through terrain, and no control
-   breakage.
-3. Human-facing playable view distance is not yet a production presentation
-   contract. Automated full visual coverage exists, but the first-person
-   presentation still needs draw-distance/horizon assertions that match the
-   intended large-world experience.
-4. The public terrain addon API is not yet locked as a game-facing contract.
+1. The public terrain addon API is not yet locked as a game-facing contract.
    Games need stable generation, streaming, edit, material, storage, telemetry,
    and debug hooks without depending on validation-game internals.
-5. The material/texture pipeline is not yet production quality. We need stable
+2. Validation-game workarounds are not yet removed or moved into the correct
+   addon boundary. The validation game must not mask addon incompleteness.
+3. Native hot-path boundaries are not yet locked. Heavy generation, meshing,
+   streaming, edit application, storage, and validation paths must avoid
+   GDScript hot loops.
+4. Debug telemetry UI is not yet production quality. Games need inspectable
+   active chunks, queues, frame/update cost, edit state, material state, and
+   storage state.
+5. Terrain profile standards are not yet final. Flat, mountain, compact 2K, and
+   seeded procedural profiles still need deterministic production defaults.
+6. The material/texture pipeline is not yet production quality. We need stable
    texture selection, small test assets, biome/material assignment rules, and no
    visible edit flicker.
-6. Dynamic LOD and seam quality are not yet final production contracts. The
-   current path validates bounded local detail, not a finished multi-LOD terrain
-   product.
-7. Storage/recovery is not yet a long-term schema contract. The edit journal is
-   validated, but versioning, compaction, binary format policy, recovery rules,
-   and migration behavior still need gates.
-8. World generation is not yet the final game-world generator. Flat baseline and
+7. Underground terrain variation is not yet a production contract. Mining and
+   deep terrain need voxel-based density/material behavior below the surface.
+8. Large-world streaming radius and dynamic LOD seam quality are not yet final
+   production contracts. The current path validates bounded local detail, not a
+   finished multi-LOD terrain product.
+9. World generation is not yet the final game-world generator. Flat baseline and
    compact procedural terrain are required, but biomes, underground variation,
    veins, caves, and optional quantized generation need separate standards.
-9. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
+10. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
    and compute/GPU acceleration are future systems. They must not be treated as
    complete just because the terrain validation path exists.
 
@@ -127,6 +134,9 @@ The first production-gap milestones are:
    policy and prove repeated edit shape behavior.
 5. `G45 - Storage recovery schema quality`: prove compact binary/storage policy,
    deterministic recovery, journal compaction, and versioned migration behavior.
+6. `G46 - Terrain addon API contract quality`: lock the minimal stable
+   game-facing API for generation, streaming, editing, materials, storage, and
+   telemetry.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -136,12 +146,14 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G44.
+runtime after G45.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
 gap for current validation profiles. G43 closed the view distance presentation
 quality gap for current compact 2K first-person views. G44 closed the edit policy
-and repeated shape quality gap for the default validation sphere brush. The
-immediate direction after G44 is to close the storage/recovery schema gap through
-G45, then continue through the finite G41-G60 Terrain 1.0 roadmap.
+and repeated shape quality gap for the default validation sphere brush. G45
+closed the storage/recovery schema quality gap for compact 2K journal recovery
+and sparse 2K compaction/reopen. The immediate direction after G45 is to close
+the game-facing terrain addon API contract gap through G46, then continue through
+the finite G41-G60 Terrain 1.0 roadmap.

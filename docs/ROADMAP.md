@@ -1022,3 +1022,34 @@ Boundary:
   behavior. It does not claim full public terrain editing API stability, final
   mining design, non-sphere production brushes, fluids, biomes, vegetation,
   buildings, multiplayer, or a separate game repository.
+
+## G45 - Storage recovery schema quality
+
+Status: complete when `WT_VALIDATION_G45_CONTRACT_PASS` and
+`WT_VALIDATION_G45_STORAGE_RECOVERY_SCHEMA_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- compact 2K storage uses a compact deterministic descriptor plus versioned
+  `world.wtedit` journal, not dense near-2K world files;
+- journal format version is locked to schema `1`;
+- physical journal bytes expose the schema-1 `WTEDIT` container header and
+  expected source revision;
+- compact 2K edits reload and replay from the journal;
+- a simulated interrupted write with a truncated `WTEDIT` tail is recovered by
+  reopening and truncating to the last complete transaction prefix;
+- `WtTerrainWorld` exposes game-facing snapshot request wrappers;
+- existing sparse 2K baked-fixture compaction writes a side-by-side snapshot, reopens it, and
+  verifies the edited authoritative sample;
+- compacted output starts without a carried edit journal;
+- active resources return to the 25-resource compact detail window;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves compact 2K journal/reload/truncated-tail recovery and
+  compaction/reopen through the existing sparse 2K baked fixture. It does not
+  claim final save UI, cloud sync, massive world compaction, procedural-world
+  compaction, public terrain API stability, materials/textures, LOD seam quality,
+  water, vegetation, buildings, multiplayer, or a separate game repository.
