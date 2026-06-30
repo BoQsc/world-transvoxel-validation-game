@@ -136,6 +136,7 @@ The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
 runtime after G40.
 
-The immediate direction is to close the production-readiness gap through
-measured runtime terrain quality milestones, starting with runtime frame budget
-telemetry quality.
+G41 closed the runtime frame budget telemetry quality gap for the current
+compact 2K validation path. The immediate direction after G41 is to close the
+production-readiness gap through G42 collision traversal stability quality, then
+continue through the finite G41-G60 Terrain 1.0 roadmap.

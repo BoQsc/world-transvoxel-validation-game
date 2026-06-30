@@ -905,3 +905,31 @@ Boundary:
   compact CPU/native terrain path. It does not claim final terrain art, seamless
   dynamic LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
   multiplayer, or a separate game repository.
+
+## G41 - Runtime frame budget telemetry quality
+
+Status: complete when `WT_VALIDATION_G41_CONTRACT_PASS` and
+`WT_VALIDATION_G41_RUNTIME_FRAME_BUDGET_TELEMETRY_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- runtime frame budget telemetry quality is measured in the normal compact 2K
+  runtime scene;
+- telemetry covers settled idle, movement/streaming, real carve/construct edits,
+  and reload after edits;
+- at least five telemetry phases and at least 240 measured frames are recorded;
+- every phase records average frame milliseconds and max frame milliseconds;
+- maximum phase average frame time remains below the telemetry budget;
+- maximum single-frame spike remains below the spike budget;
+- transient active render, collision, and chunk records remain bounded to 50;
+- render fade/blink resources remain zero;
+- dense near-2K source/world files are not reintroduced;
+- machine-readable telemetry JSON is written for later trend comparison.
+
+Boundary:
+
+- this creates the first runtime frame/update budget contract for the current
+  compact CPU/native terrain path. It does not claim final optimization,
+  seamless dynamic LOD, GPU/compute generation, fluids, biomes, vegetation,
+  buildings, multiplayer, or a separate game repository.

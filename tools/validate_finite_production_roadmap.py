@@ -58,6 +58,7 @@ REQUIRED_PHRASES = {
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
         "G41 through G60",
+        "G41 is the latest completed runtime frame budget telemetry quality gate",
         "python tools/validate_finite_production_roadmap.py",
         "WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS",
     ),

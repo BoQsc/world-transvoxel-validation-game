@@ -195,13 +195,18 @@ G40 is the active edit visual material feedback quality gate. It captures a
 focused terrain patch before and after real edits, requires visible image delta,
 verifies material stability, and checks authoritative edited samples.
 
+G41 is the latest completed runtime frame budget telemetry quality gate. It
+measures idle, movement/streaming, edit, and reload phase frame/update costs in
+the normal compact 2K runtime scene and writes machine-readable telemetry for
+later production comparison.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G40 is automated validation-grade compact 2K terrain runtime,
-not production-ready large-world terrain. The next production-gap direction is
-runtime frame budget telemetry quality, followed by collision traversal
-stability, terrain addon API stability, material/texture quality, and
-storage/recovery schema quality.
+Current state after G41 is automated validation-grade compact 2K terrain runtime
+with measured frame/update telemetry, not production-ready large-world terrain.
+The next production-gap direction is collision traversal stability quality,
+followed by view-distance presentation, edit policy, storage/recovery schema,
+terrain addon API stability, and material/texture quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -234,6 +239,8 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
 - streaming endurance stability quality gate before renewed human visual review;
 - distributed edit streaming quality gate before renewed human visual review;
 - edit visual material feedback quality gate before renewed human visual review;
+- runtime frame budget telemetry quality gate before claiming production-ready
+  terrain performance;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.

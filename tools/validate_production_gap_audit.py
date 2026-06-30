@@ -67,7 +67,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=runtime_frame_budget_telemetry_quality")
+    print(f"{MARKER} next=collision_traversal_stability_quality")
 
 
 if __name__ == "__main__":

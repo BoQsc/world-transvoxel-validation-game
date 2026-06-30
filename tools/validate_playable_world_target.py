@@ -92,6 +92,7 @@ REQUIRED_PHRASES = {
         "G38 is the active streaming endurance stability quality gate",
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
+        "G41 is the latest completed runtime frame budget telemetry quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -141,6 +142,7 @@ REQUIRED_PHRASES = {
         "## G38 - Streaming endurance stability quality",
         "## G39 - Distributed edit streaming quality",
         "## G40 - Edit visual material feedback quality",
+        "## G41 - Runtime frame budget telemetry quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -164,6 +166,7 @@ REQUIRED_PHRASES = {
         "G38 is the active streaming endurance stability quality gate",
         "G39 is the active distributed edit streaming quality gate",
         "G40 is the active edit visual material feedback quality gate",
+        "G41 is the latest completed runtime frame budget telemetry quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -204,7 +207,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=runtime_frame_budget_telemetry_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=collision_traversal_stability_quality")
 
 
 if __name__ == "__main__":
