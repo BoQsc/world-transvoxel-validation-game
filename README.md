@@ -97,9 +97,13 @@ G42 is the latest completed collision traversal stability quality gate: it
 drives the real player over flat, mountain/sloped, and edited compact 2K terrain
 while checking floor contact, control state, vertical stability, and
 active-resource bounds.
-Current claim boundary after G42: automated validation-grade compact 2K terrain
-runtime with measured frame/update telemetry and collision traversal stability,
-not production-ready large-world terrain. The production gap is tracked
+G43 is the latest completed view distance presentation quality gate: it captures
+multiple first-person compact 2K views and rejects tiny one-chunk-only
+presentation.
+Current claim boundary after G43: automated validation-grade compact 2K terrain
+runtime with measured frame/update telemetry, collision traversal stability, and
+view-distance presentation coverage, not production-ready large-world terrain.
+The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is tracked in
@@ -227,6 +231,8 @@ python tools/validate_g41_contract.py
 python tools/g41_runtime_frame_budget_telemetry_quality.py
 python tools/validate_g42_contract.py
 python tools/g42_collision_traversal_stability_quality.py
+python tools/validate_g43_contract.py
+python tools/g43_view_distance_presentation_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -236,8 +242,8 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=view_distance_presentation_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=view_distance_presentation_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=edit_policy_shape_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=edit_policy_shape_quality
 WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
@@ -353,6 +359,9 @@ WT_VALIDATION_G41_RUNTIME_FRAME_BUDGET_TELEMETRY_SMOKE_PASS profile=g19_compact_
 WT_VALIDATION_G42_CONTRACT_PASS implementation=collision_traversal_stability_quality
 WT_VALIDATION_G42_COLLISION_TRAVERSAL_STABILITY_PASS profile_cases=3 route_segments=... edited_segments=... total_motion=... min_floor_contact_ratio=... max_off_floor_streak=... min_player_y=... max_abs_vertical_velocity=... max_render_resources=... max_collision_resources=... max_active_records=... max_render_fading_resources=0 dense_world_files=0
 WT_VALIDATION_G42_COLLISION_TRAVERSAL_STABILITY_SMOKE_PASS engines=2 profile_cases=3 route_segments=... total_motion=... min_floor_contact_ratio=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g42_collision_traversal_stability_quality/g42_collision_traversal_stability_quality_report.json
+WT_VALIDATION_G43_CONTRACT_PASS implementation=view_distance_presentation_quality
+WT_VALIDATION_G43_VIEW_DISTANCE_PRESENTATION_PASS profile=g19_compact_2k_on_demand captures=3 full_visual_blocks=2048x2048 min_colored_samples=... min_horizontal_bins=... min_vertical_bins=... min_mid_band_samples=... max_render_resources=25 max_collision_resources=25 max_render_fading_resources=0 dense_world_files=0
+WT_VALIDATION_G43_VIEW_DISTANCE_PRESENTATION_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 captures=3 min_colored_samples=... min_horizontal_bins=... min_mid_band_samples=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g43_view_distance_presentation_quality/g43_view_distance_presentation_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -373,19 +382,21 @@ python tools/g39_distributed_edit_streaming_quality.py
 python tools/g40_edit_visual_material_feedback_quality.py
 python tools/g41_runtime_frame_budget_telemetry_quality.py
 python tools/g42_collision_traversal_stability_quality.py
+python tools/g43_view_distance_presentation_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G42 is the latest completed terrain quality gate. Current state after G42 is
+G43 is the latest completed terrain quality gate. Current state after G43 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
-telemetry and collision traversal stability, not production-ready large-world
-terrain. The gap to the expected final world/terrain is tracked in
+telemetry, collision traversal stability, and view-distance presentation
+coverage, not production-ready large-world terrain. The gap to the expected
+final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
 through G60, with G60 as the release-candidate finish line. Next terrain work is
-G43 view distance presentation quality and must advance through that finite list
+G44 edit policy and shape quality and must advance through that finite list
 instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.

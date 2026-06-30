@@ -961,3 +961,31 @@ Boundary:
   does not claim final character controller design, final terrain art, seamless
   dynamic LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
   multiplayer, or a separate game repository.
+
+## G43 - View distance presentation quality
+
+Status: complete when `WT_VALIDATION_G43_CONTRACT_PASS` and
+`WT_VALIDATION_G43_VIEW_DISTANCE_PRESENTATION_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- view distance presentation quality is measured through first-person captures
+  in the normal compact 2K runtime scene;
+- the full terrain visual reports 2048 by 2048 block coverage;
+- at least three map-scale first-person captures are written;
+- every capture contains enough colored terrain samples;
+- every capture spans enough horizontal and vertical image bins;
+- every capture contains enough mid-band terrain samples for horizon/presentation
+  coverage;
+- local active render and collision resources remain bounded to 25;
+- render fade/blink resources remain zero;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this detects tiny-patch or one-chunk-only first-person presentation regressions
+  in the current compact CPU/native terrain path. It does not claim final art
+  direction, final draw-distance policy, seamless dynamic LOD, GPU/compute
+  generation, fluids, biomes, vegetation, buildings, multiplayer, or a separate
+  game repository.

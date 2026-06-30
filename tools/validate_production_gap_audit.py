@@ -67,7 +67,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=view_distance_presentation_quality")
+    print(f"{MARKER} next=edit_policy_shape_quality")
 
 
 if __name__ == "__main__":
