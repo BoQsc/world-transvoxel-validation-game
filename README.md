@@ -60,6 +60,10 @@ reimports it from a clean Godot cache, and launches it through `project.godot`.
 G32 is the active exact review-bundle autonomous runtime proof gate: it copies
 the G30 bundle to `bundle_runtime_copy` and runs G25, G26, and G27 from that
 copied review artifact before human review.
+G33 is the active runtime terrain quality gate: it audits the G32 runtime
+evidence for full 2048 by 2048 terrain coverage, first-person route evidence,
+bounded active resources, edit/material behavior, copied PNG evidence, and
+runtime ceilings. Human-visible review is not the active project direction.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -248,9 +252,27 @@ WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=..
 WT_VALIDATION_G32_CONTRACT_PASS implementation=review_bundle_runtime_proof
 WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_PASS profile=g19_compact_2k_on_demand engines=2 scripts=6 exact_review_bundle=true g25=true g26=true g27=true map_blocks=2048 max_script_seconds=... runtime_copy_human_input=false source_bundle_human_input=true dense_world_files=0
 WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_SMOKE_PASS engines=2 scripts=6 max_script_seconds=... report=artifacts/g32_review_bundle_runtime_proof/g32_review_bundle_runtime_proof_report.json
+WT_VALIDATION_G33_CONTRACT_PASS implementation=runtime_terrain_quality_gate
+WT_VALIDATION_G33_RUNTIME_TERRAIN_QUALITY_PASS profile=g19_compact_2k_on_demand engines=2 g25=2 g26=2 g27=2 map_blocks=2048 max_active_resources=25 max_script_seconds=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g33_runtime_terrain_quality_gate/g33_runtime_terrain_quality_gate_report.json
 ```
 
-## Human-visible playtest
+## Active terrain quality track
+
+The active direction is runtime terrain quality, not repeated human-review
+packaging. The current baseline is:
+
+```console
+python tools/g32_review_bundle_runtime_proof.py
+python tools/g33_runtime_terrain_quality_gate.py
+```
+
+G33 is the gate to beat before adding the next terrain feature. Next terrain
+work should improve measured runtime behavior, terrain correctness, edit
+latency/persistence, material quality, or addon API stability. Human-visible
+review remains useful as a final sanity check, but it is not the active project
+direction.
+
+## Human-visible sanity check
 
 Do not open the repository-root `project.godot` for terrain playtesting. The
 root project is only a safe notice project and intentionally does not vendor
@@ -305,17 +327,18 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-Do not request current compact near-2K human review until the review bundle
-launch preflight and exact bundle runtime proof gates pass. G24 is capped-window
-regression evidence only, G25 is an overhead visual baseline, G26 is
-first-person full-terrain runtime evidence, G27 is scene-level handoff
-preflight, G28 is normal launch preflight, G29 is the human-ready project
-generator, G30 is the auditable review bundle generator, G31 is launch
-preflight, and G32 is exact review-bundle runtime proof. First run:
+Do not request current compact near-2K human-visible sanity check until the
+runtime terrain quality gate passes. G24 is capped-window regression evidence
+only, G25 is an overhead visual baseline, G26 is first-person full-terrain
+runtime evidence, G27 is scene-level runtime preflight, G28 is normal launch
+preflight, G29 is the human-ready project generator, G30 is the auditable bundle
+generator, G31 is launch preflight, G32 is exact bundle runtime proof, and G33
+is the active runtime terrain quality gate. First run:
 
 ```console
 python tools/g31_review_bundle_launch_preflight.py
 python tools/g32_review_bundle_runtime_proof.py
+python tools/g33_runtime_terrain_quality_gate.py
 ```
 
 Then open:

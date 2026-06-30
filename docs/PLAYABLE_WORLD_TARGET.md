@@ -149,7 +149,14 @@ copied review-bundle runtime proof by running G25 full-terrain visual baseline,
 G26 full-terrain playable experience, and G27 full-terrain handoff preflight
 from a separate automation copy of the G30 bundle.
 
-## Required before final human visual handoff
+G33 is the active runtime terrain quality gate. It audits the exact runtime
+evidence from G32 and enforces full visual coverage, first-person route evidence,
+bounded active resources, edit/material behavior, copied PNG evidence, and a
+30 second per-script quality ceiling. From G33 onward, runtime terrain quality
+gates are the active direction; human-visible review remains a final sanity
+check, not the active project direction.
+
+## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
 - flat terrain baseline as the default reproducible mode;
@@ -166,6 +173,7 @@ from a separate automation copy of the G30 bundle.
 - Compact 2K review bundle before renewed human visual review;
 - copied-bundle launch readiness before renewed human visual review;
 - copied review-bundle runtime proof before renewed human visual review;
+- runtime terrain quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

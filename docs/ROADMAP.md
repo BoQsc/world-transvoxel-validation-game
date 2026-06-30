@@ -700,3 +700,33 @@ Boundary:
   handoff artifact; it does not claim human approval, final terrain art,
   seamless dynamic LOD, GPU/compute generation, fluids, biomes, vegetation,
   buildings, multiplayer, or a separate game repository.
+
+## G33 - Runtime terrain quality gate
+
+Status: complete when `WT_VALIDATION_G33_CONTRACT_PASS` and
+`WT_VALIDATION_G33_RUNTIME_TERRAIN_QUALITY_PASS` both pass.
+
+Exit:
+
+- this is the active runtime terrain quality gate;
+- this is not another human review package;
+- G32 exact-bundle runtime evidence exists for at least two Godot engines;
+- G25 full-terrain visual baseline evidence proves full 2048 by 2048 terrain
+  visual coverage;
+- G26 first-person playable experience evidence proves player-driven streaming,
+  first-person captures, and bounded active resources;
+- G27 full-terrain handoff preflight evidence proves material application,
+  local edit commit behavior, first-person captures, and automation-safe input;
+- each runtime script remains below the 30 second quality ceiling;
+- every runtime check keeps the bounded 25-resource native detail window;
+- copied PNG evidence exists on disk and is non-empty;
+- generated compact terrain storage remains inside the 50 MB file and 100 MB
+  total budget;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this turns the active track toward terrain quality instead of review packaging.
+  It does not claim final terrain art, seamless dynamic LOD, GPU/compute
+  generation, fluids, biomes, vegetation, buildings, multiplayer, or a separate
+  game repository.
