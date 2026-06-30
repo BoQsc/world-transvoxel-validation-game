@@ -144,6 +144,11 @@ launch readiness by creating `bundle_launch_copy`, removing stale Godot import
 cache, disabling human input only in the automation copy, and launching the
 copied bundle project through `project.godot`.
 
+G32 is the active exact review-bundle autonomous runtime proof gate. It proves
+copied review-bundle runtime proof by running G25 full-terrain visual baseline,
+G26 full-terrain playable experience, and G27 full-terrain handoff preflight
+from a separate automation copy of the G30 bundle.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -160,6 +165,7 @@ copied bundle project through `project.godot`.
 - human-ready compact 2K handoff project before renewed human visual review;
 - Compact 2K review bundle before renewed human visual review;
 - copied-bundle launch readiness before renewed human visual review;
+- copied review-bundle runtime proof before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

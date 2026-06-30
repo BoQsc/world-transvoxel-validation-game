@@ -57,6 +57,9 @@ with hashes into one auditable directory.
 G31 is the active review bundle launch preflight gate: it copies the G30 bundle
 to `bundle_launch_copy`, disables human input only in that automation copy,
 reimports it from a clean Godot cache, and launches it through `project.godot`.
+G32 is the active exact review-bundle autonomous runtime proof gate: it copies
+the G30 bundle to `bundle_runtime_copy` and runs G25, G26, and G27 from that
+copied review artifact before human review.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -242,6 +245,9 @@ WT_VALIDATION_G30_COMPACT_2K_REVIEW_BUNDLE_PASS profile=g19_compact_2k_on_demand
 WT_VALIDATION_G31_CONTRACT_PASS implementation=review_bundle_launch_preflight
 WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_PASS profile=g19_compact_2k_on_demand engines=2 max_ready_seconds=... launch_copy_human_input=false source_bundle_human_input=true dense_world_files=0
 WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=... report=artifacts/g31_review_bundle_launch_preflight/g31_review_bundle_launch_preflight_report.json
+WT_VALIDATION_G32_CONTRACT_PASS implementation=review_bundle_runtime_proof
+WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_PASS profile=g19_compact_2k_on_demand engines=2 scripts=6 exact_review_bundle=true g25=true g26=true g27=true map_blocks=2048 max_script_seconds=... runtime_copy_human_input=false source_bundle_human_input=true dense_world_files=0
+WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_SMOKE_PASS engines=2 scripts=6 max_script_seconds=... report=artifacts/g32_review_bundle_runtime_proof/g32_review_bundle_runtime_proof_report.json
 ```
 
 ## Human-visible playtest
@@ -300,14 +306,16 @@ replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
 Do not request current compact near-2K human review until the review bundle
-launch preflight gate passes. G24 is capped-window regression evidence only, G25
-is an overhead visual baseline, G26 is first-person full-terrain runtime
-evidence, G27 is scene-level handoff preflight, G28 is normal launch preflight,
-G29 is the human-ready project generator, and G30 is the auditable review bundle
-generator. First run:
+launch preflight and exact bundle runtime proof gates pass. G24 is capped-window
+regression evidence only, G25 is an overhead visual baseline, G26 is
+first-person full-terrain runtime evidence, G27 is scene-level handoff
+preflight, G28 is normal launch preflight, G29 is the human-ready project
+generator, G30 is the auditable review bundle generator, G31 is launch
+preflight, and G32 is exact review-bundle runtime proof. First run:
 
 ```console
 python tools/g31_review_bundle_launch_preflight.py
+python tools/g32_review_bundle_runtime_proof.py
 ```
 
 Then open:
@@ -320,9 +328,11 @@ The G31 proof is the automated prerequisite before human review. It copies the
 G30 review bundle to a separate launch workspace, removes stale Godot import
 cache, disables human input only in that automation copy, imports it, and proves
 the copied bundle reaches the ready marker through `project.godot`. Open the
-original G30 bundle for human review; it remains human-input enabled. G27
-remains the deeper scene-level proof for compact 2048 by 2048 terrain
-visibility, first-person captures, event-driven material application, local
-native Transvoxel chunks following scripted player movement for
-editable/collision detail, bounded material-repair audit behavior, a committed
-terrain edit, and rejection of dense near-2K source/world files.
+original G30 bundle for human review; it remains human-input enabled. The G32
+proof is the autonomous runtime prerequisite on the exact copied review bundle:
+it runs G25, G26, and G27 from `bundle_runtime_copy`, preserving the source G30
+bundle for human review while proving compact 2048 by 2048 terrain visibility,
+first-person captures, event-driven material application, local native
+Transvoxel chunks following scripted player movement for editable/collision
+detail, bounded material-repair audit behavior, committed terrain edits, and
+rejection of dense near-2K source/world files.

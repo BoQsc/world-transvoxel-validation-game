@@ -673,3 +673,30 @@ Boundary:
   approval, final terrain art, seamless dynamic LOD, GPU/compute generation,
   fluids, biomes, vegetation, buildings, multiplayer, or a separate game
   repository.
+
+## G32 - Review bundle runtime proof
+
+Status: complete when `WT_VALIDATION_G32_CONTRACT_PASS` and
+`WT_VALIDATION_G32_REVIEW_BUNDLE_RUNTIME_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the exact review-bundle autonomous runtime proof gate;
+- the source G30 bundle remains human-input ready;
+- `bundle_runtime_copy` is created as a separate automation runtime copy;
+- stale `.godot` import cache is removed from the runtime copy before import;
+- automation disables human input only in the runtime copy;
+- Godot import passes for the runtime copy;
+- G25 full-terrain visual baseline passes from the runtime copy;
+- G26 full-terrain playable experience passes from the runtime copy;
+- G27 full-terrain handoff preflight passes from the runtime copy;
+- runtime proof captures and logs are copied into G32 evidence;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves copied review-bundle runtime behavior for the current compact 2K
+  handoff artifact; it does not claim human approval, final terrain art,
+  seamless dynamic LOD, GPU/compute generation, fluids, biomes, vegetation,
+  buildings, multiplayer, or a separate game repository.
