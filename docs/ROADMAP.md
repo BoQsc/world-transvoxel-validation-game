@@ -778,3 +778,28 @@ Boundary:
   CPU/native terrain path. It does not claim final terrain art, seamless dynamic
   LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
   multiplayer, or a separate game repository.
+
+## G36 - Cold idle performance quality
+
+Status: complete when `WT_VALIDATION_G36_CONTRACT_PASS` and
+`WT_VALIDATION_G36_COLD_IDLE_PERFORMANCE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- cold-idle performance stability is measured in the normal compact 2K runtime
+  scene after the active detail window settles;
+- viewer update count remains unchanged over 300 idle frames;
+- edit replacement count remains unchanged without edits;
+- material auto-apply count remains unchanged after material stability;
+- render and collision resources remain bounded to 25;
+- render queues, collision queues, pending retirements, and render fade/blink
+  resources remain zero;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves cold-idle performance stability for the current compact CPU/native
+  terrain path. It does not claim final terrain art, seamless dynamic LOD,
+  GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
+  or a separate game repository.

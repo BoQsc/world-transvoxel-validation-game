@@ -170,6 +170,11 @@ checks full-map mesh shape, finite surface heights, neighbor and diagonal-pair
 continuity thresholds, material palette bounds, backend/visual height agreement,
 capture evidence, and bounded active resources.
 
+G36 is the active cold-idle performance quality gate. It holds the compact 2K
+runtime scene idle for 300 frames after settling and proves no viewer-update
+churn, edit-replacement churn, material auto-apply churn, queued work, pending
+retirements, or render fade/blink resources occur.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -191,6 +196,7 @@ capture evidence, and bounded active resources.
 - edit latency and persistence quality gate before renewed human visual review;
 - terrain correctness and artifact detection quality gate before renewed human
   visual review;
+- cold-idle performance quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

@@ -70,6 +70,10 @@ the scene, and proves the edits replay from persistent storage.
 G35 is the active terrain correctness and artifact detection quality gate: it
 checks full-map surface continuity, material palette bounds, backend/visual
 height agreement, capture evidence, and bounded active resources.
+G36 is the active cold-idle performance quality gate: it holds the compact 2K
+runtime scene idle for 300 frames and proves there is no viewer-update churn,
+edit-replacement churn, material reapplication churn, queue work, retirements,
+or render fade/blink resources after settling.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -172,6 +176,8 @@ python tools/validate_g34_contract.py
 python tools/g34_edit_latency_persistence_quality.py
 python tools/validate_g35_contract.py
 python tools/g35_terrain_correctness_artifact_quality.py
+python tools/validate_g36_contract.py
+python tools/g36_cold_idle_performance_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -181,7 +187,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=runtime_terrain_quality_gate
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=cold_idle_performance_quality
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -275,6 +281,9 @@ WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_SMOKE_PASS profile=g19_compact_2k_on_
 WT_VALIDATION_G35_CONTRACT_PASS implementation=terrain_correctness_artifact_quality
 WT_VALIDATION_G35_TERRAIN_CORRECTNESS_ARTIFACT_PASS profile=g19_compact_2k_on_demand map_blocks=2048 surface_samples=... backend_samples=... max_backend_height_error=... min_height=... max_height=... max_neighbor_delta=... max_diagonal_pair_delta=... material_ids=... capture_colored_samples=... max_render_resources=25 max_collision_resources=25 dense_world_files=0
 WT_VALIDATION_G35_TERRAIN_CORRECTNESS_ARTIFACT_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 map_blocks=2048 max_backend_height_error=... max_neighbor_delta=... max_diagonal_pair_delta=... min_height=... max_height=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g35_terrain_correctness_artifact_quality/g35_terrain_correctness_artifact_quality_report.json
+WT_VALIDATION_G36_CONTRACT_PASS implementation=cold_idle_performance_quality
+WT_VALIDATION_G36_COLD_IDLE_PERFORMANCE_PASS profile=g19_compact_2k_on_demand idle_frames=300 viewer_update_delta=0 edit_replacement_delta=0 material_auto_apply_delta=0 max_render_resources=25 max_collision_resources=25 max_active_records=25 max_queued_render=0 max_queued_collision=0 max_pending_retirements=0 max_render_fading_resources=0 cold_idle=true dense_world_files=0
+WT_VALIDATION_G36_COLD_IDLE_PERFORMANCE_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 idle_frames=300 viewer_update_delta=0 edit_replacement_delta=0 material_auto_apply_delta=0 max_render_resources=25 max_collision_resources=25 max_active_records=25 quality_track=runtime_terrain dense_world_files=0 report=artifacts/g36_cold_idle_performance_quality/g36_cold_idle_performance_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -288,9 +297,10 @@ python tools/g32_review_bundle_runtime_proof.py
 python tools/g33_runtime_terrain_quality_gate.py
 python tools/g34_edit_latency_persistence_quality.py
 python tools/g35_terrain_correctness_artifact_quality.py
+python tools/g36_cold_idle_performance_quality.py
 ```
 
-G35 is the gate to beat before adding the next terrain feature. Next terrain
+G36 is the gate to beat before adding the next terrain feature. Next terrain
 work should improve measured runtime behavior, broader terrain correctness,
 material quality, edit policy, or addon API stability. Human-visible review
 remains useful as a final sanity check, but it is not the active project

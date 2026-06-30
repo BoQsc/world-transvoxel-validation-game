@@ -87,6 +87,7 @@ REQUIRED_PHRASES = {
         "Post-G33 milestones must not be review, handoff, package, bundle, launch, or human-review milestones",
         "G34 is the active edit latency and persistence quality gate",
         "G35 is the active terrain correctness and artifact detection quality gate",
+        "G36 is the active cold-idle performance quality gate",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -125,6 +126,7 @@ REQUIRED_PHRASES = {
         "## G33 - Runtime terrain quality gate",
         "## G34 - Edit latency persistence quality",
         "## G35 - Terrain correctness artifact quality",
+        "## G36 - Cold idle performance quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -143,6 +145,7 @@ REQUIRED_PHRASES = {
         "G33 is the active runtime terrain quality gate",
         "G34 is the active edit latency and persistence quality gate",
         "G35 is the active terrain correctness and artifact detection quality gate",
+        "G36 is the active cold-idle performance quality gate",
         "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
 }
@@ -164,7 +167,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=terrain_correctness_artifact_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=cold_idle_performance_quality")
 
 
 if __name__ == "__main__":
