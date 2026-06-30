@@ -181,6 +181,11 @@ scripted local movement at each sample, and measures settle frames,
 settled active-resource bounds, transient overlap bounds, fade/blink resources,
 and material-apply churn.
 
+G38 is the active streaming endurance stability quality gate. It repeats the
+compact 2K streaming route for two cycles, verifies ten route samples with real
+local player movement, and requires final cold idle with the standard
+25-resource active window.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -205,6 +210,7 @@ and material-apply churn.
 - cold-idle performance quality gate before renewed human visual review;
 - streaming movement performance quality gate before renewed human visual
   review;
+- streaming endurance stability quality gate before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

@@ -830,3 +830,28 @@ Boundary:
   terrain path. It does not claim final terrain art, seamless dynamic LOD,
   GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
   or a separate game repository.
+
+## G38 - Streaming endurance stability quality
+
+Status: complete when `WT_VALIDATION_G38_CONTRACT_PASS` and
+`WT_VALIDATION_G38_STREAMING_ENDURANCE_STABILITY_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- streaming endurance stability quality is measured in the normal compact 2K
+  runtime scene;
+- two route cycles exercise ten compact 2K route samples;
+- each route sample performs scripted player movement through the real player;
+- each settled active window returns to 25 render, collision, and chunk records;
+- transient streaming overlap remains bounded to 50 records/resources;
+- render fade/blink resources remain zero;
+- final cold idle is true after the repeated route;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves repeated movement-streaming stability for the current compact
+  CPU/native terrain path. It does not claim final terrain art, seamless dynamic
+  LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
+  multiplayer, or a separate game repository.

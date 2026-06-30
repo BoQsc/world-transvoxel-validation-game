@@ -79,6 +79,10 @@ real validation player across five interior compact 2K route samples, performs
 scripted local movement at each sample, and measures streaming settle frames,
 settled active-resource bounds, transient overlap bounds, fade/blink resources,
 and material-apply churn.
+G38 is the active streaming endurance stability quality gate: it repeats the
+compact 2K route for two cycles, verifies ten streaming samples with real local
+player movement, and requires the terrain to return to final cold idle with the
+standard 25-resource active window.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -185,6 +189,8 @@ python tools/validate_g36_contract.py
 python tools/g36_cold_idle_performance_quality.py
 python tools/validate_g37_contract.py
 python tools/g37_streaming_movement_performance_quality.py
+python tools/validate_g38_contract.py
+python tools/g38_streaming_endurance_stability_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -194,7 +200,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=streaming_movement_performance_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=streaming_endurance_stability_quality
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -294,6 +300,9 @@ WT_VALIDATION_G36_COLD_IDLE_PERFORMANCE_SMOKE_PASS profile=g19_compact_2k_on_dem
 WT_VALIDATION_G37_CONTRACT_PASS implementation=streaming_movement_performance_quality
 WT_VALIDATION_G37_STREAMING_MOVEMENT_PERFORMANCE_PASS profile=g19_compact_2k_on_demand route_samples=5 local_motion_samples=5 total_player_motion=... viewer_updates_delta=... max_settle_frames=... max_render_resources=... max_collision_resources=... max_active_records=... max_queued_render=... max_queued_collision=... max_pending_retirements=... max_render_fading_resources=0 max_material_auto_apply_delta=... dense_world_files=0
 WT_VALIDATION_G37_STREAMING_MOVEMENT_PERFORMANCE_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 route_samples=5 max_settle_frames=... min_total_player_motion=... max_render_resources=... max_collision_resources=... max_active_records=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g37_streaming_movement_performance_quality/g37_streaming_movement_performance_quality_report.json
+WT_VALIDATION_G38_CONTRACT_PASS implementation=streaming_endurance_stability_quality
+WT_VALIDATION_G38_STREAMING_ENDURANCE_STABILITY_PASS profile=g19_compact_2k_on_demand route_cycles=2 route_samples=10 local_motion_samples=10 total_player_motion=... viewer_updates_delta=... max_settle_frames=... max_render_resources=... max_collision_resources=... max_active_records=... max_pending_retirements=... max_render_fading_resources=0 final_render_resources=25 final_collision_resources=25 final_active_records=25 final_cold_idle=true dense_world_files=0
+WT_VALIDATION_G38_STREAMING_ENDURANCE_STABILITY_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 route_cycles=2 route_samples=10 max_settle_frames=... min_total_player_motion=... final_cold_idle=true quality_track=runtime_terrain dense_world_files=0 report=artifacts/g38_streaming_endurance_stability_quality/g38_streaming_endurance_stability_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -309,9 +318,10 @@ python tools/g34_edit_latency_persistence_quality.py
 python tools/g35_terrain_correctness_artifact_quality.py
 python tools/g36_cold_idle_performance_quality.py
 python tools/g37_streaming_movement_performance_quality.py
+python tools/g38_streaming_endurance_stability_quality.py
 ```
 
-G37 is the gate to beat before adding the next terrain feature. Next terrain
+G38 is the gate to beat before adding the next terrain feature. Next terrain
 work should improve measured runtime behavior, broader terrain correctness,
 material quality, edit policy, or addon API stability. Human-visible review
 remains useful as a final sanity check, but it is not the active project
