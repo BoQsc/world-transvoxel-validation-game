@@ -803,3 +803,30 @@ Boundary:
   terrain path. It does not claim final terrain art, seamless dynamic LOD,
   GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
   or a separate game repository.
+
+## G37 - Streaming movement performance quality
+
+Status: complete when `WT_VALIDATION_G37_CONTRACT_PASS` and
+`WT_VALIDATION_G37_STREAMING_MOVEMENT_PERFORMANCE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- streaming movement performance quality is measured in the normal compact 2K
+  runtime scene;
+- five interior route samples across the compact 2K map are exercised;
+- each route sample performs scripted player movement through the real player
+  controller;
+- each streaming transition settles within the frame budget;
+- each settled active window returns to 25 render, collision, and chunk records;
+- transient streaming overlap remains bounded to 50 records/resources;
+- render fade/blink resources remain zero;
+- material auto-apply churn remains bounded per route sample;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves movement-streaming behavior for the current compact CPU/native
+  terrain path. It does not claim final terrain art, seamless dynamic LOD,
+  GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
+  or a separate game repository.

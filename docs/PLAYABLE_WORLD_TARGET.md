@@ -175,6 +175,12 @@ runtime scene idle for 300 frames after settling and proves no viewer-update
 churn, edit-replacement churn, material auto-apply churn, queued work, pending
 retirements, or render fade/blink resources occur.
 
+G37 is the active streaming movement performance quality gate. It drives the
+real validation player across five interior compact 2K route samples, performs
+scripted local movement at each sample, and measures settle frames,
+settled active-resource bounds, transient overlap bounds, fade/blink resources,
+and material-apply churn.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -197,6 +203,8 @@ retirements, or render fade/blink resources occur.
 - terrain correctness and artifact detection quality gate before renewed human
   visual review;
 - cold-idle performance quality gate before renewed human visual review;
+- streaming movement performance quality gate before renewed human visual
+  review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

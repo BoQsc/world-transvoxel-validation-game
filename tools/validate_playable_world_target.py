@@ -88,6 +88,7 @@ REQUIRED_PHRASES = {
         "G34 is the active edit latency and persistence quality gate",
         "G35 is the active terrain correctness and artifact detection quality gate",
         "G36 is the active cold-idle performance quality gate",
+        "G37 is the active streaming movement performance quality gate",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -127,6 +128,7 @@ REQUIRED_PHRASES = {
         "## G34 - Edit latency persistence quality",
         "## G35 - Terrain correctness artifact quality",
         "## G36 - Cold idle performance quality",
+        "## G37 - Streaming movement performance quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -146,6 +148,7 @@ REQUIRED_PHRASES = {
         "G34 is the active edit latency and persistence quality gate",
         "G35 is the active terrain correctness and artifact detection quality gate",
         "G36 is the active cold-idle performance quality gate",
+        "G37 is the active streaming movement performance quality gate",
         "WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS",
     ),
 }
@@ -167,7 +170,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=cold_idle_performance_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=streaming_movement_performance_quality")
 
 
 if __name__ == "__main__":
