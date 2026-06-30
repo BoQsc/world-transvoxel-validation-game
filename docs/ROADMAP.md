@@ -754,3 +754,27 @@ Boundary:
   terrain path. It does not claim final terrain art, seamless dynamic LOD,
   GPU/compute generation, fluids, biomes, vegetation, buildings, multiplayer,
   or a separate game repository.
+
+## G35 - Terrain correctness artifact quality
+
+Status: complete when `WT_VALIDATION_G35_CONTRACT_PASS` and
+`WT_VALIDATION_G35_TERRAIN_CORRECTNESS_ARTIFACT_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- full-map terrain visual mesh shape is exactly the expected compact 2K shape;
+- surface samples are finite and inside the expected vertical range;
+- neighbor and diagonal-pair samples stay below artifact thresholds;
+- material samples stay inside the current terrain palette;
+- backend authoritative samples match the full-map visual surface;
+- full-map capture contains enough colored terrain samples;
+- active render and collision resources remain bounded to 25;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves terrain correctness and artifact detection for the current compact
+  CPU/native terrain path. It does not claim final terrain art, seamless dynamic
+  LOD, GPU/compute generation, fluids, biomes, vegetation, buildings,
+  multiplayer, or a separate game repository.

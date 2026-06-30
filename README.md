@@ -67,6 +67,9 @@ runtime ceilings. Human-visible review is not the active project direction.
 G34 is the active edit latency and persistence quality gate: it times carve and
 construct edits, verifies authoritative samples, writes the edit journal, reloads
 the scene, and proves the edits replay from persistent storage.
+G35 is the active terrain correctness and artifact detection quality gate: it
+checks full-map surface continuity, material palette bounds, backend/visual
+height agreement, capture evidence, and bounded active resources.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -167,6 +170,8 @@ python tools/validate_g33_contract.py
 python tools/g33_runtime_terrain_quality_gate.py
 python tools/validate_g34_contract.py
 python tools/g34_edit_latency_persistence_quality.py
+python tools/validate_g35_contract.py
+python tools/g35_terrain_correctness_artifact_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -267,6 +272,9 @@ WT_VALIDATION_G33_RUNTIME_TERRAIN_QUALITY_PASS profile=g19_compact_2k_on_demand 
 WT_VALIDATION_G34_CONTRACT_PASS implementation=edit_latency_persistence_quality
 WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_PASS profile=g19_compact_2k_on_demand edits=2 replayed=2 max_commit_frames=... max_settle_frames=... max_commit_ms=... max_settle_ms=... journal_bytes=... max_render_resources=25 max_collision_resources=25 dense_world_files=0
 WT_VALIDATION_G34_EDIT_LATENCY_PERSISTENCE_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 edits=2 replayed=2 max_commit_frames=... max_settle_frames=... max_commit_ms=... max_settle_ms=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g34_edit_latency_persistence_quality/g34_edit_latency_persistence_quality_report.json
+WT_VALIDATION_G35_CONTRACT_PASS implementation=terrain_correctness_artifact_quality
+WT_VALIDATION_G35_TERRAIN_CORRECTNESS_ARTIFACT_PASS profile=g19_compact_2k_on_demand map_blocks=2048 surface_samples=... backend_samples=... max_backend_height_error=... min_height=... max_height=... max_neighbor_delta=... max_diagonal_pair_delta=... material_ids=... capture_colored_samples=... max_render_resources=25 max_collision_resources=25 dense_world_files=0
+WT_VALIDATION_G35_TERRAIN_CORRECTNESS_ARTIFACT_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 map_blocks=2048 max_backend_height_error=... max_neighbor_delta=... max_diagonal_pair_delta=... min_height=... max_height=... quality_track=runtime_terrain dense_world_files=0 report=artifacts/g35_terrain_correctness_artifact_quality/g35_terrain_correctness_artifact_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -279,11 +287,12 @@ packaging. The current baseline is:
 python tools/g32_review_bundle_runtime_proof.py
 python tools/g33_runtime_terrain_quality_gate.py
 python tools/g34_edit_latency_persistence_quality.py
+python tools/g35_terrain_correctness_artifact_quality.py
 ```
 
-G34 is the gate to beat before adding the next terrain feature. Next terrain
-work should improve measured runtime behavior, terrain correctness, broader edit
-persistence, material quality, or addon API stability. Human-visible review
+G35 is the gate to beat before adding the next terrain feature. Next terrain
+work should improve measured runtime behavior, broader terrain correctness,
+material quality, edit policy, or addon API stability. Human-visible review
 remains useful as a final sanity check, but it is not the active project
 direction.
 

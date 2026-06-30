@@ -165,6 +165,11 @@ compact 2K runtime path from a clean state, performs timed carve and construct
 edits, verifies authoritative samples, verifies edit journal creation, reloads
 the scene, and verifies both edits replay from persistent storage.
 
+G35 is the active terrain correctness and artifact detection quality gate. It
+checks full-map mesh shape, finite surface heights, neighbor and diagonal-pair
+continuity thresholds, material palette bounds, backend/visual height agreement,
+capture evidence, and bounded active resources.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -184,6 +189,8 @@ the scene, and verifies both edits replay from persistent storage.
 - copied review-bundle runtime proof before renewed human visual review;
 - runtime terrain quality gate before renewed human visual review;
 - edit latency and persistence quality gate before renewed human visual review;
+- terrain correctness and artifact detection quality gate before renewed human
+  visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary
