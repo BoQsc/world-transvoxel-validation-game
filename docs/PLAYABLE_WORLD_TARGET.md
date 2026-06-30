@@ -109,6 +109,12 @@ G25 replaces G24 as the active large-terrain visibility gate. It requires full
 native authoritative backend samples, and confirms the active window is only the
 local Transvoxel detail layer for editing and collision.
 
+G26 is the active first-person full-terrain playable-experience gate. It keeps
+human input disabled for automation while player-driven viewer updates remain
+active, captures player-eye views at map-scale positions, verifies the local
+detail window follows scripted player movement, and confirms terrain editing
+still commits.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -118,6 +124,8 @@ local Transvoxel detail layer for editing and collision.
 - textured terrain material path with small, performance-conscious test assets;
 - terrain collision, chunking, cold-idle behavior, and visible-runtime telemetry;
 - full 2048 by 2048 terrain visual coverage before renewed human visual review;
+- first-person full-terrain playable-experience captures before renewed human
+  visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

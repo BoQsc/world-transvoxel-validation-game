@@ -514,3 +514,28 @@ Boundary:
 - this restores the large-terrain visibility requirement, but it does not claim
   final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
   biomes, vegetation, buildings, multiplayer, or a separate game repository.
+
+## G26 - Full terrain playable experience
+
+Status: complete when `WT_VALIDATION_G26_CONTRACT_PASS` and
+`WT_VALIDATION_G26_FULL_TERRAIN_PLAYABLE_EXPERIENCE_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the first-person full-terrain playable experience gate;
+- human input is disabled for automation;
+- player-driven viewer updates remain active when player movement is scripted;
+- first-person player-eye captures are written at origin/center/far-map
+  positions;
+- every sampled position settles to the expected local native Transvoxel detail
+  window;
+- local active render/collision resources remain inside budget;
+- terrain editing still commits through the normal interactor;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves first-person full-terrain validation-game behavior, but it does not
+  claim final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
+  biomes, vegetation, buildings, multiplayer, or a separate game repository.

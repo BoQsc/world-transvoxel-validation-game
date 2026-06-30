@@ -51,7 +51,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_update_camera()
-	if _validation_state == "ready" and human_input_enabled and player_driven_viewer_enabled:
+	if _validation_state == "ready" and player_driven_viewer_enabled:
 		_player_viewer_driver.update_from_player(_player)
 
 func _input(event: InputEvent) -> void:

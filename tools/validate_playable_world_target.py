@@ -60,6 +60,8 @@ REQUIRED_PHRASES = {
         "G25 replaces G24 as the active large-terrain visibility gate",
         "full 2048 by 2048 terrain visual coverage",
         "active window is only the local native Transvoxel detail layer",
+        "G26 is the active first-person full-terrain playable-experience gate",
+        "player-driven viewer updates remain active",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -88,6 +90,7 @@ REQUIRED_PHRASES = {
         "## G23 - Real compact human-playable streaming",
         "## G24 - Autonomous large-terrain acceptance",
         "## G25 - Full terrain visual baseline",
+        "## G26 - Full terrain playable experience",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -96,6 +99,7 @@ REQUIRED_PHRASES = {
         "python tools/validate_playable_world_target.py",
         "WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS",
         "G25 replaces G24 as the active large-terrain visibility gate",
+        "G26 is the active first-person full-terrain playable-experience gate",
     ),
 }
 

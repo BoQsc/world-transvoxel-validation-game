@@ -31,7 +31,7 @@ REQUIRED_PHRASES = {
         "player_driven_viewer_enabled",
         "PlayerViewerDriver",
         "player_viewer_updates",
-        "human_input_enabled and player_driven_viewer_enabled",
+        "_player_viewer_driver.update_from_player",
     ),
     "scripts/validation_profile_catalog.gd": (
         "Vector3(1032, 24, 1032)",
