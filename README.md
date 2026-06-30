@@ -54,6 +54,9 @@ for review.
 G30 is the active compact 2K review bundle gate: it packages the human-ready
 project, G27/G28/G29 evidence, `REVIEW_INDEX.md`, and `HANDOFF_MANIFEST.json`
 with hashes into one auditable directory.
+G31 is the active review bundle launch preflight gate: it copies the G30 bundle
+to `bundle_launch_copy`, disables human input only in that automation copy,
+reimports it from a clean Godot cache, and launches it through `project.godot`.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -146,6 +149,8 @@ python tools/validate_g29_contract.py
 python tools/g29_compact_2k_human_ready_handoff.py --skip-build
 python tools/validate_g30_contract.py
 python tools/g30_compact_2k_review_bundle.py
+python tools/validate_g31_contract.py
+python tools/g31_review_bundle_launch_preflight.py
 ```
 
 Expected marker:
@@ -154,7 +159,7 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=compact_2k_review_bundle
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=review_bundle_launch_preflight
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -234,6 +239,9 @@ WT_VALIDATION_G29_CONTRACT_PASS implementation=compact_2k_human_ready_handoff
 WT_VALIDATION_G29_COMPACT_2K_HUMAN_READY_HANDOFF_PASS profile=g19_compact_2k_on_demand project=... scene=res://scenes/validation_playtest.tscn human_input=true imported_engines=2 review=HUMAN_REVIEW.md dense_world_files=0 report=artifacts/g29_compact_2k_human_ready_handoff/g29_compact_2k_human_ready_handoff_report.json
 WT_VALIDATION_G30_CONTRACT_PASS implementation=compact_2k_review_bundle
 WT_VALIDATION_G30_COMPACT_2K_REVIEW_BUNDLE_PASS profile=g19_compact_2k_on_demand project=project/project.godot manifest=HANDOFF_MANIFEST.json index=REVIEW_INDEX.md evidence_files=... project_files=... total_bytes=... dense_world_files=0
+WT_VALIDATION_G31_CONTRACT_PASS implementation=review_bundle_launch_preflight
+WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_PASS profile=g19_compact_2k_on_demand engines=2 max_ready_seconds=... launch_copy_human_input=false source_bundle_human_input=true dense_world_files=0
+WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_SMOKE_PASS engines=2 max_ready_seconds=... report=artifacts/g31_review_bundle_launch_preflight/g31_review_bundle_launch_preflight_report.json
 ```
 
 ## Human-visible playtest
@@ -291,14 +299,15 @@ presence, crosshair presence, scripted player movement, edit commits,
 replacement metrics, and sample updates. A gray rectangle alone is not an
 acceptable G1 result.
 
-Do not request current compact near-2K human review until the compact 2K review
-bundle gate passes. G24 is capped-window regression evidence only, G25 is an
-overhead visual baseline, G26 is first-person full-terrain runtime evidence, G27
-is scene-level handoff preflight, G28 is normal launch preflight, and G29 is the
-human-ready project generator. First run:
+Do not request current compact near-2K human review until the review bundle
+launch preflight gate passes. G24 is capped-window regression evidence only, G25
+is an overhead visual baseline, G26 is first-person full-terrain runtime
+evidence, G27 is scene-level handoff preflight, G28 is normal launch preflight,
+G29 is the human-ready project generator, and G30 is the auditable review bundle
+generator. First run:
 
 ```console
-python tools/g30_compact_2k_review_bundle.py
+python tools/g31_review_bundle_launch_preflight.py
 ```
 
 Then open:
@@ -307,13 +316,13 @@ Then open:
 artifacts/g30_compact_2k_review_bundle/project/project.godot
 ```
 
-The G30 proof is the automated prerequisite before human review. It packages the
-G29 human-ready generated project with G27/G28/G29 reports and logs,
-`REVIEW_INDEX.md`, `HANDOFF_MANIFEST.json`, SHA-256 hashes, and file-budget
-evidence. G27 remains the deeper scene-level proof for compact 2048 by 2048
-terrain visibility, first-person captures, event-driven material application,
-local native Transvoxel chunks following scripted player movement for
+The G31 proof is the automated prerequisite before human review. It copies the
+G30 review bundle to a separate launch workspace, removes stale Godot import
+cache, disables human input only in that automation copy, imports it, and proves
+the copied bundle reaches the ready marker through `project.godot`. Open the
+original G30 bundle for human review; it remains human-input enabled. G27
+remains the deeper scene-level proof for compact 2048 by 2048 terrain
+visibility, first-person captures, event-driven material application, local
+native Transvoxel chunks following scripted player movement for
 editable/collision detail, bounded material-repair audit behavior, a committed
-terrain edit, and rejection of dense near-2K source/world files. G28 remains the
-normal `project.godot` launch proof. G29 remains the human-ready project
-generator.
+terrain edit, and rejection of dense near-2K source/world files.

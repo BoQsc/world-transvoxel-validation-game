@@ -139,6 +139,11 @@ G30 is the active compact 2K review bundle gate. It packages the human-ready
 project, G27/G28/G29 evidence, `REVIEW_INDEX.md`, and `HANDOFF_MANIFEST.json`
 with SHA-256 hashes so the review artifact is auditable from one directory.
 
+G31 is the active review bundle launch preflight gate. It proves copied-bundle
+launch readiness by creating `bundle_launch_copy`, removing stale Godot import
+cache, disabling human input only in the automation copy, and launching the
+copied bundle project through `project.godot`.
+
 ## Required before final human visual handoff
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -154,6 +159,7 @@ with SHA-256 hashes so the review artifact is auditable from one directory.
 - normal generated project launch preflight before renewed human visual review;
 - human-ready compact 2K handoff project before renewed human visual review;
 - Compact 2K review bundle before renewed human visual review;
+- copied-bundle launch readiness before renewed human visual review;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary

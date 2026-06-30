@@ -76,6 +76,9 @@ REQUIRED_PHRASES = {
         "G30 is the active compact 2K review bundle gate",
         "Compact 2K review bundle",
         "HANDOFF_MANIFEST.json",
+        "G31 is the active review bundle launch preflight gate",
+        "copied-bundle launch readiness",
+        "bundle_launch_copy",
         "2048 by 2048",
         "not final terrain art",
     ),
@@ -109,6 +112,7 @@ REQUIRED_PHRASES = {
         "## G28 - Normal project launch preflight",
         "## G29 - Compact 2K human-ready handoff",
         "## G30 - Compact 2K review bundle",
+        "## G31 - Review bundle launch preflight",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -122,6 +126,7 @@ REQUIRED_PHRASES = {
         "G28 is the active normal project launch preflight gate",
         "G29 is the active compact 2K human-ready handoff gate",
         "G30 is the active compact 2K review bundle gate",
+        "G31 is the active review bundle launch preflight gate",
     ),
 }
 
@@ -142,7 +147,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=compact_2k_review_bundle")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=review_bundle_launch_preflight")
 
 
 if __name__ == "__main__":

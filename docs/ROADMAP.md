@@ -646,3 +646,30 @@ Boundary:
 - this prepares an auditable review bundle; it does not claim human approval,
   final terrain art, seamless dynamic LOD, GPU/compute generation, fluids,
   biomes, vegetation, buildings, multiplayer, or a separate game repository.
+
+## G31 - Review bundle launch preflight
+
+Status: complete when `WT_VALIDATION_G31_CONTRACT_PASS` and
+`WT_VALIDATION_G31_REVIEW_BUNDLE_LAUNCH_SMOKE_PASS` both pass.
+
+Exit:
+
+- No human validation is requested until this gate passes;
+- this is the review bundle launch preflight gate;
+- the source G30 bundle remains human-input ready;
+- `bundle_launch_copy` is created as a separate automation launch copy;
+- stale `.godot` import cache is removed from the launch copy before import;
+- automation disables human input only in the launch copy;
+- Godot import passes for the launch copy;
+- Godot launches the copied bundle project with `--path`, not `--script`;
+- the copied bundle reaches `WT_VALIDATION_PLAYTEST_READY` within the 30 second
+  ready ceiling;
+- the copied bundle launch logs no Godot errors;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves copied-bundle launch readiness for review; it does not claim human
+  approval, final terrain art, seamless dynamic LOD, GPU/compute generation,
+  fluids, biomes, vegetation, buildings, multiplayer, or a separate game
+  repository.
