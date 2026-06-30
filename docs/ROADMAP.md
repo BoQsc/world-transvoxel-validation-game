@@ -738,7 +738,7 @@ Status: complete when `WT_VALIDATION_G34_CONTRACT_PASS` and
 
 Exit:
 
-- this is an active runtime terrain quality gate;
+- this is a runtime terrain quality gate;
 - the compact 2K runtime state starts clean for each engine;
 - carve and construct edits commit inside the frame and millisecond budgets;
 - authoritative samples match edited density/material values before reload;
@@ -989,3 +989,36 @@ Boundary:
   direction, final draw-distance policy, seamless dynamic LOD, GPU/compute
   generation, fluids, biomes, vegetation, buildings, multiplayer, or a separate
   game repository.
+
+## G44 - Edit policy and shape quality
+
+Status: complete when `WT_VALIDATION_G44_CONTRACT_PASS` and
+`WT_VALIDATION_G44_EDIT_POLICY_SHAPE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an active runtime terrain quality gate;
+- edit policy and shape quality is measured in the normal compact 2K runtime
+  scene;
+- the validation edit policy exposes default shape, dig radius, place radius,
+  place material, and alternate-shape-toggle status;
+- default carve/place shape is sphere;
+- dig and place radii are both 1.8;
+- place material id is 4;
+- alternate shape toggles are explicitly disabled for this validation gate;
+- at least six repeated carve/construct edits commit through the terrain
+  interactor;
+- center and inside-radius authoritative samples match expected density/material
+  behavior;
+- outside-radius authoritative samples remain unchanged immediately after each
+  edit;
+- edits settle within commit and active-window budgets;
+- render fade/blink resources and pending retirements remain zero;
+- dense near-2K source/world files are not reintroduced.
+
+Boundary:
+
+- this proves the current default sphere edit policy and repeated edit shape
+  behavior. It does not claim full public terrain editing API stability, final
+  mining design, non-sphere production brushes, fluids, biomes, vegetation,
+  buildings, multiplayer, or a separate game repository.

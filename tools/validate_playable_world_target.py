@@ -95,6 +95,7 @@ REQUIRED_PHRASES = {
         "G41 is the latest completed runtime frame budget telemetry quality gate",
         "G42 is the latest completed collision traversal stability quality gate",
         "G43 is the latest completed view distance presentation quality gate",
+        "G44 is the latest completed edit policy and shape quality gate",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -147,6 +148,7 @@ REQUIRED_PHRASES = {
         "## G41 - Runtime frame budget telemetry quality",
         "## G42 - Collision traversal stability quality",
         "## G43 - View distance presentation quality",
+        "## G44 - Edit policy and shape quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -173,6 +175,7 @@ REQUIRED_PHRASES = {
         "G41 is the latest completed runtime frame budget telemetry quality gate",
         "G42 is the latest completed collision traversal stability quality gate",
         "G43 is the latest completed view distance presentation quality gate",
+        "G44 is the latest completed edit policy and shape quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -213,7 +216,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=edit_policy_shape_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=storage_recovery_schema_quality")
 
 
 if __name__ == "__main__":

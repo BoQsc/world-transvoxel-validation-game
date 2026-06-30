@@ -3,22 +3,23 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G40, what the expected final world/terrain target is, and
+game actually is after G44, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G40
+## Current claim boundary after G44
 
-The current validated claim after G43 is:
+The current validated claim after G44 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, and view-distance presentation coverage, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, and default sphere edit policy/repeated edit shape validation, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
 stream a bounded local Transvoxel detail window, edit terrain, replay distributed
 edits, remain cold when idle, measure frame/update telemetry, prove collision
 traversal stability across flat, mountain/sloped, and edited terrain cases, prove
-multi-position first-person view-distance presentation coverage, and produce
+multi-position first-person view-distance presentation coverage, verify the
+default sphere carve/place policy with repeated edit shape samples, and produce
 automated evidence for specific runtime quality gates.
 
 It does not mean the final game-world terrain product is complete.
@@ -118,13 +119,12 @@ The first production-gap milestones are:
 1. `G41 - Runtime frame budget telemetry quality`: measure real idle, movement,
    streaming, edit, and reload costs under the compact 2K profile.
 2. `G42 - Collision traversal stability quality`: drive long scripted player
-   routes across flat, sloped, mountainous, and edited terrain while checking
-   floor/contact stability and control state.
-3. `G43 - Terrain addon API contract quality`: lock the minimal stable
-   game-facing API for generation, streaming, editing, materials, storage, and
-   telemetry.
-4. `G44 - Material texture pipeline quality`: prove stable texture/material
-   assignment and edit feedback without flicker or excessive churn.
+    routes across flat, sloped, mountainous, and edited terrain while checking
+    floor/contact stability and control state.
+3. `G43 - View distance presentation quality`: prove first-person compact 2K
+   presentation is not a tiny one-chunk-only view.
+4. `G44 - Edit policy and shape quality`: lock default sphere carve/place
+   policy and prove repeated edit shape behavior.
 5. `G45 - Storage recovery schema quality`: prove compact binary/storage policy,
    deterministic recovery, journal compaction, and versioned migration behavior.
 
@@ -136,11 +136,12 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G40.
+runtime after G44.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
 gap for current validation profiles. G43 closed the view distance presentation
-quality gap for current compact 2K first-person views. The immediate direction
-after G43 is to close the production-readiness gap through G44 edit policy and
-shape quality, then continue through the finite G41-G60 Terrain 1.0 roadmap.
+quality gap for current compact 2K first-person views. G44 closed the edit policy
+and repeated shape quality gap for the default validation sphere brush. The
+immediate direction after G44 is to close the storage/recovery schema gap through
+G45, then continue through the finite G41-G60 Terrain 1.0 roadmap.

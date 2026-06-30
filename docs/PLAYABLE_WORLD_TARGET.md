@@ -210,14 +210,18 @@ multiple first-person compact 2K views and rejects tiny one-chunk-only
 presentation by checking full visual coverage plus horizontal, vertical, and
 mid-band terrain image coverage.
 
+G44 is the latest completed edit policy and shape quality gate. It locks the default
+sphere carve/place policy for the validation layer and verifies repeated edit
+shape behavior with authoritative samples.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G43 is automated validation-grade compact 2K terrain runtime
+Current state after G44 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
-view-distance presentation coverage, not production-ready large-world terrain.
-The next production-gap direction is edit policy and shape quality, followed by
-storage/recovery schema, terrain addon API stability, and material/texture
-quality.
+view-distance presentation coverage plus default sphere edit policy/repeated edit
+shape validation, not production-ready large-world terrain. The next
+production-gap direction is storage/recovery schema, followed by terrain addon API
+stability and material/texture quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -256,6 +260,8 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
   player traversal;
 - view distance presentation quality gate before claiming production-ready
   large-world presentation;
+- edit policy and shape quality gate before claiming production-ready digging
+  and placing;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.

@@ -26,8 +26,8 @@ REQUIRED_PHRASES = {
         "G60",
         "G41 - Runtime frame budget telemetry quality",
         "G42 - Collision traversal stability quality",
-        "G43 - Terrain addon API contract quality",
-        "G44 - Material texture pipeline quality",
+        "G43 - View distance presentation quality",
+        "G44 - Edit policy and shape quality",
         "G45 - Storage recovery schema quality",
         "world-transvoxel",
         "world-transvoxel-terrain",
@@ -67,7 +67,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=edit_policy_shape_quality")
+    print(f"{MARKER} next=storage_recovery_schema_quality")
 
 
 if __name__ == "__main__":

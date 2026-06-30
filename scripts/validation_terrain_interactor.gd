@@ -8,12 +8,23 @@ const EditBatch := preload("res://addons/world_transvoxel_terrain/edit/wt_terrai
 @export var dig_radius: float = 1.8
 @export var place_radius: float = 1.8
 @export_range(1, 65535, 1) var place_material_id: int = 4
+@export var alternate_shape_toggles_enabled: bool = false
 
 var _last_submission: Dictionary = {}
 
 
 func get_last_submission() -> Dictionary:
 	return _last_submission
+
+
+func get_edit_policy_summary() -> Dictionary:
+	return {
+		"default_brush_shape": "sphere",
+		"dig_radius": dig_radius,
+		"place_radius": place_radius,
+		"place_material_id": place_material_id,
+		"alternate_shape_toggles_enabled": alternate_shape_toggles_enabled,
+	}
 
 
 func _input(event: InputEvent) -> void:
