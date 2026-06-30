@@ -20,7 +20,8 @@ REQUIRED_PHRASES = {
         "G48 locked the native hot-path boundary",
         "debug telemetry UI evidence",
         "G49 added a normal-scene debug telemetry",
-        "Terrain profile standards are not yet final",
+        "terrain profile standard evidence",
+        "G50 locked the terrain profile standard",
         "The material/texture pipeline is not yet production quality",
         "Underground terrain variation is not yet a production contract",
         "Gap closure ladder",
@@ -71,7 +72,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=terrain_profile_standard_quality")
+    print(f"{MARKER} next=material_texture_pipeline_quality")
 
 
 if __name__ == "__main__":

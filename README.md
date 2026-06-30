@@ -120,13 +120,17 @@ G49 is the latest completed debug telemetry UI quality gate: it adds a
 mouse-transparent telemetry overlay and JSON export to the normal validation
 playtest scene for active chunks, queues, frame/update cost, edit state,
 material state, and storage state.
-Current claim boundary after G49: automated validation-grade compact 2K terrain
+G50 is the latest completed terrain profile standard quality gate: it locks the
+standard flat baseline, mountain, compact 2K, and seeded procedural 2K profiles,
+including deterministic seeds, source revisions, active-resource budgets, and
+storage/load budget checks.
+Current claim boundary after G50: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
-evidence plus native hot-path boundary evidence and debug telemetry UI evidence,
-not production-ready large-world terrain.
+evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
+terrain profile standard evidence, not production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -265,6 +269,12 @@ python tools/validate_g46_contract.py
 python tools/g46_terrain_addon_api_contract_quality.py
 python tools/validate_g47_contract.py
 python tools/g47_validation_workaround_removal_quality.py
+python tools/validate_g48_contract.py
+python tools/g48_native_hot_path_boundary_quality.py
+python tools/validate_g49_contract.py
+python tools/g49_debug_telemetry_ui_quality.py
+python tools/validate_g50_contract.py
+python tools/g50_terrain_profile_standard_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -412,6 +422,9 @@ WT_VALIDATION_G48_NATIVE_HOT_PATH_BOUNDARY_SMOKE_PASS profile=g19_compact_2k_on_
 WT_VALIDATION_G49_CONTRACT_PASS implementation=debug_telemetry_ui_quality
 WT_VALIDATION_G49_DEBUG_TELEMETRY_UI_PASS profile=g19_compact_2k_on_demand categories=6 overlay=1 exported=1 active_chunks=25 queued_render=0 queued_collision=0 frame_samples=... edit_committed=1 materialized=... storage_visible=1 dense_world_files=0
 WT_VALIDATION_G49_DEBUG_TELEMETRY_UI_SMOKE_PASS profile=g19_compact_2k_on_demand engines=2 categories=6 overlay=1 exported=1 quality_track=runtime_terrain dense_world_files=0 report=artifacts/g49_debug_telemetry_ui_quality/g49_debug_telemetry_ui_quality_report.json
+WT_VALIDATION_G50_CONTRACT_PASS implementation=terrain_profile_standard_quality
+WT_VALIDATION_G50_TERRAIN_PROFILE_STANDARD_PASS profiles=4 runtime_profiles=4 deterministic=4 budgets=4 flat_resources=1 mountain_resources=64 compact_resources=25 seeded_resources=25 compact_seed=19019 seeded_seed=50050 max_profile_load_ms=... dense_world_files=0
+WT_VALIDATION_G50_TERRAIN_PROFILE_STANDARD_SMOKE_PASS profiles=4 engines=2 deterministic=4 budgets=4 max_engine_seconds=... max_file_bytes=... dense_world_files=0 report=artifacts/g50_terrain_profile_standard_quality/g50_terrain_profile_standard_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -439,23 +452,25 @@ python tools/g46_terrain_addon_api_contract_quality.py
 python tools/g47_validation_workaround_removal_quality.py
 python tools/g48_native_hot_path_boundary_quality.py
 python tools/g49_debug_telemetry_ui_quality.py
+python tools/g50_terrain_profile_standard_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G49 is the latest completed terrain quality gate. Current state after G49 is
+G50 is the latest completed terrain quality gate. Current state after G50 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
 compact storage recovery schema evidence plus a minimal game-facing terrain
 addon API contract plus validation-workaround removal evidence plus native
-hot-path boundary evidence plus debug telemetry UI evidence, not production-ready
-large-world terrain. The gap to the expected final world/terrain is tracked in
+hot-path boundary evidence plus debug telemetry UI evidence and terrain profile
+standard evidence, not production-ready large-world terrain. The gap to the
+expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
 through G60, with G60 as the release-candidate finish line. Next terrain work is
-G50 terrain profile standard quality and must advance through that finite list
+G51 material texture pipeline quality and must advance through that finite list
 instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.

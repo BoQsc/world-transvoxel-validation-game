@@ -1159,3 +1159,34 @@ Boundary:
   variation, large-world streaming radius, LOD seam quality, generator budgets,
   water, vegetation, buildings, multiplayer, compute acceleration, or separate
   game integration.
+
+## G50 - Terrain profile standard quality
+
+Status: complete when `WT_VALIDATION_G50_CONTRACT_PASS` and
+`WT_VALIDATION_G50_TERRAIN_PROFILE_STANDARD_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the standard profile set is `flat_baseline`, `mountain_8x8`,
+  `g19_compact_2k_on_demand`, and `g50_seeded_procedural_2k`;
+- the standard profile contract exposes deterministic source mode, seed, source
+  revision, chunk dimensions, storage paths, active-resource expectations, and
+  load/storage budgets;
+- the normal validation playtest scene runs all four profiles with human input
+  and player-driven viewer updates disabled, so the gate measures the
+  profile-defined viewer windows;
+- all four profiles reach ready state, floor contact, cold idle, and their
+  expected active-resource count;
+- compact and seeded procedural 2K profiles use deterministic procedural
+  descriptors and do not create dense `world.wtworld`, `streaming.wtworld`, or
+  `procedural.wtseed` files;
+- the G50 runner enforces the 30 second load-to-play ceiling, 50 MiB per-file
+  target, and 100 MiB per-profile-directory ceiling.
+
+Boundary:
+
+- this locks terrain profile standards. It does not finish material textures,
+  underground variation, large-world streaming radius, LOD seam quality,
+  generator budgets, water, vegetation, buildings, multiplayer, compute
+  acceleration, or separate game integration.

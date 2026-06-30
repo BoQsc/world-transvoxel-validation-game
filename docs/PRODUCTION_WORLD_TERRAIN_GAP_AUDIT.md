@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G49, what the expected final world/terrain target is, and
+game actually is after G50, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G49
+## Current claim boundary after G50
 
-The current validated claim after G49 is:
+The current validated claim after G50 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, and debug telemetry UI evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, and terrain profile standard evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -26,9 +26,11 @@ summaries, lifecycle, streaming, edits, authoritative samples, storage,
 telemetry, and debug snapshots, move required material and mesh-inspection
 helpers into the terrain addon, quarantine historical backend-facing tests as
 audit evidence, lock the native hot-path boundary for generation, meshing,
-streaming, edit application, storage, and normal validation runtime paths, and
+streaming, edit application, storage, and normal validation runtime paths,
 provide a normal-scene debug telemetry overlay/export for active chunks, queues,
-frame/update cost, edit state, material state, and storage state.
+frame/update cost, edit state, material state, and storage state, and lock the
+standard flat baseline, mountain, compact 2K, and seeded procedural 2K terrain
+profiles with deterministic seeds/source revisions and storage/load budgets.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -82,27 +84,31 @@ These items are currently backed by milestone evidence in this repository:
   snapshots;
 - addon-owned material applicator and mesh-stats helpers in the normal
   validation scene, with no local validation-game copies of those terrain
-  helpers.
+  helpers;
+- native hot-path boundary evidence for generation, meshing, streaming, edit
+  application, storage, and normal validation runtime paths;
+- debug telemetry UI/export evidence for active chunks, queues, frame/update
+  cost, edit state, material state, and storage state;
+- terrain profile standard evidence for `flat_baseline`, `mountain_8x8`,
+  `g19_compact_2k_on_demand`, and `g50_seeded_procedural_2k`.
 
 ## Not production-ready yet
 
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. Terrain profile standards are not yet final. Flat, mountain, compact 2K, and
-   seeded procedural profiles still need deterministic production defaults.
-2. The material/texture pipeline is not yet production quality. We need stable
+1. The material/texture pipeline is not yet production quality. We need stable
    texture selection, small test assets, biome/material assignment rules, and no
    visible edit flicker.
-3. Underground terrain variation is not yet a production contract. Mining and
+2. Underground terrain variation is not yet a production contract. Mining and
    deep terrain need voxel-based density/material behavior below the surface.
-4. Large-world streaming radius and dynamic LOD seam quality are not yet final
+3. Large-world streaming radius and dynamic LOD seam quality are not yet final
    production contracts. The current path validates bounded local detail, not a
    finished multi-LOD terrain product.
-5. World generation is not yet the final game-world generator. Flat baseline and
+4. World generation is not yet the final game-world generator. Flat baseline and
    compact procedural terrain are required, but biomes, underground variation,
    veins, caves, and optional quantized generation need separate standards.
-6. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
+5. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
    and compute/GPU acceleration are future systems. They must not be treated as
    complete just because the terrain validation path exists.
 
@@ -155,7 +161,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G49.
+runtime after G50.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -170,6 +176,7 @@ audit evidence. G48 locked the native hot-path boundary for the current compact
 2K validation path by adding addon API evidence and static/runtime validation
 against GDScript terrain hot loops. G49 added a normal-scene debug telemetry
 overlay/export path for active chunks, queues, frame/update cost, edit state,
-material state, and storage state. The immediate direction after G49 is G50
-terrain profile standard quality, then the remaining finite G41-G60 Terrain 1.0
-roadmap.
+material state, and storage state. G50 locked the terrain profile standard for
+flat baseline, mountain, compact 2K, and seeded procedural 2K profiles. The
+immediate direction after G50 is G51 material texture pipeline quality, then the
+remaining finite G41-G60 Terrain 1.0 roadmap.

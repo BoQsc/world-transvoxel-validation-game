@@ -54,8 +54,8 @@ REQUIRED_PHRASES = {
         "active chunks, queues, frame/update cost, edit state, material state",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G49",
-        "The next milestone after G49 is G50",
+        "G49 - Debug telemetry UI quality",
+        "G50 - Terrain profile standard quality",
     ),
 }
 

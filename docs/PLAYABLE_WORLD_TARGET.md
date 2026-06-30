@@ -239,16 +239,21 @@ mouse-transparent telemetry overlay and JSON export to the normal validation
 playtest scene for active chunks, queues, frame/update cost, edit state,
 material state, and storage state.
 
+G50 is the latest completed terrain profile standard quality gate. It locks the
+standard `flat_baseline`, `mountain_8x8`, `g19_compact_2k_on_demand`, and
+`g50_seeded_procedural_2k` profiles with deterministic seeds/source revisions,
+active-resource expectations, and storage/load budgets.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G49 is automated validation-grade compact 2K terrain runtime
+Current state after G50 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
-evidence plus native hot-path boundary evidence and debug telemetry UI evidence,
-not production-ready large-world terrain. The next production-gap direction is
-terrain profile standard quality.
+evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
+terrain profile standard evidence, not production-ready large-world terrain. The
+next production-gap direction is material texture pipeline quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -289,6 +294,8 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
   large-world presentation;
 - edit policy and shape quality gate before claiming production-ready digging
   and placing;
+- terrain profile standard quality gate before material, underground, streaming
+  radius, seam/artifact, or generator-budget work;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.

@@ -16,6 +16,7 @@ static func available_profile_ids() -> Array[StringName]:
 		&"g14_generated_64x64",
 		&"g16_generated_128x128",
 		&"g19_compact_2k_on_demand",
+		&"g50_seeded_procedural_2k",
 	]
 
 
@@ -81,6 +82,14 @@ static func settings(profile_id: StringName) -> Dictionary:
 				"edit_point": Vector3(1032, 8, 1032),
 				"fixture_label": "g19_compact_2k_on_demand",
 			}
+		"g50_seeded_procedural_2k":
+			return {
+				"viewer_position": Vector3(520, 8, 520),
+				"player_start_position": Vector3(520, 24, 520),
+				"camera_follow_offset": Vector3(150, 80, 150),
+				"edit_point": Vector3(520, 8, 520),
+				"fixture_label": "g50_seeded_procedural_2k",
+			}
 		_:
 			return {
 				"viewer_position": Vector3(8, 8, 8),
@@ -94,15 +103,19 @@ static func generation_profile(profile_id: StringName) -> Resource:
 	var generation = GenerationProfile.new()
 	generation.profile_id = profile_id
 	generation.seed = 3003 if _is_grid_8x8(profile_id) else 1
+	if str(profile_id) == "flat_8x8":
+		generation.source_revision = 9301
+	elif str(profile_id) == "mountain_8x8":
+		generation.source_revision = 9302
 	generation.source_mode = GenerationProfile.SourceMode.FLAT
 	if str(profile_id) == "mountain_8x8" or _is_sparse_2k(profile_id) or _is_dense_generated(profile_id):
 		generation.source_mode = GenerationProfile.SourceMode.BAKED_WORLD
-	if _is_compact_on_demand(profile_id):
+	if _is_procedural_2k(profile_id):
 		generation.source_mode = GenerationProfile.SourceMode.DETERMINISTIC_REFERENCE
-		generation.seed = 19019
+		generation.seed = _procedural_seed(profile_id)
 		generation.world_chunk_count_x = 128
 		generation.world_chunk_count_z = 128
-		generation.source_revision = 190019
+		generation.source_revision = _procedural_source_revision(profile_id)
 	return generation
 
 
@@ -122,12 +135,14 @@ static func storage_profile(profile_id: StringName) -> Resource:
 		root_path = "res://build/g16-generated-fixture/%s" % str(profile_id)
 	elif _is_compact_on_demand(profile_id):
 		root_path = "res://build/g19-compact-on-demand/%s" % str(profile_id)
+	elif _is_seeded_procedural(profile_id):
+		root_path = "res://build/g50-seeded-procedural/%s" % str(profile_id)
 	var manifest_name := "streaming.wtworld"
 	if _is_grid_8x8(profile_id) or _is_dense_generated(profile_id):
 		manifest_name = "world.wtworld"
 	elif _is_sparse_2k(profile_id):
 		manifest_name = "g8_2000x2000_sparse.wtworld"
-	elif _is_compact_on_demand(profile_id):
+	elif _is_procedural_2k(profile_id):
 		manifest_name = "procedural.wtseed"
 	storage.world_manifest_path = "%s/%s" % [root_path, manifest_name]
 	storage.object_root_path = root_path
@@ -140,6 +155,8 @@ static func storage_profile(profile_id: StringName) -> Resource:
 static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
 	if _is_compact_on_demand(profile_id):
 		return [Vector3(1032.0, 8.0, 1032.0)]
+	if _is_seeded_procedural(profile_id):
+		return [Vector3(520.0, 8.0, 520.0)]
 	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
 		return [Vector3(8.0, 8.0, 8.0)]
 	if _is_sparse_2k_multi_viewer(profile_id):
@@ -161,11 +178,12 @@ static func viewer_positions(profile_id: StringName) -> Array[Vector3]:
 
 
 static func viewer_radius_chunks(profile_id: StringName) -> int:
-	return 2 if _is_grid_8x8(profile_id) or _is_sparse_2k(profile_id) or _is_dense_generated(profile_id) or _is_compact_on_demand(profile_id) else 0
+	return 2 if _is_grid_8x8(profile_id) or _is_sparse_2k(profile_id) or \
+			_is_dense_generated(profile_id) or _is_procedural_2k(profile_id) else 0
 
 
 static func expected_resource_count(profile_id: StringName) -> int:
-	if _is_compact_on_demand(profile_id):
+	if _is_procedural_2k(profile_id):
 		return 25
 	if _is_sparse_2k_single_viewer(profile_id) or _is_dense_generated(profile_id):
 		return 9
@@ -220,6 +238,22 @@ static func _is_dense_generated(profile_id: StringName) -> bool:
 
 static func _is_compact_on_demand(profile_id: StringName) -> bool:
 	return str(profile_id) == "g19_compact_2k_on_demand"
+
+
+static func _is_seeded_procedural(profile_id: StringName) -> bool:
+	return str(profile_id) == "g50_seeded_procedural_2k"
+
+
+static func _is_procedural_2k(profile_id: StringName) -> bool:
+	return _is_compact_on_demand(profile_id) or _is_seeded_procedural(profile_id)
+
+
+static func _procedural_seed(profile_id: StringName) -> int:
+	return 50050 if _is_seeded_procedural(profile_id) else 19019
+
+
+static func _procedural_source_revision(profile_id: StringName) -> int:
+	return 50050 if _is_seeded_procedural(profile_id) else 190019
 
 
 static func _grid_8x8_settings(
