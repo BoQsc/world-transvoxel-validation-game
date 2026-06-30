@@ -90,6 +90,10 @@ from the journal.
 G40 is the active edit visual material feedback quality gate: it captures a
 focused terrain patch before and after real edits, requires visible image delta,
 verifies material stability, and checks authoritative edited samples.
+Current claim boundary after G40: automated validation-grade compact 2K terrain
+runtime, not production-ready large-world terrain. The production gap is tracked
+in
+[`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -106,6 +110,8 @@ workarounds here.
   compute, or 0BSD backend replacement here before their contracts exist.
 - The larger target is tracked in
   [`docs/PLAYABLE_WORLD_TARGET.md`](docs/PLAYABLE_WORLD_TARGET.md).
+- The current production-readiness gap is tracked in
+  [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 
 ## Validate
 
@@ -118,6 +124,7 @@ python tools/validate_g0_contract.py
 python tools/root_project_safe_import.py
 python tools/g0_install_run_smoke.py
 python tools/validate_playable_world_target.py
+python tools/validate_production_gap_audit.py
 python tools/validate_g1_contract.py
 python tools/g1_visible_playtest_smoke.py
 python tools/g1_visual_capture.py --windowed
@@ -211,7 +218,8 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=edit_visual_material_feedback_quality
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=runtime_frame_budget_telemetry_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=runtime_frame_budget_telemetry_quality
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -338,13 +346,18 @@ python tools/g37_streaming_movement_performance_quality.py
 python tools/g38_streaming_endurance_stability_quality.py
 python tools/g39_distributed_edit_streaming_quality.py
 python tools/g40_edit_visual_material_feedback_quality.py
+python tools/validate_production_gap_audit.py
 ```
 
-G40 is the gate to beat before adding the next terrain feature. Next terrain
-work should improve measured runtime behavior, broader terrain correctness,
-material quality, edit policy, or addon API stability. Human-visible review
-remains useful as a final sanity check, but it is not the active project
-direction.
+G40 is the last completed terrain quality gate. Current state is automated
+validation-grade compact 2K terrain runtime, not production-ready large-world
+terrain. The gap to the expected final world/terrain is tracked in
+[`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
+Next terrain work should close that gap with measured runtime behavior first:
+runtime frame budget telemetry quality, then collision traversal stability,
+terrain addon API stability, material/texture quality, and storage/recovery
+schema quality. Human-visible review remains useful as a final sanity check, but
+it is not the active project direction.
 
 Run the drift guard before adding or accepting any new milestone:
 

@@ -195,6 +195,14 @@ G40 is the active edit visual material feedback quality gate. It captures a
 focused terrain patch before and after real edits, requires visible image delta,
 verifies material stability, and checks authoritative edited samples.
 
+The production world/terrain gap audit is
+[`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
+Current state after G40 is automated validation-grade compact 2K terrain runtime,
+not production-ready large-world terrain. The next production-gap direction is
+runtime frame budget telemetry quality, followed by collision traversal
+stability, terrain addon API stability, material/texture quality, and
+storage/recovery schema quality.
+
 ## Required before final human-visible sanity check
 
 - first-person player with crosshair and terrain interaction affordances;
@@ -222,6 +230,7 @@ verifies material stability, and checks authoritative edited samples.
 - streaming endurance stability quality gate before renewed human visual review;
 - distributed edit streaming quality gate before renewed human visual review;
 - edit visual material feedback quality gate before renewed human visual review;
+- production world/terrain gap audit before claiming production-ready terrain;
 - automated captures and runtime checks before asking for human playtest.
 
 ## Addon boundary
