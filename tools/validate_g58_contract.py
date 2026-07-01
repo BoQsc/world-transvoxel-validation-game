@@ -37,27 +37,22 @@ REQUIRED_PHRASES = {
         "world-transvoxel-integration-game",
     ),
     "README.md": (
-        "G58 is the latest completed documentation examples quality gate",
+        "G58 is a completed documentation examples quality gate",
         "WT_VALIDATION_G58_DOCUMENTATION_EXAMPLES_SMOKE_PASS",
-        "Next terrain work is G59 versioning release contract quality",
     ),
     "docs/ROADMAP.md": (
         "## G58 - Documentation examples quality",
         "WT_VALIDATION_G58_DOCUMENTATION_EXAMPLES_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G58",
-        "The next milestone after G58 is G59",
+        "Completed validation track:",
         "G58 - Documentation examples quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G58",
         "documentation examples evidence",
-        "immediate direction after G58 is G59",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G58 is the latest completed documentation examples quality gate",
-        "Next terrain work is G59 versioning release contract quality",
+        "G58 is a completed documentation examples quality gate",
     ),
 }
 

@@ -157,11 +157,15 @@ it proves the sibling `world-transvoxel-integration-game` repository imports
 `world_transvoxel_game_world` without validation-game scripts/tests/scenes,
 then runs the compact 2K player-viewer and edit path on both supported Godot
 engines.
-G58 is the latest completed documentation examples quality gate: it provides
+G58 is a completed documentation examples quality gate: it provides
 installation, profile setup, terrain editing, storage, telemetry, and
 troubleshooting examples in `docs/TERRAIN_ADOPTION_EXAMPLES.md` and keeps the
 separate integration repo README aligned.
-Current claim boundary after G58: automated validation-grade compact 2K terrain
+G59 is the latest completed versioning release contract quality gate: it locks
+versioning, compatibility, migration policy, license boundary,
+source/reference policy, and the release checklist in
+`docs/VERSIONING_RELEASE_CONTRACT.md`.
+Current claim boundary after G59: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
@@ -171,8 +175,8 @@ terrain profile standard evidence plus material texture pipeline evidence and
 underground density/material variation evidence plus configurable streaming
 radius evidence plus mixed LOD seam/artifact evidence and map-generator budget
 evidence plus game-world addon prototype evidence and separate game repository
-integration evidence plus documentation examples evidence, not production-ready
-large-world terrain.
+integration evidence plus documentation examples evidence and versioning release
+contract evidence, not production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -333,6 +337,8 @@ python tools/validate_g57_contract.py
 python tools/g57_separate_game_repository_integration_quality.py
 python tools/validate_g58_contract.py
 python tools/g58_documentation_examples_quality.py
+python tools/validate_g59_contract.py
+python tools/g59_versioning_release_contract_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -342,9 +348,9 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=versioning_release_contract_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=versioning_release_contract_quality
-WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G58 next=G59 final=G60 terrain_1_0=true
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=terrain_1_0_release_candidate_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=terrain_1_0_release_candidate_quality
+WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G59 next=G60 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -507,6 +513,9 @@ WT_VALIDATION_G57_SEPARATE_GAME_REPOSITORY_SMOKE_PASS repo=... addon=world_trans
 WT_VALIDATION_G58_CONTRACT_PASS implementation=documentation_examples_quality
 WT_VALIDATION_G58_DOCUMENTATION_EXAMPLES_PASS sections=6 code_blocks=... integration_readme=1
 WT_VALIDATION_G58_DOCUMENTATION_EXAMPLES_SMOKE_PASS sections=6 code_blocks=... integration_readme=1 report=artifacts/g58_documentation_examples_quality/g58_documentation_examples_quality_report.json
+WT_VALIDATION_G59_CONTRACT_PASS implementation=versioning_release_contract_quality
+WT_VALIDATION_G59_VERSIONING_RELEASE_CONTRACT_PASS sections=6 supported_godot=2 release_checklist=1 mit_boundary=1
+WT_VALIDATION_G59_VERSIONING_RELEASE_CONTRACT_SMOKE_PASS sections=6 supported_godot=2 release_checklist=1 mit_boundary=1 report=artifacts/g59_versioning_release_contract_quality/g59_versioning_release_contract_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -543,11 +552,12 @@ python tools/g55_map_generator_budget_quality.py
 python tools/g56_game_world_addon_prototype_quality.py
 python tools/g57_separate_game_repository_integration_quality.py
 python tools/g58_documentation_examples_quality.py
+python tools/g59_versioning_release_contract_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G58 is the latest completed terrain quality gate. Current state after G58 is
+G59 is the latest completed terrain quality gate. Current state after G59 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
@@ -558,13 +568,13 @@ standard evidence plus material texture pipeline evidence plus underground
 density/material variation evidence plus configurable streaming radius evidence
 plus mixed LOD seam/artifact evidence and map-generator budget evidence plus
 game-world addon prototype evidence and separate game repository integration
-evidence plus documentation examples evidence, not production-ready large-world
-terrain.
+evidence plus documentation examples evidence and versioning release contract
+evidence, not production-ready large-world terrain.
 The gap to the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
-through G60, with G60 as the release-candidate finish line. Next terrain work is G59 versioning release contract quality and must advance through that finite list instead of appending unbounded "next useful" tasks.
+through G60, with G60 as the release-candidate finish line. Next terrain work is G60 Terrain 1.0 release candidate quality and must advance through that finite list instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
 

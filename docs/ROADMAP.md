@@ -1401,3 +1401,26 @@ Boundary:
 - this locks adoption examples only. It does not finish versioning, migration,
   release policy, release-candidate validation, water, vegetation, buildings,
   multiplayer, or compute acceleration.
+
+## G59 - Versioning release contract quality
+
+Status: complete when `WT_VALIDATION_G59_CONTRACT_PASS` and
+`WT_VALIDATION_G59_VERSIONING_RELEASE_CONTRACT_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a release-policy quality gate;
+- `docs/VERSIONING_RELEASE_CONTRACT.md` defines versioning, compatibility,
+  migration policy, license boundary, source/reference policy, and release
+  checklist;
+- supported Godot versions are Godot 4.6.3 stable and Godot 4.7 stable;
+- the current native target boundary is Windows x86_64 until more platforms are
+  validated;
+- the MIT Transvoxel backend boundary is explicit;
+- the 0BSD backend is not claimed as the default or exact official replacement.
+
+Boundary:
+
+- this locks release policy only. It does not run the Terrain 1.0 release
+  candidate suite; that is G60. It also does not finish water, vegetation,
+  buildings, multiplayer, or compute acceleration.

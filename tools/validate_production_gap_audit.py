@@ -38,8 +38,10 @@ REQUIRED_PHRASES = {
         "G57 locked separate game repository integration",
         "documentation examples evidence",
         "G58 locked",
+        "versioning release contract evidence",
+        "G59 locked the versioning release contract",
         "World generation is not yet the final game-world generator",
-        "versioning release contract quality",
+        "Terrain 1.0 release candidate quality",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -88,7 +90,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=versioning_release_contract_quality")
+    print(f"{MARKER} next=terrain_1_0_release_candidate_quality")
 
 
 if __name__ == "__main__":
