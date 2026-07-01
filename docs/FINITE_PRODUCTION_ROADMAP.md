@@ -221,6 +221,8 @@ These are important, but they are not required to finish Terrain 1.0:
 - massive worlds beyond the compact 2K target.
 
 Each post-1.0 system must get its own bounded roadmap before implementation.
+The current post-1.0 research contract and onward roadmap are tracked in
+[`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](POST_1_0_RESEARCH_AND_ROADMAP.md).
 
 ## Drift rule
 

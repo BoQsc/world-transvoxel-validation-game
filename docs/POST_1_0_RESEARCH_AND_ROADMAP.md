@@ -1,0 +1,280 @@
+# Post-1.0 research and onward roadmap
+
+Status: post-1.0 research contract.
+
+Research date: 2026-07-01.
+
+Terrain 1.0 ended at G60 for the validated compact 2K terrain stack. This
+document defines the next bounded direction without appending G61 to the Terrain
+1.0 roadmap.
+
+## Current project boundary
+
+The project currently has:
+
+- `world-transvoxel`: low-level MIT-backed Transvoxel backend;
+- `world-transvoxel-terrain`: reusable terrain addon;
+- `world_transvoxel_game_world`: validation-owned prototype addon;
+- `world-transvoxel-integration-game`: separate proof game consuming the three
+  addon stack.
+
+The next work must move reusable game-world behavior out of the validation game
+and into a real addon/repository boundary. It must not start fluids, vegetation,
+voxel buildings, planets, multiplayer, or compute-shader acceleration as default
+terrain behavior before the game-world addon boundary is real.
+
+## Research facts that constrain the next step
+
+1. Transvoxel remains the correct low-level terrain LOD seam technology for this
+   project. The official Transvoxel description says transition cells join
+   multiresolution voxel terrain boundaries and require only local voxel data,
+   which matches the current edit/streaming architecture.
+
+2. Godot GDExtension remains the correct default terrain hot-path boundary.
+   The Godot C++ binding compatibility policy allows an extension built against
+   an earlier Godot minor version to work on later minor versions, not the other
+   way around. That supports continuing to validate against the oldest supported
+   Godot minor version.
+
+3. Compute shaders are useful, but they should be optional after measurement,
+   not the default next step. Godot compute shaders require RenderingDevice-based
+   renderers, use GLSL/SPIR-V, and can stall the CPU if synchronized
+   immediately. Long compute work can trigger Windows TDR, so GPU meshing or
+   generation must be split into bounded dispatches with telemetry.
+
+4. The compact 2K map does not require a planetary coordinate solution.
+   Godot's large-world documentation treats large world coordinates as useful
+   for space or planetary-scale simulation, with performance/memory costs.
+   Larger future worlds need an explicit coordinate/origin strategy before they
+   are advertised.
+
+5. Rendering only useful visible work should combine several layers:
+   player-centered terrain streaming, normal frustum culling, occlusion/HLOD
+   where scene layout permits it, and chunk/cell splitting for vegetation and
+   entities. Godot documents visibility ranges, mesh LOD, occlusion culling, and
+   MultiMesh as separate tools; none replaces terrain streaming.
+
+6. Water/lava should be a separate post-1.0 system. Initial water should be a
+   bounded surface/heightfield or local-cell simulation with terrain coupling.
+   Fully volumetric water inside the Transvoxel density field is high-risk and
+   should not be the first post-1.0 default.
+
+## Decision
+
+The first post-1.0 track should be:
+
+`P1 - Game-world addon extraction and production boundary`
+
+Rationale:
+
+- it closes the largest documented remaining gap: the game-world addon is still
+  validation-owned prototype code;
+- it directly supports future game repositories without requiring copied
+  validation internals;
+- it keeps terrain stable while enabling future water, vegetation, buildings,
+  player interaction, and editor tooling to attach through a standard world API;
+- it avoids starting GPU acceleration before the CPU/native baseline has a clean
+  game-world boundary and measurable bottlenecks.
+
+The recommended repository/addon naming is:
+
+- repository: `world-transvoxel-gameworld`;
+- addon folder: `addons/world_transvoxel_game_world`;
+- public root node: `WtGameWorld` or `WtWorldGameWorld`;
+- terrain dependency: `world-transvoxel-terrain`;
+- low-level dependency remains hidden behind `world-transvoxel-terrain`.
+
+Do not use `world-transvoxel-core` for this project structure.
+
+## Bounded post-1.0 roadmap
+
+### P1 - Game-world addon extraction and production boundary
+
+Goal: turn the validation-owned `world_transvoxel_game_world` prototype into a
+real reusable addon/repository.
+
+Exit:
+
+- `world-transvoxel-gameworld` repository exists;
+- it imports `world-transvoxel` and `world-transvoxel-terrain` as dependencies;
+- it exposes a stable world node, terrain node setup, optional player bridge,
+  terrain edit bridge, telemetry bridge, and profile selection;
+- it contains no validation-game scripts, scenes, tools, or artifacts;
+- the validation game and integration game consume the addon from the same public
+  API;
+- a validator proves no copied validation internals.
+
+Failure boundary:
+
+- if games still need validation-game scripts, P1 is not complete.
+
+### P2 - Production integration game proof
+
+Goal: make a normal minimal game repository prove the addon stack as an end-user
+dependency.
+
+Exit:
+
+- a separate game repository opens through `project.godot`;
+- it has a playable first-person character, crosshair, terrain edit input,
+  terrain telemetry overlay, and profile selection;
+- it runs the flat baseline and compact 2K procedural profile;
+- it does not vendor validation-game tests or internal scripts;
+- it has one command that validates launch, input, traversal, edit, storage, and
+  cold idle.
+
+Failure boundary:
+
+- if the game repository needs manual patching after clone/import, P2 is not
+  complete.
+
+### P3 - Scale and coordinate policy beyond compact 2K
+
+Goal: define how far the world can grow before origin/precision strategy changes.
+
+Exit:
+
+- the project records standard map scale vocabulary beyond 2K;
+- the standard single-precision range, origin-shift boundary, and optional large
+  world coordinate boundary are documented;
+- one larger-than-2K profile validates streaming, file-size budget, load budget,
+  memory budget, and visible presentation;
+- the larger profile remains optional until it is as stable as compact 2K.
+
+Failure boundary:
+
+- if larger maps increase storage/load time without a new budget, P3 fails.
+
+### P4 - Rendering and object-density foundation
+
+Goal: define how terrain, vegetation, props, and future buildings stay visible
+only when useful.
+
+Exit:
+
+- terrain streaming prioritizes camera/player-facing active work without hiding
+  required collision/edit chunks;
+- vegetation and prop prototypes are chunk/cell split instead of one huge
+  MultiMesh;
+- HLOD/visibility-range and mesh-LOD policy is documented;
+- occlusion is treated as optional scene-layout optimization, not a terrain
+  correctness mechanism;
+- automated telemetry reports visible terrain chunks, entity cells, draw calls,
+  instance counts, and frame cost.
+
+Failure boundary:
+
+- if object systems create one huge unculled resource, P4 fails.
+
+### P5 - Optional GPU/compute acceleration proof
+
+Goal: prove one optional GPU path without replacing the native CPU/default path.
+
+Exit:
+
+- one isolated compute experiment exists for a measurable workload, such as
+  height/material field generation or mesh-support preprocessing;
+- dispatches are bounded to avoid long GPU stalls and Windows TDR risk;
+- CPU/GPU sync is delayed or pipelined instead of immediate per-frame blocking;
+- telemetry compares CPU/native baseline against GPU path on the same profile;
+- disabling GPU acceleration returns to the current native path.
+
+Failure boundary:
+
+- if the GPU path becomes required for terrain correctness, P5 fails.
+
+### P6 - Water/lava research prototype
+
+Goal: select the first fluid representation without polluting terrain.
+
+Exit:
+
+- water/lava lives in a separate addon or clearly separate module;
+- the first prototype is surface/heightfield/local-cell based, not full
+  volumetric Transvoxel water;
+- terrain coupling is explicit: sample terrain height, collision mask, carve
+  changes, and storage events;
+- budget includes simulation step time, render cost, memory, and storage.
+
+Failure boundary:
+
+- if water requires rewriting terrain storage or meshing before a prototype
+  proves value, P6 fails.
+
+### P7 - Vegetation and biome prototype
+
+Goal: add visual richness without changing terrain correctness.
+
+Exit:
+
+- biome/material profiles decide spawn rules;
+- vegetation is deterministic from seed plus edit masks;
+- instances are chunk/cell partitioned for culling;
+- no GDScript hot loop owns dense vegetation updates;
+- telemetry reports instance counts and frame cost.
+
+Failure boundary:
+
+- if vegetation changes terrain correctness or creates hidden idle churn, P7
+  fails.
+
+### P8 - Voxel/block building prototype
+
+Goal: add blocky/gridlike structures as a separate system from smooth terrain.
+
+Exit:
+
+- block/building data has its own storage and meshing path;
+- the terrain edit API can interact with buildings only through explicit
+  integration events;
+- buildings have their own LOD/culling budget;
+- physics/collision update cost is measured.
+
+Failure boundary:
+
+- if building data is mixed into smooth terrain density without a storage and
+  collision contract, P8 fails.
+
+## Immediate recommendation
+
+Start P1. Do not begin compute shaders, fluids, vegetation, or voxel buildings
+until P1 has a real addon/repository boundary and the existing integration game
+uses it.
+
+The first implementation milestone after this research should be named:
+
+`P1 - Game-world addon extraction and production boundary`
+
+It should be validated by a command and marker, not by a human checklist.
+
+## References checked
+
+- Godot compute shaders:
+  https://docs.godotengine.org/en/stable/tutorials/shaders/compute_shaders.html
+- Godot GDExtension C++ bindings compatibility:
+  https://github.com/godotengine/godot-cpp
+- Godot large world coordinates:
+  https://docs.godotengine.org/en/stable/tutorials/physics/large_world_coordinates.html
+- Godot 3D performance, culling, and LOD:
+  https://docs.godotengine.org/en/latest/tutorials/performance/optimizing_3d_performance.html
+- Godot visibility ranges:
+  https://docs.godotengine.org/en/stable/tutorials/3d/visibility_ranges.html
+- Godot mesh LOD:
+  https://docs.godotengine.org/en/stable/tutorials/3d/mesh_lod.html
+- Godot MultiMeshInstance3D:
+  https://docs.godotengine.org/en/stable/classes/class_multimeshinstance3d.html
+- Godot background loading:
+  https://docs.godotengine.org/en/latest/tutorials/io/background_loading.html
+- Godot threading:
+  https://docs.godotengine.org/en/stable/tutorials/performance/using_multiple_threads.html
+- Official Transvoxel overview:
+  https://transvoxel.org/
+- Eric Lengyel Transvoxel data tables:
+  https://github.com/EricLengyel/Transvoxel
+- Eric Lengyel, Voxel-Based Terrain for Real-Time Virtual Simulations:
+  https://transvoxel.org/Lengyel-VoxelTerrain.pdf
+- GPU geometry clipmaps:
+  https://hhoppe.com/proj/gpugcm/
+- GPU Gems water and fluid references:
+  https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models
+  https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-38-fast-fluid-dynamics-simulation-gpu
