@@ -1269,3 +1269,32 @@ Boundary:
   CPU/native path. It does not finish LOD seam quality, generator budgets,
   water, vegetation, buildings, multiplayer, compute acceleration, or separate
   game integration.
+
+## G54 - LOD seam and artifact quality
+
+Status: complete when `WT_VALIDATION_G54_CONTRACT_PASS` and
+`WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the native production LOD streaming proof reports
+  `PRODUCTION_LOD_STREAMING_PASS`;
+- the Godot runtime starts the 28-page mixed LOD transition fixture;
+- `maximum_lod=1` produces both LOD0 and LOD1 render meshes;
+- coarse bridge and fine seam-neighbor chunks become fully ready;
+- horizontal LOD seam pairs are detected from actual render mesh names and
+  chunk coordinates;
+- boundary vertices exist on both sides of the LOD seam and stay under the seam
+  gap tolerance;
+- diagonal mesh edges are present and bounded before and after the LOD topology
+  change;
+- an edited seam remains stable and a post-edit topology change remeshes
+  transition geometry;
+- no dense near-2K source/world files are required in the normal compact path.
+
+Boundary:
+
+- this locks mixed LOD seam/artifact behavior for the current CPU/native
+  transition fixture. It does not finish generator budgets, water, vegetation,
+  buildings, multiplayer, compute acceleration, or separate game integration.

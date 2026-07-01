@@ -28,7 +28,9 @@ REQUIRED_PHRASES = {
         "G52 locked baseline underground",
         "configurable streaming radius evidence",
         "G53 locked configurable streaming radius behavior",
-        "Dynamic LOD seam quality is not yet final",
+        "mixed LOD seam/artifact evidence",
+        "G54 locked mixed LOD seam",
+        "World generation is not yet the final game-world generator",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -77,7 +79,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=lod_seam_artifact_quality")
+    print(f"{MARKER} next=map_generator_budget_quality")
 
 
 if __name__ == "__main__":

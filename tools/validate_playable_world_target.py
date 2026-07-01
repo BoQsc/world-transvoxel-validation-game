@@ -104,8 +104,9 @@ REQUIRED_PHRASES = {
         "G50 is the latest completed terrain profile standard quality gate",
         "G51 is the latest completed material texture pipeline quality gate",
         "G52 is the latest completed underground terrain variation quality gate",
-        "G53 is the latest completed large-world streaming radius quality gate",
-        "Next terrain work is G54 LOD seam and artifact quality",
+        "G53 is a completed large-world streaming radius quality gate",
+        "G54 is the latest completed LOD seam and artifact quality gate",
+        "Next terrain work is G55 map generator budget quality",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -168,6 +169,7 @@ REQUIRED_PHRASES = {
         "## G51 - Material texture pipeline quality",
         "## G52 - Underground terrain variation quality",
         "## G53 - Large-world streaming radius quality",
+        "## G54 - LOD seam and artifact quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -203,7 +205,8 @@ REQUIRED_PHRASES = {
         "G50 is the latest completed terrain profile standard quality gate",
         "G51 is the latest completed material texture pipeline quality gate",
         "G52 is the latest completed underground terrain variation quality gate",
-        "G53 is the latest completed large-world streaming radius quality gate",
+        "G53 is a completed large-world streaming radius quality gate",
+        "G54 is the latest completed LOD seam and artifact quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -244,7 +247,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=lod_seam_artifact_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=map_generator_budget_quality")
 
 
 if __name__ == "__main__":

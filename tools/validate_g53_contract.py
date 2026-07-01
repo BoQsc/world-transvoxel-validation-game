@@ -39,27 +39,22 @@ REQUIRED_PHRASES = {
         "assert_compact_project_budget",
     ),
     "README.md": (
-        "G53 is the latest completed large-world streaming radius quality gate",
+        "G53 is a completed large-world streaming radius quality gate",
         "WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS",
-        "Next terrain work is G54 LOD seam and artifact quality",
     ),
     "docs/ROADMAP.md": (
         "## G53 - Large-world streaming radius quality",
         "WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G53",
-        "The next milestone after G53 is G54",
+        "Completed validation track: G0 through G54",
         "G53 - Large-world streaming radius quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G53",
         "G53 locked configurable streaming radius behavior",
-        "immediate direction after G53 is G54",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G53 is the latest completed large-world streaming radius quality gate",
-        "Next terrain work is G54 LOD seam and artifact quality",
+        "G53 is a completed large-world streaming radius quality gate",
     ),
 }
 

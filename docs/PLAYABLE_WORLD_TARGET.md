@@ -254,15 +254,21 @@ the native procedural vertical-strata model, public generation-profile
 underground contract, flat-baseline volumetric density proof, and localized
 underground carve behavior.
 
-G53 is the latest completed large-world streaming radius quality gate. It proves
+G53 is a completed large-world streaming radius quality gate. It proves
 configurable compact 2K streaming radii 1, 2, 4, and 6 through the public viewer
 path, exact active/render resources 9, 25, 81, and 169, radius-edge readiness,
 outside-radius absence, growing visible mesh spread, and active-resource capacity
 256.
 
+G54 is the latest completed LOD seam and artifact quality gate. It proves the
+current mixed LOD transition fixture through native production LOD streaming
+evidence and a Godot runtime seam audit with LOD0/LOD1 render meshes, horizontal
+seam-pair checks, diagonal edge bounds, edited seam stability, and post-edit
+transition remeshing.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G53 is automated validation-grade compact 2K terrain runtime
+Current state after G54 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
@@ -270,7 +276,8 @@ game-facing terrain addon API contract plus validation-workaround removal
 evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
 terrain profile standard evidence plus material texture pipeline evidence and
 underground density/material variation evidence plus configurable streaming
-radius evidence, not production-ready large-world terrain. Next terrain work is G54 LOD seam and artifact quality.
+radius evidence plus mixed LOD seam/artifact evidence, not production-ready
+large-world terrain. Next terrain work is G55 map generator budget quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -317,6 +324,7 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
   seam/artifact, or generator-budget work;
 - underground terrain variation quality gate before streaming radius,
   seam/artifact, or generator-budget work;
+- LOD seam and artifact quality gate before generator-budget work;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.
