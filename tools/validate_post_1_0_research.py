@@ -13,6 +13,8 @@ REQUIRED_PHRASES = {
         "Status: post-1.0 research contract; P1 and P2 complete, P3 next",
         "Terrain 1.0 ended at G60",
         "without appending G61",
+        "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md",
+        "source of truth for discovered post-1.0 gaps",
         "P1 - Game-world addon extraction and production boundary",
         "Status: complete",
         "WT_VALIDATION_P1_CONTRACT_PASS",
@@ -41,6 +43,9 @@ REQUIRED_PHRASES = {
         "P6 - Water/lava research prototype",
         "P7 - Vegetation and biome prototype",
         "P8 - Voxel/block building prototype",
+        "P3-SCALE-COORDINATES",
+        "P4-TERRAIN-TEXTURES",
+        "P4-VISUAL-VALIDATION",
         "Start P3",
         "https://docs.godotengine.org/en/stable/tutorials/shaders/compute_shaders.html",
         "https://docs.godotengine.org/en/stable/tutorials/physics/large_world_coordinates.html",
@@ -53,6 +58,7 @@ REQUIRED_PHRASES = {
     ),
     "README.md": (
         "docs/POST_1_0_RESEARCH_AND_ROADMAP.md",
+        "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md",
         "WT_VALIDATION_POST_1_0_RESEARCH_PASS",
         "WT_VALIDATION_P1_CONTRACT_PASS",
         "WT_VALIDATION_P2_CONTRACT_PASS",
@@ -61,6 +67,7 @@ REQUIRED_PHRASES = {
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
         "docs/POST_1_0_RESEARCH_AND_ROADMAP.md",
+        "POST_1_0_PRODUCTION_GAP_REGISTER.md",
         "post-1.0 roadmap",
         "production terrain material/texture pipeline beyond the G51 baseline proof",
     ),
@@ -70,6 +77,12 @@ REQUIRED_PHRASES = {
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G51 is baseline material/texture proof, not final production terrain texturing",
+        "POST_1_0_PRODUCTION_GAP_REGISTER.md",
+    ),
+    "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md": (
+        "WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS",
+        "P3-SCALE-COORDINATES",
+        "P4-TERRAIN-TEXTURES",
     ),
 }
 

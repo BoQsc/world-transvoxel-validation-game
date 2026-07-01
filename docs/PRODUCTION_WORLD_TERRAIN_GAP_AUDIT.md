@@ -183,6 +183,8 @@ Each milestone must name:
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
 is bounded to G41 through G60; G60 is the release-candidate finish line.
+The post-1.0 production gap register is
+[`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
 
 The first production-gap milestones are:
 

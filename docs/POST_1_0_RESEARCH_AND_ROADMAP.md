@@ -8,6 +8,12 @@ Terrain 1.0 ended at G60 for the validated compact 2K terrain stack. This
 document defines the next bounded direction without appending G61 to the Terrain
 1.0 roadmap.
 
+The production gap register is tracked in
+[`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
+It is the source of truth for discovered post-1.0 gaps. This roadmap should
+pull bounded milestones from that register instead of leaving important systems
+implicit under completed baseline gates.
+
 ## Current project boundary
 
 The project currently has:
@@ -113,6 +119,18 @@ Do not use `world-transvoxel-core` for this project structure.
 
 ## Bounded post-1.0 roadmap
 
+The active register entries for this roadmap are:
+
+- `P3-SCALE-COORDINATES`;
+- `P4-TERRAIN-TEXTURES`;
+- `P4-RENDER-DENSITY`;
+- `P4-VISUAL-VALIDATION`;
+- `P4-EDITOR-UX`;
+- `P5-GPU-ACCELERATION`;
+- `P6-WATER-LAVA`;
+- `P7-VEGETATION-BIOMES`;
+- `P8-BLOCK-BUILDINGS`.
+
 ### P1 - Game-world addon extraction and production boundary
 
 Status: complete.
@@ -187,6 +205,8 @@ Exit:
 - one larger-than-2K profile validates streaming, file-size budget, load budget,
   memory budget, and visible presentation;
 - the larger profile remains optional until it is as stable as compact 2K.
+- `P3-SCALE-COORDINATES` is either closed or split into smaller registered
+  gaps with validators.
 
 Failure boundary:
 
@@ -224,6 +244,8 @@ Exit:
   correctness mechanism;
 - automated telemetry reports visible terrain chunks, entity cells, draw calls,
   instance counts, and frame cost.
+- `P4-TERRAIN-TEXTURES`, `P4-RENDER-DENSITY`, and `P4-VISUAL-VALIDATION` are
+  closed; `P4-EDITOR-UX` is either closed or explicitly moved to P5.
 
 Failure boundary:
 

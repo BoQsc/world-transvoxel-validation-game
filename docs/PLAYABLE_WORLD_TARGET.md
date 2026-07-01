@@ -314,6 +314,8 @@ The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
 is bounded to G41 through G60, with G60 as the release-candidate finish line.
 Future work after G60 belongs to explicit post-1.0 roadmaps.
+The post-1.0 production gap register is
+[`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
 The post-1.0 roadmap has completed P1 game-world addon extraction and P2
 production integration game proof through `world-transvoxel-gameworld` and
 `world-transvoxel-integration-game`; P3 scale and coordinate policy is the next

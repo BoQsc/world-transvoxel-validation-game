@@ -224,6 +224,8 @@ These are important, but they are not required to finish Terrain 1.0:
 Each post-1.0 system must get its own bounded roadmap before implementation.
 The current post-1.0 research contract and onward roadmap are tracked in
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](POST_1_0_RESEARCH_AND_ROADMAP.md).
+The post-1.0 production gap register is tracked in
+[`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
 That roadmap has completed P1 game-world addon extraction and P2 production
 integration game proof; P3 scale and coordinate policy is the next bounded
 post-1.0 track. P4 explicitly owns production terrain rendering/materials/object
