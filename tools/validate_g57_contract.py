@@ -26,8 +26,7 @@ REQUIRED_PHRASES = {
         "world_transvoxel",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G57",
-        "The next milestone after G57 is G58",
+        "Completed validation track:",
         "G57 - Separate game repository integration quality",
     ),
     "docs/G57_SEPARATE_GAME_REPOSITORY_INTEGRATION_QUALITY.md": (
@@ -36,22 +35,18 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G57_SEPARATE_GAME_REPOSITORY_SMOKE_PASS",
     ),
     "README.md": (
-        "G57 is the latest completed separate game repository integration quality gate",
+        "G57 is a completed separate game repository integration quality gate",
         "WT_VALIDATION_G57_SEPARATE_GAME_REPOSITORY_SMOKE_PASS",
-        "Next terrain work is G58 documentation examples quality",
     ),
     "docs/ROADMAP.md": (
         "## G57 - Separate game repository integration quality",
         "WT_VALIDATION_G57_SEPARATE_GAME_REPOSITORY_SMOKE_PASS",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G57",
         "G57 locked separate game repository integration",
-        "immediate direction after G57 is G58",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G57 is the latest completed separate game repository integration quality gate",
-        "Next terrain work is G58 documentation examples quality",
+        "G57 is a completed separate game repository integration quality gate",
     ),
 }
 

@@ -278,14 +278,18 @@ standard world node, configure terrain profiles, attach an optional player,
 drive player-based viewer updates, and submit terrain edits without dense normal
 terrain files.
 
-G57 is the latest completed separate game repository integration quality gate.
+G57 is a completed separate game repository integration quality gate.
 It proves the sibling `world-transvoxel-integration-game` repository imports the
 three addon stack without validation-game scripts/tests/scenes, then runs the
 compact 2K player-viewer and edit path on both supported Godot engines.
 
+G58 is the latest completed documentation examples quality gate. It provides
+installation, profile setup, terrain editing, storage, telemetry, and
+troubleshooting examples, and keeps the separate integration repo README aligned.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G57 is automated validation-grade compact 2K terrain runtime
+Current state after G58 is automated validation-grade compact 2K terrain runtime
 with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
@@ -295,8 +299,9 @@ terrain profile standard evidence plus material texture pipeline evidence and
 underground density/material variation evidence plus configurable streaming
 radius evidence plus mixed LOD seam/artifact evidence and map-generator budget
 evidence plus game-world addon prototype evidence and separate game repository
-integration evidence, not production-ready large-world terrain. Next terrain
-work is G58 documentation examples quality.
+integration evidence plus documentation examples evidence, not production-ready
+large-world terrain. Next terrain work is G59 versioning release contract
+quality.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
@@ -349,6 +354,7 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
   integration work;
 - separate game repository integration quality gate before documentation
   examples work;
+- documentation examples quality gate before versioning release contract work;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.

@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G57, what the expected final world/terrain target is, and
+game actually is after G58, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G57
+## Current claim boundary after G58
 
-The current validated claim after G57 is:
+The current validated claim after G58 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, game-world addon prototype evidence, and separate game repository integration evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, game-world addon prototype evidence, separate game repository integration evidence, and documentation examples evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -45,7 +45,8 @@ a validation-owned game-world addon prototype can create the standard world
 node, configure terrain profiles, attach an optional player, drive player-based
 viewer updates, and submit terrain edits, and prove a separate sibling game
 repository can import the three-addon stack without copying validation-game
-scripts/tests/scenes.
+scripts/tests/scenes, and provide adoption examples for installation, profile
+setup, terrain editing, storage, telemetry, and troubleshooting.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -123,6 +124,8 @@ These items are currently backed by milestone evidence in this repository:
   `world-transvoxel-integration-game` repository importing `world_transvoxel`,
   `world_transvoxel_terrain`, and `world_transvoxel_game_world` without
   validation-game scripts/tests/scenes.
+- documentation examples evidence covering installation, profile setup, terrain
+  editing, storage, telemetry, and troubleshooting.
 
 ## Not production-ready yet
 
@@ -133,7 +136,7 @@ final world/terrain:
    though a separate integration repository now proves it as an external
    dependency.
    World generation is not yet the final game-world generator.
-2. Documentation examples are not complete enough yet for normal user adoption.
+2. Versioning, compatibility, migration, and release policy are not locked yet.
 3. The G54 LOD seam proof is a current transition-fixture quality gate, not a
    claim that all future terrain art styles and all future generator outputs are
    visually final.
@@ -201,6 +204,8 @@ The first production-gap milestones are:
     integration work.
 17. `G57 - Separate game repository integration quality`: lock a sibling game
     repository proof before documentation examples work.
+18. `G58 - Documentation examples quality`: lock user adoption examples before
+    versioning release contract work.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -210,7 +215,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G57.
+runtime after G58.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -235,6 +240,8 @@ the current transition fixture. G55 locked map generator budget behavior for the
 current deterministic compact 2K profiles. G56 locked the game-world addon
 prototype boundary for standard world setup, optional player viewer integration,
 and terrain edit bridging. G57 locked separate game repository integration for
-the three-addon stack without validation-game internals. The immediate direction
-after G57 is G58 documentation examples quality, then the remaining finite
-G41-G60 Terrain 1.0 roadmap.
+the three-addon stack without validation-game internals. G58 locked
+documentation examples for installation, profile setup, terrain editing, storage,
+telemetry, and troubleshooting. The immediate direction after G58 is G59
+versioning release contract quality, then the remaining finite G41-G60 Terrain
+1.0 roadmap.

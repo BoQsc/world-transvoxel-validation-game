@@ -108,8 +108,9 @@ REQUIRED_PHRASES = {
         "G54 is a completed LOD seam and artifact quality gate",
         "G55 is a completed map generator budget quality gate",
         "G56 is a completed game-world addon prototype quality gate",
-        "G57 is the latest completed separate game repository integration quality gate",
-        "Next terrain work is G58 documentation examples quality",
+        "G57 is a completed separate game repository integration quality gate",
+        "G58 is the latest completed documentation examples quality gate",
+        "Next terrain work is G59 versioning release contract quality",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -176,6 +177,7 @@ REQUIRED_PHRASES = {
         "## G55 - Map generator budget quality",
         "## G56 - Game-world addon prototype quality",
         "## G57 - Separate game repository integration quality",
+        "## G58 - Documentation examples quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -215,7 +217,8 @@ REQUIRED_PHRASES = {
         "G54 is a completed LOD seam and artifact quality gate",
         "G55 is a completed map generator budget quality gate",
         "G56 is a completed game-world addon prototype quality gate",
-        "G57 is the latest completed separate game repository integration quality gate",
+        "G57 is a completed separate game repository integration quality gate",
+        "G58 is the latest completed documentation examples quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -256,7 +259,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=documentation_examples_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=versioning_release_contract_quality")
 
 
 if __name__ == "__main__":

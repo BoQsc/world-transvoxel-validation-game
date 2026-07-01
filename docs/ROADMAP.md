@@ -1379,3 +1379,25 @@ Boundary:
   examples, versioning policy, release-candidate validation, final game-world
   generator design, water, vegetation, buildings, multiplayer, or compute
   acceleration.
+
+## G58 - Documentation examples quality
+
+Status: complete when `WT_VALIDATION_G58_CONTRACT_PASS` and
+`WT_VALIDATION_G58_DOCUMENTATION_EXAMPLES_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a documentation quality gate;
+- `docs/TERRAIN_ADOPTION_EXAMPLES.md` covers installation, profile setup,
+  terrain editing, storage, telemetry, and troubleshooting;
+- examples use the game-world addon and terrain addon APIs instead of copied
+  validation-game internals;
+- the separate integration repo README carries the same adoption sections;
+- the docs name the expected G57 and G58 validation markers;
+- docs contain no TODO/TBD placeholders.
+
+Boundary:
+
+- this locks adoption examples only. It does not finish versioning, migration,
+  release policy, release-candidate validation, water, vegetation, buildings,
+  multiplayer, or compute acceleration.
