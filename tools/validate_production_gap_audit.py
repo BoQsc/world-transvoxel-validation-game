@@ -30,7 +30,10 @@ REQUIRED_PHRASES = {
         "G53 locked configurable streaming radius behavior",
         "mixed LOD seam/artifact evidence",
         "G54 locked mixed LOD seam",
+        "map-generator budget evidence",
+        "G55 locked map generator budget behavior",
         "World generation is not yet the final game-world generator",
+        "game-world addon prototype quality",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -79,7 +82,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=map_generator_budget_quality")
+    print(f"{MARKER} next=game_world_addon_prototype_quality")
 
 
 if __name__ == "__main__":

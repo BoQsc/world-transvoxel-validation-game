@@ -44,29 +44,31 @@ REQUIRED_PHRASES = {
         "static_audit",
     ),
     "README.md": (
-        "G54 is the latest completed LOD seam and artifact quality gate",
+        "G54 is a completed LOD seam and artifact quality gate",
         "WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_SMOKE_PASS",
-        "Next terrain work is G55 map generator budget quality",
     ),
     "docs/ROADMAP.md": (
         "## G54 - LOD seam and artifact quality",
         "WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G54",
-        "The next milestone after G54 is G55",
+        "Completed validation track: G0 through G55",
+        "The next milestone after G55 is G56",
         "G54 - LOD seam and artifact quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G54",
+        "Current claim boundary after G55",
         "G54 locked mixed LOD seam and edited artifact behavior",
-        "immediate direction after G54 is G55",
+        "immediate direction after G55 is G56",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G54 is the latest completed LOD seam and artifact quality gate",
-        "Next terrain work is G55 map generator budget quality",
+        "G54 is a completed LOD seam and artifact quality gate",
     ),
 }
+
+
+def normalized_contains(text: str, phrase: str) -> bool:
+    return phrase in text or phrase in " ".join(text.split())
 
 
 def main() -> None:
@@ -81,7 +83,7 @@ def main() -> None:
             continue
         text = path.read_text(encoding="utf-8")
         for phrase in phrases:
-            if phrase not in text:
+            if not normalized_contains(text, phrase):
                 errors.append(f"{relative} missing phrase: {phrase}")
     for relative in REQUIRED_FILES:
         path = ROOT / relative

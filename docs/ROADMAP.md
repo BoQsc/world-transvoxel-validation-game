@@ -1298,3 +1298,31 @@ Boundary:
 - this locks mixed LOD seam/artifact behavior for the current CPU/native
   transition fixture. It does not finish generator budgets, water, vegetation,
   buildings, multiplayer, compute acceleration, or separate game integration.
+
+## G55 - Map generator budget quality
+
+Status: complete when `WT_VALIDATION_G55_CONTRACT_PASS` and
+`WT_VALIDATION_G55_MAP_GENERATOR_BUDGET_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a runtime terrain quality gate;
+- the normal compact 2K procedural generator path is tested through
+  `g19_compact_2k_on_demand` and `g50_seeded_procedural_2k`;
+- both profiles use deterministic reference generation;
+- both profiles expose 2048 by 2048 block maps through 16384 pages;
+- both profiles reach playable readiness inside the 30 seconds load-to-play
+  ceiling;
+- render/collision resources settle to the expected 25-resource compact active
+  window;
+- no normal terrain file exceeds the 100 MiB hard per-file ceiling;
+- current generated target files remain under the 50 MiB target per-file
+  ceiling;
+- generated profile directories remain under the 100 MiB total ceiling;
+- no dense near-2K source/world files are required in the normal compact path.
+
+Boundary:
+
+- this locks the current deterministic compact 2K map-generator budget. It does
+  not finish the future game-world addon, separate game repository integration,
+  water, vegetation, buildings, multiplayer, or compute acceleration.

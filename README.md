@@ -137,12 +137,16 @@ the compact 2K runtime accepts configurable streaming radii 1, 2, 4, and 6,
 settles active/render resources to 9, 25, 81, and 169, keeps resources inside a
 256 active-resource capacity, and verifies radius-edge readiness plus
 outside-radius absence.
-G54 is the latest completed LOD seam and artifact quality gate: it proves the
+G54 is a completed LOD seam and artifact quality gate: it proves the
 current mixed LOD transition fixture through native production LOD streaming
 evidence and a Godot runtime seam audit with LOD0/LOD1 render meshes, horizontal
 seam-pair checks, diagonal edge bounds, edited seam stability, and post-edit
 transition remeshing.
-Current claim boundary after G54: automated validation-grade compact 2K terrain
+G55 is the latest completed map generator budget quality gate: it proves the
+current deterministic compact 2K generator profiles load under 30 seconds,
+expose 2048 by 2048 block maps through 16384 pages, avoid dense normal terrain
+files, and stay inside the 50 MiB target and 100 MiB hard file budgets.
+Current claim boundary after G55: automated validation-grade compact 2K terrain
 runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
@@ -150,8 +154,8 @@ game-facing terrain addon API contract plus validation-workaround removal
 evidence plus native hot-path boundary evidence, debug telemetry UI evidence, and
 terrain profile standard evidence plus material texture pipeline evidence and
 underground density/material variation evidence plus configurable streaming
-radius evidence plus mixed LOD seam/artifact evidence, not production-ready
-large-world terrain.
+radius evidence plus mixed LOD seam/artifact evidence and map-generator budget
+evidence, not production-ready large-world terrain.
 The production gap is tracked
 in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
@@ -304,6 +308,8 @@ python tools/validate_g53_contract.py
 python tools/g53_large_world_streaming_radius_quality.py
 python tools/validate_g54_contract.py
 python tools/g54_lod_seam_artifact_quality.py
+python tools/validate_g55_contract.py
+python tools/g55_map_generator_budget_quality.py
 python tools/validate_active_track_guardrails.py
 ```
 
@@ -313,9 +319,9 @@ Expected marker:
 WT_VALIDATION_G0_CONTRACT_PASS implementation=install_run_validation_scaffold next=human_visible_playtest_confirmation
 WT_VALIDATION_ROOT_PROJECT_SAFE_IMPORT_PASS engines=2 report=artifacts/root_project_safe_import/root_project_safe_import_report.json
 WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_install_run_smoke_report.json
-WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=map_generator_budget_quality
-WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=map_generator_budget_quality
-WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G54 next=G55 final=G60 terrain_1_0=true
+WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=game_world_addon_prototype_quality
+WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=game_world_addon_prototype_quality
+WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G55 next=G56 final=G60 terrain_1_0=true
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -466,6 +472,9 @@ WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS profile=g19_compact_2k
 WT_VALIDATION_G54_CONTRACT_PASS implementation=lod_seam_artifact_quality
 WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_PASS pages=28 active_records=18 render_resources=10 collision_resources=10 lod0=... lod1=... seam_pairs=... edited_seam_pairs=... diagonal_edges=... edited_diagonal_edges=... max_boundary_gap=... edited_boundary_gap=... transition_completions=... edit_replacements=... dense_world_files=0
 WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_SMOKE_PASS engines=2 pages=28 active_capacity=40 max_engine_seconds=... dense_world_files=0 report=artifacts/g54_lod_seam_artifact_quality/g54_lod_seam_artifact_quality_report.json
+WT_VALIDATION_G55_CONTRACT_PASS implementation=map_generator_budget_quality
+WT_VALIDATION_G55_MAP_GENERATOR_BUDGET_PASS profiles=2 map_blocks=2048 pages=16384 max_load_ms=... max_render_resources=25 max_collision_resources=25 generator_modes=deterministic_reference,deterministic_reference seeds=19019,50050 dense_world_files=0
+WT_VALIDATION_G55_MAP_GENERATOR_BUDGET_SMOKE_PASS profiles=2 engines=2 max_engine_seconds=... max_file_bytes=... max_total_bytes=... target_file_bytes=52428800 hard_file_bytes=104857600 dense_world_files=0 report=artifacts/g55_map_generator_budget_quality/g55_map_generator_budget_quality_report.json
 WT_VALIDATION_ACTIVE_TRACK_GUARDRAILS_PASS active=runtime_terrain_quality post_g33_review_milestones=0
 ```
 
@@ -498,11 +507,12 @@ python tools/g51_material_texture_pipeline_quality.py
 python tools/g52_underground_terrain_variation_quality.py
 python tools/g53_large_world_streaming_radius_quality.py
 python tools/g54_lod_seam_artifact_quality.py
+python tools/g55_map_generator_budget_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 ```
 
-G54 is the latest completed terrain quality gate. Current state after G54 is
+G55 is the latest completed terrain quality gate. Current state after G55 is
 automated validation-grade compact 2K terrain runtime with measured frame/update
 telemetry, collision traversal stability, and view-distance presentation
 coverage plus default sphere edit policy/repeated edit shape validation and
@@ -511,13 +521,13 @@ addon API contract plus validation-workaround removal evidence plus native
 hot-path boundary evidence plus debug telemetry UI evidence and terrain profile
 standard evidence plus material texture pipeline evidence plus underground
 density/material variation evidence plus configurable streaming radius evidence
-plus mixed LOD seam/artifact evidence,
+plus mixed LOD seam/artifact evidence and map-generator budget evidence,
 not production-ready large-world terrain.
 The gap to the expected final world/terrain is tracked in
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
 The finite Terrain 1.0 roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](docs/FINITE_PRODUCTION_ROADMAP.md): G41
-through G60, with G60 as the release-candidate finish line. Next terrain work is G55 map generator budget quality and must advance through that finite list instead of appending unbounded "next useful" tasks.
+through G60, with G60 as the release-candidate finish line. Next terrain work is G56 game-world addon prototype quality and must advance through that finite list instead of appending unbounded "next useful" tasks.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
 
