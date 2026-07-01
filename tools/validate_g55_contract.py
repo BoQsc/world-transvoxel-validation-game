@@ -38,27 +38,22 @@ REQUIRED_PHRASES = {
         "MAX_LOAD_TO_PLAY_SECONDS",
     ),
     "README.md": (
-        "G55 is the latest completed map generator budget quality gate",
+        "G55 is a completed map generator budget quality gate",
         "WT_VALIDATION_G55_MAP_GENERATOR_BUDGET_SMOKE_PASS",
-        "Next terrain work is G56 game-world addon prototype quality",
     ),
     "docs/ROADMAP.md": (
         "## G55 - Map generator budget quality",
         "WT_VALIDATION_G55_MAP_GENERATOR_BUDGET_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G55",
-        "The next milestone after G55 is G56",
+        "Completed validation track:",
         "G55 - Map generator budget quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G55",
         "G55 locked map generator budget behavior",
-        "immediate direction after G55 is G56",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G55 is the latest completed map generator budget quality gate",
-        "Next terrain work is G56 game-world addon prototype quality",
+        "G55 is a completed map generator budget quality gate",
     ),
 }
 

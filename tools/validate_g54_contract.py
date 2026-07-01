@@ -52,14 +52,11 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G54_LOD_SEAM_ARTIFACT_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G55",
-        "The next milestone after G55 is G56",
+        "Completed validation track:",
         "G54 - LOD seam and artifact quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G55",
         "G54 locked mixed LOD seam and edited artifact behavior",
-        "immediate direction after G55 is G56",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G54 is a completed LOD seam and artifact quality gate",

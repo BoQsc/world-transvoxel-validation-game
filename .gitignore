@@ -4,3 +4,4 @@
 __pycache__/
 *.pyc
 *.translation
+*.gd.uid

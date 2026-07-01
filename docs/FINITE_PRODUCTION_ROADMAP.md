@@ -2,17 +2,17 @@
 
 Status: active roadmap contract.
 
-This document defines the concrete remaining path from the current G55 state to
+This document defines the concrete remaining path from the current G56 state to
 Terrain 1.0. It exists so the project does not degrade into an infinite list of
 "next useful" tasks.
 
 ## Current state
 
-Completed validation track: G0 through G55.
+Completed validation track: G0 through G56.
 
 Current claim:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, and map-generator budget evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, and game-world addon prototype evidence, not production-ready large-world terrain.
 
 The remaining roadmap is finite for Terrain 1.0. If new work is discovered, it
 must either replace an existing gate, be folded into an existing gate, or be
@@ -41,8 +41,8 @@ specific gate below says otherwise.
 
 ## Terrain 1.0 gates
 
-The remaining Terrain 1.0 gates after the current G55 state are G56 through
-G60. G41 through G55 remain listed here as the completed evidence ladder.
+The remaining Terrain 1.0 gates after the current G56 state are G57 through
+G60. G41 through G56 remain listed here as the completed evidence ladder.
 
 ### Phase A - Runtime reliability and performance
 
@@ -170,6 +170,8 @@ this validation repository.
     - Prototype the future game-world addon boundary: standard world node,
       terrain node setup, optional player interaction integration, and defaults.
     - Failure means game setup is still too manual.
+    - Current status: complete when `WT_VALIDATION_G56_CONTRACT_PASS` and
+      `WT_VALIDATION_G56_GAME_WORLD_ADDON_PROTOTYPE_SMOKE_PASS` both pass.
 
 17. `G57 - Separate game repository integration quality`
     - Create or update a minimal separate game repository that imports
@@ -212,6 +214,6 @@ Each post-1.0 system must get its own bounded roadmap before implementation.
 
 ## Drift rule
 
-The next milestone after G55 is G56. The finish line for this roadmap is G60.
+The next milestone after G56 is G57. The finish line for this roadmap is G60.
 No new Terrain 1.0 milestone may be appended after G60 unless it replaces or
 merges with an existing G41-G60 gate and keeps the roadmap finite.

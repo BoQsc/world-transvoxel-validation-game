@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G55, what the expected final world/terrain target is, and
+game actually is after G56, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G55
+## Current claim boundary after G56
 
-The current validated claim after G55 is:
+The current validated claim after G56 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, and map-generator budget evidence, not production-ready large-world terrain.
+> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, and game-world addon prototype evidence, not production-ready large-world terrain.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -40,7 +40,10 @@ radius-edge readiness, outside-radius absence, growing visible mesh spread, and 
 the native production LOD streaming proof plus a Godot runtime transition-fixture
 audit with edited seam stability and post-edit transition remeshing, and prove
 the current deterministic compact 2K generator remains inside the 30 seconds
-load-to-play ceiling plus 50 MiB target and 100 MiB hard file budgets.
+load-to-play ceiling plus 50 MiB target and 100 MiB hard file budgets, and prove
+a validation-owned game-world addon prototype can create the standard world
+node, configure terrain profiles, attach an optional player, drive player-based
+viewer updates, and submit terrain edits.
 
 It does not mean the final game-world terrain product is complete.
 
@@ -110,15 +113,18 @@ These items are currently backed by milestone evidence in this repository:
 - map-generator budget evidence for the current deterministic compact 2K
   generator profiles, including 2048 by 2048 map coverage, 16384 pages,
   sub-30-second load-to-play, and no dense normal terrain files.
+- game-world addon prototype evidence for a validation-owned
+  `world_transvoxel_game_world` addon boundary with standard world node setup,
+  terrain profile configuration, optional player viewer integration, and a
+  terrain edit bridge.
 
 ## Not production-ready yet
 
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. The future game-world addon boundary is not implemented yet. A game still
-   needs standard world/player setup defaults instead of validation-game
-   scaffolding.
+1. The game-world addon boundary is still a validation-owned prototype. A
+   separate game repository has not yet proven it as an external dependency.
    World generation is not yet the final game-world generator.
 2. The G54 LOD seam proof is a current transition-fixture quality gate, not a
    claim that all future terrain art styles and all future generator outputs are
@@ -182,6 +188,9 @@ The first production-gap milestones are:
 15. `G55 - Map generator budget quality`: lock the deterministic compact 2K
     generator budget for load-to-play, per-file size, total generated size, and
     dense-file absence before game-world addon prototype work.
+16. `G56 - Game-world addon prototype quality`: lock the validation-owned
+    game-world addon prototype boundary before separate game repository
+    integration work.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -191,7 +200,7 @@ acceleration.
 
 The project should not claim production-ready large-world terrain yet. It should
 claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G55.
+runtime after G56.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -213,6 +222,8 @@ assignment through edits and streaming. G52 locked baseline underground
 density/material variation and localized underground carve behavior. G53 locked configurable streaming radius behavior for compact 2K active/render resources and
 draw-distance spread. G54 locked mixed LOD seam and edited artifact behavior for
 the current transition fixture. G55 locked map generator budget behavior for the
-current deterministic compact 2K profiles. The immediate direction after G55 is
-G56 game-world addon prototype quality, then the remaining finite G41-G60
-Terrain 1.0 roadmap.
+current deterministic compact 2K profiles. G56 locked the game-world addon
+prototype boundary for standard world setup, optional player viewer integration,
+and terrain edit bridging. The immediate direction after G56 is G57 separate
+game repository integration quality, then the remaining finite G41-G60 Terrain
+1.0 roadmap.

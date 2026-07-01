@@ -1326,3 +1326,30 @@ Boundary:
 - this locks the current deterministic compact 2K map-generator budget. It does
   not finish the future game-world addon, separate game repository integration,
   water, vegetation, buildings, multiplayer, or compute acceleration.
+
+## G56 - Game-world addon prototype quality
+
+Status: complete when `WT_VALIDATION_G56_CONTRACT_PASS` and
+`WT_VALIDATION_G56_GAME_WORLD_ADDON_PROTOTYPE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is a game-facing integration quality gate;
+- a validation-owned `world_transvoxel_game_world` addon prototype exists under
+  `addons/world_transvoxel_game_world`;
+- the generated validation project installs the game-world addon beside
+  `world-transvoxel` and `world-transvoxel-terrain`;
+- the addon prototype exposes a standard world node API for terrain setup;
+- the prototype configures terrain generation/storage profiles through the
+  terrain addon instead of direct backend calls;
+- optional player integration can attach a player node and drive viewer updates;
+- the prototype exposes a terrain edit bridge and proves one edit commits;
+- the compact 2K active window remains settled at 25 render/collision
+  resources with no dense normal terrain files.
+
+Boundary:
+
+- this locks the prototype boundary only. It does not prove a separate game
+  repository can consume the addon stack; that is G57. It also does not finish
+  water, vegetation, buildings, multiplayer, compute acceleration, or final
+  game-world generator design.

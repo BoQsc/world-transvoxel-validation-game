@@ -47,7 +47,7 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G53_LARGE_WORLD_STREAMING_RADIUS_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G55",
+        "Completed validation track:",
         "G53 - Large-world streaming radius quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (

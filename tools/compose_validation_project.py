@@ -16,6 +16,7 @@ TERRAIN_REPO = REPOSITORY_ROOT / "world-transvoxel-terrain"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "validation_project"
 
 PROJECT_ITEMS = (
+    "addons",
     "scenes",
     "scripts",
     "tests",
@@ -115,7 +116,7 @@ def write_generated_project_file(output: Path) -> None:
                 "",
                 "[editor_plugins]",
                 "",
-                'enabled=PackedStringArray("res://addons/world_transvoxel/plugin.cfg", "res://addons/world_transvoxel_terrain/plugin.cfg")',
+                'enabled=PackedStringArray("res://addons/world_transvoxel/plugin.cfg", "res://addons/world_transvoxel_terrain/plugin.cfg", "res://addons/world_transvoxel_game_world/plugin.cfg")',
                 "",
             ]
         ),
