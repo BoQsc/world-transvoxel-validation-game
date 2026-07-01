@@ -18,6 +18,10 @@ The project currently has:
 - `world-transvoxel-integration-game`: separate proof game consuming the three
   addon stack.
 
+The existing `world_transvoxel_game_world` identifier is historical prototype
+evidence from G56/G57. P1 should migrate that prototype into the cleaner final
+addon id `world_transvoxel_gameworld`.
+
 The next work must move reusable game-world behavior out of the validation game
 and into a real addon/repository boundary. It must not start fluids, vegetation,
 voxel buildings, planets, multiplayer, or compute-shader acceleration as default
@@ -79,8 +83,9 @@ Rationale:
 The recommended repository/addon naming is:
 
 - repository: `world-transvoxel-gameworld`;
-- addon folder: `addons/world_transvoxel_game_world`;
-- public root node: `WtGameWorld` or `WtWorldGameWorld`;
+- addon folder: `addons/world_transvoxel_gameworld`;
+- addon id: `world_transvoxel_gameworld`;
+- public root node: `WtGameWorld`;
 - terrain dependency: `world-transvoxel-terrain`;
 - low-level dependency remains hidden behind `world-transvoxel-terrain`.
 
@@ -91,11 +96,13 @@ Do not use `world-transvoxel-core` for this project structure.
 ### P1 - Game-world addon extraction and production boundary
 
 Goal: turn the validation-owned `world_transvoxel_game_world` prototype into a
-real reusable addon/repository.
+real reusable addon/repository named `world-transvoxel-gameworld` with addon id
+`world_transvoxel_gameworld`.
 
 Exit:
 
 - `world-transvoxel-gameworld` repository exists;
+- `addons/world_transvoxel_gameworld` exists as the production addon folder;
 - it imports `world-transvoxel` and `world-transvoxel-terrain` as dependencies;
 - it exposes a stable world node, terrain node setup, optional player bridge,
   terrain edit bridge, telemetry bridge, and profile selection;
