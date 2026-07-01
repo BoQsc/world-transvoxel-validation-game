@@ -107,8 +107,9 @@ REQUIRED_PHRASES = {
         "G53 is a completed large-world streaming radius quality gate",
         "G54 is a completed LOD seam and artifact quality gate",
         "G55 is a completed map generator budget quality gate",
-        "G56 is the latest completed game-world addon prototype quality gate",
-        "Next terrain work is G57 separate game repository integration quality",
+        "G56 is a completed game-world addon prototype quality gate",
+        "G57 is the latest completed separate game repository integration quality gate",
+        "Next terrain work is G58 documentation examples quality",
         "production world/terrain gap audit",
         "finite production roadmap",
         "Terrain 1.0",
@@ -174,6 +175,7 @@ REQUIRED_PHRASES = {
         "## G54 - LOD seam and artifact quality",
         "## G55 - Map generator budget quality",
         "## G56 - Game-world addon prototype quality",
+        "## G57 - Separate game repository integration quality",
     ),
     "README.md": (
         "docs/PLAYABLE_WORLD_TARGET.md",
@@ -212,7 +214,8 @@ REQUIRED_PHRASES = {
         "G53 is a completed large-world streaming radius quality gate",
         "G54 is a completed LOD seam and artifact quality gate",
         "G55 is a completed map generator budget quality gate",
-        "G56 is the latest completed game-world addon prototype quality gate",
+        "G56 is a completed game-world addon prototype quality gate",
+        "G57 is the latest completed separate game repository integration quality gate",
         "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md",
         "docs/FINITE_PRODUCTION_ROADMAP.md",
         "Terrain 1.0",
@@ -253,7 +256,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=separate_game_repository_integration_quality")
+    print("WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=documentation_examples_quality")
 
 
 if __name__ == "__main__":

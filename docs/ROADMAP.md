@@ -1353,3 +1353,29 @@ Boundary:
   repository can consume the addon stack; that is G57. It also does not finish
   water, vegetation, buildings, multiplayer, compute acceleration, or final
   game-world generator design.
+
+## G57 - Separate game repository integration quality
+
+Status: complete when `WT_VALIDATION_G57_CONTRACT_PASS` and
+`WT_VALIDATION_G57_SEPARATE_GAME_REPOSITORY_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is an external game integration quality gate;
+- a sibling `world-transvoxel-integration-game` repository exists;
+- the separate repository imports `world_transvoxel`,
+  `world_transvoxel_terrain`, and `world_transvoxel_game_world`;
+- validation-game scenes, scripts, tests, and tools are not copied into the
+  separate repository;
+- the separate repository runs its own compact 2K deterministic profile;
+- the external game path attaches a player, drives viewer updates, submits one
+  terrain edit through the game-world addon, and settles back to 25
+  render/collision resources;
+- the proof runs on both supported Godot engines.
+
+Boundary:
+
+- this locks external integration only. It does not finish documentation
+  examples, versioning policy, release-candidate validation, final game-world
+  generator design, water, vegetation, buildings, multiplayer, or compute
+  acceleration.

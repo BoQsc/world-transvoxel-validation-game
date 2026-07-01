@@ -49,27 +49,22 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_G56_GAME_WORLD_ADDON_PROTOTYPE_SMOKE_PASS",
     ),
     "README.md": (
-        "G56 is the latest completed game-world addon prototype quality gate",
+        "G56 is a completed game-world addon prototype quality gate",
         "WT_VALIDATION_G56_GAME_WORLD_ADDON_PROTOTYPE_SMOKE_PASS",
-        "Next terrain work is G57 separate game repository integration quality",
     ),
     "docs/ROADMAP.md": (
         "## G56 - Game-world addon prototype quality",
         "WT_VALIDATION_G56_GAME_WORLD_ADDON_PROTOTYPE_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G56",
-        "The next milestone after G56 is G57",
+        "Completed validation track:",
         "G56 - Game-world addon prototype quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G56",
         "G56 locked the game-world addon prototype boundary",
-        "immediate direction after G56 is G57",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G56 is the latest completed game-world addon prototype quality gate",
-        "Next terrain work is G57 separate game repository integration quality",
+        "G56 is a completed game-world addon prototype quality gate",
     ),
 }
 
