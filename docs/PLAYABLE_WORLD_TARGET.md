@@ -318,6 +318,11 @@ The post-1.0 roadmap has completed P1 game-world addon extraction and P2
 production integration game proof through `world-transvoxel-gameworld` and
 `world-transvoxel-integration-game`; P3 scale and coordinate policy is the next
 bounded target.
+P4 must explicitly close production terrain rendering/materials/object density,
+including real terrain texture slots, material profiles, mapping/blending
+policy, texture import budget, sample terrain texture set, and
+edit/stream/reload/LOD stability. G51 is baseline material/texture proof, not
+final production terrain texturing.
 
 ## Required before final human-visible sanity check
 

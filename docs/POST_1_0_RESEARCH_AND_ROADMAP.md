@@ -65,6 +65,15 @@ the P3 scale and coordinate policy is real.
    Fully volumetric water inside the Transvoxel density field is high-risk and
    should not be the first post-1.0 default.
 
+7. Production terrain texture support is not far-future work. G51 proves the
+   baseline material/texture path, but it is intentionally small deterministic
+   evidence, not a production art pipeline. Godot's standard 3D material path
+   already supports normal artist-facing texture channels and triplanar mapping
+   options, while Godot texture import has explicit memory, disk-size, and VRAM
+   compression tradeoffs. The project needs a bounded production terrain
+   material/texture milestone before vegetation, fluids, buildings, or advanced
+   biome systems are treated as normal work.
+
 ## Decision
 
 The first post-1.0 track was:
@@ -86,6 +95,10 @@ P1 is now complete. P2 is also complete and proves the addon stack from a normal
 minimal game repository. The next bounded track is:
 
 `P3 - Scale and coordinate policy beyond compact 2K`
+
+The first near-term presentation track after P3 is P4, and P4 must explicitly
+include production terrain materials/textures. Do not leave production texturing
+implicit under the completed G51 baseline gate.
 
 The recommended repository/addon naming is:
 
@@ -179,13 +192,29 @@ Failure boundary:
 
 - if larger maps increase storage/load time without a new budget, P3 fails.
 
-### P4 - Rendering and object-density foundation
+### P4 - Production terrain rendering, materials, and object-density foundation
 
-Goal: define how terrain, vegetation, props, and future buildings stay visible
+Status: after P3.
+
+Goal: define how terrain is presented with production-grade material/texture
+support and how terrain, vegetation, props, and future buildings stay visible
 only when useful.
 
 Exit:
 
+- production terrain material profiles expose real texture slots, at minimum
+  albedo/color, normal, roughness/ORM, and material-id selection;
+- the terrain shader policy is explicit: UV2/material-id baseline, triplanar or
+  slope-aware mapping where appropriate, and a documented blending boundary;
+- texture import policy documents resolution defaults, mipmaps/filtering,
+  normal-map handling, VRAM/disk/memory budget, and fallback test assets;
+- flat, mountain, compact 2K, and edit/reload cases validate that material
+  assignment, texture selection, and material instances remain stable through
+  streaming, edits, reloads, and mixed LOD;
+- the standard sample set includes small performance-conscious terrain textures
+  for at least grass/ground, rock, sand/dirt, and underground/stone materials;
+- terrain material work remains event-driven and does not introduce per-frame
+  material repair churn;
 - terrain streaming prioritizes camera/player-facing active work without hiding
   required collision/edit chunks;
 - vegetation and prop prototypes are chunk/cell split instead of one huge
@@ -198,6 +227,10 @@ Exit:
 
 Failure boundary:
 
+- if terrain still relies on only the 16 by 16 generated G51 checker/palette for
+  normal presentation, P4 fails;
+- if production texture support remains implicit under G51 instead of a measured
+  P4 contract, P4 fails;
 - if object systems create one huge unculled resource, P4 fails.
 
 ### P5 - Optional GPU/compute acceleration proof
@@ -241,7 +274,7 @@ Goal: add visual richness without changing terrain correctness.
 
 Exit:
 
-- biome/material profiles decide spawn rules;
+- biome/material profiles decide spawn rules after P4 material profiles exist;
 - vegetation is deterministic from seed plus edit masks;
 - instances are chunk/cell partitioned for culling;
 - no GDScript hot loop owns dense vegetation updates;
@@ -279,7 +312,20 @@ The next implementation milestone after P2 should be named:
 
 `P3 - Scale and coordinate policy beyond compact 2K`
 
+Texture support is not deferred to far future. The roadmap gap is closed by P4:
+`Production terrain rendering, materials, and object-density foundation`. P4
+must turn the G51 baseline material/texture proof into a production terrain
+material and texture pipeline before vegetation, water/lava, voxel buildings, or
+advanced biomes become normal work.
+
 It should be validated by a command and marker, not by a human checklist.
+
+## Roadmap gap handling rule
+
+When the project discovers that a completed baseline gate does not equal a
+production-ready feature, the post-1.0 roadmap must name the production gap
+explicitly, place it in a bounded milestone, and add validator phrases for the
+new boundary. Do not leave important systems hidden under completed proof gates.
 
 ## References checked
 
@@ -295,6 +341,14 @@ It should be validated by a command and marker, not by a human checklist.
   https://docs.godotengine.org/en/stable/tutorials/3d/visibility_ranges.html
 - Godot mesh LOD:
   https://docs.godotengine.org/en/stable/tutorials/3d/mesh_lod.html
+- Godot StandardMaterial3D and ORM material:
+  https://docs.godotengine.org/en/latest/tutorials/3d/standard_material_3d.html
+- Godot texture importing:
+  https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_images.html
+- Godot ResourceImporterTexture compression modes:
+  https://docs.godotengine.org/en/stable/classes/class_resourceimportertexture.html
+- Godot CompressedTexture2D:
+  https://docs.godotengine.org/en/stable/classes/class_compressedtexture2d.html
 - Godot MultiMeshInstance3D:
   https://docs.godotengine.org/en/stable/classes/class_multimeshinstance3d.html
 - Godot background loading:

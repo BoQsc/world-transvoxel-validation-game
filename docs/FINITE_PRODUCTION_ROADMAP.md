@@ -217,6 +217,7 @@ These are important, but they are not required to finish Terrain 1.0:
 - planets/moons;
 - multiplayer terrain replication;
 - compute-shader/GPU terrain acceleration;
+- production terrain material/texture pipeline beyond the G51 baseline proof;
 - full biome ecosystem beyond baseline terrain/material profiles;
 - massive worlds beyond the compact 2K target.
 
@@ -225,7 +226,9 @@ The current post-1.0 research contract and onward roadmap are tracked in
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](POST_1_0_RESEARCH_AND_ROADMAP.md).
 That roadmap has completed P1 game-world addon extraction and P2 production
 integration game proof; P3 scale and coordinate policy is the next bounded
-post-1.0 track.
+post-1.0 track. P4 explicitly owns production terrain rendering/materials/object
+density, including the production terrain material/texture pipeline that G51 did
+not claim to finish.
 
 ## Drift rule
 

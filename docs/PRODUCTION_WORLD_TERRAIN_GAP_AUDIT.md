@@ -112,6 +112,10 @@ These items are currently backed by milestone evidence in this repository:
 - material texture pipeline evidence for deterministic UV2 material assignment,
   small generated texture budget, construct-edit material sampling, and streaming
   material stability.
+- production terrain material/texture pipeline remains a post-1.0 gap beyond
+  G51: real terrain texture slots, material profile API, mapping/blending
+  policy, import/memory budget, sample texture set, and edit/stream/reload/LOD
+  stability must be closed by the P4 production presentation track.
 - mixed LOD seam/artifact evidence for the 28-page transition fixture, including
   LOD0/LOD1 render meshes, horizontal seam-pair checks, diagonal edge bounds,
   edited seam stability, and post-edit transition remeshing.
@@ -158,6 +162,11 @@ final world/terrain:
 4. Fluids, lava, vegetation, voxel buildings, entities, multiplayer, planets,
    and compute/GPU acceleration are future systems. They must not be treated as
    complete just because the terrain validation path exists.
+5. Production terrain texturing is not a far-future system, but it is also not
+   complete. G51 proved the baseline material/texture path with a small
+   deterministic generated texture; P4 must turn that into a production terrain
+   material/texture pipeline before vegetation, fluids, buildings, or advanced
+   biome systems become normal work.
 
 ## Gap closure ladder
 
@@ -201,6 +210,7 @@ The first production-gap milestones are:
     profiles before profile/material/underground work continues.
 11. `G51 - Material texture pipeline quality`: lock deterministic small
      material/texture assignment before underground and streaming-radius work.
+    This is baseline proof, not final production terrain texture support.
 12. `G52 - Underground terrain variation quality`: lock baseline underground
     density/material strata, flat-world volumetric density, and localized
     underground carve behavior before streaming-radius work.

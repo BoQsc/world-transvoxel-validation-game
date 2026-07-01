@@ -199,6 +199,11 @@ through `project.godot`, use the three-addon stack, run flat and compact 2K
 profiles, traverse, edit, create storage journals, and return to cold idle.
 The next bounded post-1.0 track is P3 scale and coordinate policy beyond
 compact 2K.
+The first near-term presentation track after P3 is P4 production terrain
+rendering/materials/object density. G51 is only baseline material/texture
+evidence; production terrain textures are not far-future work and must be made
+explicit in P4 before vegetation, fluids, buildings, or advanced biomes become
+normal work.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -623,6 +628,9 @@ The current post-1.0 research contract is
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](docs/POST_1_0_RESEARCH_AND_ROADMAP.md);
 P1 game-world addon extraction and P2 production integration game proof are
 complete, and P3 scale and coordinate policy is the next bounded post-1.0 track.
+P4 must explicitly close the production terrain material/texture gap beyond G51:
+real texture slots, material profiles, mapping/blending policy, texture import
+budget, sample terrain texture set, and edit/stream/reload/LOD stability.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
 
