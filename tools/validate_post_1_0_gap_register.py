@@ -10,7 +10,7 @@ MARKER = "WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS"
 
 REQUIRED_PHRASES = {
     "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md": (
-        "Status: active gap register; P1 and P2 complete, P3 next",
+        "Status: active gap register; P1 through P4 complete, P5 next",
         "A completed baseline gate does not mean",
         "P3-SCALE-COORDINATES",
         "P4-TERRAIN-TEXTURES",
@@ -18,6 +18,7 @@ REQUIRED_PHRASES = {
         "P4-VISUAL-VALIDATION",
         "P4-EDITOR-UX",
         "P5-GPU-ACCELERATION",
+        "P5/P5A",
         "P6-WATER-LAVA",
         "P7-VEGETATION-BIOMES",
         "P8-BLOCK-BUILDINGS",
@@ -36,6 +37,7 @@ REQUIRED_PHRASES = {
         "Do not claim a production feature is complete because a baseline gate exists",
         "Do not add broad GDScript hot loops",
         "WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS",
+        "completed=P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration",
     ),
     "docs/POST_1_0_RESEARCH_AND_ROADMAP.md": (
         "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md",
@@ -78,7 +80,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=P3_scale_coordinate_policy planned=P4_terrain_rendering_materials_object_density")
+    print(f"{MARKER} completed=P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration")
 
 
 if __name__ == "__main__":

@@ -226,11 +226,10 @@ The current post-1.0 research contract and onward roadmap are tracked in
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](POST_1_0_RESEARCH_AND_ROADMAP.md).
 The post-1.0 production gap register is tracked in
 [`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
-That roadmap has completed P1 game-world addon extraction and P2 production
-integration game proof; P3 scale and coordinate policy is the next bounded
-post-1.0 track. P4 explicitly owns production terrain rendering/materials/object
-density, including the production terrain material/texture pipeline that G51 did
-not claim to finish.
+That roadmap has completed P1 game-world addon extraction, P2 production
+integration game proof, P3 scale and coordinate policy, and P4 production
+terrain rendering/materials/object density. P5 optional GPU/compute acceleration
+proof is the next bounded post-1.0 track.
 
 ## Drift rule
 

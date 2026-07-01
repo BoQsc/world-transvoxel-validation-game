@@ -14,7 +14,7 @@ REQUIRED_PHRASES = {
         "mountain/8 by 8 multi-chunk generation mode",
         "digging and placing",
         "textured terrain material path",
-        "future game-world addon name is undecided",
+        "world-transvoxel-gameworld",
         "GDScript limited to scene scaffolding",
         "Map scale vocabulary",
         "2000×2000",

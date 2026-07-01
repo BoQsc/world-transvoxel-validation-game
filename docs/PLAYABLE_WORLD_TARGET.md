@@ -316,15 +316,11 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
 Future work after G60 belongs to explicit post-1.0 roadmaps.
 The post-1.0 production gap register is
 [`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](POST_1_0_PRODUCTION_GAP_REGISTER.md).
-The post-1.0 roadmap has completed P1 game-world addon extraction and P2
-production integration game proof through `world-transvoxel-gameworld` and
-`world-transvoxel-integration-game`; P3 scale and coordinate policy is the next
-bounded target.
-P4 must explicitly close production terrain rendering/materials/object density,
-including real terrain texture slots, material profiles, mapping/blending
-policy, texture import budget, sample terrain texture set, and
-edit/stream/reload/LOD stability. G51 is baseline material/texture proof, not
-final production terrain texturing.
+The post-1.0 roadmap has completed P1 game-world addon extraction, P2 production
+integration game proof, P3 scale and coordinate policy, and P4 production
+terrain rendering/materials/object density. G51 is baseline material/texture
+proof, not final production terrain texturing; P4 adds the production material
+texture foundation. P5 optional GPU/compute acceleration proof is next.
 
 ## Required before final human-visible sanity check
 
@@ -387,9 +383,9 @@ final production terrain texturing.
 - `world-transvoxel`: low-level MIT-backed Transvoxel backend.
 - `world-transvoxel-terrain`: terrain addon with generation, meshing,
   streaming, edit/storage/recovery, and terrain-facing public APIs.
-- future game-world addon name is undecided; it should provide the standard
-  world node, terrain node setup, player interaction integration, and game-world
-  defaults without forcing a specific game.
+- `world-transvoxel-gameworld`: game-world addon with standard world node,
+  terrain node setup, player interaction integration, and game-world defaults
+  without forcing a specific game.
 - future optional addons can cover vegetation, block/voxel buildings, fluids,
   and entities after terrain is technically reliable.
 

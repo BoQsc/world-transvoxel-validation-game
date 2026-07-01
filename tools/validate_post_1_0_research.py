@@ -10,7 +10,7 @@ MARKER = "WT_VALIDATION_POST_1_0_RESEARCH_PASS"
 
 REQUIRED_PHRASES = {
     "docs/POST_1_0_RESEARCH_AND_ROADMAP.md": (
-        "Status: post-1.0 research contract; P1 and P2 complete, P3 next",
+        "Status: post-1.0 research contract; P1 through P4 complete, P5 next",
         "Terrain 1.0 ended at G60",
         "without appending G61",
         "docs/POST_1_0_PRODUCTION_GAP_REGISTER.md",
@@ -29,11 +29,13 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_P2_CONTRACT_PASS",
         "WT_VALIDATION_P2_PRODUCTION_INTEGRATION_GAME_SMOKE_PASS",
         "P3 - Scale and coordinate policy beyond compact 2K",
-        "Status: next",
+        "WT_VALIDATION_P3_CONTRACT_PASS",
+        "WT_VALIDATION_P3_SCALE_COORDINATE_POLICY_PASS",
         "Production terrain texture support is not far-future work",
         "G51 proves the baseline material/texture path",
-        "production terrain material/texture milestone",
         "P4 - Production terrain rendering, materials, and object-density foundation",
+        "WT_VALIDATION_P4_CONTRACT_PASS",
+        "WT_VALIDATION_P4_PRODUCTION_RENDERING_MATERIALS_OBJECT_DENSITY_PASS",
         "real texture slots",
         "triplanar or slope-aware mapping",
         "texture import policy",
@@ -46,7 +48,8 @@ REQUIRED_PHRASES = {
         "P3-SCALE-COORDINATES",
         "P4-TERRAIN-TEXTURES",
         "P4-VISUAL-VALIDATION",
-        "Start P3",
+        "P5-GPU-ACCELERATION",
+        "Start P5",
         "https://docs.godotengine.org/en/stable/tutorials/shaders/compute_shaders.html",
         "https://docs.godotengine.org/en/stable/tutorials/physics/large_world_coordinates.html",
         "https://docs.godotengine.org/en/latest/tutorials/3d/standard_material_3d.html",
@@ -62,18 +65,19 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_POST_1_0_RESEARCH_PASS",
         "WT_VALIDATION_P1_CONTRACT_PASS",
         "WT_VALIDATION_P2_CONTRACT_PASS",
-        "next=P3_scale_coordinate_policy",
-        "P4 must explicitly close the production terrain material/texture gap",
+        "WT_VALIDATION_P3_CONTRACT_PASS",
+        "WT_VALIDATION_P4_CONTRACT_PASS",
+        "next=P5_gpu_acceleration",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
         "docs/POST_1_0_RESEARCH_AND_ROADMAP.md",
         "POST_1_0_PRODUCTION_GAP_REGISTER.md",
         "post-1.0 roadmap",
-        "production terrain material/texture pipeline beyond the G51 baseline proof",
+        "P5 optional GPU/compute acceleration proof is the next bounded post-1.0 track",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
         "G51 proved the baseline material/texture path",
-        "P4 must turn that into a production terrain material/texture pipeline",
+        "P4 has now turned that into a production terrain material/texture foundation",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
         "G51 is baseline material/texture proof, not final production terrain texturing",
@@ -83,6 +87,7 @@ REQUIRED_PHRASES = {
         "WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS",
         "P3-SCALE-COORDINATES",
         "P4-TERRAIN-TEXTURES",
+        "P5-GPU-ACCELERATION",
     ),
 }
 
@@ -106,7 +111,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} completed=P1_gameworld_addon_extraction,P2_production_integration_game_proof next=P3_scale_coordinate_policy")
+    print(f"{MARKER} completed=P1_gameworld_addon_extraction,P2_production_integration_game_proof,P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration")
 
 
 if __name__ == "__main__":

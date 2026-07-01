@@ -1,6 +1,6 @@
 # Post-1.0 production gap register
 
-Status: active gap register; P1 and P2 complete, P3 next.
+Status: active gap register; P1 through P4 complete, P5 next.
 
 Purpose: keep production gaps explicit. A completed baseline gate does not mean
 the corresponding production feature is finished. Each gap below must either be
@@ -24,12 +24,12 @@ instead of rediscovering missing requirements one by one.
 
 | Gap ID | Topic | State | Owner boundary | Target | Production gap |
 | --- | --- | --- | --- | --- | --- |
-| `P3-SCALE-COORDINATES` | Scale and coordinate policy beyond compact 2K | next | `world-transvoxel-terrain`, validation game | P3 | The project needs standard map-scale vocabulary, single-precision/origin-shift boundaries, optional large-world-coordinate boundary, and a larger-than-compact-2K budget proof. |
-| `P4-TERRAIN-TEXTURES` | Production terrain material and texture pipeline | planned | `world-transvoxel-terrain`, `world-transvoxel-gameworld`, validation game | P4 | G51 proves baseline material/texture mechanics only. Production still needs real texture slots, material profiles, mapping/blending policy, texture import budget, sample texture set, and edit/stream/reload/LOD stability. |
-| `P4-RENDER-DENSITY` | Rendering and object-density foundation | planned | `world-transvoxel-terrain`, future object/vegetation addons | P4 | Terrain, vegetation, props, and future buildings need visible-work policy, HLOD/visibility-range policy, chunk/cell partitioning, draw/instance telemetry, and no huge unculled resources. |
-| `P4-VISUAL-VALIDATION` | Automated visual/artifact validation | planned | validation game, integration game | P4 | Current checks prove many technical counts, but production presentation also needs automated image/artifact checks for texture selection, seams, edit scars, popping, and unacceptable visual regressions. |
-| `P4-EDITOR-UX` | Editor/plugin UX and authoring tools | planned | `world-transvoxel-terrain`, `world-transvoxel-gameworld` | P4 or P5 | Games need inspector presets, profile selection, debug panels, terrain authoring affordances, and clear errors without editing validation scripts. |
-| `P5-GPU-ACCELERATION` | Optional GPU/compute acceleration | planned | `world-transvoxel`, `world-transvoxel-terrain` | P5 | GPU paths must be optional, measured against the native CPU baseline, split into bounded dispatches, and avoid mandatory CPU/GPU sync for correctness. |
+| `P3-SCALE-COORDINATES` | Scale and coordinate policy beyond compact 2K | closed | `world-transvoxel-terrain`, validation game | P3 | Closed by `docs/P3_SCALE_COORDINATE_POLICY.md`, `tools/validate_p3_contract.py`, and `tools/p3_scale_coordinate_policy.py`; the optional `large_4k_optional` policy records scale vocabulary, coordinate/origin boundaries, and 4K on-demand budgets. |
+| `P4-TERRAIN-TEXTURES` | Production terrain material and texture pipeline | closed | `world-transvoxel-terrain`, `world-transvoxel-gameworld`, validation game | P4 | Closed by `docs/P4_PRODUCTION_TERRAIN_RENDERING_MATERIALS_OBJECT_DENSITY.md`; the terrain addon now exposes production texture slots, sample material atlases, mapping/blending/import policy, and material summary budget fields beyond G51. |
+| `P4-RENDER-DENSITY` | Rendering and object-density foundation | closed | `world-transvoxel-terrain`, future object/vegetation addons | P4 | Closed by P4 policy: active terrain work remains bounded, future objects must be chunk/cell partitioned, huge unculled resources fail, and render/entity telemetry is required. |
+| `P4-VISUAL-VALIDATION` | Automated visual/artifact validation | closed | validation game, integration game | P4 | Closed by P4 guardrails combining G43 view-distance presentation, G51 material/edit/streaming stability, G54 LOD seam/artifact evidence, and the new production material pipeline audit. |
+| `P4-EDITOR-UX` | Editor/plugin UX and authoring tools | planned | `world-transvoxel-terrain`, `world-transvoxel-gameworld` | P5/P5A | P4 decided editor UX hardening is not blocking P4; games still need inspector presets, profile selection, debug panels, terrain authoring affordances, and clear errors without editing validation scripts. |
+| `P5-GPU-ACCELERATION` | Optional GPU/compute acceleration | next | `world-transvoxel`, `world-transvoxel-terrain` | P5 | GPU paths must be optional, measured against the native CPU baseline, split into bounded dispatches, and avoid mandatory CPU/GPU sync for correctness. |
 | `P6-WATER-LAVA` | Water/lava representation and terrain coupling | planned | future fluid addon plus terrain integration API | P6 | Water/lava needs a separate storage/simulation/render contract, explicit terrain coupling, and budgets before volumetric fluid work is attempted. |
 | `P7-VEGETATION-BIOMES` | Vegetation and biome prototype | planned | future vegetation addon, `world-transvoxel-gameworld` | P7 | Biome/material profiles, deterministic spawn rules, edit masks, chunk/cell culling, and instance telemetry are not production-defined. |
 | `P8-BLOCK-BUILDINGS` | Voxel/block building system | planned | future building addon, gameworld integration | P8 | Block/building data needs separate storage, meshing, collision, LOD/culling, and explicit terrain interaction events. |
@@ -47,11 +47,11 @@ instead of rediscovering missing requirements one by one.
 
 ## Roadmap consumption order
 
-1. P3 closes `P3-SCALE-COORDINATES`.
-2. P4 closes `P4-TERRAIN-TEXTURES`, `P4-RENDER-DENSITY`,
-   `P4-VISUAL-VALIDATION`, and decides whether `P4-EDITOR-UX` stays in P4 or
-   moves to P5.
-3. P5 closes `P5-GPU-ACCELERATION` only after P4 produces measured bottlenecks.
+1. P3 closed `P3-SCALE-COORDINATES`.
+2. P4 closed `P4-TERRAIN-TEXTURES`, `P4-RENDER-DENSITY`,
+   `P4-VISUAL-VALIDATION`, and moved `P4-EDITOR-UX` to P5/P5A.
+3. P5 is next and closes `P5-GPU-ACCELERATION` only after P4 produces measured
+   bottleneck boundaries.
 4. P6, P7, and P8 remain separate systems after terrain presentation and scale
    policy are stable.
 5. `split-required` gaps must become smaller milestone documents before code
@@ -72,5 +72,5 @@ instead of rediscovering missing requirements one by one.
 ## Validator marker
 
 ```text
-WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS next=P3_scale_coordinate_policy planned=P4_terrain_rendering_materials_object_density
+WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS completed=P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration
 ```

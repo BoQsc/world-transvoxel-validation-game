@@ -1,6 +1,6 @@
 # Post-1.0 research and onward roadmap
 
-Status: post-1.0 research contract; P1 and P2 complete, P3 next.
+Status: post-1.0 research contract; P1 through P4 complete, P5 next.
 
 Research date: 2026-07-01.
 
@@ -30,10 +30,10 @@ The old `world_transvoxel_game_world` identifier is historical prototype
 evidence from G56/G57 only. P1 migrated that prototype into the cleaner final
 addon id `world_transvoxel_gameworld`.
 
-The next work must preserve the addon/repository boundary and move to scale
-policy. It must not start fluids, vegetation, voxel buildings, planets,
-multiplayer, or compute-shader acceleration as default terrain behavior before
-the P3 scale and coordinate policy is real.
+The next work must preserve the addon/repository boundary and move to optional
+GPU/compute acceleration proof. It must not start fluids, vegetation, voxel
+buildings, planets, or multiplayer as default terrain behavior before the P5
+optional GPU path is measured and remains optional.
 
 ## Research facts that constrain the next step
 
@@ -97,14 +97,12 @@ Rationale:
 - it avoids starting GPU acceleration before the CPU/native baseline has a clean
   game-world boundary and measurable bottlenecks.
 
-P1 is now complete. P2 is also complete and proves the addon stack from a normal
-minimal game repository. The next bounded track is:
+P1, P2, P3, and P4 are now complete. The next bounded track is:
 
-`P3 - Scale and coordinate policy beyond compact 2K`
+`P5 - Optional GPU/compute acceleration proof`
 
-The first near-term presentation track after P3 is P4, and P4 must explicitly
-include production terrain materials/textures. Do not leave production texturing
-implicit under the completed G51 baseline gate.
+P4 explicitly included production terrain materials/textures. Do not leave
+production texturing implicit under the completed G51 baseline gate.
 
 The recommended repository/addon naming is:
 
@@ -193,7 +191,7 @@ Evidence:
 
 ### P3 - Scale and coordinate policy beyond compact 2K
 
-Status: next.
+Status: complete.
 
 Goal: define how far the world can grow before origin/precision strategy changes.
 
@@ -212,9 +210,14 @@ Failure boundary:
 
 - if larger maps increase storage/load time without a new budget, P3 fails.
 
+Evidence:
+
+- `WT_VALIDATION_P3_CONTRACT_PASS`;
+- `WT_VALIDATION_P3_SCALE_COORDINATE_POLICY_PASS`.
+
 ### P4 - Production terrain rendering, materials, and object-density foundation
 
-Status: after P3.
+Status: complete.
 
 Goal: define how terrain is presented with production-grade material/texture
 support and how terrain, vegetation, props, and future buildings stay visible
@@ -255,7 +258,14 @@ Failure boundary:
   P4 contract, P4 fails;
 - if object systems create one huge unculled resource, P4 fails.
 
+Evidence:
+
+- `WT_VALIDATION_P4_CONTRACT_PASS`;
+- `WT_VALIDATION_P4_PRODUCTION_RENDERING_MATERIALS_OBJECT_DENSITY_PASS`.
+
 ### P5 - Optional GPU/compute acceleration proof
+
+Status: next.
 
 Goal: prove one optional GPU path without replacing the native CPU/default path.
 
@@ -326,19 +336,19 @@ Failure boundary:
 
 ## Immediate recommendation
 
-Start P3. Do not begin compute shaders, fluids, vegetation, voxel buildings, or
-planetary-scale work until P3 defines map scale vocabulary, coordinate/origin
-boundaries, and a larger-than-compact-2K budget.
+Start P5. Do not begin fluids, vegetation, voxel buildings, networking, or
+planetary-scale work until P5 proves one optional GPU/compute path remains
+optional and is measured against the native CPU/default path.
 
-The next implementation milestone after P2 should be named:
+The next implementation milestone after P4 should be named:
 
-`P3 - Scale and coordinate policy beyond compact 2K`
+`P5 - Optional GPU/compute acceleration proof`
 
-Texture support is not deferred to far future. The roadmap gap is closed by P4:
+Texture support is not deferred to far future. P4 closed the roadmap gap:
 `Production terrain rendering, materials, and object-density foundation`. P4
-must turn the G51 baseline material/texture proof into a production terrain
-material and texture pipeline before vegetation, water/lava, voxel buildings, or
-advanced biomes become normal work.
+turned the G51 baseline material/texture proof into a production terrain
+material and texture foundation before vegetation, water/lava, voxel buildings,
+or advanced biomes become normal work.
 
 It should be validated by a command and marker, not by a human checklist.
 

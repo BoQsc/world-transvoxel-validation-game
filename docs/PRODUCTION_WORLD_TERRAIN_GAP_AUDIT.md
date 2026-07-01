@@ -151,8 +151,9 @@ final world/terrain:
 1. The game-world addon boundary is no longer only a validation-owned prototype:
    post-1.0 P1 extracted `world-transvoxel-gameworld` and P2 proved it from a
    normal minimal integration game. World generation is not yet the final
-   game-world generator. The next bounded post-1.0 track is P3 scale and
-   coordinate policy.
+   game-world generator. P3 scale and coordinate policy and P4 production
+   terrain rendering/materials/object density are complete; P5 optional
+   GPU/compute acceleration proof is next.
 2. Terrain 1.0 is validated only for the current compact 2K release-candidate
    scope. Bigger worlds, different art styles, and new world systems require
    their own bounded post-1.0 roadmaps.
@@ -164,9 +165,9 @@ final world/terrain:
    complete just because the terrain validation path exists.
 5. Production terrain texturing is not a far-future system, but it is also not
    complete. G51 proved the baseline material/texture path with a small
-   deterministic generated texture; P4 must turn that into a production terrain
-   material/texture pipeline before vegetation, fluids, buildings, or advanced
-   biome systems become normal work.
+   deterministic generated texture; P4 has now turned that into a production
+   terrain material/texture foundation before vegetation, fluids, buildings, or
+   advanced biome systems become normal work.
 
 ## Gap closure ladder
 

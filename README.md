@@ -193,19 +193,15 @@ Post-1.0 research and the bounded onward roadmap are tracked in
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](docs/POST_1_0_RESEARCH_AND_ROADMAP.md).
 The post-1.0 production gap register is tracked in
 [`docs/POST_1_0_PRODUCTION_GAP_REGISTER.md`](docs/POST_1_0_PRODUCTION_GAP_REGISTER.md).
-Post-1.0 P1 and P2 are complete: the reusable game-world addon now lives in
+Post-1.0 P1 through P4 are complete: the reusable game-world addon now lives in
 the sibling `world-transvoxel-gameworld` repository as addon id
 `world_transvoxel_gameworld`, and the sibling
 `world-transvoxel-integration-game` repository proves a normal game can launch
 through `project.godot`, use the three-addon stack, run flat and compact 2K
 profiles, traverse, edit, create storage journals, and return to cold idle.
-The next bounded post-1.0 track is P3 scale and coordinate policy beyond
-compact 2K.
-The first near-term presentation track after P3 is P4 production terrain
-rendering/materials/object density. G51 is only baseline material/texture
-evidence; production terrain textures are not far-future work and must be made
-explicit in P4 before vegetation, fluids, buildings, or advanced biomes become
-normal work.
+P3 closed scale and coordinate policy beyond compact 2K. P4 closed production
+terrain rendering/materials/object density. The next bounded post-1.0 track is
+P5 optional GPU/compute acceleration proof.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -244,6 +240,10 @@ python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 python tools/validate_post_1_0_research.py
 python tools/validate_post_1_0_gap_register.py
+python tools/validate_p3_contract.py
+python tools/p3_scale_coordinate_policy.py
+python tools/validate_p4_contract.py
+python tools/p4_production_rendering_materials_object_density.py
 python tools/validate_p1_contract.py
 python tools/p1_gameworld_addon_extraction_quality.py --skip-build
 python tools/validate_p2_contract.py
@@ -384,8 +384,12 @@ WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_i
 WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=post_1_0_backlog
 WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=post_1_0_backlog
 WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G60 next=post_1_0_backlog final=G60 terrain_1_0=true
-WT_VALIDATION_POST_1_0_RESEARCH_PASS completed=P1_gameworld_addon_extraction,P2_production_integration_game_proof next=P3_scale_coordinate_policy
-WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS next=P3_scale_coordinate_policy planned=P4_terrain_rendering_materials_object_density
+WT_VALIDATION_POST_1_0_RESEARCH_PASS completed=P1_gameworld_addon_extraction,P2_production_integration_game_proof,P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration
+WT_VALIDATION_POST_1_0_GAP_REGISTER_PASS completed=P3_scale_coordinate_policy,P4_terrain_rendering_materials_object_density next=P5_gpu_acceleration
+WT_VALIDATION_P3_CONTRACT_PASS implementation=scale_coordinate_policy
+WT_VALIDATION_P3_SCALE_COORDINATE_POLICY_PASS profile=large_4k_optional map_blocks=4096 chunk_grid=256x256 pages=65536 active_radius=6 active_resources=169 active_capacity=256 ... next=P4_production_rendering_materials_object_density
+WT_VALIDATION_P4_CONTRACT_PASS implementation=production_rendering_materials_object_density
+WT_VALIDATION_P4_PRODUCTION_RENDERING_MATERIALS_OBJECT_DENSITY_PASS texture_slots=3 sample_materials=4 material_pipeline=terrain_production_material_texture_pipeline_v1 render_density=1 visual_validation=1 editor_ux_moved_to_p5=1 next=P5_gpu_acceleration
 WT_VALIDATION_P1_CONTRACT_PASS implementation=gameworld_addon_extraction_quality
 WT_VALIDATION_P1_GAMEWORLD_ADDON_EXTRACTION_PASS addon=world_transvoxel_gameworld api_version=1 standard_world_node=1 terrain_node_ready=1 player_attached=1 player_viewer_updates=... edit_replacements=... render_resources=25 collision_resources=25 active_records=25 validation_internals=0 dense_world_files=0
 WT_VALIDATION_P1_GAMEWORLD_ADDON_EXTRACTION_SMOKE_PASS addon=world_transvoxel_gameworld api_version=1 engines=2 max_engine_seconds=... validation_internals=0 player_viewer_updates=... edit_replacements=... render_resources=25 collision_resources=25 dense_world_files=0 report=artifacts/p1_gameworld_addon_extraction_quality/p1_gameworld_addon_extraction_quality_report.json
@@ -602,6 +606,10 @@ python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 python tools/validate_post_1_0_research.py
 python tools/validate_post_1_0_gap_register.py
+python tools/validate_p3_contract.py
+python tools/p3_scale_coordinate_policy.py
+python tools/validate_p4_contract.py
+python tools/p4_production_rendering_materials_object_density.py
 python tools/validate_p1_contract.py
 python tools/p1_gameworld_addon_extraction_quality.py --skip-build
 python tools/validate_p2_contract.py
@@ -631,11 +639,10 @@ reached for this validated scope; future work belongs to explicitly bounded
 post-1.0 roadmaps instead of appending unbounded "next useful" tasks.
 The current post-1.0 research contract is
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](docs/POST_1_0_RESEARCH_AND_ROADMAP.md);
-P1 game-world addon extraction and P2 production integration game proof are
-complete, and P3 scale and coordinate policy is the next bounded post-1.0 track.
-P4 must explicitly close the production terrain material/texture gap beyond G51:
-real texture slots, material profiles, mapping/blending policy, texture import
-budget, sample terrain texture set, and edit/stream/reload/LOD stability.
+P1 game-world addon extraction, P2 production integration game proof, P3 scale
+and coordinate policy, and P4 production terrain rendering/materials/object
+density are complete. P5 optional GPU/compute acceleration proof is the next
+bounded post-1.0 track.
 The production gap register must be updated whenever a completed baseline gate
 is not enough for a production feature.
 Human-visible review remains useful as a final sanity check, but it is not the
