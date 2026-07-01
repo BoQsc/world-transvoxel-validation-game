@@ -378,6 +378,17 @@ texture foundation. P5 optional GPU/compute acceleration proof is next.
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.
 
+Final fullscreen human walking/interacting review is allowed only after the
+automated playable textured large-terrain gate is already clean. That review must
+use the normal generated game scene, human input enabled from startup,
+fullscreen/player-control behavior, first-person walking, digging and placing,
+visible telemetry, and the current production-style terrain texture set. It must
+not rely on the tiny G51 16 by 16 checker texture as the visible art target
+unless the run is explicitly labeled as a fallback diagnostic. Human review can
+accept or reject feel and obvious visual problems, but it cannot replace the
+automated terrain evidence above and cannot close P5 GPU/compute acceleration by
+itself.
+
 ## Addon boundary
 
 - `world-transvoxel`: low-level MIT-backed Transvoxel backend.

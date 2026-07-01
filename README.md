@@ -647,6 +647,13 @@ The production gap register must be updated whenever a completed baseline gate
 is not enough for a production feature.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
+Final fullscreen human walking/interacting review is appropriate only after the
+automated playable textured large-terrain gate is clean. That review must launch
+the normal generated game scene with human input enabled from startup, stable
+player control, walking, digging and placing, visible telemetry, and the current
+production-style terrain texture set. It must not use the tiny G51 checker
+texture as the visible art target except for an explicitly labeled fallback
+diagnostic.
 
 Run the drift guard before adding or accepting any new milestone:
 
