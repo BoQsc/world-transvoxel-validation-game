@@ -3,15 +3,15 @@
 Status: active gap contract.
 
 This document exists to prevent milestone drift. It states where the validation
-game actually is after G59, what the expected final world/terrain target is, and
+game actually is after G60, what the expected final world/terrain target is, and
 which gaps must close before this can be called production-ready large-world
 terrain.
 
-## Current claim boundary after G59
+## Current claim boundary after G60
 
-The current validated claim after G59 is:
+The current validated claim after G60 is:
 
-> automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, game-world addon prototype evidence, separate game repository integration evidence, documentation examples evidence, and versioning release contract evidence, not production-ready large-world terrain.
+> Terrain 1.0 release-candidate quality is achieved for the validated compact 2K stack: automated validation-grade compact 2K terrain runtime with measured frame/update telemetry, collision traversal stability, view-distance presentation coverage, default sphere edit policy/repeated edit shape validation, compact storage recovery schema evidence, a minimal game-facing terrain addon API contract, validation-workaround removal evidence, native hot-path boundary evidence, debug telemetry UI evidence, terrain profile standard evidence, material texture pipeline evidence, underground density/material variation evidence, configurable streaming radius evidence, mixed LOD seam/artifact evidence, map-generator budget evidence, game-world addon prototype evidence, separate game repository integration evidence, documentation examples evidence, versioning release contract evidence, and the full G60 release-candidate suite with zero known critical blockers.
 
 That means the repository currently proves a real Godot validation project can
 import the sibling addons, run the compact `2048 by 2048` block terrain profile,
@@ -48,9 +48,9 @@ repository can import the three-addon stack without copying validation-game
 scripts/tests/scenes, and provide adoption examples for installation, profile
 setup, terrain editing, storage, telemetry, and troubleshooting, and define
 versioning, compatibility, migration, license, source/reference, and release
-checklist policy.
+checklist policy, and pass the full G60 release-candidate suite.
 
-It does not mean the final game-world terrain product is complete.
+It does not mean the final post-1.0 game-world product is complete.
 
 ## Expected final world/terrain target
 
@@ -131,6 +131,8 @@ These items are currently backed by milestone evidence in this repository:
 - versioning release contract evidence covering compatibility, migration,
   license boundaries, source/reference policy, supported Godot versions, and
   release checklist requirements.
+- G60 release-candidate evidence covering all G41 through G59 validators and
+  runtime gates with zero known critical blockers.
 
 ## Not production-ready yet
 
@@ -141,7 +143,9 @@ final world/terrain:
    though a separate integration repository now proves it as an external
    dependency.
    World generation is not yet the final game-world generator.
-2. The G60 release-candidate suite has not been run yet.
+2. Terrain 1.0 is validated only for the current compact 2K release-candidate
+   scope. Bigger worlds, different art styles, and new world systems require
+   their own bounded post-1.0 roadmaps.
 3. The G54 LOD seam proof is a current transition-fixture quality gate, not a
    claim that all future terrain art styles and all future generator outputs are
    visually final.
@@ -213,6 +217,8 @@ The first production-gap milestones are:
     versioning release contract work.
 19. `G59 - Versioning release contract quality`: lock release policy before the
     Terrain 1.0 release-candidate gate.
+20. `G60 - Terrain 1.0 release candidate quality`: run the complete bounded
+    release-candidate suite and require zero known critical blockers.
 
 This order keeps the project focused on production terrain reliability before
 adding water, vegetation, buildings, planets, multiplayer, or compute-shader
@@ -220,9 +226,9 @@ acceleration.
 
 ## Current decision
 
-The project should not claim production-ready large-world terrain yet. It should
-claim the narrower current state: automated validation-grade compact 2K terrain
-runtime after G59.
+The project should claim Terrain 1.0 release-candidate quality for the validated
+compact 2K stack. It should not claim that all post-1.0 world systems or all
+possible large-world game requirements are complete.
 
 G41 closed the runtime frame budget telemetry quality gap for the current
 compact 2K validation path. G42 closed the collision traversal stability quality
@@ -249,6 +255,7 @@ prototype boundary for standard world setup, optional player viewer integration,
 and terrain edit bridging. G57 locked separate game repository integration for
 the three-addon stack without validation-game internals. G58 locked
 documentation examples for installation, profile setup, terrain editing, storage,
-telemetry, and troubleshooting. G59 locked the versioning release contract. The
-immediate direction after G59 is G60 Terrain 1.0 release candidate quality, the
-final gate in the finite G41-G60 Terrain 1.0 roadmap.
+telemetry, and troubleshooting. G59 locked the versioning release contract. G60
+ran the complete bounded G41-G59 release-candidate suite with zero known
+critical blockers and is the final gate in the finite G41-G60 Terrain 1.0
+roadmap. Future systems belong to explicit post-1.0 roadmaps.

@@ -40,8 +40,11 @@ REQUIRED_PHRASES = {
         "G58 locked",
         "versioning release contract evidence",
         "G59 locked the versioning release contract",
+        "G60 ran the complete bounded G41-G59 release-candidate suite",
+        "G60 release-candidate evidence",
         "World generation is not yet the final game-world generator",
         "Terrain 1.0 release candidate quality",
+        "post-1.0 roadmaps",
         "Gap closure ladder",
         "finite production roadmap",
         "Terrain 1.0",
@@ -90,7 +93,7 @@ def main() -> None:
         print(f"ERROR: {error}")
     if errors:
         raise SystemExit(1)
-    print(f"{MARKER} next=terrain_1_0_release_candidate_quality")
+    print(f"{MARKER} next=post_1_0_backlog")
 
 
 if __name__ == "__main__":

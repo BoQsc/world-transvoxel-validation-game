@@ -287,14 +287,18 @@ G58 is a completed documentation examples quality gate. It provides
 installation, profile setup, terrain editing, storage, telemetry, and
 troubleshooting examples, and keeps the separate integration repo README aligned.
 
-G59 is the latest completed versioning release contract quality gate. It locks
+G59 is a completed versioning release contract quality gate. It locks
 versioning, compatibility, migration policy, license boundary,
 source/reference policy, supported Godot versions, and the release checklist.
 
+G60 is the latest completed Terrain 1.0 release-candidate quality gate. It runs
+the bounded G41-G59 validation suite and requires zero known critical blockers.
+
 The production world/terrain gap audit is
 [`docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md`](PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md).
-Current state after G59 is automated validation-grade compact 2K terrain runtime
-with measured frame/update telemetry, collision traversal stability, and
+Current state after G60 is Terrain 1.0 release-candidate quality for the
+validated compact 2K stack: automated validation-grade compact 2K terrain
+runtime with measured frame/update telemetry, collision traversal stability, and
 view-distance presentation coverage plus default sphere edit policy/repeated edit
 shape validation plus compact storage recovery schema evidence and a minimal
 game-facing terrain addon API contract plus validation-workaround removal
@@ -303,13 +307,13 @@ terrain profile standard evidence plus material texture pipeline evidence and
 underground density/material variation evidence plus configurable streaming
 radius evidence plus mixed LOD seam/artifact evidence and map-generator budget
 evidence plus game-world addon prototype evidence and separate game repository
-integration evidence plus documentation examples evidence, not production-ready
-large-world terrain, plus versioning release contract evidence. Next terrain
-work is G60 Terrain 1.0 release candidate quality.
+integration evidence plus documentation examples evidence, versioning release
+contract evidence, and the full G60 release-candidate suite.
 
 The finite production roadmap is
 [`docs/FINITE_PRODUCTION_ROADMAP.md`](FINITE_PRODUCTION_ROADMAP.md). Terrain 1.0
 is bounded to G41 through G60, with G60 as the release-candidate finish line.
+Future work after G60 belongs to explicit post-1.0 roadmaps.
 
 ## Required before final human-visible sanity check
 
@@ -361,6 +365,8 @@ is bounded to G41 through G60, with G60 as the release-candidate finish line.
 - documentation examples quality gate before versioning release contract work;
 - versioning release contract quality gate before Terrain 1.0 release candidate
   work;
+- Terrain 1.0 release candidate quality gate before claiming Terrain 1.0 for the
+  validated compact 2K stack;
 - production world/terrain gap audit before claiming production-ready terrain;
 - finite production roadmap before adding new production milestones;
 - automated captures and runtime checks before asking for human playtest.

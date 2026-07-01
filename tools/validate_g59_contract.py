@@ -39,27 +39,27 @@ REQUIRED_PHRASES = {
         "0BSD replacement backend is not the default",
     ),
     "README.md": (
-        "G59 is the latest completed versioning release contract quality gate",
+        "G59 is a completed versioning release contract quality gate",
+        "G60 is a completed Terrain 1.0 release-candidate quality gate",
         "WT_VALIDATION_G59_VERSIONING_RELEASE_CONTRACT_SMOKE_PASS",
-        "Next terrain work is G60 Terrain 1.0 release candidate quality",
     ),
     "docs/ROADMAP.md": (
         "## G59 - Versioning release contract quality",
         "WT_VALIDATION_G59_VERSIONING_RELEASE_CONTRACT_SMOKE_PASS",
     ),
     "docs/FINITE_PRODUCTION_ROADMAP.md": (
-        "Completed validation track: G0 through G59",
-        "The next milestone after G59 is G60",
+        "Completed validation track: G0 through G60",
+        "G60 is the Terrain 1.0 finish line",
         "G59 - Versioning release contract quality",
     ),
     "docs/PRODUCTION_WORLD_TERRAIN_GAP_AUDIT.md": (
-        "Current claim boundary after G59",
+        "Current claim boundary after G60",
         "G59 locked the versioning release contract",
-        "immediate direction after G59 is G60",
+        "G60 ran the complete bounded G41-G59 release-candidate suite",
     ),
     "docs/PLAYABLE_WORLD_TARGET.md": (
-        "G59 is the latest completed versioning release contract quality gate",
-        "Next terrain work is G60 Terrain 1.0 release candidate quality",
+        "G59 is a completed versioning release contract quality gate",
+        "G60 is the latest completed Terrain 1.0 release-candidate quality gate",
     ),
 }
 

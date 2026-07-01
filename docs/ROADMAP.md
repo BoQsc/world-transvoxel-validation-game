@@ -1424,3 +1424,26 @@ Boundary:
 - this locks release policy only. It does not run the Terrain 1.0 release
   candidate suite; that is G60. It also does not finish water, vegetation,
   buildings, multiplayer, or compute acceleration.
+
+## G60 - Terrain 1.0 release candidate quality
+
+Status: complete when `WT_VALIDATION_G60_CONTRACT_PASS` and
+`WT_VALIDATION_G60_TERRAIN_1_0_RELEASE_CANDIDATE_SMOKE_PASS` both pass.
+
+Exit:
+
+- this is the Terrain 1.0 release-candidate finish line for the validated
+  compact 2K terrain stack;
+- the full bounded G41-G59 validator set passes;
+- the full bounded G41-G59 runtime quality gate set passes;
+- no known critical terrain correctness, performance, storage, collision, or
+  integration blockers remain for the validated Terrain 1.0 scope;
+- the release-candidate report records validator count, runtime gate count,
+  critical blocker count, and build-skip state.
+
+Boundary:
+
+- this reaches Terrain 1.0 for the validated compact 2K terrain stack. It does
+  not finish post-1.0 systems such as water, lava, vegetation, voxel buildings,
+  planets, multiplayer, massive worlds beyond the compact 2K target, or
+  compute/GPU acceleration.
