@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = ROOT.parent
 WORLD_TRANSVOXEL_REPO = REPOSITORY_ROOT / "world-transvoxel"
 TERRAIN_REPO = REPOSITORY_ROOT / "world-transvoxel-terrain"
+GAMEWORLD_REPO = REPOSITORY_ROOT / "world-transvoxel-gameworld"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "validation_project"
 
 PROJECT_ITEMS = (

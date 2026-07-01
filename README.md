@@ -191,6 +191,14 @@ The finite Terrain 1.0 roadmap is tracked in
 G41 through G60.
 Post-1.0 research and the bounded onward roadmap are tracked in
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](docs/POST_1_0_RESEARCH_AND_ROADMAP.md).
+Post-1.0 P1 and P2 are complete: the reusable game-world addon now lives in
+the sibling `world-transvoxel-gameworld` repository as addon id
+`world_transvoxel_gameworld`, and the sibling
+`world-transvoxel-integration-game` repository proves a normal game can launch
+through `project.godot`, use the three-addon stack, run flat and compact 2K
+profiles, traverse, edit, create storage journals, and return to cold idle.
+The next bounded post-1.0 track is P3 scale and coordinate policy beyond
+compact 2K.
 This repository is not the sandbox and not a production game. Its job is to
 import `world-transvoxel` and
 `world-transvoxel-terrain` as addons, run real game-facing integration paths,
@@ -228,6 +236,10 @@ python tools/validate_playable_world_target.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 python tools/validate_post_1_0_research.py
+python tools/validate_p1_contract.py
+python tools/p1_gameworld_addon_extraction_quality.py --skip-build
+python tools/validate_p2_contract.py
+python tools/p2_production_integration_game_quality.py --skip-build
 python tools/validate_g1_contract.py
 python tools/g1_visible_playtest_smoke.py
 python tools/g1_visual_capture.py --windowed
@@ -364,7 +376,13 @@ WT_VALIDATION_G0_SMOKE_PASS engines=2 report=artifacts/g0_install_run_smoke/g0_i
 WT_VALIDATION_PLAYABLE_WORLD_TARGET_PASS next=post_1_0_backlog
 WT_VALIDATION_PRODUCTION_GAP_AUDIT_PASS next=post_1_0_backlog
 WT_VALIDATION_FINITE_PRODUCTION_ROADMAP_PASS first=G41 current=G60 next=post_1_0_backlog final=G60 terrain_1_0=true
-WT_VALIDATION_POST_1_0_RESEARCH_PASS next=P1_game_world_addon_extraction
+WT_VALIDATION_POST_1_0_RESEARCH_PASS completed=P1_gameworld_addon_extraction,P2_production_integration_game_proof next=P3_scale_coordinate_policy
+WT_VALIDATION_P1_CONTRACT_PASS implementation=gameworld_addon_extraction_quality
+WT_VALIDATION_P1_GAMEWORLD_ADDON_EXTRACTION_PASS addon=world_transvoxel_gameworld api_version=1 standard_world_node=1 terrain_node_ready=1 player_attached=1 player_viewer_updates=... edit_replacements=... render_resources=25 collision_resources=25 active_records=25 validation_internals=0 dense_world_files=0
+WT_VALIDATION_P1_GAMEWORLD_ADDON_EXTRACTION_SMOKE_PASS addon=world_transvoxel_gameworld api_version=1 engines=2 max_engine_seconds=... validation_internals=0 player_viewer_updates=... edit_replacements=... render_resources=25 collision_resources=25 dense_world_files=0 report=artifacts/p1_gameworld_addon_extraction_quality/p1_gameworld_addon_extraction_quality_report.json
+WT_VALIDATION_P2_CONTRACT_PASS implementation=production_integration_game_proof
+WT_PRODUCTION_GAME_P2_PASS profile=... addon=world_transvoxel_gameworld api_version=1 launch=project_godot player=1 camera=1 crosshair=1 profile_selector=1 telemetry=1 input_edit=1 traversal=1 edit_committed=1 storage_journal=1 cold_idle=1 render_resources=... collision_resources=... active_records=... validation_internals=0
+WT_VALIDATION_P2_PRODUCTION_INTEGRATION_GAME_SMOKE_PASS repo=... addon=world_transvoxel_gameworld engines=2 profiles=2 max_engine_seconds=... validation_internals=0 launch=project_godot input_edit=1 traversal=1 edit_committed=1 storage_journal=1 cold_idle=1 generated_uid_artifacts_removed=... report=artifacts/p2_production_integration_game_quality/p2_production_integration_game_quality_report.json
 WT_VALIDATION_G1_CONTRACT_PASS implementation=human_visible_playtest_guard next=human_rerun_confirmation
 WT_VALIDATION_G1_SMOKE_PASS engines=2 report=artifacts/g1_visible_playtest/g1_visible_playtest_report.json
 WT_VALIDATION_G1_VISUAL_CAPTURE_RUN_PASS engines=2 report=artifacts/g1_visual_capture/g1_visual_capture_report.json
@@ -574,6 +592,10 @@ python tools/g60_terrain_1_0_release_candidate_quality.py
 python tools/validate_production_gap_audit.py
 python tools/validate_finite_production_roadmap.py
 python tools/validate_post_1_0_research.py
+python tools/validate_p1_contract.py
+python tools/p1_gameworld_addon_extraction_quality.py --skip-build
+python tools/validate_p2_contract.py
+python tools/p2_production_integration_game_quality.py --skip-build
 ```
 
 G60 is the latest completed terrain quality gate. Current state after G60 is
@@ -599,7 +621,8 @@ reached for this validated scope; future work belongs to explicitly bounded
 post-1.0 roadmaps instead of appending unbounded "next useful" tasks.
 The current post-1.0 research contract is
 [`docs/POST_1_0_RESEARCH_AND_ROADMAP.md`](docs/POST_1_0_RESEARCH_AND_ROADMAP.md);
-it selects P1 game-world addon extraction as the first bounded post-1.0 track.
+P1 game-world addon extraction and P2 production integration game proof are
+complete, and P3 scale and coordinate policy is the next bounded post-1.0 track.
 Human-visible review remains useful as a final sanity check, but it is not the
 active project direction.
 

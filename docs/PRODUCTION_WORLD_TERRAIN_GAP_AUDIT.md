@@ -126,6 +126,11 @@ These items are currently backed by milestone evidence in this repository:
   `world-transvoxel-integration-game` repository importing `world_transvoxel`,
   `world_transvoxel_terrain`, and `world_transvoxel_game_world` without
   validation-game scripts/tests/scenes.
+- post-1.0 P1/P2 evidence for the production
+  `world-transvoxel-gameworld` repository and final addon id
+  `world_transvoxel_gameworld`, plus a normal minimal integration game proving
+  launch, traversal, edit input, storage journal creation, and cold idle through
+  `project.godot`.
 - documentation examples evidence covering installation, profile setup, terrain
   editing, storage, telemetry, and troubleshooting.
 - versioning release contract evidence covering compatibility, migration,
@@ -139,10 +144,11 @@ These items are currently backed by milestone evidence in this repository:
 These are the major gaps between the current validation state and the expected
 final world/terrain:
 
-1. The game-world addon boundary is still a validation-owned prototype, even
-   though a separate integration repository now proves it as an external
-   dependency.
-   World generation is not yet the final game-world generator.
+1. The game-world addon boundary is no longer only a validation-owned prototype:
+   post-1.0 P1 extracted `world-transvoxel-gameworld` and P2 proved it from a
+   normal minimal integration game. World generation is not yet the final
+   game-world generator. The next bounded post-1.0 track is P3 scale and
+   coordinate policy.
 2. Terrain 1.0 is validated only for the current compact 2K release-candidate
    scope. Bigger worlds, different art styles, and new world systems require
    their own bounded post-1.0 roadmaps.

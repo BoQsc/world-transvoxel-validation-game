@@ -1,6 +1,6 @@
 # Post-1.0 research and onward roadmap
 
-Status: post-1.0 research contract.
+Status: post-1.0 research contract; P1 and P2 complete, P3 next.
 
 Research date: 2026-07-01.
 
@@ -14,18 +14,20 @@ The project currently has:
 
 - `world-transvoxel`: low-level MIT-backed Transvoxel backend;
 - `world-transvoxel-terrain`: reusable terrain addon;
-- `world_transvoxel_game_world`: validation-owned prototype addon;
-- `world-transvoxel-integration-game`: separate proof game consuming the three
-  addon stack.
+- `world-transvoxel-gameworld`: reusable game-world addon with addon id
+  `world_transvoxel_gameworld`;
+- `world-transvoxel-integration-game`: separate proof game consuming
+  `world_transvoxel`, `world_transvoxel_terrain`, and
+  `world_transvoxel_gameworld`.
 
-The existing `world_transvoxel_game_world` identifier is historical prototype
-evidence from G56/G57. P1 should migrate that prototype into the cleaner final
+The old `world_transvoxel_game_world` identifier is historical prototype
+evidence from G56/G57 only. P1 migrated that prototype into the cleaner final
 addon id `world_transvoxel_gameworld`.
 
-The next work must move reusable game-world behavior out of the validation game
-and into a real addon/repository boundary. It must not start fluids, vegetation,
-voxel buildings, planets, multiplayer, or compute-shader acceleration as default
-terrain behavior before the game-world addon boundary is real.
+The next work must preserve the addon/repository boundary and move to scale
+policy. It must not start fluids, vegetation, voxel buildings, planets,
+multiplayer, or compute-shader acceleration as default terrain behavior before
+the P3 scale and coordinate policy is real.
 
 ## Research facts that constrain the next step
 
@@ -65,7 +67,7 @@ terrain behavior before the game-world addon boundary is real.
 
 ## Decision
 
-The first post-1.0 track should be:
+The first post-1.0 track was:
 
 `P1 - Game-world addon extraction and production boundary`
 
@@ -79,6 +81,11 @@ Rationale:
   player interaction, and editor tooling to attach through a standard world API;
 - it avoids starting GPU acceleration before the CPU/native baseline has a clean
   game-world boundary and measurable bottlenecks.
+
+P1 is now complete. P2 is also complete and proves the addon stack from a normal
+minimal game repository. The next bounded track is:
+
+`P3 - Scale and coordinate policy beyond compact 2K`
 
 The recommended repository/addon naming is:
 
@@ -94,6 +101,8 @@ Do not use `world-transvoxel-core` for this project structure.
 ## Bounded post-1.0 roadmap
 
 ### P1 - Game-world addon extraction and production boundary
+
+Status: complete.
 
 Goal: turn the validation-owned `world_transvoxel_game_world` prototype into a
 real reusable addon/repository named `world-transvoxel-gameworld` with addon id
@@ -115,7 +124,16 @@ Failure boundary:
 
 - if games still need validation-game scripts, P1 is not complete.
 
+Evidence:
+
+- `WT_VALIDATION_P1_CONTRACT_PASS`;
+- `WT_VALIDATION_P1_GAMEWORLD_ADDON_EXTRACTION_SMOKE_PASS`;
+- `world-transvoxel-gameworld` repository with
+  `addons/world_transvoxel_gameworld`.
+
 ### P2 - Production integration game proof
+
+Status: complete.
 
 Goal: make a normal minimal game repository prove the addon stack as an end-user
 dependency.
@@ -135,7 +153,16 @@ Failure boundary:
 - if the game repository needs manual patching after clone/import, P2 is not
   complete.
 
+Evidence:
+
+- `WT_VALIDATION_P2_CONTRACT_PASS`;
+- `WT_PRODUCTION_GAME_P2_PASS` for `flat_baseline`;
+- `WT_PRODUCTION_GAME_P2_PASS` for `g19_compact_2k_on_demand`;
+- `WT_VALIDATION_P2_PRODUCTION_INTEGRATION_GAME_SMOKE_PASS`.
+
 ### P3 - Scale and coordinate policy beyond compact 2K
+
+Status: next.
 
 Goal: define how far the world can grow before origin/precision strategy changes.
 
@@ -244,13 +271,13 @@ Failure boundary:
 
 ## Immediate recommendation
 
-Start P1. Do not begin compute shaders, fluids, vegetation, or voxel buildings
-until P1 has a real addon/repository boundary and the existing integration game
-uses it.
+Start P3. Do not begin compute shaders, fluids, vegetation, voxel buildings, or
+planetary-scale work until P3 defines map scale vocabulary, coordinate/origin
+boundaries, and a larger-than-compact-2K budget.
 
-The first implementation milestone after this research should be named:
+The next implementation milestone after P2 should be named:
 
-`P1 - Game-world addon extraction and production boundary`
+`P3 - Scale and coordinate policy beyond compact 2K`
 
 It should be validated by a command and marker, not by a human checklist.
 
